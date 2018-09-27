@@ -13,8 +13,15 @@ class TaskTest extends TestCase
      *
      * @return void
      */
-    public function testExample()
+    /** @test */
+    public function todo()
     {
-        $this->assertTrue(true);
+        $this->withExceptionHandling();
+        $response = $this->get('/tasks');
+
+
+//        dd($response);
+        $response->assertSuccessful();
+        $response->assertSee('Tasques');
     }
 }
