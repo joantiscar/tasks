@@ -17,11 +17,23 @@ class TaskTest extends TestCase
     public function todo()
     {
         $this->withExceptionHandling();
+
+        Task::create([
+
+            'name'=>'comprar pa',
+            'completed'=>false
+        ]);
+
+
+
+
         $response = $this->get('/tasks');
 
 
 //        dd($response);
         $response->assertSuccessful();
         $response->assertSee('Tasques');
+
+        //comprovar que es veuen les tasques que hi ha a la base de dades
     }
 }
