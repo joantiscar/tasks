@@ -6,14 +6,83 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss/dist/tailwind.min.css" rel="stylesheet">
+
 </head>
-<body>
-
-<button onclick="saluda()">Saluda</button>
+<body class="bg-grey-light">
 
 
+<div id="app" class="container flex justify-center font-sans">
+    <div class="flex flex-col">
+        <h1 class="text-center text-red-lighter">Tasques</h1>
+        <div class="flex-row">
+            <input id="newTask" type="text" placeholder="Nova tasca" class="m-3 mt-5 p-2 pl-5 shadow rounded focus:shadow-outline text-grey-darker">
+            <svg onclick="addTask()" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M11 9h4v2h-4v4H9v-4H5V9h4V5h2v4zm-1 11a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16z"/></svg>
+        </div>
+        <div id="tasks">
+
+        </div>
 
 
-<script src="functions.js"></script>
+    </div>
+
+
+</div>
+
+
+
+
+
+<script>
+    // MVC --> MODEL?????? --> no tenim base de dades
+    // MODEL -> variables/objectes Javascript
+    // TODO -> connectarse al servidor i omplir les variables amb info de la base de dades
+    // APIs?
+    // DOM ->
+    // Llibreria DOM Document Object Model
+    // Javascript (OCO cuan s'executa en un navegador). Tenir objectes predefinits
+    // CRUD CREATE ETIQUETA RETRIEVE UPDATE ELIMINAR =
+
+    // SVG
+    var tasks = ["Comprar pa", "Comprar llet","Estudiar PHP"] // HARDCODED
+    function addTask() {
+        // Afegir la tasca al vector tasks
+        console.log('TODO add task')
+        var task = document.getElementById('newTask')
+        tasks.splice(0,0,task.value)
+        draw_list()
+    }
+    function draw_list(){
+
+        var divtasks = document.getElementById('tasks')
+        while (divtasks.firstChild) {
+            divtasks.removeChild(divtasks.firstChild);
+        }
+        var app = document.getElementById(tasks);
+        var ul = document.createElement('ul')
+        ul.setAttribute('class','list-reset m-3 pl-5')
+        tasks.forEach(function (task) {
+            var li = document.createElement('li')
+            var text = document.createTextNode(task)
+            li.setAttribute('class','text-grey-darker')
+            li.appendChild(text)
+            ul.appendChild(li)
+        })
+        divtasks.appendChild(ul)
+    }
+    draw_list()
+
+
+
+
+
+
+
+
+
+
+    //codi Javascript que agafan este model crei HTML que toca ul>li
+
+</script>
 </body>
 </html>

@@ -6,7 +6,7 @@ namespace App\Http\Controllers;
 use App\Task;
 use Illuminate\Http\Request;
 
-class PagesController extends Controller
+class TasksController extends Controller
 {
 
 
@@ -33,18 +33,59 @@ class PagesController extends Controller
         //Retornar a /tasks
             return redirect('/tasks');
         ;
+    }
+
+    public function delete(Request $request)
+    {
+        $task = Task::findorfail($request->id);
+        $task->delete();
+
+        return redirect('/tasks');
+    }
+    public function update(Request $request)
+    {
+        // Models -> Eloquent -> ORM (HIVERNATE De Java) Object Relation Model
 
 
 
+
+        $task = Task::findorfail($request->id);
+        $task->name = $request->name;
+        $task->completed = $request->completed;
+        $task->save();
+
+
+//        if ($task->completed == true){
+//            $task->completed = false;
+//        }else{
+//            $task->completed = true;
+//        }
+//
+//        $task->save();
+
+        return redirect('/tasks');
 
 
     }
 
-    public function destroy(Request $request)
+    public function edit(Request $request)
     {
         $task = Task::findorfail($request->id);
-        $task = delete();
+        return view('tasks_edit', compact('task'));
+    }
+    public function completar(Request $request){
 
-        return redirect()->back();
+        $task = Task::findorfail($request->id);
+
+        if ($task->completed == true){
+            $task->completed = false;
+        }else{
+            $task->completed = true;
+        }
+
+        $task->save();
+        return redirect('/tasks');
+
+
     }
 }
