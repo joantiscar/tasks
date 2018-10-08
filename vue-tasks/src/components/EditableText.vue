@@ -31,7 +31,6 @@ export default {
     // props: [ 'text' ],
     methods: {
       edit() {
-          console.log('astio')
           this.editing = false
           this.$emit('edited', this.currentText)
           this.currentText = ''

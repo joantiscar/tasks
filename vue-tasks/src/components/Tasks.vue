@@ -13,27 +13,28 @@
                 <!--<input :value="newTask" @input="newTask = $event.target.value">-->
             </div>
             <ul class="list-reset m-3 pl-5">
-                <!--<li v-for="task in tasks" v-if="task.completed">{{task.name}}</li>-->
-                <!--<li v-else>{{task.name}}</li>-->
-                <li class="text-grey-darker" v-for="task in filteredTasks" :key="task.id"><span
-                        :class="{ strike: task.completed }">
+                <!--<li v-for="dataTask in dataTasks" v-if="dataTask.completed">{{dataTask.name}}</li>-->
+                <!--<li v-else>{{dataTask.name}}</li>-->
+                <li class="text-grey-darker" v-for="dataTask in filteredTasks" :key="dataTask.id"><span
+                        :class="{ strike: dataTask.completed }">
 
-                    <editable-text :text="task.name"
-                                   @edited="editName(task, $event)">
+                    <editable-text :text="dataTask.name"
+                                   @edited="editName(dataTask, $event)">
 
 
                     </editable-text>
 
-                </span>&nbsp<span @click="remove(task)">&#x274c;</span>
+                </span>&nbsp;<span @click="remove(dataTask)">&#x274c;</span>
                     <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                         <path d="M12.3 3.7l4 4L4 20H0v-4L12.3 3.7zm1.4-1.4L16 0l4 4-2.3 2.3-4-4z"/>
                     </svg>
 
                 </li>
-                {{ filter }}
+
             </ul>
 
             <h3>Filtres:</h3>
+            <h5>Active filter: {{ filter }}</h5>
             <ul>
                 <li class="list-reset">
                     <button @click="setFilter('all')">Totes</button>
@@ -54,21 +55,21 @@
     import EditableText from './EditableText.vue'
 
     var filters = {
-        all: function (tasks) {
-            return tasks
+        all: function (dataTasks) {
+            return dataTasks
         },
-        completed: function (tasks) {
-            return tasks.filter(function (task) {
-                // if (tasks.completed) return true
+        completed: function (dataTasks) {
+            return dataTasks.filter(function (dataTask) {
+                // if (dataTasks.completed) return true
                 // else return false
-                return tasks.completed
+                return dataTasks.completed
             })
         },
-        active: function (tasks) {
-            return tasks.filter(function (task) {
-                // if (!tasks.completed) return true
+        active: function (dataTasks) {
+            return dataTasks.filter(function (dataTask) {
+                // if (!dataTasks.completed) return true
                 // else return false
-                return !tasks.completed
+                return !dataTasks.completed
             })
         }
     }
@@ -80,56 +81,39 @@
             return {
                 filter: 'all', //all completed active
                 newTask: '',
-                tasks: [
-                    {
-                        id: 1,
-                        name: 'comprar pa',
-                        completed: false
-                    },
-                    {
-                        id: 2,
-                        name: 'comprar lejia',
-                        completed: false
-                    },
-                    {
-                        id: 3,
-                        name: 'comprar llet',
-                        completed: false
-                    },
-
-                    {
-                        id: 4,
-                        name: 'Estudiar php',
-                        completed: true
-                    },
-                ]
+                dataTasks: ''
             }
         },
-        setFilter(newFilter) {
-            this.filter = newFilter
+        props: {
+          'tasks': {
+              type: Array,
+              required: true
+          }
         },
-
         computed: {
             filteredTasks() {
-                return filters[this.filter](this.tasks)
+                return filters[this.filter](this.dataTasks)
             },
             total() {
-                return this.tasks.length
-            }
+                return this.dataTasks.length
+            },
         },
         methods: {
-            editName(task, text){
+            editName(dataTask, text){
                 console.log('acho');
-                task.name= text
+                dataTask.name= text
             },
             add() {
-                this.tasks.splice(0, 0, {name: this.newTask, completed: false})
+                this.dataTasks.splice(0, 0, {name: this.newTask, completed: false})
                 this.newTask = ''
             },
-            remove(task) {
-                window.console.log(task)
+            remove(dataTask) {
+                window.console.log(dataTask)
 
-                this.tasks.splice(this.tasks.indexOf(task), 1)
+                this.dataTasks.splice(this.dataTasks.indexOf(dataTask), 1)
+            },
+            setFilter(newFilter) {
+                this.filter = newFilter
             }
         }
     }
