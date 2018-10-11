@@ -8,6 +8,16 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+Vue.use(require('vuetify'));
+
+// Windows OCO en bowser Objecte Global
+
+// Browser js
+
+// <script src="/fitxer1.js"></script>
+
+// npm
+
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -16,7 +26,15 @@ window.Vue = require('vue');
  */
 
 Vue.component('example-component', require('./components/ExampleComponent.vue'));
+Vue.component('tasks', require('./components/Tasks.vue'));
+Vue.component('editable-text', require('./components/EditableText.vue'));
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    data: () => ({
+        drawer: null
+    }),
+    props: {
+        source: String
+    }
 });

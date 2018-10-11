@@ -1,5 +1,6 @@
 <?php
 
+use App\Task;
 use Illuminate\Http\Request;
 
 /*
@@ -48,3 +49,10 @@ Route::get('/v1/tasks', function() {
 //    }
 //    ];
 });
+
+Route::get('/v1/tasks','Api\TasksController@index');            //BROWSE
+Route::get('/v1/tasks/{task}','Api\TasksController@show');      //READ
+Route::delete('/v1/tasks/{task}','Api\TasksController@destroy');//DELETE
+Route::post('/v1/tasks','Api\TasksController@store');           //CREATE
+Route::put('/v1/tasks/{task}','Api\TasksController@edit');      //EDIT
+

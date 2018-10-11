@@ -7,7 +7,7 @@
                 <input type="text"
                        v-model="newTask" @keyup.enter="add"
                        class="m-3 mt-5 p-2 pl-5 shadow rounded focus:shadow-outline text-grey-darker">
-                <svg @click="add()" class="h-1 w-1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                <svg @click="add()" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
                     <path d="M11 9h4v2h-4v4H9v-4H5V9h4V5h2v4zm-1 11a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16z"/>
                 </svg>
                 <!--<input :value="newTask" @input="newTask = $event.target.value">-->

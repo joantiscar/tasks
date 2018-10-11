@@ -34,3 +34,10 @@ Route::view('contact','contact');
 Route::view('about','about');
 Route::get('/tasks_edit/{id}','TasksController@edit');
 Route::patch('/tasks/{id}','TasksController@completar');
+
+Route::get('/tasks_vue', 'TasksVueController@index');
+
+// Index -> LIST
+// store -> create
+// delete -> destroy
+// edit -> PUT

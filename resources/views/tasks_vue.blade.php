@@ -1,5 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-Al pantano de La Senia
+
+    <tasks :tasks="{{ $tasks }}"></tasks>
     @endsection

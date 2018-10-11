@@ -69,5 +69,12 @@ class CompletedTaskControllerTest extends TestCase
         //2
         $response=$this->delete('completed_task/1');
         //3 Assert
+
+
+
         $response->assertStatus(404);
-}
+
+
+
+}}
+

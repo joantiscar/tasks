@@ -1,0 +1,124 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: dios
+ * Date: 11/10/18
+ * Time: 19:24
+ */
+
+namespace Tests\Feature\Api;
+
+
+use App\Task;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\TestCase;
+
+class TasksControllerTest extends TestCase
+{
+    use RefreshDatabase;
+    
+    public function test_can_show_a_task()
+    {
+
+        // http://tasks.test/api/v1/tasks
+
+        //CRUD -> CRU -> CREATE RETRIEVE UPDATE DELETE
+        //BREAD -> PA -> BROWSE READ EDIT ADD DELETE
+
+        //HTTP -> GET / POST / PUT / DELETE
+
+
+//        Task::create([]);
+        $task = factory(Task::class)->create();
+
+
+        $this->withoutExceptionHandling();
+
+
+
+        $response = $this->get('/api/v1/tasks/' . $task->id);
+
+
+        $result = json_decode($response->getContent());
+
+        $response->assertSuccessful();
+        $this->assertEquals($task->name, $result->name);
+        $this->assertEquals($task->completed, (boolean) $result->completed);
+    }
+
+    public function test_can_delete_task()
+    {
+
+        $task = factory(Task::class)->create();
+
+        $response = $this->DELETE('/api/v1/tasks/' . $task->id);
+
+//        $this->assertNotContains('')
+        $result = json_decode($response->getContent());
+        $this->assertEquals('', $result);
+//        $this->assertDatabaseMissing('tasks', $task);
+        $this->assertNull(Task::find($task->id));
+    }
+    public function test_can_create_task()
+    {
+        $task = factory(Task::class)->create();
+
+        $response = $this->post('/api/v1/tasks/',[
+            'name' => 'Comprar pa'
+        ]);
+
+//        $this->assertNotContains('')
+        $result = json_decode($response->getContent());
+
+
+        $this->assertNotNull($task = Task::find($result->id));
+
+        $this->assertEquals('Comprar pa', $result->name);
+
+        $this->assertFalse($result->completed);
+    }
+    public function test_can_edit_a_task()
+    {
+        //1
+        $task = Task::create([
+            'name' => 'Comprar lejia',
+            'completed' => false
+        ]);
+        //2
+        $response = $this->put('/api/v1/tasks/' . $task->id,$newTask = [
+            'name' => 'Comprar pa',
+            'completed' => true
+        ]);
+
+        // 2 opcions
+//        $this->assertDatabaseHas('tasks',$newTask);
+//        $this->assertDatabaseMissing('tasks',$task);
+
+        $task = $task->fresh();
+        $this->assertEquals($task->name,'Comprar pa');
+        $this->assertEquals($task->completed, true);
+        $this->assertTrue((boolean) $task->completed);
+    }
+
+    public function test_can_browse_tasks()
+    {
+
+
+        $task1 = factory(Task::class)->create();
+        $task2 = factory(Task::class)->create();
+        $task3 = factory(Task::class)->create();
+
+
+        $this->post('/api/v1/tasks/'.$task1);
+        $this->post('/api/v1/tasks/'.$task2);
+        $this->post('/api/v1/tasks/'.$task3);
+
+
+
+        $response = $this->get('/api/v1/tasks');
+
+        $this->assertContains($response, $task1);
+
+    }
+
+}

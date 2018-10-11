@@ -12,7 +12,8 @@
         name: 'app',
         data() {
             return {
-                tasks: []
+                tasks: [],
+                error: null
             }
         },
         components: {
@@ -39,10 +40,10 @@
 
             // 2) PROMISES then.catch
             // axios.get('http://httpbin.org/get').then(() => {
-            axios.get('http://localhost:8050/api/v1/tasks').then(() => {
-                console.log('TOT HA ANAT BE')
+            axios.get('http://localhost:8050/api/v1/tasks').then((response) => {
+                this.tasks = response.data
             }).catch(() => {
-                console.log('ERROR')
+                this.error = error
             })
 
             // // 3) ASYNC WAIT
