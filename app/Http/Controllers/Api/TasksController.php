@@ -47,11 +47,8 @@ class TasksController extends Controller
         return $task;
 //        return Task::findOrFail($request->task);
     }
-    public function browse(Request $request, Task $task) // Route Model Binding
+    public function index(Request $request)
     {
-
         return Task::all();
-
-//        return Task::findOrFail($request->task);
     }
 }

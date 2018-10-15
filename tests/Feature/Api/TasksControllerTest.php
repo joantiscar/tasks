@@ -113,11 +113,13 @@ class TasksControllerTest extends TestCase
         $this->post('/api/v1/tasks/'.$task2);
         $this->post('/api/v1/tasks/'.$task3);
 
-
-
         $response = $this->get('/api/v1/tasks');
+        $response->assertSuccessful();
 
-        $this->assertContains($response, $task1);
+        $result = json_decode($response->getContent());
+
+        $this->assertCount(3,$result);
+        
 
     }
 
