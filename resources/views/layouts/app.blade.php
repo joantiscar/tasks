@@ -21,20 +21,36 @@
                 app
         >
             <v-list dense>
-                <v-list-tile @click="">
+                <v-list-tile href="tasks">
                     <v-list-tile-action>
                         <v-icon>home</v-icon>
                     </v-list-tile-action>
                     <v-list-tile-content>
-                        <v-list-tile-title>Home</v-list-tile-title>
+                        <v-list-tile-title>Tasques amb PHP</v-list-tile-title>
                     </v-list-tile-content>
                 </v-list-tile>
-                <v-list-tile @click="">
+                <v-list-tile href="tasks_vue">
                     <v-list-tile-action>
-                        <v-icon>contact_mail</v-icon>
+                        <v-icon>home</v-icon>
                     </v-list-tile-action>
                     <v-list-tile-content>
-                        <v-list-tile-title>Contact</v-list-tile-title>
+                        <v-list-tile-title>Tasques amb Vue</v-list-tile-title>
+                    </v-list-tile-content>
+                </v-list-tile>
+                <v-list-tile href="about">
+                    <v-list-tile-action>
+                        <v-icon>home</v-icon>
+                    </v-list-tile-action>
+                    <v-list-tile-content>
+                        <v-list-tile-title>About</v-list-tile-title>
+                    </v-list-tile-content>
+                </v-list-tile>
+                <v-list-tile href="contact">
+                    <v-list-tile-action>
+                        <v-icon>home</v-icon>
+                    </v-list-tile-action>
+                    <v-list-tile-content>
+                        <v-list-tile-title>Contacte</v-list-tile-title>
                     </v-list-tile-content>
                 </v-list-tile>
             </v-list>
@@ -52,15 +68,6 @@
                     <v-flex text-xs-center>
 
                             <span>
-HEADER
-<nav>
-    <ul>
-        <a href="tasks"><li>Tasques amb PHP</li></a>
-        <a href="tasks_vue"><li>Tasques amb Vue</li></a>
-       <a href="about"><li>About</li></a>
-       <a href="contact"><li>Contact</li></a>
-    </ul>
-</nav>
 <div id="app">
     @yield('content')
 </div>

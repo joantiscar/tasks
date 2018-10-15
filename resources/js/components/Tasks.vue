@@ -7,9 +7,7 @@
                 <input type="text"
                        v-model="newTask" @keyup.enter="add"
                        class="m-3 mt-5 p-2 pl-5 shadow rounded focus:shadow-outline text-grey-darker">
-                <svg @click="add()" class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                    <path d="M11 9h4v2h-4v4H9v-4H5V9h4V5h2v4zm-1 11a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16z"/>
-                </svg>
+                <button @click="add()">Afegir</button>
                 <!--<input :value="newTask" @input="newTask = $event.target.value">-->
             </div>
             <ul class="list-reset m-3 pl-5">
@@ -25,9 +23,7 @@
                     </editable-text>
 
                 </span>&nbsp;<span @click="remove(dataTask)">&#x274c;</span>
-                    <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                        <path d="M12.3 3.7l4 4L4 20H0v-4L12.3 3.7zm1.4-1.4L16 0l4 4-2.3 2.3-4-4z"/>
-                    </svg>
+                    <button @click="editName">Editar</button>
 
                 </li>
 
@@ -81,13 +77,15 @@
             return {
                 filter: 'all', //all completed active
                 newTask: '',
-                dataTasks: ''
+                dataTasks: this.tasks
             }
         },
         props: {
           'tasks': {
               type: Array,
-              required: true
+              default: function () {
+                  return []
+              }
           }
         },
         computed: {
@@ -109,16 +107,45 @@
                 dataTask.name= text
             },
             add() {
-                this.dataTasks.splice(0, 0, {name: this.newTask, completed: false})
-                this.newTask = ''
-            },
+                axios.post('/api/v1/tasks', {
+                    name: this.newTask,
+                    completed: false
+                }).then((response) => {
+                    this.dataTasks.splice(0, 0, {id : response.data.id, name: this.newTask, completed: this.completed})
+                    this.newTask = ''
+                }).catch((error) => {
+                    console.log(response)
+                })
+
+                },
             remove(dataTask) {
                 window.console.log(dataTask)
-
-                this.dataTasks.splice(this.dataTasks.indexOf(dataTask), 1)
+                axios.delete('/api/v1/tasks/' + dataTask.id, {
+                }).then((response) => {
+                    console.log('ok');
+                    this.dataTasks.splice(this.dataTasks.indexOf(dataTask), 1)
+                }).catch((error) => {
+                    console.log(response)
+                })
             },
             setFilter(newFilter) {
                 this.filter = newFilter
+            }
+        },
+        created () {
+            // Si tinc prop tasks no fer res
+            // Else vull fer petició a la api per obtindre les tasques
+            if (this.dataTasks.length === 0) {
+                console.log('ok');
+                // axios.get('/api/v1/task')
+                this.dataTasks = axios.get('/api/v1/tasks').then((response) => {
+                    console.log(response.data)
+                    this.dataTasks = response.data
+                }).catch((error) => {
+                    console.log(error);
+                })
+            }else{
+                console.log('else');
             }
         }
     }

@@ -2,5 +2,6 @@
 
 @section('content')
 
-    <tasks :tasks="{{ $tasks }}"></tasks>
+    {{--<tasks :tasks="{{ $tasks }}"></tasks>--}}
+    <tasks></tasks>
     @endsection
