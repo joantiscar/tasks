@@ -123,4 +123,15 @@ class TasksControllerTest extends TestCase
 
     }
 
+    public function test_cannot_create_tasks_without_name()
+    {
+        $this->withoutExceptionHandling()
+        $response = $this->post('/api/v1/tasks/'[
+            'name' => ''
+            ]);
+
+
+
+    }
+
 }

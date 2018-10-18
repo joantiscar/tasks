@@ -4,10 +4,16 @@
             <h1 class="text-center text-red-lighter">Tasques</h1>
             <div class="flex-row">
 
+                <div v-if="errorMessage">
+                    Hi ha un error: {{errorMessage}}
+
+                </div>
+
                 <input type="text"
+                       name="name"
                        v-model="newTask" @keyup.enter="add"
                        class="m-3 mt-5 p-2 pl-5 shadow rounded focus:shadow-outline text-grey-darker">
-                <button @click="add()">Afegir</button>
+                <button id="button_add_task" @click="add()">Afegir</button>
                 <!--<input :value="newTask" @input="newTask = $event.target.value">-->
             </div>
             <ul class="list-reset m-3 pl-5">
@@ -21,13 +27,13 @@
 
                     </editable-text>
 
-                </span>&nbsp;<span @click="remove(dataTask)">&#x274c;</span>
+                </span>&nbsp;<span :id="'delete_task_' + dataTask.id" @click="remove(dataTask)">&#x274c;</span>
                     <button @click="editName">Editar</button>
 
                 </li>
 
             </ul>
-
+            <template v-if="total>0">
             <h3>Filtres:</h3>
             <h5>Active filter: {{ filter }}</h5>
             <ul>
@@ -41,12 +47,15 @@
                     <button @click="setFilter('active')">Actives</button>
                 </li>
             </ul>
+            </template>
             Total: {{total}}
         </div>
     </div>
 </template>
 
 <script>
+/* eslint-disable no-undef */
+
 import EditableText from './EditableText.vue'
 
 var filters = {
@@ -74,6 +83,7 @@ export default {
   },
   data () {
     return {
+      errorMessage: false,
       filter: 'all', // all completed active
       newTask: '',
       dataTasks: this.tasks
@@ -117,13 +127,13 @@ export default {
       })
     },
     remove (dataTask) {
-      window.console.log(dataTask)
+      console.log('estic dins del remove')
+      window.console.log(dataTask.id)
       axios.delete('/api/v1/tasks/' + dataTask.id, {
       }).then((response) => {
         console.log('ok')
         this.dataTasks.splice(this.dataTasks.indexOf(dataTask), 1)
       }).catch((error) => {
-        console.log(response)
       })
     },
     setFilter (newFilter) {
@@ -134,13 +144,15 @@ export default {
     // Si tinc prop tasks no fer res
     // Else vull fer petició a la api per obtindre les tasques
     if (this.dataTasks.length === 0) {
-      console.log('ok')
+      console.log('entra if')
       // axios.get('/api/v1/task')
       this.dataTasks = axios.get('/api/v1/tasks').then((response) => {
+        console.log('entra ok')
         console.log(response.data)
         this.dataTasks = response.data
       }).catch((error) => {
-        console.log(error)
+        console.log('entra_error')
+        this.errorMessage = error.response
       })
     } else {
       console.log('else')

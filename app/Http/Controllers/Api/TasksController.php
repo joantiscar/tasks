@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\StoreTask;
 use App\Task;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -36,9 +37,14 @@ class TasksController extends Controller
 
 //        return Task::findOrFail($request->task);
     }
-    public function store(Request $request) // Route Model Binding
+    public function store(StoreTask $request) // Route Model Binding
     {
 //        Task::create();
+
+//          $request->validate([
+//            'name' => 'required',
+//        ]);
+
 
         $task = new Task();
         $task->name = $request->name;
