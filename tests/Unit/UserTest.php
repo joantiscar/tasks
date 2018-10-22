@@ -22,7 +22,7 @@ class UserText extends TestCase{
         //2 execute
         $user->addTask($task);
         $tasks = $user->tasks;
-        
+
 
         //3 Comprovar
         $this->assertTrue($tasks[0]->is($task));
