@@ -71,7 +71,7 @@
 <div id="app">
     @yield('content')
 </div>
-FOOTER</span>
+&#60;br&#62;FOOTER</span>
 </v-flex>
 </v-layout>
 </v-container>

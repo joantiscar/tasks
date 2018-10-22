@@ -125,10 +125,42 @@ class TasksControllerTest extends TestCase
 
     public function test_cannot_create_tasks_without_name()
     {
-        $this->withoutExceptionHandling()
-        $response = $this->post('/api/v1/tasks/'[
+
+
+        // XHR -> JSON
+        $response = $this->json('POST', '/api/v1/tasks',[
             'name' => ''
-            ]);
+        ]);
+
+
+//        $this->withoutExceptionHandling();
+//        $response = $this->post('/api/v1/tasks/', [
+//            'name' => ''
+//            ])
+        $response->assertStatus(422);
+
+
+
+    }
+    public function test_cannot_edit_tasks_without_name()
+    {
+        //1
+        $task = Task::create([
+            'name' => 'Comprar lejia',
+            'completed' => false
+        ]);
+        //2
+        $response = $this->json('PUT','/api/v1/tasks/' . $task->id,$newTask = [
+            'name' => '',
+            'completed' => true
+        ]);
+
+
+//        $this->withoutExceptionHandling();
+//        $response = $this->post('/api/v1/tasks/', [
+//            'name' => ''
+//            ])
+        $response->assertStatus(422);
 
 
 
