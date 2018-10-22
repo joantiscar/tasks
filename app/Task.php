@@ -19,4 +19,33 @@ class Task extends Model
         $file->save();
     }
 
+    public function addTags($tags)
+    {
+
+        $this->tags()->saveMany($tags);
+
+    }
+    public function addTag($tag)
+    {
+
+        $this->tag()->save($tag);
+
+    }
+
+    public function tags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+
+    public function assignUser(User $user)
+    {
+        $this->user()->associate($user);
+
+        $this->save();
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

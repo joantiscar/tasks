@@ -18,6 +18,12 @@ class CreateTagsTable extends Migration
             $table->string('name') -> nullable();
             $table->timestamps();
         });
+
+        Schema::create('tag_task', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('task_id');
+            $table->unsignedInteger('tag_id');
+        });
     }
 
     /**
@@ -28,5 +34,7 @@ class CreateTagsTable extends Migration
     public function down()
     {
         Schema::dropIfExists('tags');
+        Schema::dropIfExists('tag_task');
+
     }
 }

@@ -8,4 +8,13 @@ class Tag extends Model
 {
     protected $guarded = [];
 //    protected $fillable = ['name','completed'];
+
+
+    public function assignTags()
+    {
+        return $this->belongsToMany(Tag::class);
+    }
+
+
+
 }
