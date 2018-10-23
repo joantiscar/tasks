@@ -6,17 +6,20 @@
  */
 
 require('./bootstrap');
+import AppComponent from './components/App.vue'
+import Vue from 'vue'
+import Vuetify from 'vuetify'
+import 'vuetify/dist/vuetify.min.css'
+import 'material-design-icons-iconfont/dist/material-design-icons.css'
+import './bootstrap'
+import ExampleComponent from './components/ExampleComponent.vue'
+import Tasks from './components/Tasks.vue'
 
-window.Vue = require('vue');
-Vue.use(require('vuetify'));
 
-// Windows OCO en bowser Objecte Global
+window.Vue = Vue
+window.Vue.use(Vuetify)
 
-// Browser js
 
-// <script src="/fitxer1.js"></script>
-
-// npm
 
 
 /**
@@ -24,17 +27,8 @@ Vue.use(require('vuetify'));
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+window.Vue.component('example-component', ExampleComponent)
+window.Vue.component('tasks', Tasks)
 
-Vue.component('example-component', require('./components/ExampleComponent.vue'));
-Vue.component('tasks', require('./components/Tasks.vue'));
-Vue.component('editable-text', require('./components/EditableText.vue'));
+const app = new window.Vue(AppComponent)
 
-const app = new Vue({
-    el: '#app',
-    data: () => ({
-        drawer: null
-    }),
-    props: {
-        source: String
-    }
-});

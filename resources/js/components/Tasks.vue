@@ -1,7 +1,11 @@
 <template>
-    <div class="container flex justify-center font-sans">
+    <v-container grid-list-md text-xs-center>
+        <v-layout row wrap>
         <div class="flex flex-col">
-            <h1 class="text-center text-red-lighter">Tasques</h1>
+
+            <v-card>
+
+                <v-card-title class="display-2">Tasques</v-card-title>
             <div class="flex-row">
 
                 <div v-if="errorMessage">
@@ -49,8 +53,11 @@
             </ul>
             </template>
             Total: {{total}}
+            </v-card>
         </div>
-    </div>
+
+        </v-layout>
+    </v-container>
 </template>
 
 <script>
