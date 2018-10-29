@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model
 {
+    protected $hidden = [
+        'created_at'
+    ];
     protected $guarded = [];
 //    protected $fillable = ['name','completed'];
 
@@ -47,5 +50,23 @@ class Task extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+    public function toggleCompleted()
+    {
+        $this->completed=!$this->completed;
+        $this->save();
+    }
+
+    public function map()
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'completed' => $this->completed,
+            'user_id' => $this->user_id,
+            'user_name' => optional($this->user)->name
+//            'tags' => $this->tags
+//        'file' => optional($this->file)->file
+        ];
     }
 }

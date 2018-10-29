@@ -128,4 +128,39 @@ class TaskTest extends TestCase
         $this->assertNull($file);
 
     }
+
+    public function test_can_toggle_completed()
+    {
+        $task = factory(Task::class)->create([
+            'completed' => false
+        ]);
+        $task->toggleCompleted();
+        $this->assertTrue($task->completed);
+    }
+    public function test_can_toggle_uncompleted()
+    {
+        $task = factory(Task::class)->create([
+            'completed' => true
+        ]);
+        $task->toggleCompleted();
+        $this->assertFalse($task->completed);
+    }
+
+    public function test_map()
+    {
+        $task = factory(Task::class)->create();
+
+
+        $this->withoutExceptionHandling();
+
+
+
+        $response = $this->json('GET','/api/v1/tasks/' . $task->id)->getData();
+        dd($task->map());
+        $this->assertEquals($response, $task->map());
+
+
+        //3
+
+    }
 }

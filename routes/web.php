@@ -10,6 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+Auth::routes();
+Route::post('/login_alt','Auth\LoginAltController@login');
 
 
 
@@ -36,7 +38,8 @@ Route::get('/tasks_edit/{id}','TasksController@edit');
 Route::patch('/tasks/{id}','TasksController@completar');
 
 Route::get('/tasks_vue', 'TasksVueController@index');
-
+Route::delete('/completed_task/{task}','CompletedTasksController@destroy');//DELETE
+Route::post('/completed_task','CompletedTasksController@store');           //CREATE
 // Index -> LIST
 // store -> create
 // delete -> destroy

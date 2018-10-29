@@ -1,9 +1,8 @@
 <template>
     <v-container grid-list-md text-xs-center>
-        <v-layout row wrap>
-        <div class="flex flex-col">
-
-            <v-card>
+        <v-layout align-start justify-center row fill-heigh>
+            <v-flex xs6>
+            <v-card >
 
                 <v-card-title class="display-2">Tasques</v-card-title>
             <div class="flex-row">
@@ -54,8 +53,7 @@
             </template>
             Total: {{total}}
             </v-card>
-        </div>
-
+            </v-flex>
         </v-layout>
     </v-container>
 </template>

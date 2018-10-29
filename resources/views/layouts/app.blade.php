@@ -115,6 +115,17 @@
         <v-toolbar color="indigo" dark fixed app>
             <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
             <v-toolbar-title>Lo pantano es de La Sénia</v-toolbar-title>
+            <v-spacer></v-spacer>
+            {{ Auth::user()->name}} {{ Auth::user()->email }}
+            <v-avatar>
+                <img src="https://www.gravatar.com/avatar/{{ md5(Auth::user()->email) }}" alt="avatar">
+            </v-avatar>
+            <v-form action="logout" method="POST">
+                @csrf
+                <v-btn type="submit">
+                    Logout
+                </v-btn>
+            </v-form>
         </v-toolbar>
         <v-content>
             <v-container fluid fill-height>

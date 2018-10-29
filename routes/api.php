@@ -63,3 +63,10 @@ Route::delete('/v1/tags/{tag}','Api\TagsController@destroy');//DELETE
 Route::post('/v1/tags','Api\TagsController@store');           //CREATE
 Route::put('/v1/tags/{tag}','Api\TagsController@update');      //EDIT
 
+
+Route::get('/v1/completed_task','Api\CompletedTasksController@index');            //BROWSE
+Route::get('/v1/completed_task/{task}','Api\CompletedTasksController@show');      //READ
+Route::delete('/v1/completed_task/{task}','Api\CompletedTasksController@destroy');//DELETE
+Route::post('/v1/completed_task','Api\CompletedTasksController@store');           //CREATE
+Route::put('/v1/completed_task/{task}','Api\CompletedTasksController@update');      //EDIT
+
