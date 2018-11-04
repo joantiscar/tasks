@@ -12,6 +12,7 @@
 */
 Auth::routes();
 Route::post('/login_alt','Auth\LoginAltController@login');
+Route::post('/register_alt','Auth\RegisterAltController@register');
 
 
 
@@ -24,6 +25,7 @@ Route::get('/prova',function(){
     $prova ='aidfnaofnaofafa';
     dd($prova);
 });
+Route::get('/home','TasksController@index');
 
 Route::delete('/tasks/{id}', 'TasksController@delete');
 Route::get('/tasks','TasksController@index');
@@ -37,9 +39,9 @@ Route::view('about','about');
 Route::get('/tasks_edit/{id}','TasksController@edit');
 Route::patch('/tasks/{id}','TasksController@completar');
 
-Route::get('/tasks_vue', 'TasksVueController@index');
-Route::delete('/completed_task/{task}','CompletedTasksController@destroy');//DELETE
-Route::post('/completed_task','CompletedTasksController@store');           //CREATE
+//Route::get('/tasks_vue', 'TasksVueController@index');
+//Route::delete('/completed_task/{task}','CompletedTasksController@destroy');//DELETE
+//Route::post('/completed_task','CompletedTasksController@store');           //CREATE
 // Index -> LIST
 // store -> create
 // delete -> destroy

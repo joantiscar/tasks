@@ -2,6 +2,7 @@
 export default {
     el: '#app',
     data: () => ({
+        title: 'Lo pantano és de La Sénia',
         drawer: null,
         items: [
             { icon: 'contacts', text: 'Welcome', url: '/' },

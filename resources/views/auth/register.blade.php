@@ -10,7 +10,7 @@
                 <v-flex xs12 sm8 md4>
                     <v-card class="elevation-12">
 
-                        <login-form email="{{old('email')}}" csrf-token="{{csrf_token()}}"></login-form>
+                        <register-form email="{{old('email')}}" csrf-token="{{csrf_token()}}"></register-form>
 
 
                     </v-card>
