@@ -41,6 +41,7 @@ Route::middleware((['auth']))->group(function () {
     Route::patch('/tasks/{id}','TasksController@completar');
     Route::get('/home','TasksController@index');
     Route::get('/tasks_vue', 'TasksVueController@index');
+    Route::get('/tasques', 'TasquesController@index');
     Route::delete('/completed_task/{task}','CompletedTasksController@destroy');//DELETE
     Route::post('/completed_task','CompletedTasksController@store');           //CREATE
 });

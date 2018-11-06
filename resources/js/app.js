@@ -5,7 +5,6 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
 import AppComponent from './components/App.vue'
 import Vue from 'vue'
 import Vuetify from 'vuetify'
@@ -14,15 +13,13 @@ import 'material-design-icons-iconfont/dist/material-design-icons.css'
 import './bootstrap'
 import ExampleComponent from './components/ExampleComponent.vue'
 import Tasks from './components/Tasks.vue'
+import Tasques from './components/Tasques.vue'
 import LoginForm from './components/LoginForm.vue'
 import RegisterForm from './components/RegisterForm.vue'
-
+require('./bootstrap')
 
 window.Vue = Vue
 window.Vue.use(Vuetify)
-
-
-
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -31,8 +28,8 @@ window.Vue.use(Vuetify)
  */
 window.Vue.component('example-component', ExampleComponent)
 window.Vue.component('tasks', Tasks)
+window.Vue.component('tasques', Tasques)
 window.Vue.component('login-form', LoginForm)
 window.Vue.component('register-form', RegisterForm)
 
 const app = new window.Vue(AppComponent)
-

@@ -19,7 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-Route::middleware(['auth:api'])->group(function () {
+//Route::middleware(['auth:api'])->group(function () {
 
     Route::get('/v1/tasks','Api\TasksController@index');            //BROWSE
     Route::get('/v1/tasks/{task}','Api\TasksController@show');      //READ
@@ -39,7 +39,7 @@ Route::middleware(['auth:api'])->group(function () {
         return Task::all();
 
     });
-});
+//});
 
 
 //
