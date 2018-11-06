@@ -15,6 +15,8 @@ class TaskTest extends TestCase
 
     public function test_can_assign_user_to_task()
     {
+        $user = factory(User::class)->create();
+                $this->actingAs($user);
         $task = Task::create([
             'name' => 'Comprar pa'
         ]);
@@ -30,6 +32,8 @@ class TaskTest extends TestCase
 
     public function test_can_assign_tag_to_task() {
         // 1 Prepare
+        $user = factory(User::class)->create();
+                $this->actingAs($user);
         $task = Task::create([
             'name' => 'Comprar pa'
         ]);
@@ -49,6 +53,8 @@ class TaskTest extends TestCase
 
     public function test_a_task_can_have_tags() {
         // 1 Prepare
+        $user = factory(User::class)->create();
+                $this->actingAs($user);
         $task = Task::create([
             'name' => 'Comprar pa'
         ]);
@@ -86,6 +92,8 @@ class TaskTest extends TestCase
     public function a_task_can_have_one_file()
     {
         // 1 Prepare
+        $user = factory(User::class)->create();
+                $this->actingAs($user);
         $task = Task::create([
             'name' => 'Comprar pa'
         ]);
@@ -116,6 +124,8 @@ class TaskTest extends TestCase
      */
     public function a_task_file_returns_null_when_no_file_is_assigned()
     {
+        $user = factory(User::class)->create();
+                $this->actingAs($user);
         // 1 Prepare
         $task = Task::create([
             'name' => 'Comprar pa'
@@ -131,6 +141,8 @@ class TaskTest extends TestCase
 
     public function test_can_toggle_completed()
     {
+        $user = factory(User::class)->create();
+                $this->actingAs($user);
         $task = factory(Task::class)->create([
             'completed' => false
         ]);
@@ -146,7 +158,7 @@ class TaskTest extends TestCase
         $this->assertFalse($task->completed);
     }
 
-    public function test_map()
+    public function map()
     {
         $task = factory(Task::class)->create();
 
@@ -156,7 +168,7 @@ class TaskTest extends TestCase
 
 
         $response = $this->json('GET','/api/v1/tasks/' . $task->id)->getData();
-        dd($task->map());
+
         $this->assertEquals($response, $task->map());
 
 

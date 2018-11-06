@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Task;
+use App\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -20,6 +21,8 @@ class CompletedTaskControllerTest extends TestCase
     public function can_complete_a_task()
     {
         //1
+        $user = factory(User::class)->create();
+        $this->actingAs($user);
         $task= Task::create([
             'name' => 'comprar pa',
             'completed' => false
@@ -40,6 +43,8 @@ class CompletedTaskControllerTest extends TestCase
     public function test_can_uncomplete_a_task()
     {
         //1
+        $user = factory(User::class)->create();
+        $this->actingAs($user);
         $task= Task::create([
             'name' => 'comprar pa',
             'completed' => false
@@ -66,6 +71,8 @@ class CompletedTaskControllerTest extends TestCase
     public function test_cannot_uncomplete_a_unexisting_task()
     {
        //1 no cal fer res
+        $user = factory(User::class)->create();
+        $this->actingAs($user);
         //2
         $response=$this->delete('completed_task/1');
         //3 Assert

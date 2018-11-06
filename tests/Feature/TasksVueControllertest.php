@@ -8,6 +8,7 @@
 
 namespace Tests\Feature;
 
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -19,7 +20,8 @@ class TasksVueControllertest extends TestCase
     public function test_can_show_vue_tasks(){
         // 1 PREPARE
         $this->withExceptionHandling();
-
+        $user = factory(User::class)->create();
+        $this->actingAs($user);
 
         create_example_tasks();
 

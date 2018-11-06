@@ -10,6 +10,7 @@ namespace Tests\Feature\Api;
 
 
 use App\Task;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -19,7 +20,8 @@ class TasksControllerTest extends TestCase
     
     public function test_can_show_a_task()
     {
-
+        $user = factory(User::class)->create();
+        $this->actingAs($user, "api");
         // http://tasks.test/api/v1/tasks
 
         //CRUD -> CRU -> CREATE RETRIEVE UPDATE DELETE
@@ -48,7 +50,8 @@ class TasksControllerTest extends TestCase
 
     public function test_can_delete_task()
     {
-
+        $user = factory(User::class)->create();
+        $this->actingAs($user, "api");
         $task = factory(Task::class)->create();
 
         $response = $this->DELETE('/api/v1/tasks/' . $task->id);
@@ -61,6 +64,8 @@ class TasksControllerTest extends TestCase
     }
     public function test_can_create_task()
     {
+        $user = factory(User::class)->create();
+        $this->actingAs($user, "api");
         $task = factory(Task::class)->create();
 
         $response = $this->post('/api/v1/tasks/',[
@@ -79,13 +84,15 @@ class TasksControllerTest extends TestCase
     }
     public function test_can_edit_a_task()
     {
+        $user = factory(User::class)->create();
+        $this->actingAs($user, "api");
         //1
         $task = Task::create([
             'name' => 'Comprar lejia',
             'completed' => false
         ]);
         //2
-        $response = $this->put('/api/v1/tasks/' . $task->id,$newTask = [
+        $response = $this->json('PUT','/api/v1/tasks/' . $task->id, [
             'name' => 'Comprar pa',
             'completed' => true
         ]);
@@ -102,7 +109,8 @@ class TasksControllerTest extends TestCase
 
     public function test_can_browse_tasks()
     {
-
+        $user = factory(User::class)->create();
+        $this->actingAs($user, "api");
 
         $task1 = factory(Task::class)->create();
         $task2 = factory(Task::class)->create();
@@ -125,7 +133,8 @@ class TasksControllerTest extends TestCase
 
     public function test_cannot_create_tasks_without_name()
     {
-
+        $user = factory(User::class)->create();
+        $this->actingAs($user, "api");
 
         // XHR -> JSON
         $response = $this->json('POST', '/api/v1/tasks',[
@@ -144,6 +153,8 @@ class TasksControllerTest extends TestCase
     }
     public function test_cannot_edit_tasks_without_name()
     {
+        $user = factory(User::class)->create();
+        $this->actingAs($user, "api");
         //1
         $task = Task::create([
             'name' => 'Comprar lejia',

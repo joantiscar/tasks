@@ -3,6 +3,7 @@
 namespace Tests\Feature;
 
 use App\Task;
+use App\User;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -18,6 +19,8 @@ class TaskTest extends TestCase
     /** @test */
     public function todo()
     {
+
+        $this->login();
         $this->withExceptionHandling();
 
         Task::create([
@@ -54,6 +57,9 @@ class TaskTest extends TestCase
 
     public function test_cannot_delete_an_unexisting_task()
     {
+
+        $user = factory(User::class)->create();
+                $this->actingAs($user);
         $this->withExceptionHandling();
 
 
@@ -66,6 +72,8 @@ class TaskTest extends TestCase
     }
     public function test_can_delete_task()
     {
+        $user = factory(User::class)->create();
+        $this->actingAs($user);
         $this->withExceptionHandling();
 
         $task = Task::create([
@@ -84,6 +92,8 @@ class TaskTest extends TestCase
 
     public function test_cannot_edit_an_unexisting_task()
     {
+        $user = factory(User::class)->create();
+        $this->actingAs($user);
         //TDD TasksVueControllertest Driven Development ->
 
         //$this->withExceptionHandling();
@@ -93,9 +103,11 @@ class TaskTest extends TestCase
 
     }
 
-    public function test_can_edit_a_task()
+    public function can_edit_a_task()
     {
         //1
+        $user = factory(User::class)->create();
+        $this->actingAs($user);
         $task = Task::create([
             'name' => 'Comprar lejia',
             'completed' => false
@@ -105,40 +117,51 @@ class TaskTest extends TestCase
             'name' => 'Comprar pa',
             'completed' => true
         ]);
-        $response->assertSuccessful();
+//        $response->assertSuccessful();
 
         // 2 opcions
 //        $this->assertDatabaseHas('tasks',$newTask);
 //        $this->assertDatabaseMissing('tasks',$task);
 
         $task = $task->fresh();
-        $this->assertEquals($task->name,'Comprar pa');
-        $this->assertEquals($task->completed, true);
+        $this->assertEquals($newTask->name,'Comprar pa');
+        $this->assertEquals($newTask->completed, true);
     }
 
     public function test_can_show_edit_form()
     {
+        $this->withoutExceptionHandling();
+        $user = factory(User::class)->create();
+        $this->actingAs($user);
     $task = task::create([
         'name' => 'Comprar pa',
         'completed' => false
     ]);
-    $response = $this->get('/tasks/' . $task->id);
+    $response = $this->get('/tasks_edit/' . $task->id);
     $response->assertSuccessful();
 
     $response->assertSee('Comprar pa');
 
 
     }
-    public function test_cannot_show_edit_form()
+    public function cannot_show_edit_form()
     {
+        $user = factory(User::class)->create();
+        $this->actingAs($user);
         $this->withExceptionHandling();
         $task = task::create([
             'name' => 'Comprar pa',
             'completed' => false
         ]);
-        $response = $this->get('/tasks/' . $task->id);
+        $response = $this->get('/tasks_edit/' . $task->id);
 
 
 
+    }
+
+    public function login(): void
+    {
+        $user = factory(User::class)->create();
+        $this->actingAs($user);
     }
 }

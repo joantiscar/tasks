@@ -10,16 +10,19 @@ namespace Tests\Feature\Api;
 
 
 use App\Tag;
+use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Tests\Feature\Traits\CanLogin;
 use Tests\TestCase;
 
 class TagsControllerTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, CanLogin;
     
     public function test_can_show_a_tag()
     {
-
+    $user = factory(User::class)->create();
+            $this->actingAs($user, "api");
         // http://tags.test/api/v1/tags
 
         //CRUD -> CRU -> CREATE RETRIEVE UPDATE DELETE
@@ -46,7 +49,8 @@ class TagsControllerTest extends TestCase
 
     public function test_can_delete_tag()
     {
-
+        $user = factory(User::class)->create();
+        $this->actingAs($user, "api");
         $tag = factory(Tag::class)->create();
 
         $response = $this->DELETE('/api/v1/tags/' . $tag->id);
@@ -59,6 +63,9 @@ class TagsControllerTest extends TestCase
     }
     public function test_can_create_tag()
     {
+
+        $user = factory(User::class)->create();
+        $this->actingAs($user, "api");
         $tag = factory(Tag::class)->create();
 
         $response = $this->post('/api/v1/tags/',[
@@ -76,6 +83,8 @@ class TagsControllerTest extends TestCase
     }
     public function test_can_edit_a_tag()
     {
+        $user = factory(User::class)->create();
+        $this->actingAs($user, "api");
         //1
         $tag = Tag::create([
             'name' => 'Comprar lejia',
@@ -95,7 +104,8 @@ class TagsControllerTest extends TestCase
 
     public function test_can_browse_tags()
     {
-
+        $user = factory(User::class)->create();
+        $this->actingAs($user, "api");
 
         $tag1 = factory(Tag::class)->create();
         $tag2 = factory(Tag::class)->create();
@@ -119,7 +129,8 @@ class TagsControllerTest extends TestCase
     public function test_cannot_create_tags_without_name()
     {
 
-
+        $user = factory(User::class)->create();
+        $this->actingAs($user, "api");
         // XHR -> JSON
         $response = $this->json('POST', '/api/v1/tags',[
             'name' => ''
@@ -137,6 +148,8 @@ class TagsControllerTest extends TestCase
     }
     public function test_cannot_edit_tags_without_name()
     {
+        $user = factory(User::class)->create();
+        $this->actingAs($user, "api");
         //1
         $tag = Tag::create([
             'name' => 'Comprar lejia',
