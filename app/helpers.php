@@ -44,7 +44,7 @@ if (!function_exists('create_mysql_database')) {
     }
 
     if (!function_exists('drop_mysql_database')) {
-        function create_mysql_database($name)
+        function drop_mysql_database($name)
         {
 
             //PDO
