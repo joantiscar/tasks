@@ -88,10 +88,14 @@ class TagsControllerTest extends TestCase
         //1
         $tag = Tag::create([
             'name' => 'Comprar lejia',
+            'description' => 'Text aleatori',
+            'color' => 'blue'
         ]);
         //2
         $response = $this->put('/api/v1/tags/' . $tag->id,$newTag = [
             'name' => 'Comprar pa',
+            'description' => 'El pantano es de La Sénia, perque el pantano es troba a la pobla, que com tots sabem forma part de lo imperi senienc',
+            'color' => 'red'
         ]);
 
         // 2 opcions
@@ -100,6 +104,9 @@ class TagsControllerTest extends TestCase
 
         $tag = $tag->fresh();
         $this->assertEquals($tag->name,'Comprar pa');
+        $this->assertEquals($tag->description,'El pantano es de La Sénia, perque el pantano es troba a la pobla, que com tots sabem forma part de lo imperi senienc');
+        $this->assertEquals($tag->color,'red');
+
     }
 
     public function test_can_browse_tags()

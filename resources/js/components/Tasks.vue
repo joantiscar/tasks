@@ -1,29 +1,24 @@
 <template>
-    <v-container grid-list-md text-xs-center>
-        <v-layout align-start justify-center row fill-heigh>
-            <v-flex xs6>
-            <v-card >
-
-                <v-card-title class="display-2">Tasques</v-card-title>
-            <div class="flex-row">
-
+    <div>
+        <div>
                 <div v-if="errorMessage">
                     Hi ha un error: {{errorMessage}}
 
                 </div>
+                <h1 class="text-pink-lighter antialiased text-4x1">Tasques</h1>
+            <div class="inline-flex"><input type="text"
+                        placeholder="Introdueix una tasca"
+                        name="name"
+                        v-model="newTask" @keyup.enter="add"
+                        class="shadow-lg border rounded w-full pa-2 px-3 mr-2 text-grey-darker leading-tight focus:outline-none focus:shadow-outline">
+                <button class="bg-blue hover:bg-blue-dark text-white font-bold py-2 px-4 rounded" id="button_add_task" @click="add()">Afegir</button></div>
 
-                <input type="text"
-                       name="name"
-                       v-model="newTask" @keyup.enter="add"
-                       class="m-3 mt-5 p-2 pl-5 shadow rounded focus:shadow-outline text-grey-darker">
-                <button id="button_add_task" @click="add()">Afegir</button>
                 <!--<input :value="newTask" @input="newTask = $event.target.value">-->
-            </div>
             <ul class="list-reset m-3 pl-5">
                 <!--<li v-for="dataTask in dataTasks" v-if="dataTask.completed">{{dataTask.name}}</li>-->
                 <!--<li v-else>{{dataTask.name}}</li>-->
                 <li class="text-grey-darker" v-for="dataTask in filteredTasks" :key="dataTask.id"><span
-                        :class="{ strike: dataTask.completed }">
+                        :class="{strike: estaCompletada(dataTask)}">
 
                     <editable-text :text="dataTask.name"
                                    @edited="editName(dataTask, $event)">
@@ -31,8 +26,10 @@
                     </editable-text>
 
                 </span>&nbsp;<span :id="'delete_task_' + dataTask.id" @click="remove(dataTask)">&#x274c;</span>
-                    <button @click="editName">Editar</button>
-
+                    <button @click="editName" class="m-2 p-3 bg-grey-light hover:bg-grey text-grey-darkest font-bold rounded inline-flex items-center">
+                            <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.3 3.7l4 4L4 20H0v-4L12.3 3.7zm1.4-1.4L16 0l4 4-2.3 2.3-4-4z"/></svg>
+                        <span>Edita</span>
+                    </button>
                 </li>
 
             </ul>
@@ -52,10 +49,8 @@
             </ul>
             </template>
             Total: {{total}}
-            </v-card>
-            </v-flex>
-        </v-layout>
-    </v-container>
+            </div>
+    </div>
 </template>
 
 <script>
@@ -118,7 +113,20 @@ export default {
   methods: {
     editName (dataTask, text) {
       console.log('acho')
-      dataTask.name = text
+
+      axios.put('/api/v1/tasks/' + dataTask.id, {
+        name: text,
+        completed: dataTask.completed
+      }).then((response) => {
+        console.log(response)
+        dataTask.name = text
+      }).catch((error) => {
+        console.log(response)
+      })
+    },
+    estaCompletada (dataTask) {
+      if (dataTask.completed === '1') return true
+      return false
     },
     add () {
       axios.post('/api/v1/tasks', {

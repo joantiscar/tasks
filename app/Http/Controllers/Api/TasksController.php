@@ -27,8 +27,9 @@ class TasksController extends Controller
 
 
 
-    public function update(UpdateTask $request, Task $task) // Route Model Binding
+    public function edit(UpdateTask $request, Task $task) // Route Model Binding
     {
+
         $task->name = $request->name;
         $task->completed = $request->completed;
         $task->save();

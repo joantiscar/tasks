@@ -30,6 +30,8 @@ class TagsController extends Controller
     public function update(UpdateTag $request, Tag $tag) // Route Model Binding
     {
         $tag->name = $request->name;
+        $tag->description = $request->description;
+        $tag->color = $request->color;
         $tag->save();
 
 
@@ -48,6 +50,8 @@ class TagsController extends Controller
 
         $tag = new Tag();
         $tag->name = $request->name;
+        $tag->description = $request->description;
+        $tag->color = $request->color;
         $tag->save();
         return $tag;
 //        return Tag::findOrFail($request->tags);

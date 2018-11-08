@@ -128,14 +128,22 @@
                 </v-btn>
             </v-form>
         </v-toolbar>
-        <v-content fluid fill-height fluid fill-height>
-            <v-layout
-                    align-center justify-center row fill-height
-            >
-            <v-flex justify-center grid-list-md text-xs-center>
-                @yield('content')
-            </v-flex>
-            </v-layout>
+        <v-content>
+            <v-container fluid fill-height>
+                <v-layout
+                        justify-center
+                        align-center
+                >
+                    <v-flex text-xs-center>
+
+                            <span>
+<div id="app">
+    @yield('content')
+</div>
+</span>
+                    </v-flex>
+                </v-layout>
+            </v-container>
         </v-content>
         <v-footer color="indigo" app inset>
             <span class="white--text">&copy; 2017</span>
