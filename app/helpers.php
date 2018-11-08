@@ -3,6 +3,7 @@
 
 use App\Task;
 use App\User;
+use Illuminate\Support\Facades\DB;
 
 if (!function_exists('create_example_tasks')){
     function create_Example_tasks(){
@@ -30,5 +31,14 @@ if (!function_exists('create_primary_user')){
             'password' => bcrypt(env('PRIMARY_USER_PASSWORD', '123456'))
         ]);
         }
+    }
+}
+if (!function_exists('create_mysql_database')){
+    function create_mysql_database($name){
+
+        //PDO
+        // MYSQL: CREATE DATABASE IF NOT EXISTS $name
+        $statement = "CREATE DATABASE IF NOT EXISTS $name";
+        DB::connection('mysqlroot')->getPdo()->exec($statement);
     }
 }

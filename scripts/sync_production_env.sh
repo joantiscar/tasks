@@ -1,0 +1,1 @@
+scp /home/dios/Code/joantiscar/tasks/.env.production tasks2DAM:/home/forge/tasks.joantiscar.scool.cat/.env
