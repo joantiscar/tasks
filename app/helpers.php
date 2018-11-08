@@ -74,7 +74,7 @@ if (!function_exists('create_mysql_database')) {
         }
     }
     if (!function_exists('create_database')) {
-        function create_database($user, $database, $host = 'localhost'){
+        function create_database(){
             create_mysql_database(env('DB_DATABASE'));
             create_mysql_user(env('DB_USERNAME'), env('DB_PASSWORD'));
             create_mysql_privileges(env('DB_USERNAME'), env('DB_DATABASE'));
