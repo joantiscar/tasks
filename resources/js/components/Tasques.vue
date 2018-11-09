@@ -143,32 +143,6 @@ export default{
       ],
       search: '',
       loading: false,
-      dataTasks: [
-        {
-          id: 1,
-          name: 'Comprar pa',
-          completed: false,
-          created_at: '11/11/11',
-          updated_at: '11/11/11',
-          user_id: 1
-        },
-        {
-          id: 2,
-          name: 'Comprar lejia',
-          completed: false,
-          created_at: '11/11/11',
-          updated_at: '11/11/11',
-          user_id: 2
-        },
-        {
-          id: 3,
-          name: 'Estudiar PHP',
-          completed: true,
-          created_at: '11/11/11',
-          updated_at: '11/11/11',
-          user_id: 1
-        }
-      ],
       headers: [
         {
           text: 'id', value: 'id'
@@ -194,11 +168,22 @@ export default{
       }
     }
   },
+  props: {
+    tasks: {
+      type: Array,
+      required: true
+    }
+  },
   methods: {
     refresh () {
       this.loading = true
       // todo -> axios
-      setTimeout(() => { this.loading = false }, 5000)
+      window.axios.get('/api/v1/user/tasks').then(response => {
+        this.dataTasks = response.data
+      }).catch(error => {
+        console.log(error)
+      })
+      // setTimeout(() => { this.loading = false }, 5000)
     },
     opcio1 () {
       console.log('Opcio1')

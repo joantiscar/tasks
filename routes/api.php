@@ -19,7 +19,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 
-//Route::middleware(['auth:api'])->group(function () {
+Route::middleware(['auth:api'])->group(function () {
 
     Route::get('/v1/tasks','Api\TasksController@index');            //BROWSE
     Route::get('/v1/tasks/{task}','Api\TasksController@show');      //READ
@@ -33,13 +33,14 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     Route::delete('/v1/tags/{tag}','Api\TagsController@destroy');//DELETE
     Route::post('/v1/tags','Api\TagsController@store');           //CREATE
     Route::put('/v1/tags/{tag}','Api\TagsController@update');      //EDIT
-    Route::get('/v1/tasks', function() {
+Route::get('/v1/tasks', function() {
         //Connectar base de dades, obtindre llista de tasques i pasarles a JSON
 
         return Task::all();
 
     });
-//});
+Route::put('/v1/user/tasks','Api\LoggedUserTasksController@index');      //EDIT
+});
 
 
 //

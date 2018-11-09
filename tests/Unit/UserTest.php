@@ -69,6 +69,49 @@ class UserText extends TestCase{
     }
 
 
+    public function test_can_add_tasks_to_user()
+    {
+        // 1 Prepare
 
+        $user = factory(User::class)->create();
+        $task1 = factory(Task::class)->create();
+        $task2 = factory(Task::class)->create();
+        $task3 = factory(Task::class)->create();
+        $tasks = [$task1, $task2, $task3];
+
+
+        //2 execute
+        $user->addTasks($tasks);
+        $tasks = $user->tasks;
+
+
+        //3 Comprovar
+        $this->assertTrue($tasks[0]->is($task1));
+        $this->assertTrue($tasks[1]->is($task2));
+        $this->assertTrue($tasks[2]->is($task3));
+    }
+
+    public function test_have_task()
+    {
+
+        $user = factory(User::class)->create();
+        $task = factory(Task::class)->create();
+
+
+
+        //2 execute
+        $user->addTask($task);
+
+
+        $tascaRetornada = $user->haveTask($task);
+
+        assertEquals($task, $tascaRetornada);
+
+    }
+    public function test_remove_task()
+    {
+
+        $user->removeTask();
+    }
 
 }

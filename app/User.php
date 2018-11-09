@@ -36,8 +36,14 @@ class User extends Authenticatable
     {
         $this->tasks()->save($task);
     }
-    public function addTasks($task)
+    public function addTasks($tasks)
     {
-        $this->tasks()->saveMany($task);
+        $this->tasks()->saveMany($tasks);
+    }
+
+    public function have_task($task)
+    {
+        return Auth::user()->tasks()->findOrFail($task->id);
+
     }
 }

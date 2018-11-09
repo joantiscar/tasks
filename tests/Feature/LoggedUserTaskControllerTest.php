@@ -6,7 +6,7 @@
  * Time: 21:17
  */
 
-namespace Tests\Feature\Api;
+namespace Tests\Feature;
 
 
 use App\Task;
@@ -15,12 +15,13 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\Feature\Traits\CanLogin;
 use Tests\TestCase;
 
-class LoggedUserTaskApiControllerTest extends TestCase
+class LoggedUserTaskControllerTest extends TestCase
 {
     use RefreshDatabase, CanLogin;
 
     public function test_can_list_logged_user_tasks()
     {
+        $this->withoutExceptionHandling();
         $user = $this->login();
         $task1 = factory(Task::class)->create();
         $task2 = factory(Task::class)->create();
@@ -31,12 +32,11 @@ class LoggedUserTaskApiControllerTest extends TestCase
 
 
 
-        $response = $this->json('get', '/user/tasks');
+        $response = $this->get('/user/tasks');
         $response->assertSuccessful();
-        $resultJson = json_decode($response->getContent());
 
-        $resultJson->assertCount('3');
-
+        $response->assertViewIs('tasks.user.index');
+        $response->assertViewHas('tasks', $user->tasks);
 
     }
     public function test_cannot_see_tasks_if_user_is_not_logged()
