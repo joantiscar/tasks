@@ -39,7 +39,8 @@ Route::get('/v1/tasks', function() {
         return Task::all();
 
     });
-Route::put('/v1/user/tasks','Api\LoggedUserTasksController@index');      //EDIT
+Route::get('/v1/user/tasks','Api\LoggedUserTasksController@index');      //EDIT
+Route::put('/v1/user/tasks','Api\LoggedUserTasksController@store');      //EDIT
 });
 
 

@@ -126,6 +126,7 @@ export default{
   name: 'Tasques',
   data () {
     return {
+      dataTasks: this.tasks,
       createDialog: false,
       destroyDialog: false,
       snackbar: true,
@@ -171,7 +172,7 @@ export default{
   props: {
     tasks: {
       type: Array,
-      required: true
+      required: false
     }
   },
   methods: {
@@ -179,7 +180,9 @@ export default{
       this.loading = true
       // todo -> axios
       window.axios.get('/api/v1/user/tasks').then(response => {
-        this.dataTasks = response.data
+      console.log(response)
+      this.dataTasks = response.data
+      this.loading = false
       }).catch(error => {
         console.log(error)
       })

@@ -31,8 +31,9 @@ class LoggedUserTaskApiControllerTest extends TestCase
 
 
 
-        $response = $this->json('get', '/user/tasks');
+        $response = $this->json('get', '/api/v1/user/tasks');
         $response->assertSuccessful();
+
         $resultJson = json_decode($response->getContent());
 
         $resultJson->assertCount('3');
