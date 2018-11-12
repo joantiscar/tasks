@@ -11,18 +11,27 @@ namespace Tests\Feature\Api;
 
 use App\Task;
 use App\User;
+
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Gate;
+use Tests\Feature\Traits\CanLogin;
 use Tests\TestCase;
 
 class TasksControllerTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, CanLogin;
     
     public function test_can_show_a_task()
     {
-        $user = factory(User::class)->create();
-        $this->actingAs($user, "api");
+        $user = $this->login('api');
         // http://tasks.test/api/v1/tasks
+
+//        $user->givePermissionTo('task.store');
+//
+//        Gate::define('task.store',function($user){
+//           dd($user->name);
+//           dd('PROVA');
+//        });
 
         //CRUD -> CRU -> CREATE RETRIEVE UPDATE DELETE
         //BREAD -> PA -> BROWSE READ EDIT ADD DELETE

@@ -19,7 +19,9 @@ export default {
           { icon: 'build', text: 'User Tasques', url: '/user/tasks' }
 
         ]
-      }
+      },
+      { icon: 'history', text: 'Tags', url: '/tags' }
+
     ]
   }),
   props: {

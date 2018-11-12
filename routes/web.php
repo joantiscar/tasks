@@ -42,6 +42,7 @@ Route::middleware((['auth']))->group(function () {
     Route::get('/home','TasksController@index');
     Route::get('/tasks_vue', 'TasksVueController@index');
     Route::get('/tasques', 'TasquesController@index');
+    Route::get('/tags', 'TagsController@index');
     Route::delete('/completed_task/{task}','CompletedTasksController@destroy');//DELETE
     Route::post('/completed_task','CompletedTasksController@store');           //CREATE
     Route::get('/user/tasks','LoggedUserTasksController@index');
