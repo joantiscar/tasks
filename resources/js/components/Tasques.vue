@@ -6,15 +6,77 @@
         <v-card-text>Esta accio es irreversible.</v-card-text>
         <v-card-actions>
           <v-spacer></v-spacer>
-          <v-btn color="green darken-1" flat @click.native="dialog = false">Disagree</v-btn>
+          <v-btn color="green darken-1" flat @click.native="destroyDialog = false">Disagree</v-btn>
           <v-btn color="green darken-1" flat @click.native="destroy(task)">Agree</v-btn>
         </v-card-actions>
       </v-card>
 
   </v-dialog>
+        <v-dialog v-model="editDialog" @keydown.esc="editDialog = false">
+            <v-toolbar color="primary" class="white--text">
+            <v-btn color="white" flat icon @click.native="editDialog = false"><v-icon class="mr-1">close</v-icon></v-btn>
+
+                Editar tasca
+               <v-spacer></v-spacer> <v-btn color="white" flat @click.native="editDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>Sortir</v-btn>
+               <v-btn color="white" flat @click.native="editDialog = false"><v-icon class="mr-1">save</v-icon>Guardar</v-btn>
+            </v-toolbar>
+            <v-card>
+                <v-card-text>
+        <v-form>
+            <v-text-field v-model="name" label="Nom" hint="El nom de la tasca..."></v-text-field>
+            <v-switch v-model="completed" :label="completed ? 'Completada' : 'Pendent'"></v-switch>
+                <v-textarea v-model="description" label="Descripcio" hint="Descripció"></v-textarea>
+            <div class="text-xs-center">
+            <v-btn color="grey" @click.native="editDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>Sortir</v-btn>
+               <v-btn color="success" @click.native="editDialog = false"><v-icon class="mr-1">save</v-icon>Guardar</v-btn>
+                </div>
+        </v-form>
+
+                    </v-card-text>
+      </v-card>
+
+  </v-dialog>
+        <v-dialog v-model="showDialog" @keydown.esc="showDialog = false">
+            <v-toolbar color="primary" class="white--text">
+            <v-btn color="white" flat icon @click.native="showDialog = false"><v-icon class="mr-1">close</v-icon></v-btn>
+
+                Tasca en detall
+               <v-spacer></v-spacer> <v-btn color="white" flat @click.native="showDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>Sortir</v-btn>
+               <v-btn color="white" flat @click.native="showDialog = false"><v-icon class="mr-1">save</v-icon>Guardar</v-btn>
+            </v-toolbar>
+      <v-card>
+          <v-card-text>
+        <v-form>
+            <v-text-field v-model="showName" label="Nom" hint="El nom de la tasca..."></v-text-field>
+            <v-autocomplete label="User" :items="dataUsers" v-model="user" item-text="name" clearable></v-autocomplete>
+            <v-switch v-model="showCompleted" :label="showCompleted ? 'Completada' : 'Pendent'"></v-switch>
+                <v-textarea v-model="showDescription" label="Descripcio" hint="Descripció"></v-textarea>
+            <div class="text-xs-center">
+            <v-btn color="grey" @click.native="showDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>Sortir</v-btn>
+               <v-btn color="success" @click.native="showDialog = false"><v-icon class="mr-1">save</v-icon>Guardar</v-btn>
+                </div>
+        </v-form>
+              </v-card-text>
+      </v-card>
+
+  </v-dialog>
   <v-dialog v-model="createDialog" fullscreen>
-      <v-card>TODO CREATE DIALOG
-      <v-btn flat @click.native="createDialog=false">Tancar</v-btn></v-card>
+      <v-toolbar color="primary" class="white--text">
+            <v-btn color="white" flat icon @click.native="createDialog = false"><v-icon class="mr-1">close</v-icon></v-btn>
+
+                Tasca en detall
+               <v-spacer></v-spacer> <v-btn color="white" flat @click.native="createDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>Sortir</v-btn>
+               <v-btn color="white" flat @click.native="createDialog = false"><v-icon class="mr-1">save</v-icon>Guardar</v-btn>
+            </v-toolbar>
+      <v-card>
+        <v-card-title class="headline">Estas segur?</v-card-title>
+        <v-card-text>Esta accio es irreversible.</v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="green darken-1" flat @click.native="createDialog = false">Disagree</v-btn>
+          <v-btn color="green darken-1" flat @click.native="create(task)">Agree</v-btn>
+        </v-card-actions>
+      </v-card>
   </v-dialog>
   <v-snackbar :timeout="3000" color="success" v-model="snackbar">
       Això és un snackbar
@@ -51,14 +113,14 @@
         </v-toolbar>
         <v-card>
         <v-card-title>
-            <v-layout>
-                <v-flex xs3 class="pr-2">
-                <v-select lavel="Filtres" :items="filters" v-model="filter"></v-select>
+            <v-layout row wrap>
+                <v-flex lg3 class="mr-2">
+                <v-select label="Filtres" :items="filters" v-model="filter"></v-select>
                 </v-flex>
-                <v-flex xs3 class="pr-2">
-                    <v-select lavel="User" :items="users" v-model="user" clearable></v-select>
+                <v-flex lg3 class="mr-2">
+                    <v-select label="User" :items="users" v-model="user" clearable></v-select>
                 </v-flex>
-                <v-flex xs5>
+                <v-flex lg5>
                     <v-text-field
                             v-model="search"
                             append-icon="search"
@@ -78,33 +140,56 @@
                     no-data-text=""
                     rows-per-page-text="Tasques per pàgina"
                     :rows-per-page-items="[5,10,25,50,100,200,{'text':'Tots','value':-1}]"
-                    :pagination.sync="pagination">
+                    :pagination.sync="pagination"
+                    class="hidden-md-and-down">
+
                 <v-progress-linear slot="progress" color="blue" indeterminate></v-progress-linear>
                 <template slot="items" slot-scope="{item: task}">
                     <tr>
                         <td>{{ task.id}}</td>
                         <td>{{ task.name}}</td>
+                        <td>{{ task.user}}</td>
                         <td>{{ task.completed}}</td>
                         <td>{{ task.created_at}}</td>
                         <td>{{ task.updated_at}}</td>
                         <td>
                         <v-btn color="success" flat title="Modificar la tasca"
-                               @click="update(task)">
-                            <v-icon>delete</v-icon>
+                               @click="showEdit(task)">
+                            <v-icon>border_color</v-icon>
+                        </v-btn>
+                            <v-btn color="success" flat title="Modificar la tasca"
+                                   @click="showShow(task)">
+                            <v-icon>remove_red_eye</v-icon>
                         </v-btn>
                         <v-btn color="error" flat title="Eliminar la tasca"
                                @click="showDestroy(task)">
                             <v-icon>delete</v-icon>
                         </v-btn>
-                        <v-btn color="error" flat title="Mostrar snackbar"
+                        <v-btn color="primary" flat title="Mostrar snackbar"
                                @click="snackbar=true">
-                            <v-icon>home</v-icon>
+                            <v-icon>info</v-icon>
                         </v-btn>
                         </td>
                     </tr>
 
                 </template>
             </v-data-table>
+              <v-data-iterator
+                      class="hidden-lg-and-up"
+              >
+            <v-flex
+                    slot="item"
+                    slot-scope="{item:task}"
+                    xs12
+                    sm6
+                    md4>
+
+                <v-card class="mb-1">
+                    <v-card-title v-text="item.name"></v-card-title>
+
+                </v-card>
+                </v-flex>
+            </v-data-iterator>
         </v-card>
         <v-btn
             fab
@@ -126,17 +211,22 @@ export default{
   name: 'Tasques',
   data () {
     return {
+      name: '',
+      description: '',
+      completed: false,
+      showName: '',
+      showDescription: '',
+      showCompleted: false,
+      showUserId: '',
       dataTasks: this.tasks,
       createDialog: false,
       destroyDialog: false,
+      editDialog: false,
+      showDialog: false,
       snackbar: true,
       user: 'Astio',
-      users: [
-        'Astio',
-        'Emilio',
-        'Jordi Varas'
-      ],
       filter: 'Totes',
+      dataUsers: this.users,
       filters: [
         'Totes',
         'Completades',
@@ -150,6 +240,9 @@ export default{
         },
         {
           text: 'Nom', value: 'name'
+        },
+        {
+          text: 'Usuari', value: 'user'
         },
         {
           text: 'Completat', value: 'completed'
@@ -172,7 +265,11 @@ export default{
   props: {
     tasks: {
       type: Array,
-      required: false
+      required: true
+    },
+    users: {
+      type: Array,
+      required: true
     }
   },
   methods: {
@@ -180,9 +277,9 @@ export default{
       this.loading = true
       // todo -> axios
       window.axios.get('/api/v1/user/tasks').then(response => {
-      console.log(response)
-      this.dataTasks = response.data
-      this.loading = false
+        console.log(response)
+        this.dataTasks = response.data
+        this.loading = false
       }).catch(error => {
         console.log(error)
       })
@@ -200,14 +297,20 @@ export default{
     showCreate (task) {
       this.createDialog = true
     },
-    update (task) {
-      console.log('Destroy Task' + task.id)
+    edit (task) {
+      console.log('Update Task' + task.id)
     },
     show (task) {
-      console.log('Destroy Task' + task.id)
+      console.log('Show Task' + task.id)
     },
     destroy (task) {
       console.log('Destroy Task' + task.id)
+    },
+    showEdit (task) {
+      this.editDialog = true
+    },
+    showShow (task) {
+      this.showDialog = true
     },
     showDestroy (task) {
       this.destroyDialog = true

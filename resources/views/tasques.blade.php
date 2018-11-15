@@ -3,5 +3,12 @@
 @section('content')
 
     {{--<tasks :tasks="{{ $tasks }}"></tasks>--}}
-    <tasques></tasques>
+    <v-container fluid>
+        <v-layout>
+            <v-flex class="ma-5">
+                <tasques :users="{{$users}}" :tasks="{{ $tasks }}"></tasques>
+            </v-flex>
+        </v-layout>
+    </v-container>
+
     @endsection

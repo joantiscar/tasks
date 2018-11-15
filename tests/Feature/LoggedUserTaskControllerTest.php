@@ -21,7 +21,6 @@ class LoggedUserTaskControllerTest extends TestCase
 
     public function test_can_list_logged_user_tasks()
     {
-        $this->withoutExceptionHandling();
         $user = $this->login();
         $task1 = factory(Task::class)->create();
         $task2 = factory(Task::class)->create();
