@@ -7,7 +7,7 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn color="green darken-1" flat @click.native="destroyDialog = false">Disagree</v-btn>
-          <v-btn color="green darken-1" flat @click.native="destroy(task)">Agree</v-btn>
+          <v-btn color="green darken-1" flat @click.native="destroy()">Agree</v-btn>
         </v-card-actions>
       </v-card>
 
@@ -153,19 +153,19 @@
                         <td>{{ task.created_at}}</td>
                         <td>{{ task.updated_at}}</td>
                         <td>
-                        <v-btn color="success" flat title="Modificar la tasca"
+                        <v-btn color="success" icon flat title="Modificar la tasca"
                                @click="showEdit(task)">
                             <v-icon>border_color</v-icon>
                         </v-btn>
-                            <v-btn color="success" flat title="Modificar la tasca"
+                            <v-btn color="success" icon flat title="Modificar la tasca"
                                    @click="showShow(task)">
                             <v-icon>remove_red_eye</v-icon>
                         </v-btn>
-                        <v-btn color="error" flat title="Eliminar la tasca"
+                        <v-btn color="error" flat icon title="Eliminar la tasca"
                                @click="showDestroy(task)">
                             <v-icon>delete</v-icon>
                         </v-btn>
-                        <v-btn color="primary" flat title="Mostrar snackbar"
+                        <v-btn color="primary" icon flat title="Mostrar snackbar"
                                @click="snackbar=true">
                             <v-icon>info</v-icon>
                         </v-btn>
@@ -174,22 +174,22 @@
 
                 </template>
             </v-data-table>
-              <v-data-iterator
-                      class="hidden-lg-and-up"
-              >
-            <v-flex
-                    slot="item"
-                    slot-scope="{item:task}"
-                    xs12
-                    sm6
-                    md4>
+              <!--<v-data-iterator-->
+                      <!--class="hidden-lg-and-up"-->
+              <!--&gt;-->
+            <!--<v-flex-->
+                    <!--slot="item"-->
+                    <!--slot-scope="{item:task}"-->
+                    <!--xs12-->
+                    <!--sm6-->
+                    <!--md4>-->
 
-                <v-card class="mb-1">
-                    <v-card-title v-text="item.name"></v-card-title>
+                <!--<v-card class="mb-1">-->
+                    <!--<v-card-title v-text="item.name"></v-card-title>-->
 
-                </v-card>
-                </v-flex>
-            </v-data-iterator>
+                <!--</v-card>-->
+                <!--</v-flex>-->
+            <!--</v-data-iterator>-->
         </v-card>
         <v-btn
             fab
@@ -219,6 +219,7 @@ export default{
       showCompleted: false,
       showUserId: '',
       dataTasks: this.tasks,
+      taskBeingRemoved: '',
       createDialog: false,
       destroyDialog: false,
       editDialog: false,
@@ -234,6 +235,9 @@ export default{
       ],
       search: '',
       loading: false,
+      creating: false,
+      editing: false,
+      removing: false,
       headers: [
         {
           text: 'id', value: 'id'
@@ -279,10 +283,12 @@ export default{
       window.axios.get('/api/v1/user/tasks').then(response => {
         console.log(response)
         this.dataTasks = response.data
-        this.loading = false
       }).catch(error => {
         console.log(error)
-      })
+        this.loading = false
+      }).finally(
+        this.loading = false
+      )
       // setTimeout(() => { this.loading = false }, 5000)
     },
     opcio1 () {
@@ -303,8 +309,22 @@ export default{
     show (task) {
       console.log('Show Task' + task.id)
     },
-    destroy (task) {
-      console.log('Destroy Task' + task.id)
+    removeTask ($task) {
+      this.dataTasks.splice(this.dataTasks.indexOf($task), 1)
+    },
+    destroy () {
+      this.removing = true
+      window.axios.delete('/api/v1/user/tasks/' + this.taskBeingRemoved.id).then(() => {
+        // this.refresh() // Problema -> rendiment
+        this.removeTask(this.taskBeingRemoved)
+      }).catch(error => {
+        console.log(error)
+        this.removing = false
+        this.destroyDialog = false
+      }).finally(() => {
+        this.removing = false
+        this.destroyDialog = false
+      })
     },
     showEdit (task) {
       this.editDialog = true
@@ -314,6 +334,7 @@ export default{
     },
     showDestroy (task) {
       this.destroyDialog = true
+      this.taskBeingRemoved = task
     },
     showCreateDialog () {
       console.log('TODO SHOW DIALOG TO CREATE TASK')

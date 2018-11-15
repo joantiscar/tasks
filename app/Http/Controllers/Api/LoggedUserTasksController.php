@@ -18,6 +18,8 @@ class LoggedUserTasksController extends Controller
     public function store(Request $request)
     {
 
+
+
 //        return Task::where('user_id', Auth::user()->id);
         $task = Request::create($request->only(['name','completed']));
 //        return Auth::user()->tasks->save($task);
@@ -28,18 +30,21 @@ class LoggedUserTasksController extends Controller
     {
 
 //        return Task::where('user_id', Auth::user()->id);
+        Auth::user()->tasks()->findOrFail($task->id);
         $task->delete();
-        return Auth::user()->removeTask($task);
+
     }
     public function update(Request $request, Task $task)
     {
-
 //        return Task::where('user_id', Auth::user()->id);
+
+
         Auth::user()->tasks()->findOrFail($task->id);
         $task->name = $request->name;
-            $task->completed = $request->completed;
-            $task->save();
-            return $task;
+        $task->completed = $request->completed;
+        $task->description = $request->description;
+        $task->save();
+        return $task;
 //        if (Auth::user()->haveTask($task) ){
 //            $task->name = $request->name;
 //            $task->completed = $request->completed;
