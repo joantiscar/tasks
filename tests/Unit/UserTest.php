@@ -114,4 +114,15 @@ class UserText extends TestCase{
         $user->removeTask();
     }
 
+    public function test_is_Super_Admin()
+    {
+        $user = factory(User::class)->create();
+
+        $this->assertFalse($user->isSuperAdmin());
+
+        $user->admin = true;
+        $user->save();
+        $this->assertTrue($user->isSuperAdmin());
+    }
+
 }

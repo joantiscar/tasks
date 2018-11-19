@@ -46,6 +46,7 @@ Route::middleware((['auth']))->group(function () {
     Route::delete('/completed_task/{task}','CompletedTasksController@destroy');//DELETE
     Route::post('/completed_task','CompletedTasksController@store');           //CREATE
     Route::get('/user/tasks','LoggedUserTasksController@index');
+    Route::impersonate();
 
 });
 

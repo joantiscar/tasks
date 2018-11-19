@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Http\Requests\DestroyTask;
 use App\Task;
 use Illuminate\Http\Request;
 
@@ -35,7 +36,7 @@ class TasksController extends Controller
         ;
     }
 
-    public function delete(Request $request)
+    public function delete(DestroyTask $request)
     {
         $task = Task::findorfail($request->id);
         $task->delete();
