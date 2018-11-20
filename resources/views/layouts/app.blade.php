@@ -114,12 +114,12 @@
                 {{--</v-list-tile>--}}
             {{--</v-list>--}}
         <v-toolbar color="indigo" dark fixed app>
-            <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+            <v-toolbar-side-icon @click="drawer = !drawer"></v-toolbar-side-icon>
             <v-toolbar-title>Lo pantano es de La Sénia</v-toolbar-title>
             <v-spacer></v-spacer>
             {{ Auth::user()->name}} {{ Auth::user()->email }}
-            <v-avatar>
-                <img src="https://www.gravatar.com/avatar/{{ md5(Auth::user()->email) }}" alt="avatar">
+            <v-avatar @click="drawerRight = !drawerRight">
+                <img  src="https://www.gravatar.com/avatar/{{ md5(Auth::user()->email) }}" alt="avatar">
             </v-avatar>
             <v-form action="logout" method="POST">
                 @csrf
@@ -128,6 +128,22 @@
                 </v-btn>
             </v-form>
         </v-toolbar>
+        <v-navigation-drawer
+                v-model="drawerRight"
+                fixed
+                app
+                clipped-right
+                right
+        >
+            TODO PERFIL
+
+            Administrador:
+
+            Llista de tots els usuaris
+
+
+            <user-select></user-select>
+            </v-navigation-drawer>
         <v-content fluid fill-height fluid fill-height>
             <v-layout
                     align-center justify-center row fill-height

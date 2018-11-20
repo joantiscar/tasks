@@ -31,8 +31,7 @@
                <v-btn color="success" @click.native="editDialog = false"><v-icon class="mr-1">save</v-icon>Guardar</v-btn>
                 </div>
         </v-form>
-
-                    </v-card-text>
+                </v-card-text>
       </v-card>
 
   </v-dialog>
@@ -78,8 +77,8 @@
         </v-card-actions>
       </v-card>
   </v-dialog>
-  <v-snackbar :timeout="3000" color="success" v-model="snackbar">
-      Això és un snackbar
+  <v-snackbar :timeout="snackbarTimeout" :color="snackbarColor" v-model="snackbar">
+      {{ snackbarMessage }}
       <v-btn dark flat @click.native="snackbar=false">Tancar</v-btn>
   </v-snackbar>
   <v-toolbar color="blue darken-1">
@@ -165,10 +164,6 @@
                                @click="showDestroy(task)">
                             <v-icon>delete</v-icon>
                         </v-btn>
-                        <v-btn color="primary" icon flat title="Mostrar snackbar"
-                               @click="snackbar=true">
-                            <v-icon>info</v-icon>
-                        </v-btn>
                         </td>
                     </tr>
 
@@ -227,6 +222,10 @@ export default{
   name: 'Tasques',
   data () {
     return {
+      snackbarMessage: 'Default message',
+      snackbarTimeout: 3000,
+      snackbarColor: 'success',
+      snackbar: false,
       name: '',
       description: '',
       completed: false,
@@ -240,7 +239,7 @@ export default{
       destroyDialog: false,
       editDialog: false,
       showDialog: false,
-      snackbar: true,
+
       user: 'Astio',
       filter: 'Totes',
       dataUsers: this.users,
@@ -328,13 +327,25 @@ export default{
     removeTask ($task) {
       this.dataTasks.splice(this.dataTasks.indexOf($task), 1)
     },
+    showError (error) {
+      this.snackbarMessage = error
+      this.snackbar = true
+      this.snackbarColor = 'error'
+    },
+    showMessage (message) {
+      this.snackbarMessage = message
+      this.snackbar = true
+      this.snackbarColor = 'success'
+    },
+
     destroy () {
       this.removing = true
       window.axios.delete('/api/v1/user/tasks/' + this.taskBeingRemoved.id).then(() => {
         // this.refresh() // Problema -> rendiment
         this.removeTask(this.taskBeingRemoved)
+        this.showMessage("S'ha esborrat correctament la tasca")
       }).catch(error => {
-        console.log(error)
+        this.showError(error)
         this.removing = false
         this.destroyDialog = false
       }).finally(() => {

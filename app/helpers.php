@@ -262,6 +262,15 @@ if (!function_exists('create_mysql_database')) {
             }catch(Exception $e){}
         }
     }
+    if (!function_exists('map_collection')) {
+        function map_collection($collection){
+
+            return $collection->map(function($item) {
+                return $item->map();
+            });
+
+        }
+    }
 }
 
 // TODO: Crear multiples usuaris amb diferents rols
