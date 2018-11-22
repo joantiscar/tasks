@@ -2,12 +2,15 @@
 
 namespace App;
 
+use App\Traits\FormattedDates;
 use Illuminate\Database\Eloquent\Model;
 
 class Task extends Model
 {
+    use FormattedDates;
+
     protected $hidden = [
-        'created_at'
+//        'created_at'
     ];
     protected $guarded = [];
 //    protected $fillable = ['name','completed'];

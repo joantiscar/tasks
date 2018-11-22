@@ -35,6 +35,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::put('/v1/tags/{tag}','Api\TagsController@update');      //EDIT
 
 Route::get('/v1/user/tasks','Api\LoggedUserTasksController@index');
+Route::get('/v1/regular_users','Api\RegularUsersController@index');
 Route::post('/v1/user/tasks','Api\LoggedUserTasksController@store');
 Route::put('/v1/user/tasks/{task}','Api\LoggedUserTasksController@update');
 Route::delete('/v1/user/tasks/{task}','Api\LoggedUserTasksController@destroy');

@@ -139,4 +139,33 @@ class UserText extends TestCase{
         $this->assertEquals($mappedUser['avatar'], 'https://www.gravatar.com/avatar/6b0becddecd5a06042b3f8078c97f2e0');
     }
 
+    public function test_regulars()
+    {
+        $this->assertCount(0, User::regular()->get());
+
+        $user1 = factory(User::class)->create([
+            'name' => 'Pepe',
+            'email' => 'pepe@gmail.com'
+        ]);
+        $user2 = factory(User::class)->create([
+            'name' => 'Pepa',
+            'email' => 'pepa@gmail.com'
+        ]);
+        $user3 = factory(User::class)->create([
+            'name' => 'Pipo',
+            'email' => 'pipo@gmail.com'
+        ]);
+        $user3->admin = true;
+        $user3->save();
+        $this->assertCount(2, $regularUsers = User::regular()->get());
+        $this->assertEquals($regularUsers[0]->name,  $user1->name);
+        $this->assertEquals($regularUsers[1]->name,  $user2->name);
+        try{
+            $this->assertNull($regularUsers[2]);
+        }catch(Exception $e){
+//            $this->assert
+        }
+
+    }
+
 }

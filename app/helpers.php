@@ -265,7 +265,7 @@ if (!function_exists('create_mysql_database')) {
     if (!function_exists('map_collection')) {
         function map_collection($collection){
 
-            return $collection->map(function($item) {
+            return $collection->map(function ($item) {
                 return $item->map();
             });
 

@@ -42,19 +42,27 @@ export default {
   props: {
     users: {
       type: Array
+    },
+    url: {
+      type: String,
+      default: '/api/v1/users'
+    },
+    label: {
+      type: String,
+      default: 'Usuaris'
     }
   },
   watch: {
     selectedUser (newValue) {
       if (newValue) {
-        window.location.href = '/impersonate/take/' + newValue
+        this.$emit('selected', newValue)
       }
     }
   },
   created () {
     if (this.users) this.dataUsers = this.users
     else {
-      window.axios.get('api/v1/users').then(response => {
+      window.axios.get(this.url).then(response => {
         this.dataUsers = response.data
       }).catch(error => {
         console.log(error)

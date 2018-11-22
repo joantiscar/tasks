@@ -50,7 +50,6 @@ class TasksController extends Controller
 //            'name' => 'required',
 //        ]);
 
-
         $task = new Task();
         $task->name = $request->name;
         $task->completed = false;
@@ -60,6 +59,6 @@ class TasksController extends Controller
     }
     public function index(IndexTask $request)
     {
-        return Task::orderBy('created_at','desc')->get();
+        return map_collection(Task::orderBy('created_at)')->get());
     }
 }

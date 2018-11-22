@@ -18,13 +18,18 @@ class LoggedUserTasksController extends Controller
     public function store(Request $request)
     {
 
-
+//        $task = new Task();
+//        $task->name = $request->name;
+//        $task->completed = false;
+//        $task->save();
+//        return $task->map();
+//
 
 //        return Task::where('user_id', Auth::user()->id);
-        $task = Request::create($request->only(['name','completed']));
+        $task = Task::create($request->only(['name','completed', 'description', 'user_id']));
 //        return Auth::user()->tasks->save($task);
 
-        return Auth::user()->tasks;
+        return $task;
     }
     public function destroy(Request $request, Task $task)
     {
