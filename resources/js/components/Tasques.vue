@@ -151,7 +151,7 @@
                     <tr>
                         <td>{{ task.id}}</td>
                         <td>{{ task.name}}</td>
-                        <td>{{ task.user}}</td>
+                        <td>{{ task.user_name}}</td>
                         <td>{{ task.completed}}</td>
                         <td><span :title="task.created_at_formatted">{{task.created_at_human}}</span></td>
                         <td><span :title="task.updated_at_formatted">{{task.updated_at_human}}</span></td>
@@ -285,7 +285,7 @@ export default{
           text: 'Modificat', value: 'updated_at_timestamp'
         },
         {
-          text: 'Actions', sortable: false
+          text: 'Accions', sortable: false, value: 'full_search'
         }
       ],
       pagination: {

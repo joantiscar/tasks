@@ -54,12 +54,13 @@ if (!function_exists('create_primary_user')){
     function create_primary_user(){
         $user = User::where('email', 'joantiscar@iesebre.com')->first();
         if (!$user){
-        User::create([
+        $user = User::create([
             'name' => 'Joan Tíscar Verdiell',
             'email' => 'joantiscar@iesebre.com',
             'password' => bcrypt(env('PRIMARY_USER_PASSWORD', '123456'))
         ]);
-        $user->admin = true;
+        $user-> admin = true;
+        $user->save();
         }
     }
 }
@@ -259,6 +260,7 @@ if (!function_exists('create_mysql_database')) {
                 $deu->assignRole('Tasks');
                 $deu->assignRole('TaskManager');
                 $deu->admin = true;
+                $deu->save();
             }catch(Exception $e){}
         }
     }

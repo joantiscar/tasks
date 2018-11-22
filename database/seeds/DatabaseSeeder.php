@@ -15,6 +15,8 @@ class DatabaseSeeder extends Seeder
         create_primary_user();
         create_Example_tasks();
         initialize_roles();
+        create_sample_users();
+        create_usuari_sergi();
 
         // Crear usuaris de prova
 
