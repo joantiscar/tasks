@@ -63,7 +63,11 @@ class User extends Authenticatable
         'id' => $this->id,
         'name' => $this->name,
         'email' => $this->email,
-        'avatar' => $this->getAvatarAttribute()
+        'avatar' => $this->getAvatarAttribute(),
+        'admin' => (boolean)$this->admin,
+        'roles' => $this->roles()->pluck('name')->unique()->toArray(),
+        'permissions' => $this->getAllPermissions()->pluck('name')->unique()->toArray()
+
         ];
     }
 

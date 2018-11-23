@@ -156,15 +156,15 @@
                         <td><span :title="task.created_at_formatted">{{task.created_at_human}}</span></td>
                         <td><span :title="task.updated_at_formatted">{{task.updated_at_human}}</span></td>
                         <td>
-                        <v-btn color="success" icon flat title="Modificar la tasca"
+                        <v-btn v-can="tasks.update" color="success" icon flat title="Modificar la tasca"
                                @click="showEdit(task)">
                             <v-icon>border_color</v-icon>
                         </v-btn>
-                            <v-btn color="success" icon flat title="Modificar la tasca"
+                            <v-btn v-can="tasks.show" color="success" icon flat title="Modificar la tasca"
                                    @click="showShow(task)">
                             <v-icon>remove_red_eye</v-icon>
                         </v-btn>
-                        <v-btn color="error" flat icon title="Eliminar la tasca"
+                        <v-btn v-can="tasks.destroy" color="error" flat icon title="Eliminar la tasca"
                                @click="showDestroy(task)">
                             <v-icon>delete</v-icon>
                         </v-btn>
@@ -214,6 +214,7 @@
             fixed
             class="white--text"
             @click="showCreate"
+            v-can="tasks.create"
         >
             <v-icon>add</v-icon>
 
@@ -408,6 +409,10 @@ export default{
       this.destroyDialog = true
       this.taskBeingRemoved = task
     }
+  },
+  created () {
+    console.log('Usuari logat:')
+    console.log(window.laravel_user)
   }
 }
 

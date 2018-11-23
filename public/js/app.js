@@ -12568,6 +12568,15 @@ if (token) {
  * allows your team to easily build robust real-time web applications.
  */
 
+var user = document.head.querySelector('meta[name="user"]');
+
+if (user) {
+  // TODO
+  window.laravel_user = JSON.parse(user.content); // JSON.stringify(user)
+} else {
+  console.error('User not found at html meta');
+}
+
 // import Echo from 'laravel-echo'
 
 // window.Pusher = require('pusher-js');
@@ -26771,6 +26780,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_12__components_UserList_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_12__components_UserList_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_UserSelect_vue__ = __webpack_require__(119);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_13__components_UserSelect_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_13__components_UserSelect_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__plugins_permissions_js__ = __webpack_require__(126);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -26792,10 +26802,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+
 __webpack_require__(10);
 
 window.Vue = __WEBPACK_IMPORTED_MODULE_1_vue___default.a;
 window.Vue.use(__WEBPACK_IMPORTED_MODULE_2_vuetify___default.a);
+window.Vue.use(__WEBPACK_IMPORTED_MODULE_14__plugins_permissions_js__["a" /* default */]);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -26885,6 +26897,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   props: {
     source: String
+  },
+  methods: {
+    impersonate: function impersonate(user) {
+      console.log('astio');
+      console.log(user);
+      if (user) {
+        window.location.href = '/impersonate/take/' + user;
+      }
+    }
   }
 });
 
@@ -73303,6 +73324,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'Tasques',
@@ -73352,11 +73374,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       }, {
         text: 'Completat', value: 'completed'
       }, {
-        text: 'Creat', value: 'created_at'
+        text: 'Creat', value: 'created_at_timestamp'
       }, {
-        text: 'Modificat', value: 'updated_at'
+        text: 'Modificat', value: 'updated_at_timestamp'
       }, {
-        text: 'Actions', sortable: false
+        text: 'Accions', sortable: false, value: 'full_search'
       }],
       pagination: {
         rowsPerPage: 25
@@ -73484,6 +73506,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       this.destroyDialog = true;
       this.taskBeingRemoved = task;
     }
+  },
+  created: function created() {
+    console.log('Usuari logat:');
+    console.log(window.laravel_user);
   }
 });
 
@@ -74328,13 +74354,25 @@ var render = function() {
                         _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(task.name))]),
                         _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(task.user))]),
+                        _c("td", [_vm._v(_vm._s(task.user_name))]),
                         _vm._v(" "),
                         _c("td", [_vm._v(_vm._s(task.completed))]),
                         _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(task.created_at))]),
+                        _c("td", [
+                          _c(
+                            "span",
+                            { attrs: { title: task.created_at_formatted } },
+                            [_vm._v(_vm._s(task.created_at_human))]
+                          )
+                        ]),
                         _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(task.updated_at))]),
+                        _c("td", [
+                          _c(
+                            "span",
+                            { attrs: { title: task.updated_at_formatted } },
+                            [_vm._v(_vm._s(task.updated_at_human))]
+                          )
+                        ]),
                         _vm._v(" "),
                         _c(
                           "td",
@@ -74342,6 +74380,14 @@ var render = function() {
                             _c(
                               "v-btn",
                               {
+                                directives: [
+                                  {
+                                    name: "can",
+                                    rawName: "v-can",
+                                    value: _vm.tasks.update,
+                                    expression: "tasks.update"
+                                  }
+                                ],
                                 attrs: {
                                   color: "success",
                                   icon: "",
@@ -74361,6 +74407,14 @@ var render = function() {
                             _c(
                               "v-btn",
                               {
+                                directives: [
+                                  {
+                                    name: "can",
+                                    rawName: "v-can",
+                                    value: _vm.tasks.show,
+                                    expression: "tasks.show"
+                                  }
+                                ],
                                 attrs: {
                                   color: "success",
                                   icon: "",
@@ -74380,6 +74434,14 @@ var render = function() {
                             _c(
                               "v-btn",
                               {
+                                directives: [
+                                  {
+                                    name: "can",
+                                    rawName: "v-can",
+                                    value: _vm.tasks.destroy,
+                                    expression: "tasks.destroy"
+                                  }
+                                ],
                                 attrs: {
                                   color: "error",
                                   flat: "",
@@ -74508,6 +74570,14 @@ var render = function() {
       _c(
         "v-btn",
         {
+          directives: [
+            {
+              name: "can",
+              rawName: "v-can",
+              value: _vm.tasks.create,
+              expression: "tasks.create"
+            }
+          ],
           staticClass: "white--text",
           attrs: { fab: "", bottom: "", right: "", color: "pink", fixed: "" },
           on: { click: _vm.showCreate }
@@ -76885,7 +76955,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -76941,12 +77011,20 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   props: {
     users: {
       type: Array
+    },
+    url: {
+      type: String,
+      default: '/api/v1/users'
+    },
+    label: {
+      type: String,
+      default: 'Usuaris'
     }
   },
   watch: {
     selectedUser: function selectedUser(newValue) {
       if (newValue) {
-        window.location.href = '/impersonate/take/' + newValue;
+        this.$emit('selected', newValue);
       }
     }
   },
@@ -76954,7 +77032,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     var _this = this;
 
     if (this.users) this.dataUsers = this.users;else {
-      window.axios.get('api/v1/users').then(function (response) {
+      window.axios.get(this.url).then(function (response) {
         _this.dataUsers = response.data;
       }).catch(function (error) {
         console.log(error);
@@ -77056,6 +77134,99 @@ if (false) {
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 125 */,
+/* 126 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+var disappear = function disappear(el, modifiers) {
+  var hidden = modifiers && modifiers.hidden;
+  var disabled = modifiers && modifiers.disabled;
+  if (hidden) {
+    el.firstElementChild.style.display = 'none';
+    return true;
+  }
+  if (disabled) {
+    el.firstElementChild.disabled = true;
+    return true;
+  }
+  // el.innerHTML = ''
+  el.remove();
+};
+
+var haveRole = function haveRole(role) {
+  if (role == null) return true;
+  if (window.laravel_user && window.laravel_user.admin) return true;
+  var userRoles = window.laravel_user && window.laravel_user.roles;
+  if (userRoles) {
+    if (userRoles.indexOf(role) === -1) return false;else return true;
+  }
+  return false;
+};
+
+var hasRole = function hasRole(role) {
+  return haveRole(role);
+};
+
+var can = function can(permission) {
+  var resource = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
+  var user = window.laravel_user;
+  if (user && user.admin) return true;
+  var userPermissions = user && user.permissions;
+
+  if (resource instanceof Object) {
+    if (user.id === resource.user_id) {
+      return true;
+    }
+  }
+  if (userPermissions) {
+    if (userPermissions.indexOf(permission) === -1) return false;
+    return true;
+  } else return false;
+};
+
+var cannot = function cannot(permission) {
+  var resource = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
+  return !can(permission, resource);
+};
+
+/* harmony default export */ __webpack_exports__["a"] = ({
+  install: function install(Vue, options) {
+    // <delete-task-button v-can:delete="task"></delete-task-icon>
+    // <delete-task-button v-can="delete.task"></delete-task-icon>
+    // <delete-task-button v-can.disabled="delete.task"></delete-task-icon>
+    // <delete-task-button v-can.hidden="delete.task"></delete-task-icon>
+
+    Vue.directive('can', {
+      bind: function bind(el, binding, vnode, oldVnode) {
+        var action = binding.arg;
+        var resource = binding.value;
+        var permission = void 0;
+        if (resource instanceof Object) permission = binding.expression + '.' + action;else {
+          if (binding.value === null) return true;
+          permission = binding.value || binding.expression;
+        }
+        if (!can(permission, resource)) disappear(el, binding.modifiers);
+      }
+    });
+    Vue.directive('role', {
+      bind: function bind(el, binding, vnode, oldVnode) {
+        if (binding.value === null) return true;
+        var role = binding.value || binding.expression;
+        if (!haveRole(role)) disappear(el, binding.modifiers);
+      }
+    });
+    // If authorID id is equal to current userId permission is always granted
+    Vue.prototype.$can = can;
+    Vue.prototype.$cannot = cannot;
+    Vue.prototype.$haveRole = haveRole;
+    Vue.prototype.$hasRole = hasRole;
+  }
+});
 
 /***/ })
 /******/ ]);

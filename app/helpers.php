@@ -4,6 +4,7 @@
 use App\Tag;
 use App\Task;
 use App\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Exceptions\PermissionAlreadyExists;
@@ -73,6 +74,7 @@ if (!function_exists('create_mysql_database')) {
         $statement = "CREATE DATABASE IF NOT EXISTS $name";
         DB::connection('mysqlroot')->getPdo()->exec($statement);
     }
+}
 
     if (!function_exists('drop_mysql_database')) {
         function drop_mysql_database($name)
@@ -245,6 +247,8 @@ if (!function_exists('create_mysql_database')) {
                     'password' => Hash::make('123456')
                 ]);
                 $deu->assignRole('TaskManager');
+                $deu->assignRole('Tasks');
+                $deu->save();
             }catch(Exception $e){}
         }
     }
@@ -272,6 +276,10 @@ if (!function_exists('create_mysql_database')) {
             });
 
         }
+    }
+if (!function_exists('logged_user')){
+    function logged_user(){
+        return json_encode(optional(Auth::user())->map());
     }
 }
 
