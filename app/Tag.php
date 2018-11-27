@@ -10,11 +10,4 @@ class Tag extends Model
 //    protected $fillable = ['name','completed'];
 
 
-    public function assignTags()
-    {
-        return $this->belongsToMany(Tag::class);
-    }
-
-
-
 }

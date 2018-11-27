@@ -12,7 +12,7 @@
       </v-card>
 
   </v-dialog>
-        <v-dialog v-model="editDialog" @keydown.esc="editDialog = false">
+  <v-dialog v-model="editDialog" @keydown.esc="editDialog = false">
             <v-toolbar color="primary" class="white--text">
             <v-btn color="white" flat icon @click.native="editDialog = false"><v-icon class="mr-1">close</v-icon></v-btn>
 
@@ -24,7 +24,9 @@
                 <v-card-text>
         <v-form>
             <v-text-field v-model="taskBeingEdited.name" label="Nom" hint="El nom de la tasca..."></v-text-field>
-            <v-switch v-model="taskBeingEdited.completed" :label="completed ? 'Completada' : 'Pendent'"></v-switch>
+            <v-switch v-model="taskBeingEdited.completed" :label="taskBeingEdited.completed ? 'Completada' : 'Pendent'"></v-switch>
+            <v-select label="User" :items="dataUsers" v-model="taskBeingEdited.user_id" item-text="name" item-value="id" clearable></v-select>
+
                 <v-textarea v-model="taskBeingEdited.description" label="Descripcio" hint="Descripció"></v-textarea>
             <div class="text-xs-center">
             <v-btn color="grey" @click.native="editDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>Sortir</v-btn>
@@ -35,26 +37,26 @@
       </v-card>
 
   </v-dialog>
-        <v-dialog v-model="showDialog" @keydown.esc="showDialog = false">
-            <v-toolbar color="primary" class="white--text">
+  <v-dialog v-model="showDialog" @keydown.esc="showDialog = false">
+        <v-toolbar color="primary" class="white--text">
             <v-btn color="white" flat icon @click.native="showDialog = false"><v-icon class="mr-1">close</v-icon></v-btn>
 
-                Tasca en detall
+                Crear tasca
                <v-spacer></v-spacer> <v-btn color="white" flat @click.native="showDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>Sortir</v-btn>
                <v-btn color="white" flat @click.native="showDialog = false"><v-icon class="mr-1">save</v-icon>Guardar</v-btn>
             </v-toolbar>
-      <v-card>
-          <v-card-text>
+            <v-card>
+                <v-card-text>
         <v-form>
-            <v-text-field v-model="taskBeingShown.showName" label="Nom" hint="El nom de la tasca..."></v-text-field>
-            <v-text-field label="User" v-model="taskBeingShown.user"></v-text-field>
-            <v-switch v-model="taskBeingShown.showCompleted" :label="showCompleted ? 'Completada' : 'Pendent'"></v-switch>
-                <v-textarea v-model="taskBeingShown.showDescription" label="Descripcio" hint="Descripció"></v-textarea>
+            <v-text-field disabled v-model="taskBeingShown.name" label="Nom" hint="El nom de la tasca..."></v-text-field>
+            <v-switch disabled v-model="taskBeingShown.completed" :label="taskBeingShown.completed ? 'Completada' : 'Pendent'"></v-switch>
+            <v-text-field disabled label="User" v-model="taskBeingShown.user_name" item-text="name" item-value="id" clearable></v-text-field>
+                <v-textarea disabled v-model="taskBeingShown.description" label="Descripcio" hint="Descripció"></v-textarea>
             <div class="text-xs-center">
             <v-btn color="grey" @click.native="showDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>Sortir</v-btn>
                 </div>
         </v-form>
-              </v-card-text>
+                </v-card-text>
       </v-card>
 
   </v-dialog>
@@ -70,7 +72,8 @@
                 <v-card-text>
         <v-form>
             <v-text-field v-model="taskBeingCreated.name" label="Nom" hint="El nom de la tasca..."></v-text-field>
-            <v-switch v-model="taskBeingCreated.completed" :label="completed ? 'Completada' : 'Pendent'"></v-switch>
+            <v-switch v-model="taskBeingCreated.completed" :label="taskBeingCreated.completed ? 'Completada' : 'Pendent'"></v-switch>
+            <v-select label="User" :items="dataUsers" v-model="taskBeingCreated.user_id" item-text="name" item-value="id" clearable></v-select>
                 <v-textarea v-model="taskBeingCreated.description" label="Descripcio" hint="Descripció"></v-textarea>
             <div class="text-xs-center">
             <v-btn color="grey" @click.native="createDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>Sortir</v-btn>
@@ -81,10 +84,7 @@
       </v-card>
 
   </v-dialog>
-  <v-snackbar :timeout="snackbarTimeout" :color="snackbarColor" v-model="snackbar">
-      {{ snackbarMessage }}
-      <v-btn dark flat @click.native="snackbar=false">Tancar</v-btn>
-  </v-snackbar>
+
   <v-toolbar color="blue darken-1">
     <v-menu left>
 
@@ -121,7 +121,7 @@
                 <v-select label="Filtres" :items="filters" v-model="filter"></v-select>
                 </v-flex>
                 <v-flex lg3 class="mr-2">
-                    <v-select label="User" :items="users" v-model="user" clearable></v-select>
+                    <v-select label="User" :items="dataUsers" v-model="user" item-text="name" item-value="id" clearable></v-select>
                 </v-flex>
                 <v-flex lg5>
                     <v-text-field
@@ -151,8 +151,10 @@
                     <tr>
                         <td>{{ task.id}}</td>
                         <td>{{ task.name}}</td>
-                        <td>{{ task.user_name}}</td>
-                        <td>{{ task.completed}}</td>
+                       <v-avatar :title="task.user_name">
+                                <img :src="task.user_gravatar" alt="avatar">
+                            </v-avatar>
+                        <td> <v-switch v-model="task.completed" :label="task.completed ? 'Completada' : 'Pendent'" @change="complete(task)"></v-switch></td>
                         <td><span :title="task.created_at_formatted">{{task.created_at_human}}</span></td>
                         <td><span :title="task.updated_at_formatted">{{task.updated_at_human}}</span></td>
                         <td>
@@ -227,10 +229,6 @@ export default{
   name: 'Tasques',
   data () {
     return {
-      snackbarMessage: 'Default message',
-      snackbarTimeout: 3000,
-      snackbarColor: 'success',
-      snackbar: false,
       name: '',
       description: '',
       completed: false,
@@ -243,8 +241,8 @@ export default{
       taskBeingCreated: {
         id: '',
         name: '',
-        user: '',
-        completed: ''
+        user_id: '',
+        completed: false
       },
       taskBeingShown: '',
       taskBeingEdited: '',
@@ -325,24 +323,23 @@ export default{
     opcio2 () {
       console.log('Opcio2')
     },
-    create (task) {
+    create () {
       this.creating = true
-      window.axios.post('/api/v1/user/tasks', this.taskBeingCreated).then(() => {
+      window.axios.post('/api/v1/user/tasks', this.taskBeingCreated).then((response) => {
         // this.refresh() // Problema -> rendiment
-        this.createTask(this.taskBeingCreated)
-        this.showMessage("S'ha editat correctament la tasca")
-      }).catch(error => {
-        this.showError(error)
+        this.createTask(response.data)
+        this.$snackbar.showMessage("S'ha editat correctament la tasca")
+      }).catch((error) => {
+        this.$snackbar.showError(error)
         this.creating = false
         this.editDialog = false
       }).finally(() => {
         this.creating = false
-        this.editDialog = false
+        this.createDialog = false
       })
     },
-    showCreate (task) {
+    showCreate () {
       this.createDialog = true
-      this.taskBeingCreated = task
     },
     show (task) {
       console.log('Show Task' + task.id)
@@ -356,25 +353,15 @@ export default{
     createTask ($task) {
       this.dataTasks.splice(0, 0, $task)
     },
-    showError (error) {
-      this.snackbarMessage = error
-      this.snackbar = true
-      this.snackbarColor = 'error'
-    },
-    showMessage (message) {
-      this.snackbarMessage = message
-      this.snackbar = true
-      this.snackbarColor = 'success'
-    },
 
     destroy () {
       this.removing = true
       window.axios.delete('/api/v1/user/tasks/' + this.taskBeingRemoved.id).then(() => {
         // this.refresh() // Problema -> rendiment
         this.removeTask(this.taskBeingRemoved)
-        this.showMessage("S'ha esborrat correctament la tasca")
+        this.$snackbar.showMessage("S'ha esborrat correctament la tasca")
       }).catch(error => {
-        this.showError(error)
+        this.$snackbar.showError(error)
         this.removing = false
         this.destroyDialog = false
       }).finally(() => {
@@ -387,9 +374,9 @@ export default{
       window.axios.put('/api/v1/user/tasks/' + this.taskBeingEdited.id, this.taskBeingEdited).then(() => {
         // this.refresh() // Problema -> rendiment
         this.editTask(this.taskBeingEdited)
-        this.showMessage("S'ha editat correctament la tasca")
-      }).catch(error => {
-        this.showError(error)
+        this.$snackbar.showMessage("S'ha editat correctament la tasca")
+      }).catch((error) => {
+        this.$snackbar.showError(error)
         this.editing = false
         this.editDialog = false
       }).finally(() => {
@@ -408,6 +395,10 @@ export default{
     showDestroy (task) {
       this.destroyDialog = true
       this.taskBeingRemoved = task
+    },
+    complete (task) {
+      this.taskBeingEdited = task
+      this.edit()
     }
   },
   created () {

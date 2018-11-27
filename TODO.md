@@ -1,9 +1,64 @@
-# Tasques
+A 26/11/2018:
 
-- [ ] Lists tasks usuari logat: Api/LoggedUserTasksController.php
-- [ ] Crear test unitari per a haveTask 
-- [ ] Crear mètode haveTask
-- [ ] Crear test unitari per a removeTask 
-- [ ] Crear mètode removeTask
-- [ ] Acabar i comprovar test Api/LoggedUserTasksController.php
-- [ ] Acabar i comprovar test LoggedUserTasksController.php
+- [x] Vue i Vuetify instal·lat
+- [x] Welcome page:
+  - [x] Welcome page amb Vuetify i Parallax theme (https://vuetifyjs.com/en/layout/pre-made-themes)
+  - [x] Utilitzar layout Blade diferent de la "intranet" (@extends('layouts.landing')
+  - [x] CTA (Call To action - Boto principal enmig de la pantall) que porti a la home
+  - [x] Acció de login (Boto)
+    - [x] Opcional-> El registre/login es poden mostrar en un dialog no una URL a part
+  - [x] Acció de registre (Boto)
+- [x] Login
+  - [x] Pàgina de Login: 
+    - [x] Vista Laravel amb layout propi (Contingut centrat)
+    - [x] Realitzada amb PHP (no cal Axios ni peticions XHR)
+    - [x] Errors de validació amb Laravel i PHP (objecte error)
+    - [x] El formulari manté els valors ja introduits en cas d'error de validació (old)
+    - [x] Validació en línia (Javascript) amb vuelidate
+  - [ ] Testos del Login de Laravel
+  - [ ] Testos i implementació alternativa (feta per naltros) de Login (LoginAlt)
+- [x] Registre
+  - [x] Pàgina de registre: 
+    - [x] Vista Laravel amb layout propi (Contingut centrat)
+    - [x] Realitzada amb PHP (no cal Axios ni peticions XHR)
+    - [x] Errors de validació amb Laravel i PHP (objecte error)
+    - [x] Validació en línia amb vuelidate
+  - [ ] Testos del registre de Laravel
+  - [ ] Testos i implementació alternativa (feta per naltros) de registre
+  - [x] El formulari manté els valors ja introduits en cas d'error de validació (old)
+- [x] Home
+  - [x] Layout app per a intranet (seccions Header, menu navegació, footer, contingut)
+  - [x] HEADER
+    - [x] Avatar de vuetify amb el Gravatar de l'usuari Logat i el nom
+    - [x] Botó de Logout
+  - [x] Menú de navegació
+    - [x]  Component App.vue amb un array items amb els items del menu
+  -
+- [x] Pàgines estatíques about/contact:
+- [x] Versions de l'aplicació de tasques
+  - [x] Versió simple inicial PHP
+    - [x] Totes les operacions CRUD (CREATE RETRIEVE UPDATE DELETE), només PHP
+  - [x] Versió simple inicial PHP+VUE  
+    - [x] Presentació amb TailwindCSS   
+  - [ ] Versió definitiva  WIP
+    - [x] Presentació amb Vuetify
+- [x] Preparació de la base de dades, usuaris, permisos i entorns:
+ - [x] Usuari personal creat per defecte (el vostre propi usuari)
+   - [x] Helper per a crear usuari per defecte
+   - [x] Executar als seeders
+- [ ] Tags
+  - [ ] TagsControllerTest. Totes les operacions CRUD
+    - [ ] TagsControllerTest api   
+    - [ ] TagsControllerTest web (només index)
+    - [ ] Utilitzar objectes request i validació (errors 422)
+    - [ ] Testos Utilitzar objectes request i validació (errors 422)
+    - [ ] Route Model Binding? FindOrFail
+    - [ ] Usuaris logats (funció Login)
+- Testos
+ - [ ] TasksControllerTest
+   - [ ] TasksControllerTest web
+   - [ ] TasksControllerTest api
+    - [ ] Utilitzar objectes request i validació (errors 422)
+       - [ ] Testos Utilitzar objectes request i validació (errors 422)
+       - [ ] Route Model Binding? FindOrFail
+       - [ ] Usuaris logats (funció Login)

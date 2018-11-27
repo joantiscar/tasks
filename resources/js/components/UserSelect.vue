@@ -17,7 +17,7 @@
             <template slot="item" slot-scope="{item: user}">
                 <v-list-tile-avatar>
                 <v-avatar :title="user.name">
-                <img :src="user.avatar" alt="avatar">
+                <img :src="user.gravatar" alt="avatar">
                 </v-avatar>
                 </v-list-tile-avatar>
                 <v-list-tile-content>

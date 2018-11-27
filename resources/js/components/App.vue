@@ -23,7 +23,9 @@ export default {
       },
       { icon: 'history', text: 'Tags', url: '/tags' }
 
-    ]
+    ],
+    loginForm: false,
+    registerForm: false
   }),
   props: {
     source: String

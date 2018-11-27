@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <style>[v-cloak]{display: none}</style>
     <title>Vuetify Parallax Starter</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +9,7 @@
     <link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet">
 </head>
 <body>
-<div id="app">
+<div id="app" v-cloak>
     @yield('content')
 </div>
 <script src="{{ mix('js/app.js') }}"></script>

@@ -5,8 +5,19 @@
         <v-toolbar class="white">
             <v-toolbar-title v-text="title"></v-toolbar-title>
             <v-spacer></v-spacer>
-            <v-btn @click="" href="login">Login</v-btn>
-            <v-btn @click="" href="register">Register</v-btn>
+            <v-btn @click="loginForm = !loginForm">Login</v-btn>
+            <v-btn @click="registerForm = !registerForm">Register</v-btn>
+            <v-dialog v-model="loginForm">
+                <v-card>
+                    <login-form email="{{old('email')}}" csrf-token="{{csrf_token()}}"></login-form>
+                </v-card>
+            </v-dialog>
+            <v-dialog v-model="registerForm">
+                <v-card>
+                    <register-form email="{{old('email')}}" csrf-token="{{csrf_token()}}"></register-form>
+                </v-card>
+
+            </v-dialog>
         </v-toolbar>
         <v-content>
             <section>

@@ -63,7 +63,7 @@ class User extends Authenticatable
         'id' => $this->id,
         'name' => $this->name,
         'email' => $this->email,
-        'avatar' => $this->getAvatarAttribute(),
+        'gravatar' => $this->gravatar,
         'admin' => (boolean)$this->admin,
         'roles' => $this->roles()->pluck('name')->unique()->toArray(),
         'permissions' => $this->getAllPermissions()->pluck('name')->unique()->toArray()
@@ -71,7 +71,7 @@ class User extends Authenticatable
         ];
     }
 
-    public function getAvatarAttribute()
+    public function getGravatarAttribute()
     {
         return 'https://www.gravatar.com/avatar/' . md5($this->email);
 
