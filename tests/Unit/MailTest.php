@@ -2,6 +2,8 @@
 
 namespace Tests\Unit;
 
+use App\Mail\TestDinamicEmail;
+use App\Mail\TestEmail;
 use Illuminate\Support\Facades\Mail;
 use Tests\Feature\Traits\CanLogin;
 use Tests\TestCase;
@@ -20,5 +22,14 @@ class MailTest extends TestCase
         $user = $this->login();
 
         Mail::to($user)->send(new TestEmail());
+        $this->assertTrue(true);
+    }
+
+    public function test_markdown_send_email_dinamic()
+    {
+        $user = $this->login();
+
+        Mail::to($user)->send(new TestDinamicEmail($user));
+        $this->assertTrue(true);
     }
 }

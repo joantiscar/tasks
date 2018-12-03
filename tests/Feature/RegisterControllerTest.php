@@ -2,8 +2,10 @@
 
 namespace Tests\Feature;
 
+use App\Mail\WelcomeMail;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -18,15 +20,19 @@ class RegisterControllerTest extends TestCase
      */
     public function test_can_register_a_user()
     {
-//        $this->withoutExceptionHandling();
+        $this->withoutExceptionHandling();
         $this->assertNull(Auth::user());
 //        $response = $this->post('/register', []);
+        Mail::fake();
         $response = $this->post('/register', $user = [
             'name' => 'astiooo',
-            'email' => 'astiooo@gmail.com',
+            'email' => 'astiooiiio@gmail.com',
             'password' => '123456',
             'password_confirmation' => '123456'
         ]);
+        Mail::assertSent(WelcomeMail::class, function($mail){
+            return $mail->user->name == 'astiooo';
+        });
         $response->assertStatus(302);
         $response->assertRedirect('/home');
         $this->assertEquals($user['email'], Auth::user()->email);
