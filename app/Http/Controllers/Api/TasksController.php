@@ -35,6 +35,8 @@ class TasksController extends Controller
 
         $task->name = $request->name;
         $task->completed = $request->completed;
+        $task->description = $request->description;
+        $task->user_id = $request->user_id;
         $task->save();
 
         return $task->map();
@@ -52,7 +54,9 @@ class TasksController extends Controller
 
         $task = new Task();
         $task->name = $request->name;
-        $task->completed = false;
+        $task->completed = $request->completed;
+        $task->description = $request->description;
+        $task->user_id = $request->user_id;
         $task->save();
         return $task->map();
 //        return Task::findOrFail($request->task);

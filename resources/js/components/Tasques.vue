@@ -158,15 +158,15 @@
                         <td><span :title="task.created_at_formatted">{{task.created_at_human}}</span></td>
                         <td><span :title="task.updated_at_formatted">{{task.updated_at_human}}</span></td>
                         <td>
-                        <v-btn v-can="tasks.update" color="success" icon flat title="Modificar la tasca"
+                        <v-btn v-if="$can('tasks.update', task)" color="success" icon flat title="Modificar la tasca"
                                @click="showEdit(task)">
                             <v-icon>border_color</v-icon>
                         </v-btn>
-                            <v-btn v-can="tasks.show" color="success" icon flat title="Modificar la tasca"
+                            <v-btn v-if="$can('tasks.show', task)" color="success" icon flat title="Modificar la tasca"
                                    @click="showShow(task)">
                             <v-icon>remove_red_eye</v-icon>
                         </v-btn>
-                        <v-btn v-can="tasks.destroy" color="error" flat icon title="Eliminar la tasca"
+                        <v-btn v-if="$can('tasks.destroy', task)" color="error" flat icon title="Eliminar la tasca"
                                @click="showDestroy(task)">
                             <v-icon>delete</v-icon>
                         </v-btn>
@@ -216,7 +216,7 @@
             fixed
             class="white--text"
             @click="showCreate"
-            v-can="tasks.create"
+            v-if="$can('user.tasks.store')"
         >
             <v-icon>add</v-icon>
 
@@ -300,13 +300,17 @@ export default{
     users: {
       type: Array,
       required: true
+    },
+    uri: {
+      type: String,
+      required: true
     }
   },
   methods: {
     refresh () {
       this.loading = true
       // todo -> axios
-      window.axios.get('/api/v1/user/tasks').then(response => {
+      window.axios.get(this.uri).then(response => {
         console.log(response)
         this.dataTasks = response.data
       }).catch(error => {
@@ -325,7 +329,7 @@ export default{
     },
     create () {
       this.creating = true
-      window.axios.post('/api/v1/user/tasks', this.taskBeingCreated).then((response) => {
+      window.axios.post(this.uri, this.taskBeingCreated).then((response) => {
         // this.refresh() // Problema -> rendiment
         this.createTask(response.data)
         this.$snackbar.showMessage("S'ha editat correctament la tasca")
@@ -356,7 +360,7 @@ export default{
 
     destroy () {
       this.removing = true
-      window.axios.delete('/api/v1/user/tasks/' + this.taskBeingRemoved.id).then(() => {
+      window.axios.delete(this.uri + '/' + this.taskBeingRemoved.id).then(() => {
         // this.refresh() // Problema -> rendiment
         this.removeTask(this.taskBeingRemoved)
         this.$snackbar.showMessage("S'ha esborrat correctament la tasca")
@@ -371,7 +375,7 @@ export default{
     },
     edit () {
       this.editing = true
-      window.axios.put('/api/v1/user/tasks/' + this.taskBeingEdited.id, this.taskBeingEdited).then(() => {
+      window.axios.put(this.uri + '/' + this.taskBeingEdited.id, this.taskBeingEdited).then(() => {
         // this.refresh() // Problema -> rendiment
         this.editTask(this.taskBeingEdited)
         this.$snackbar.showMessage("S'ha editat correctament la tasca")
