@@ -1,17 +1,5 @@
 <template>
     <span>
-  <v-dialog v-model="destroyDialog">
-      <v-card>
-        <v-card-title class="headline">Estas segur?</v-card-title>
-        <v-card-text>Esta accio es irreversible.</v-card-text>
-        <v-card-actions>
-          <v-spacer></v-spacer>
-          <v-btn color="green darken-1" flat @click.native="destroyDialog = false">Disagree</v-btn>
-          <v-btn color="green darken-1" flat @click.native="destroy()">Agree</v-btn>
-        </v-card-actions>
-      </v-card>
-
-  </v-dialog>
   <v-dialog v-model="editDialog" @keydown.esc="editDialog = false">
             <v-toolbar color="primary" class="white--text">
             <v-btn color="white" flat icon @click.native="editDialog = false"><v-icon class="mr-1">close</v-icon></v-btn>
@@ -154,7 +142,7 @@
                        <v-avatar :title="task.user_name">
                                 <img :src="task.user_gravatar" alt="avatar">
                             </v-avatar>
-                        <td> <v-switch v-model="task.completed" :label="task.completed ? 'Completada' : 'Pendent'" @change="complete(task)"></v-switch></td>
+                        <td> <task-completed-toggle :task="task"></task-completed-toggle></td>
                         <td><span :title="task.created_at_formatted">{{task.created_at_human}}</span></td>
                         <td><span :title="task.updated_at_formatted">{{task.updated_at_human}}</span></td>
                         <td>
@@ -166,8 +154,8 @@
                                    @click="showShow(task)">
                             <v-icon>remove_red_eye</v-icon>
                         </v-btn>
-                        <v-btn v-if="$can('tasks.destroy', task)" color="error" flat icon title="Eliminar la tasca"
-                               @click="showDestroy(task)">
+                        <v-btn v-if="$can('tasks.destroy', task)" :loading="removing === task.id" :disabled="removing === task.id" color="error" flat icon title="Eliminar la tasca"
+                               @click="destroy(task)">
                             <v-icon>delete</v-icon>
                         </v-btn>
                         </td>
@@ -225,8 +213,12 @@
 </template>
 
 <script>
+import TaskCompletedToggle from './TaskCompletedToggle'
 export default{
   name: 'Tasques',
+  components: {
+    'task-completed-toggle': TaskCompletedToggle
+  },
   data () {
     return {
       name: '',
@@ -247,7 +239,6 @@ export default{
       taskBeingShown: '',
       taskBeingEdited: '',
       createDialog: false,
-      destroyDialog: false,
       editDialog: false,
       showDialog: false,
 
@@ -263,7 +254,7 @@ export default{
       loading: false,
       creating: false,
       editing: false,
-      removing: false,
+      removing: null,
       headers: [
         {
           text: 'id', value: 'id'
@@ -306,6 +297,20 @@ export default{
       required: true
     }
   },
+  // watch: {
+  //   // dataTasks (newDataTasks, oldDataTasks) {
+  //   //     // PROBLEMA -> WATCH ARRAYS MALA COSA O OBJECTES
+  //   //   console.log(this.dataTasks)
+  //   // }
+  //   // dataTasks: {
+  //   //   handler: function (newDataTasks, oldDataTasks) {
+  //   //     // PROBLEMA -> WATCH ARRAYS MALA COSA O OBJECTES
+  //   //     console.log(this.dataTasks)
+  //   //   },
+  //   //   deep: true
+  //   // }
+  //
+  // },
   methods: {
     refresh () {
       this.loading = true
@@ -358,20 +363,37 @@ export default{
       this.dataTasks.splice(0, 0, $task)
     },
 
-    destroy () {
-      this.removing = true
-      window.axios.delete(this.uri + '/' + this.taskBeingRemoved.id).then(() => {
-        // this.refresh() // Problema -> rendiment
-        this.removeTask(this.taskBeingRemoved)
-        this.$snackbar.showMessage("S'ha esborrat correctament la tasca")
-      }).catch(error => {
-        this.$snackbar.showError(error)
-        this.removing = false
-        this.destroyDialog = false
-      }).finally(() => {
-        this.removing = false
-        this.destroyDialog = false
-      })
+    // destroyWithPromises (task) {
+    //     // ES6 async await
+    //
+    //     let result = this.$confirm().then(
+    //     if (result) {
+    //         console.log('ok')
+    //     }
+    //
+    //     ).catch()
+
+    async destroy (task) {
+      // ES6 async await
+
+      let result = await this.$confirm('Les tasques esborrades no es poden recuperar',
+        { title: 'Esteu segurs?', buttonTrueText: 'Eliminar', buttonFalseText: 'Cancel·lar', color: 'blue' })
+      if (result) {
+        this.removing = task.id
+        window.axios.delete(this.uri + '/' + task.id).then(() => {
+          // this.refresh() // Problema -> rendiment
+          this.removeTask(task)
+          this.$snackbar.showMessage("S'ha esborrat correctament la tasca")
+        }).catch(error => {
+          this.$snackbar.showError(error)
+          this.removing = null
+          this.destroyDialog = false
+        }).finally(() => {
+          this.removing = null
+          this.destroyDialog = false
+          // })
+        })
+      }
     },
     edit () {
       this.editing = true
@@ -396,10 +418,7 @@ export default{
       this.showDialog = true
       this.taskBeingShown = task
     },
-    showDestroy (task) {
-      this.destroyDialog = true
-      this.taskBeingRemoved = task
-    },
+
     complete (task) {
       this.taskBeingEdited = task
       this.edit()

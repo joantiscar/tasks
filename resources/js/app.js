@@ -19,12 +19,15 @@ import LoginForm from './components/LoginForm.vue'
 import RegisterForm from './components/RegisterForm.vue'
 import UserList from './components/UserList.vue'
 import UserSelect from './components/UserSelect.vue'
+import TaskCompletedToggle from './components/TaskCompletedToggle.vue'
 import permissions from './plugins/permissions.js'
+import confirm from './plugins/confirm'
 import snackbar from './plugins/snackbar'
 require('./bootstrap')
 
 window.Vue = Vue
 window.Vue.use(Vuetify)
+window.Vue.use(confirm)
 window.Vue.use(permissions)
 window.Vue.use(snackbar)
 
@@ -41,5 +44,6 @@ window.Vue.component('login-form', LoginForm)
 window.Vue.component('register-form', RegisterForm)
 window.Vue.component('user-list', UserList)
 window.Vue.component('user-select', UserSelect)
+window.Vue.component('task-completed-toggle', TaskCompletedToggle)
 
 const app = new window.Vue(AppComponent)

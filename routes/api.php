@@ -25,7 +25,8 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('/v1/tasks/{task}','Api\TasksController@show');      //READ
     Route::delete('/v1/tasks/{task}','Api\TasksController@destroy');//DELETE
     Route::post('/v1/tasks','Api\TasksController@store');           //CREATE
-    Route::put('/v1/tasks/{task}','Api\TasksController@edit');      //EDIT
+    Route::post('/v1/completed_task/{task}','Api\CompletedTasksApiController@store');      //EDIT
+    Route::delete('/v1/completed_task/{task}','Api\CompletedTasksApiController@destroy');      //EDIT
 
 
     Route::get('/v1/tags','Api\TagsController@index');            //BROWSE
