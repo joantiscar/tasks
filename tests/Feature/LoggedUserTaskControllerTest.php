@@ -34,8 +34,8 @@ class LoggedUserTaskControllerTest extends TestCase
         $response = $this->get('/user/tasks');
         $response->assertSuccessful();
 
-        $response->assertViewIs('tasks.user.index');
-        $response->assertViewHas('tasks', $user->tasks);
+        $response->assertViewIs('tasques');
+        $response->assertViewHas('tasks', map_collection($user->tasks));
 
     }
     public function test_cannot_see_tasks_if_user_is_not_logged()

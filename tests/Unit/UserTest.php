@@ -105,15 +105,29 @@ class UserText extends TestCase{
         $user->addTask($task);
 
 
-        $tascaRetornada = $user->haveTask($task);
+        $tascaRetornada = $user->have_task($task);
 
-        assertEquals($task, $tascaRetornada);
+        $this->assertEquals($task->map(), $tascaRetornada->map());
 
     }
     public function test_remove_task()
     {
+        $user = factory(User::class)->create();
+        $task = factory(Task::class)->create();
 
-        $user->removeTask();
+
+
+        //2 execute
+        $user->addTask($task);
+
+        $tascaRetornada = $user->have_task($task);
+
+        $this->assertEquals($task->map(), $tascaRetornada->map());
+
+        $user->removeTask($task);
+
+        $this->assertEmpty($user->tasks);
+
     }
 
     public function test_is_Super_Admin()
@@ -138,7 +152,7 @@ class UserText extends TestCase{
         $mappedUser = $user->map();
         $this->assertEquals($mappedUser['name'], 'pepe');
         $this->assertEquals($mappedUser['email'], 'pepe@gmail.com');
-        $this->assertEquals($mappedUser['avatar'], 'https://www.gravatar.com/avatar/6b0becddecd5a06042b3f8078c97f2e0');
+        $this->assertEquals($mappedUser['gravatar'], 'https://www.gravatar.com/avatar/6b0becddecd5a06042b3f8078c97f2e0');
         $this->assertEquals($mappedUser['admin'], 0);
         $this->assertCount(0, $mappedUser['permissions']);
         $this->assertCount(0, $mappedUser['roles']);
@@ -170,18 +184,19 @@ class UserText extends TestCase{
             'name' => 'rol3'
         ]);
 
-        $user->givePermission($per1);
-        $user->givePermission($per2);
-        $user->givePermission($per3);
-        $user->giveRole($rol1);
-        $user->giveRole($rol2);
-        $user->giveRole($rol3);
-        $this->assertEquals($mappedUser['roles'][0], $rol1);
-        $this->assertEquals($mappedUser['roles'][1], $rol2);
-        $this->assertEquals($mappedUser['roles'][2], $rol2);
-        $this->assertEquals($mappedUser['permissions'][0], $per1);
-        $this->assertEquals($mappedUser['permissions'][1], $per2);
-        $this->assertEquals($mappedUser['permissions'][2], $per2);
+        $user->givePermissionTo($per1);
+        $user->givePermissionTo($per2);
+        $user->givePermissionTo($per3);
+        $user->assignRole($rol1);
+        $user->assignRole($rol2);
+        $user->assignRole($rol3);
+        $mappedUser = $user->map();
+        $this->assertEquals($mappedUser['roles'][0], 'rol1');
+        $this->assertEquals($mappedUser['roles'][1], 'rol2');
+        $this->assertEquals($mappedUser['roles'][2], 'rol3');
+        $this->assertEquals($mappedUser['permissions'][0], 'per1');
+        $this->assertEquals($mappedUser['permissions'][1], 'per2');
+        $this->assertEquals($mappedUser['permissions'][2], 'per3');
 
     }
 

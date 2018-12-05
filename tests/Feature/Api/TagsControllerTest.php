@@ -41,13 +41,9 @@ class TagsControllerTest extends TestCase
     public function test_can_manager_show_a_tag()
     {
         initialize_roles();
-        $user = $this->login('api');
-        $tag = factory(Tag::class)->create();
-
-
         $this->withoutExceptionHandling();
-
-
+        $user = $this->loginAsTagManager('api');
+        $tag = factory(Tag::class)->create();
 
         $response = $this->get('/api/v1/tags/' . $tag->id);
 
@@ -61,16 +57,7 @@ class TagsControllerTest extends TestCase
     {
         $user = $this->login('api');
         $tag = factory(Tag::class)->create();
-
-
-        $this->withoutExceptionHandling();
-
-
-
         $response = $this->get('/api/v1/tags/' . $tag->id);
-
-        $result = json_decode($response->getContent());
-
         $response->assertStatus(403);
     }
 
@@ -277,7 +264,7 @@ class TagsControllerTest extends TestCase
     public function test_manager_can_browse_tags()
     {
         initialize_roles();
-        $user = $this->login('api');
+        $user = $this->loginAsTagManager('api');
 
         $tag1 = factory(Tag::class)->create();
         $tag2 = factory(Tag::class)->create();
@@ -299,8 +286,7 @@ class TagsControllerTest extends TestCase
     }
     public function test_regular_user_cannot_browse_tags()
     {
-        $user = factory(User::class)->create();
-        $this->actingAs($user, "api");
+        $user = $this->loginAsTagManager('api');
 
         $tag1 = factory(Tag::class)->create();
         $tag2 = factory(Tag::class)->create();

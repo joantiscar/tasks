@@ -25,6 +25,11 @@ class Task extends Model
         $file->save();
     }
 
+    public function tasks()
+    {
+        return $this->belongsToMany(Task::class);
+
+    }
     public function addTags($tags)
     {
 
@@ -34,7 +39,19 @@ class Task extends Model
     public function addTag($tag)
     {
 
-        $this->tag()->save($tag);
+        $this->tags()->save($tag);
+
+    }
+    public function addTasks($tasks)
+    {
+
+        $this->tasks()->saveMany($tasks);
+
+    }
+    public function addTask($tag)
+    {
+
+        $this->tasks()->save($tag);
 
     }
 

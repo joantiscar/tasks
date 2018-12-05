@@ -21,7 +21,8 @@ class LoggedUserTaskApiControllerTest extends TestCase
 
     public function test_can_list_logged_user_tasks()
     {
-        $user = $this->login();
+        $this->withoutExceptionHandling();
+        $user = $this->loginAsTaskUser();
         $task1 = factory(Task::class)->create();
         $task2 = factory(Task::class)->create();
         $task3 = factory(Task::class)->create();
@@ -35,8 +36,7 @@ class LoggedUserTaskApiControllerTest extends TestCase
         $response->assertSuccessful();
 
         $resultJson = json_decode($response->getContent());
-
-        $resultJson->assertCount('3');
+        $this->assertCount(3, $resultJson);
 
 
     }
@@ -49,7 +49,7 @@ class LoggedUserTaskApiControllerTest extends TestCase
 
     public function test_user_can_edit_task()
     {
-        $user = $this->login();
+        $user = $this->loginAsTaskUser();
         //1
         $oldtask = Task::create([
             'name' => 'Comprar lejia',
@@ -65,7 +65,6 @@ class LoggedUserTaskApiControllerTest extends TestCase
             'description' => 'Tasca no tan guapa'
 
         ]);
-
         // 2 opcions
 //        $this->assertDatabaseHas('tasks',$newTask);
 //        $this->assertDatabaseMissing('tasks',$task);
@@ -79,16 +78,21 @@ class LoggedUserTaskApiControllerTest extends TestCase
     }
     public function test_user_cannot_edit_a_task_not_associated_to_user()
     {
-        $user = $this->login();
+        $user = $this->loginAsTaskUser();
+        $user2 = factory(User::class)->create();
         //1
         $task = Task::create([
             'name' => 'Comprar lejia',
-            'completed' => false
+            'completed' => false,
+            'description' => 'asdadas',
+            'user_id' => $user2->id
         ]);
         //2
+        $this->actingAs($user, 'api');
         $response = $this->json('PUT','/api/v1/user/tasks/' . $task->id, [
             'name' => 'Comprar pa',
-            'completed' => true
+            'completed' => true,
+            'description' => 'asdadas'
         ]);
 
         // 2 opcions

@@ -4,13 +4,14 @@ namespace Tests\Feature;
 
 use App\Task;
 use App\User;
+use Tests\Feature\Traits\CanLogin;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class TaskTest extends TestCase
+class TagsTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, CanLogin;
     /**
      * A basic test example.
      *

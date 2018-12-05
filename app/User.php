@@ -41,6 +41,11 @@ class User extends Authenticatable
     {
         $this->tasks()->save($task);
     }
+    public function removeTask($task)
+    {
+        $task = $this->tasks()->findOrFail($task->id);
+        $task->delete();
+    }
     public function addTasks($tasks)
     {
         $this->tasks()->saveMany($tasks);
@@ -48,7 +53,7 @@ class User extends Authenticatable
 
     public function have_task($task)
     {
-        return Auth::user()->tasks()->findOrFail($task->id);
+        return $this->tasks()->findOrFail($task->id);
 
     }
 

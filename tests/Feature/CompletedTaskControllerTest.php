@@ -4,13 +4,14 @@ namespace Tests\Feature;
 
 use App\Task;
 use App\User;
+use Tests\Feature\Traits\CanLogin;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class CompletedTaskControllerTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, CanLogin;
     /**
      * A basic test example.
      *
@@ -21,6 +22,7 @@ class CompletedTaskControllerTest extends TestCase
     public function can_complete_a_task()
     {
         //1
+
         $user = factory(User::class)->create();
         $this->actingAs($user);
         $task= Task::create([
@@ -30,35 +32,36 @@ class CompletedTaskControllerTest extends TestCase
 
 
         //2
-        $this->post('/completed_task/' . $task->id);
+        $response = $this->post('/completed_task/' . $task->id);
 
         //3 Dos opcions: 1) Comprovar les dades directament
         // 2) Comprovar canvis al objecte $task
 
         $task = $task->fresh();
-        $this->assertStatus(404);
+        $response->assertStatus(200);
+        $this->assertTrue((boolean)$task->completed);
 
     }
 
     public function test_can_uncomplete_a_task()
     {
-        //1
         $user = factory(User::class)->create();
         $this->actingAs($user);
         $task= Task::create([
             'name' => 'comprar pa',
-            'completed' => false
+            'completed' => true
         ]);
 
 
         //2
-        $this->delete('/completed_task/' . $task->id);
+        $response = $this->delete('/completed_task/' . $task->id);
 
         //3 Dos opcions: 1) Comprovar les dades directament
         // 2) Comprovar canvis al objecte $task
 
         $task = $task->fresh();
-        $this->assertEquals($task->completed, false);
+        $response->assertStatus(200);
+        $this->assertFalse((boolean)$task->completed);
     }
 
 

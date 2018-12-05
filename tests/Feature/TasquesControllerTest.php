@@ -4,13 +4,15 @@ namespace Tests\Feature;
 
 use App\Task;
 use App\User;
+use Illuminate\Support\Facades\Auth;
+use Tests\Feature\Traits\CanLogin;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class TasquesControllerTest extends TestCase
 {
-    use RefreshDatabase;
+    use RefreshDatabase, CanLogin;
     /**
      * A basic test example.
      *
@@ -57,7 +59,7 @@ class TasquesControllerTest extends TestCase
 
     public function test_cannot_delete_an_unexisting_task()
     {
-
+        $this->login();
         $user = factory(User::class)->create();
                 $this->actingAs($user);
         $this->withExceptionHandling();
@@ -65,29 +67,29 @@ class TasquesControllerTest extends TestCase
 
         $response = $this->delete('/tasks/1');
 
-        $response->assertStatus(404);
+        $response->assertStatus(403);
 //        $response->assertSuccessful();
 //
 //        $this->assertDatabaseMissing('tasks',['name' => 'Comprar llet']);
     }
     public function test_can_delete_task()
     {
-        $user = factory(User::class)->create();
-        $this->actingAs($user);
+
+        $this->loginAsSuperAdmin();
         $this->withExceptionHandling();
 
         $task = Task::create([
-            'name' => 'Comprar llet'
+            'name' => 'Comprar pa',
+            'completed' => false,
+            'user_id' => 1
         ]);
-
-
 
         $response = $this->delete('/tasks/' . $task->id);
 
         $response->assertStatus(302);
 //        $response->assertSuccessful();
 //
-    $this->assertDatabaseMissing('tasks',['name' => 'Comprar llet']);
+    $this->assertDatabaseMissing('tasks',['name' => 'Comprar pa']);
     }
 
     public function test_cannot_edit_an_unexisting_task()
@@ -167,16 +169,16 @@ class TasquesControllerTest extends TestCase
 
     public function test_map()
     {
-
+        $this->login();
         $task = Task::create([
             'name' => 'Comprar pa',
             'completed' => false,
-            'user_id' => $user->id
+            'user_id' => Auth::user()->id
         ]);
 
         $mappedTask = $task->map();
 
-        $this->assertEquals($mappedTask['id'], $user->id);
+        $this->assertEquals($mappedTask['id'], Auth::user()->id);
 
 
 

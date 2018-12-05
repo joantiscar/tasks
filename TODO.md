@@ -1,4 +1,4 @@
-A 26/11/2018:
+A 12/11/2018:
 
 - [x] Vue i Vuetify instal·lat
 - [x] Welcome page:
@@ -25,7 +25,7 @@ A 26/11/2018:
     - [x] Validació en línia amb vuelidate
   - [ ] Testos del registre de Laravel
   - [ ] Testos i implementació alternativa (feta per naltros) de registre
-  - [x] El formulari manté els valors ja introduits en cas d'error de validació (old)
+  - [ ] El formulari manté els valors ja introduits en cas d'error de validació (old)
 - [x] Home
   - [x] Layout app per a intranet (seccions Header, menu navegació, footer, contingut)
   - [x] HEADER
@@ -34,13 +34,13 @@ A 26/11/2018:
   - [x] Menú de navegació
     - [x]  Component App.vue amb un array items amb els items del menu
   -
-- [x] Pàgines estatíques about/contact:
+- [ ] Pàgines estatíques about/contact:
 - [x] Versions de l'aplicació de tasques
   - [x] Versió simple inicial PHP
     - [x] Totes les operacions CRUD (CREATE RETRIEVE UPDATE DELETE), només PHP
   - [x] Versió simple inicial PHP+VUE  
     - [x] Presentació amb TailwindCSS   
-  - [ ] Versió definitiva  WIP
+  - [x] Versió definitiva  WIP
     - [x] Presentació amb Vuetify
 - [x] Preparació de la base de dades, usuaris, permisos i entorns:
  - [x] Usuari personal creat per defecte (el vostre propi usuari)

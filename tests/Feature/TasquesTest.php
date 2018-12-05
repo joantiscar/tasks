@@ -11,7 +11,7 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
-class TasquesControllerTest extends TestCase
+class TasquesTest extends TestCase
 {
     use RefreshDatabase, CanLogin;
     /**
@@ -48,7 +48,7 @@ class TasquesControllerTest extends TestCase
         initialize_roles();
         create_Example_tasks();
 
-        $user = $this->loginAsUsingRole('web', 'Tasks');
+        $user = $this->loginAsTaskUser();
         $task = task::create([
             'name' => 'Tasca Usuari',
             'completed' => true,
@@ -58,7 +58,7 @@ class TasquesControllerTest extends TestCase
         $response->assertStatus(200);
         $response->assertViewIs('tasques');
         $response->assertViewHas('tasks', function($tasks) {
-            return count($tasks)===1;
+            return count($tasks)===2;
         });
     }
     public function test_regular_user_cannot_index_tasks()

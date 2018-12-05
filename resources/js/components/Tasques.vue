@@ -13,7 +13,7 @@
         <v-form>
             <v-text-field v-model="taskBeingEdited.name" label="Nom" hint="El nom de la tasca..."></v-text-field>
             <v-switch v-model="taskBeingEdited.completed" :label="taskBeingEdited.completed ? 'Completada' : 'Pendent'"></v-switch>
-            <v-select label="User" :items="dataUsers" v-model="taskBeingEdited.user_id" item-text="name" item-value="id" clearable></v-select>
+            <v-select label="User" :items="dataUsers" v-model="taskBeingEdited.user_id" item-text="name" item-valFue="id" clearable></v-select>
 
                 <v-textarea v-model="taskBeingEdited.description" label="Descripcio" hint="Descripció"></v-textarea>
             <div class="text-xs-center">

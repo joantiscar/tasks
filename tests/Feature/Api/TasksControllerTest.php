@@ -194,7 +194,7 @@ class TasksControllerTest extends TestCase
     }
     public function test_superAdmin_can_edit_a_task()
     {
-        $user = $this->login('api');
+        $user = $this->loginAsSuperAdmin('api');
         $user->admin = true;
         $user->save();
         //1
@@ -207,7 +207,6 @@ class TasksControllerTest extends TestCase
             'name' => 'Comprar pa',
             'completed' => true
         ]);
-
         // 2 opcions
 //        $this->assertDatabaseHas('tasks',$newTask);
 //        $this->assertDatabaseMissing('tasks',$task);

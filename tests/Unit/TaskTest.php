@@ -34,9 +34,7 @@ class TaskTest extends TestCase
         // 1 Prepare
         $user = factory(User::class)->create();
                 $this->actingAs($user);
-        $task = Task::create([
-            'name' => 'Comprar pa'
-        ]);
+        $task = factory(Task::class)->create();
 
         $tag = Tag::create([
             'name' => 'home'
@@ -131,7 +129,7 @@ class TaskTest extends TestCase
             'name' => 'Comprar pa'
         ]);
         // 2 Executo -> Wishful programming
-        $file = $task->file();
+        $file = $task->file;
 
         // 3 Comprovo
         // $file

@@ -111,112 +111,112 @@ if (!function_exists('create_database')) {
             grant_mysql_privileges(env('DB_USERNAME'), env('DB_DATABASE'));
         }
     }
-if (!function_exists('initialize_roles()')) {
-        function initialize_roles()
-        {
-            try {
-                // Crear rols
-                $taskmanager = Role::create([
-                    'name' => 'TaskManager'
-                ]);
-            } catch (Exception $e) {
-            }
-            try {
-                $tasks = Role::create([
-                    'name' => 'Tasks'
-                ]);
-            } catch (Exception $e) {
-            }
-            // Crear permisos
-            try {
-                // CRUD de tasques
-                Permission::create([
-                    'name' => 'tasks.index'
-                ]);
-                Permission::create([
-                    'name' => 'tasks.create'
-                ]);
-                Permission::create([
-                    'name' => 'tasks.store'
-                ]);
-                Permission::create([
-                    'name' => 'tasks.show'
-                ]);
-                Permission::create([
-                    'name' => 'tasks.update'
-                ]);
-                Permission::create([
-                    'name' => 'tasks.complete'
-                ]);
-                Permission::create([
-                    'name' => 'tasks.uncomplete'
-                ]);
-                Permission::create([
-                    'name' => 'tasks.destroy'
-                ]);
-            } catch (Exception $e) {
-            }
-            // Assignar permisos a taskmanager
-            try {
-                $taskmanager = Role::findByName('TaskManager');
-                $taskmanager->givePermissionTo('tasks.index');
-                $taskmanager->givePermissionTo('tasks.create');
-                $taskmanager->givePermissionTo('tasks.store');
-                $taskmanager->givePermissionTo('tasks.show');
-                $taskmanager->givePermissionTo('tasks.update');
-                $taskmanager->givePermissionTo('tasks.complete');
-                $taskmanager->givePermissionTo('tasks.uncomplete');
-                $taskmanager->givePermissionTo('tasks.destroy');
-            } catch (Exception $e) {
-            }
-            try{
-            // CRUD tasques d'un usuari concret
-            Permission::create([
-                'name' => 'user.tasks.index'
-            ]);
-            Permission::create([
-                'name' => 'user.tasks.create'
-            ]);
-            Permission::create([
-                'name' => 'user.tasks.store'
-            ]);
-            Permission::create([
-                'name' => 'user.tasks.show'
-            ]);
-            Permission::create([
-                'name' => 'user.tasks.update'
-            ]);
-            Permission::create([
-                'name' => 'user.tasks.complete'
-            ]);
-            Permission::create([
-                'name' => 'user.tasks.uncomplete'
-            ]);
-            Permission::create([
-                'name' => 'user.tasks.destroy'
-            ]);
-        }catch(Exception $e){}
-
-
-            try{
-            $tasks = Role::findByName('Tasks');
-                $tasks->givePermissionTo('user.tasks.index');
-                $tasks->givePermissionTo('user.tasks.create');
-                $tasks->givePermissionTo('user.tasks.store');
-                $tasks->givePermissionTo('user.tasks.show');
-                $tasks->givePermissionTo('user.tasks.update');
-                $tasks->givePermissionTo('user.tasks.complete');
-                $tasks->givePermissionTo('user.tasks.uncomplete');
-                $tasks->givePermissionTo('user.tasks.destroy');
-
-
+//if (!function_exists('initialize_roles()')) {
+//        function initialize_roles()
+//        {
+//            try {
+//                // Crear rols
+//                $taskmanager = Role::create([
+//                    'name' => 'TaskManager'
+//                ]);
+//            } catch (Exception $e) {
+//            }
+//            try {
+//                $tasks = Role::create([
+//                    'name' => 'Tasks'
+//                ]);
+//            } catch (Exception $e) {
+//            }
+//            // Crear permisos
+//            try {
+//                // CRUD de tasques
+//                Permission::create([
+//                    'name' => 'tasks.index'
+//                ]);
+//                Permission::create([
+//                    'name' => 'tasks.create'
+//                ]);
+//                Permission::create([
+//                    'name' => 'tasks.store'
+//                ]);
+//                Permission::create([
+//                    'name' => 'tasks.show'
+//                ]);
+//                Permission::create([
+//                    'name' => 'tasks.update'
+//                ]);
+//                Permission::create([
+//                    'name' => 'tasks.complete'
+//                ]);
+//                Permission::create([
+//                    'name' => 'tasks.uncomplete'
+//                ]);
+//                Permission::create([
+//                    'name' => 'tasks.destroy'
+//                ]);
+//            } catch (Exception $e) {
+//            }
+//            // Assignar permisos a taskmanager
+//            try {
+//                $taskmanager = Role::findByName('TaskManager');
+//                $taskmanager->givePermissionTo('tasks.index');
+//                $taskmanager->givePermissionTo('tasks.create');
+//                $taskmanager->givePermissionTo('tasks.store');
+//                $taskmanager->givePermissionTo('tasks.show');
+//                $taskmanager->givePermissionTo('tasks.update');
+//                $taskmanager->givePermissionTo('tasks.complete');
+//                $taskmanager->givePermissionTo('tasks.uncomplete');
+//                $taskmanager->givePermissionTo('tasks.destroy');
+//            } catch (Exception $e) {
+//            }
+//            try{
+//            // CRUD tasques d'un usuari concret
+//            Permission::create([
+//                'name' => 'user.tasks.index'
+//            ]);
+//            Permission::create([
+//                'name' => 'user.tasks.create'
+//            ]);
+//            Permission::create([
+//                'name' => 'user.tasks.store'
+//            ]);
+//            Permission::create([
+//                'name' => 'user.tasks.show'
+//            ]);
+//            Permission::create([
+//                'name' => 'user.tasks.update'
+//            ]);
+//            Permission::create([
+//                'name' => 'user.tasks.complete'
+//            ]);
+//            Permission::create([
+//                'name' => 'user.tasks.uncomplete'
+//            ]);
+//            Permission::create([
+//                'name' => 'user.tasks.destroy'
+//            ]);
+//        }catch(Exception $e){}
 //
-//            Gate::define('user.tasks.update', function($user){
-//                return $user->hasPermission('user.tasks.update');
-//            });
-            }catch(Exception $e){}
-        }
-    }
+//
+//            try{
+//            $tasks = Role::findByName('Tasks');
+//                $tasks->givePermissionTo('user.tasks.index');
+//                $tasks->givePermissionTo('user.tasks.create');
+//                $tasks->givePermissionTo('user.tasks.store');
+//                $tasks->givePermissionTo('user.tasks.show');
+//                $tasks->givePermissionTo('user.tasks.update');
+//                $tasks->givePermissionTo('user.tasks.complete');
+//                $tasks->givePermissionTo('user.tasks.uncomplete');
+//                $tasks->givePermissionTo('user.tasks.destroy');
+//
+//
+////
+////            Gate::define('user.tasks.update', function($user){
+////                return $user->hasPermission('user.tasks.update');
+////            });
+//            }catch(Exception $e){}
+//        }
+//    }
 if (!function_exists('create_sample_users')) {
         function create_sample_users(){
 

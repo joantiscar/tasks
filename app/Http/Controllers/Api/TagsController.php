@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Requests\ShowTag;
 use App\Http\Requests\StoreTag;
+use App\Http\Requests\TagsIndex;
 use App\Http\Requests\UpdateTag;
 use App\Tag;
 use Illuminate\Http\Request;
@@ -11,7 +13,7 @@ use App\Http\Controllers\Controller;
 class TagsController extends Controller
 {
     //
-    public function show(Request $request, Tag $tag) // Route Model Binding
+    public function show(ShowTag $request, Tag $tag) // Route Model Binding
     {
 
         return $tag;
@@ -56,7 +58,7 @@ class TagsController extends Controller
         return $tag;
 //        return Tag::findOrFail($request->tags);
     }
-    public function index(Request $request)
+    public function index(TagsIndex $request)
     {
         return Tag::orderBy('created_at','desc')->get();
     }

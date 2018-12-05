@@ -13,6 +13,7 @@ class LoggedUserTasksController extends Controller
     {
         $tasks =  map_collection(Auth::user()->tasks);
         $users = User::all();
-        return view('tasques',compact('tasks','users'));
+        $uri = '/api/v1/user/tasks';
+        return view('tasques',compact('tasks','users', 'uri'));
     }
 }

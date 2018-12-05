@@ -41,15 +41,15 @@ class UsersControllerTest extends TestCase
         $this->assertEquals($result[0]->name, 'Pepe');
         $this->assertEquals($result[0]->id, 1);
         $this->assertEquals($result[0]->email, 'pepe@gmail.com');
-        $this->assertEquals($result[0]->avatar, 'https://www.gravatar.com/avatar/' . md5('pepe@gmail.com'));
+        $this->assertEquals($result[0]->gravatar, 'https://www.gravatar.com/avatar/' . md5('pepe@gmail.com'));
         $this->assertEquals($result[1]->name, 'Pepa');
         $this->assertEquals($result[1]->id, 2);
         $this->assertEquals($result[1]->email, 'pepa@gmail.com');
-        $this->assertEquals($result[1]->avatar, 'https://www.gravatar.com/avatar/' . md5('pepa@gmail.com'));
+        $this->assertEquals($result[1]->gravatar, 'https://www.gravatar.com/avatar/' . md5('pepa@gmail.com'));
         $this->assertEquals($result[2]->name, 'Pipo');
         $this->assertEquals($result[2]->id, 3);
         $this->assertEquals($result[2]->email, 'pipo@gmail.com');
-        $this->assertEquals($result[2]->avatar, 'https://www.gravatar.com/avatar/' . md5('pipo@gmail.com'));
+        $this->assertEquals($result[2]->gravatar, 'https://www.gravatar.com/avatar/' . md5('pipo@gmail.com'));
 
 
     }

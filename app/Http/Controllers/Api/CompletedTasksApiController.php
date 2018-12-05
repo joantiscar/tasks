@@ -12,13 +12,13 @@ class CompletedTasksApiController extends Controller
 
     public function store(Request $request, Task $task)
     {
-        $task->completed = false;
+        $task->completed = true;
         $task->save();
         return $task;
     }
     public function destroy(Request $request, Task $task)
     {
-        $task->completed = true;
+        $task->completed = false;
         $task->save();
         return $task;
     }
