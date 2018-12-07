@@ -1,6 +1,7 @@
 <template>
-    <div>
-        <div>
+    <div class="inline-flex">
+      <div></div>
+        <div class="overflow-visible content-center">
                 <div v-if="errorMessage">
                     Hi ha un error: {{errorMessage}}
 
@@ -30,26 +31,32 @@
                             <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M12.3 3.7l4 4L4 20H0v-4L12.3 3.7zm1.4-1.4L16 0l4 4-2.3 2.3-4-4z"/></svg>
                         <span>Edita</span>
                     </button>
+                  <button @click="toggleCompleted(dataTask)" :class="colorButtonComplete(dataTask)" class="m-2 p-3 text-grey-darkest font-bold rounded inline-flex items-center">
+                    <svg class="w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M0 11l2-2 5 5L18 3l2 2L7 18z"/></svg>
+                    <span>{{textButtonComplete(dataTask)}}</span>
+                  </button>
                 </li>
 
             </ul>
-            <template v-if="total>0">
-            <h3>Filtres:</h3>
-            <h5>Active filter: {{ filter }}</h5>
-            <ul>
-                <li class="list-reset">
-                    <button @click="setFilter('all')">Totes</button>
-                </li>
-                <li class="list-reset">
-                    <button @click="setFilter('completed')">Completades</button>
-                </li>
-                <li class="list-reset">
-                    <button @click="setFilter('active')">Actives</button>
-                </li>
-            </ul>
-            </template>
-            Total: {{total}}
             </div>
+      <div>
+        <template v-if="total>0">
+          <h3>Filtres:</h3>
+          <h5>Active filter: {{ filter }}</h5>
+          <ul>
+            <li class="list-reset justify-start">
+              <button @click="setFilter('all')">Totes</button>
+            </li>
+            <li class="list-reset justify-start">
+              <button @click="setFilter('completed')">Completades</button>
+            </li>
+            <li class="list-reset justify-start">
+              <button @click="setFilter('active')">Actives</button>
+            </li>
+          </ul>
+        </template>
+        Total: {{total}}
+      </div>
     </div>
 </template>
 
@@ -66,14 +73,14 @@ var filters = {
     return dataTasks.filter(function (dataTask) {
       // if (dataTasks.completed) return true
       // else return false
-      return dataTasks.completed
+      return dataTask.completed
     })
   },
   active: function (dataTasks) {
     return dataTasks.filter(function (dataTask) {
       // if (!dataTasks.completed) return true
       // else return false
-      return !dataTasks.completed
+      return !dataTask.completed
     })
   }
 }
@@ -125,8 +132,7 @@ export default {
       })
     },
     estaCompletada (dataTask) {
-      if (dataTask.completed === '1') return true
-      return false
+      return dataTask.completed
     },
     add () {
       axios.post('/api/v1/tasks', {
@@ -151,7 +157,33 @@ export default {
     },
     setFilter (newFilter) {
       this.filter = newFilter
+    },
+    colorButtonComplete (task) {
+      if (task.completed) return 'bg-red-light hover:bg-red'
+      return 'bg-green-light hover:bg-green'
+    },
+    textButtonComplete (task) {
+      if (task.completed) return 'Descompletar'
+      return 'Completar'
+    },
+    toggleCompleted (task) {
+      if (task.completed) {
+        window.axios.delete('/api/v1/completed_task/' + task.id).then((response) => {
+          this.$snackbar.showMessage("S'ha descompletat correctament la tasca")
+          this.dataTasks.splice(this.dataTasks.indexOf(task), 1, response.data)
+        }).catch(error => {
+          this.$snackbar.showError(error)
+        }) // TODO ACABAR
+      } else {
+        window.axios.post('/api/v1/completed_task/' + task.id).then((response) => {
+          this.$snackbar.showMessage("S'ha completat correctament la tasca")
+          this.dataTasks.splice(this.dataTasks.indexOf(task), 1, response.data)
+        }).catch(error => {
+          this.$snackbar.showError(error)
+        })
+      }
     }
+
   },
   created () {
     // Si tinc prop tasks no fer res

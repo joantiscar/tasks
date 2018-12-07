@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Tag;
 use App\Task;
 use App\User;
 use Tests\Feature\Traits\CanLogin;
@@ -24,32 +25,20 @@ class TagsTest extends TestCase
         $this->login();
         $this->withExceptionHandling();
 
-        Task::create([
-
-            'name'=>'comprar pa',
-            'completed'=>false
-        ]);
-        Task::create([
-
-            'name'=>'Estudiar PHP',
-            'completed'=>false
-        ]);
-        Task::create([
-
-            'name'=>'comprar llet',
-            'completed'=>false
-        ]);
+        $tag1 = factory(Tag::class)->create();
+        $tag2 = factory(Tag::class)->create();
+        $tag3 = factory(Tag::class)->create();
 
 
 
-        $response = $this->get('/tasks');
+        $response = $this->get('/tags');
 
 
 //        dd($response);
         $response->assertSuccessful();
-        $response->assertSee('comprar pa');
-        $response->assertSee('comprar llet');
-        $response->assertSee('Estudiar PHP');
+        $response->assertSee($tag1->name);
+        $response->assertSee($tag2->name);
+        $response->assertSee($tag3->name);
 
 
         //comprovar que es veuen les tasques que hi ha a la base de dades

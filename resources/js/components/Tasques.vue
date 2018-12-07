@@ -105,13 +105,7 @@
         <v-card>
         <v-card-title>
             <v-layout row wrap>
-                <v-flex lg3 class="mr-2">
-                <v-select label="Filtres" :items="filters" v-model="filter"></v-select>
-                </v-flex>
-                <v-flex lg3 class="mr-2">
-                    <v-select label="User" :items="dataUsers" v-model="user" item-text="name" item-value="id" clearable></v-select>
-                </v-flex>
-                <v-flex lg5>
+                <v-flex xs12>
                     <v-text-field
                             v-model="search"
                             append-icon="search"

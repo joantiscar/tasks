@@ -15,17 +15,17 @@ A 12/11/2018:
     - [x] Errors de validació amb Laravel i PHP (objecte error)
     - [x] El formulari manté els valors ja introduits en cas d'error de validació (old)
     - [x] Validació en línia (Javascript) amb vuelidate
-  - [ ] Testos del Login de Laravel
-  - [ ] Testos i implementació alternativa (feta per naltros) de Login (LoginAlt)
+  - [x] Testos del Login de Laravel
+  - [x] Testos i implementació alternativa (feta per naltros) de Login (LoginAlt)
 - [x] Registre
   - [x] Pàgina de registre: 
     - [x] Vista Laravel amb layout propi (Contingut centrat)
     - [x] Realitzada amb PHP (no cal Axios ni peticions XHR)
     - [x] Errors de validació amb Laravel i PHP (objecte error)
     - [x] Validació en línia amb vuelidate
-  - [ ] Testos del registre de Laravel
-  - [ ] Testos i implementació alternativa (feta per naltros) de registre
-  - [ ] El formulari manté els valors ja introduits en cas d'error de validació (old)
+  - [x] Testos del registre de Laravel
+  - [x] Testos i implementació alternativa (feta per naltros) de registre
+  - [x] El formulari manté els valors ja introduits en cas d'error de validació (old)
 - [x] Home
   - [x] Layout app per a intranet (seccions Header, menu navegació, footer, contingut)
   - [x] HEADER
@@ -34,7 +34,7 @@ A 12/11/2018:
   - [x] Menú de navegació
     - [x]  Component App.vue amb un array items amb els items del menu
   -
-- [ ] Pàgines estatíques about/contact:
+- [x] Pàgines estatíques about/contact:
 - [x] Versions de l'aplicació de tasques
   - [x] Versió simple inicial PHP
     - [x] Totes les operacions CRUD (CREATE RETRIEVE UPDATE DELETE), només PHP

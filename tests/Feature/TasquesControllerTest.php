@@ -22,25 +22,12 @@ class TasquesControllerTest extends TestCase
     public function todo()
     {
 
-        $this->login();
-        $this->withExceptionHandling();
+        $this->loginAsSuperAdmin();
+        $this->withoutExceptionHandling();
 
-        Task::create([
-
-            'name'=>'comprar pa',
-            'completed'=>false
-        ]);
-        Task::create([
-
-            'name'=>'Estudiar PHP',
-            'completed'=>false
-        ]);
-        Task::create([
-
-            'name'=>'comprar llet',
-            'completed'=>false
-        ]);
-
+        $task1 = factory(Task::class)->create();
+        $task2 = factory(Task::class)->create();
+        $task3 = factory(Task::class)->create();
 
 
         $response = $this->get('/tasks');
@@ -48,9 +35,9 @@ class TasquesControllerTest extends TestCase
 
 //        dd($response);
         $response->assertSuccessful();
-        $response->assertSee('comprar pa');
-        $response->assertSee('comprar llet');
-        $response->assertSee('Estudiar PHP');
+        $response->assertSee($task1->name);
+        $response->assertSee($task2->name);
+        $response->assertSee($task3->name);
 
 
         //comprovar que es veuen les tasques que hi ha a la base de dades

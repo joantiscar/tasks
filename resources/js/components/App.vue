@@ -1,4 +1,4 @@
-<script>
+  <script>
 export default {
   el: '#app',
   data: () => ({
@@ -7,7 +7,8 @@ export default {
     drawerRight: false,
     items: [
       { icon: 'contacts', text: 'Welcome', url: '/' },
-      { icon: 'history', text: 'Home', url: '/about' },
+      { icon: 'history', text: 'About', url: '/about' },
+      { icon: 'history', text: 'Contact', url: '/contact' },
       {
         icon: 'keyboard_arrow_up',
         'icon-alt': 'keyboard_arrow_down',

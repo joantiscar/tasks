@@ -7,12 +7,12 @@
             <v-spacer></v-spacer>
             <v-btn @click="loginForm = !loginForm">Login</v-btn>
             <v-btn @click="registerForm = !registerForm">Register</v-btn>
-            <v-dialog v-model="loginForm">
+            <v-dialog v-model="loginForm" max-width="1000">
                 <v-card>
                     <login-form email="{{old('email')}}" csrf-token="{{csrf_token()}}"></login-form>
                 </v-card>
             </v-dialog>
-            <v-dialog v-model="registerForm">
+            <v-dialog v-model="registerForm" max-width="1000">
                 <v-card>
                     <register-form email="{{old('email')}}" csrf-token="{{csrf_token()}}"></register-form>
                 </v-card>

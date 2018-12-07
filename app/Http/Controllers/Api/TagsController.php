@@ -16,7 +16,7 @@ class TagsController extends Controller
     public function show(ShowTag $request, Tag $tag) // Route Model Binding
     {
 
-        return $tag;
+        return $tag->map();
 
 //        return Tag::findOrFail($request->tags);
     }
@@ -35,7 +35,7 @@ class TagsController extends Controller
         $tag->description = $request->description;
         $tag->color = $request->color;
         $tag->save();
-
+        return $tag->map();
 
 
 
@@ -55,11 +55,11 @@ class TagsController extends Controller
         $tag->description = $request->description;
         $tag->color = $request->color;
         $tag->save();
-        return $tag;
+        return $tag->map();
 //        return Tag::findOrFail($request->tags);
     }
     public function index(TagsIndex $request)
     {
-        return Tag::orderBy('created_at','desc')->get();
+        return map_collection(Tag::orderBy('created_at','desc')->get());
     }
 }

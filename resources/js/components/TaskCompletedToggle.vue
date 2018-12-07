@@ -38,7 +38,7 @@ export default {
     async uncompleteTask () {
       // LOADING I DISABLED TODO
       this.loading = true
-      await window.axios.post('/api/v1/completed_task/' + this.task.id).then((response) => {
+      await window.axios.delete('/api/v1/completed_task/' + this.task.id).then((response) => {
         this.$snackbar.showMessage("S'ha descompletat correctament la tasca")
         this.loading = false
       }).catch(error => {
@@ -48,7 +48,7 @@ export default {
     },
     async completeTask () {
       this.loading = true
-      await window.axios.delete('/api/v1/completed_task/' + this.task.id).then((response) => {
+      await window.axios.post('/api/v1/completed_task/' + this.task.id).then((response) => {
         this.$snackbar.showMessage("S'ha completat correctament la tasca")
         this.loading = false
       }).catch(error => {

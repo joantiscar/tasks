@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\DestroyUserTask;
 use App\Http\Requests\IndexUserTask;
 use App\Http\Requests\StoreUserTask;
 use App\Http\Requests\UpdateUserTask;
@@ -54,7 +55,7 @@ class LoggedUserTasksController extends Controller
 
 
     }
-    public function destroy(Request $request, Task $task)
+    public function destroy(DestroyUserTask $request, Task $task)
     {
 
 //        return Task::where('user_id', Auth::user()->id);

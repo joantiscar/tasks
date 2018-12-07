@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder
         initialize_roles();
         create_sample_users();
         create_Example_tasks();
+        create_Example_tags();
         create_usuari_sergi();
 
 
