@@ -36,10 +36,10 @@
             <v-card>
                 <v-card-text>
         <v-form>
-            <v-text-field disabled v-model="taskBeingShown.name" label="Nom" hint="El nom de la tasca..."></v-text-field>
-            <v-switch disabled v-model="taskBeingShown.completed" :label="taskBeingShown.completed ? 'Completada' : 'Pendent'"></v-switch>
-            <v-text-field disabled label="User" v-model="taskBeingShown.user_name" item-text="name" item-value="id" clearable></v-text-field>
-                <v-textarea disabled v-model="taskBeingShown.description" label="Descripcio" hint="Descripció"></v-textarea>
+            <v-text-field readonly v-model="taskBeingShown.name" label="Nom" hint="El nom de la tasca..."></v-text-field>
+            <v-switch readonly v-model="taskBeingShown.completed" :label="taskBeingShown.completed ? 'Completada' : 'Pendent'"></v-switch>
+            <v-text-field readonly label="User" v-model="taskBeingShown.user_name" item-text="name" item-value="id" clearable></v-text-field>
+                <v-textarea readonly v-model="taskBeingShown.description" label="Descripcio" hint="Descripció"></v-textarea>
             <div class="text-xs-center">
             <v-btn color="grey" @click.native="showDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>Sortir</v-btn>
                 </div>
@@ -97,7 +97,7 @@
         <v-btn icon dark class="white--text">
             <v-icon>settings</v-icon>
         </v-btn>
-        <v-btn icon dark class="white--text" @click="refresh" :loading="loading" :disabled="loading">
+        <v-btn icon dark class="white--text" @click="refresh" :loading="loading" :readonly="loading">
             <v-icon>refresh</v-icon>
         </v-btn>
 
@@ -148,7 +148,7 @@
                                    @click="showShow(task)">
                             <v-icon>remove_red_eye</v-icon>
                         </v-btn>
-                        <v-btn v-if="$can('tasks.destroy', task)" :loading="removing === task.id" :disabled="removing === task.id" color="error" flat icon title="Eliminar la tasca"
+                        <v-btn v-if="$can('tasks.destroy', task)" :loading="removing === task.id" :readonly="removing === task.id" color="error" flat icon title="Eliminar la tasca"
                                @click="destroy(task)">
                             <v-icon>delete</v-icon>
                         </v-btn>

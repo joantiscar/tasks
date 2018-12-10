@@ -223,16 +223,16 @@ if (!function_exists('create_sample_users')) {
             try {
                 // Dona -> No te cap permis ni cap rol
                 $dona = factory(User::class)->create([
-                    'name' => 'Maria Cinta',
-                    'email' => 'mariacinta@yahoo.es',
+                    'name' => 'Pepe pringao',
+                    'email' => 'pepepringao@yahoo.es',
                     'password' => Hash::make('123456')
                 ]);
             }catch(Exception $e){}
             try {
                 // Home -> Te mes permisos que Dona
                 $home = factory(User::class)->create([
-                    'name' => 'Paco',
-                    'email' => 'pacopacopacodemipaco@gmail.com',
+                    'name' => 'Bart Simpson',
+                    'email' => 'bartsimpson@gmail.com',
                     'password' => Hash::make('123456')
                 ]);
                 $home->assignRole('Tasks');
@@ -240,8 +240,8 @@ if (!function_exists('create_sample_users')) {
             try {
                 // Deu -> Té mes permisos que home
                 $deu = factory(User::class)->create([
-                    'name' => 'Joan Tíscar',
-                    'email' => 'joantiscar@gmail.com',
+                    'name' => 'Homer Simpson',
+                    'email' => 'homersimpson@gmail.com',
                     'password' => Hash::make('123456')
                 ]);
                 $deu->assignRole('TaskManager');

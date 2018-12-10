@@ -18,9 +18,9 @@ export default {
     }
   },
   watch: {
-    task (task) {
-      this.dataTask = task
-    },
+    // task (task) {
+    //   this.dataTask = task
+    // },
     dataTask: {
       handler: function (dataTask) {
         if (dataTask.completed) this.completeTask()

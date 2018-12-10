@@ -63,6 +63,6 @@ class TasksController extends Controller
     }
     public function index(IndexTask $request)
     {
-        return map_collection(Task::orderBy('created_at)')->get());
+        return map_collection(Task::orderBy('created_at', 'desc')->get());
     }
 }
