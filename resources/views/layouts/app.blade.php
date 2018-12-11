@@ -30,7 +30,7 @@
             Llista de tots els usuaris
 
             @canImpersonate
-            <user-select @selected="impersonate" url="/api/v1/regular_users"></user-select>
+            <impersonate url="/api/v1/regular_users"></impersonate>
             @endCanImpersonate
 
 

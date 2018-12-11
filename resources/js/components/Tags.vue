@@ -12,7 +12,7 @@
                 <v-card-text>
         <v-form>
             <v-text-field v-model="tagBeingEdited.name" label="Nom" hint="El nom de la tag..."></v-text-field>
-            <v-text-field v-model="tagBeingEdited.color" label="Color" hint="Color de la tag"></v-text-field>
+          <input type="color" v-model="tagBeingEdited.color">
           <v-textarea v-model="tagBeingEdited.description" label="Descripcio" hint="Descripció"></v-textarea>
             <div class="text-xs-center">
             <v-btn color="grey" @click.native="editDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>Sortir</v-btn>
@@ -34,9 +34,9 @@
             <v-card>
                 <v-card-text>
         <v-form>
-            <v-text-field disabled v-model="tagBeingShown.name" label="Nom" hint="El nom de la tag..."></v-text-field>
-            <v-text-field disabled v-model="tagBeingShown.color" label="Color" hint="Color de la tag"></v-text-field>
-          <v-textarea disabled v-model="tagBeingShown.description" label="Descripcio" hint="Descripció"></v-textarea>
+            <v-text-field readonly v-model="tagBeingShown.name" label="Nom" hint="El nom de la tag..."></v-text-field>
+          <input type="color" v-model="tagBeingEdited.color" readonly>
+          <v-textarea readonly v-model="tagBeingShown.description" label="Descripcio" hint="Descripció"></v-textarea>
             <div class="text-xs-center">
             <v-btn color="grey" @click.native="showDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>Sortir</v-btn>
                 </div>
@@ -57,7 +57,7 @@
                 <v-card-text>
         <v-form>
             <v-text-field v-model="tagBeingCreated.name" label="Nom" hint="El nom de la tag..."></v-text-field>
-            <v-text-field v-model="tagBeingCreated.color" label="Color" hint="Color de la tag"></v-text-field>
+          <input type="color" v-model="tagBeingCreated.color">
           <v-textarea v-model="tagBeingCreated.description" label="Descripcio" hint="Descripció"></v-textarea>
             <div class="text-xs-center">
             <v-btn color="grey" @click.native="createDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>Sortir</v-btn>

@@ -1,15 +1,16 @@
 <template>
     <v-list two line>
         <v-autocomplete
-                :items="dataUsers"
+                :items="users"
                 v-model="selectedUser"
                 clearable
                 item-value="id"
+                :label="label"
         >
             <template slot="selection" slot-scope="{item: user}">
                 <v-chip>
                     <v-avatar :title="user.name">
-                        <img :src="user.avatar" :alt="user.name">
+                        <img :src="user.gravatar" :alt="user.name">
                     </v-avatar>
                     {{user.name}},
                 </v-chip>
@@ -35,17 +36,13 @@ export default {
   name: 'UserSelect',
   data () {
     return {
-      selectedUser: null,
-      dataUsers: this.users
+      selectedUser: null
     }
   },
   props: {
     users: {
-      type: Array
-    },
-    url: {
-      type: String,
-      default: '/api/v1/users'
+      type: Array,
+      required: true
     },
     label: {
       type: String,
@@ -57,17 +54,9 @@ export default {
       if (newValue) {
         this.$emit('selected', newValue)
       }
-    }
-  },
-  created () {
-    if (this.users) this.dataUsers = this.users
-    else {
-      window.axios.get(this.url).then(response => {
-        this.dataUsers = response.data
-      }).catch(error => {
-        console.log(error)
-        // this.$snackbar.showerror(error)
-      })
+    },
+    users () {
+      this.dataUsers = this.users
     }
   }
 }

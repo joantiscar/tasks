@@ -19,6 +19,7 @@ import LoginForm from './components/LoginForm.vue'
 import RegisterForm from './components/RegisterForm.vue'
 import UserList from './components/UserList.vue'
 import UserSelect from './components/UserSelect.vue'
+import Impersonate from './components/Impersonate.vue'
 import TaskCompletedToggle from './components/TaskCompletedToggle.vue'
 import permissions from './plugins/permissions.js'
 import confirm from './plugins/confirm'
@@ -43,6 +44,7 @@ window.Vue.component('tasques', Tasques)
 window.Vue.component('login-form', LoginForm)
 window.Vue.component('register-form', RegisterForm)
 window.Vue.component('user-list', UserList)
+window.Vue.component('impersonate', Impersonate)
 window.Vue.component('user-select', UserSelect)
 window.Vue.component('task-completed-toggle', TaskCompletedToggle)
 

@@ -48,30 +48,7 @@
       </v-card>
 
   </v-dialog>
-  <v-dialog v-model="createDialog" @keydown.esc="createDialog = false">
-            <v-toolbar color="primary" class="white--text">
-            <v-btn color="white" flat icon @click.native="createDialog = false"><v-icon class="mr-1">close</v-icon></v-btn>
-
-                Crear tasca
-               <v-spacer></v-spacer> <v-btn color="white" flat @click.native="createDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>Sortir</v-btn>
-               <v-btn color="white" flat @click.native="createDialog = false"><v-icon class="mr-1">save</v-icon>Guardar</v-btn>
-            </v-toolbar>
-            <v-card>
-                <v-card-text>
-        <v-form>
-            <v-text-field v-model="taskBeingCreated.name" label="Nom" hint="El nom de la tasca..."></v-text-field>
-            <v-switch v-model="taskBeingCreated.completed" :label="taskBeingCreated.completed ? 'Completada' : 'Pendent'"></v-switch>
-            <v-select label="User" :items="dataUsers" v-model="taskBeingCreated.user_id" item-text="name" item-value="id" clearable></v-select>
-                <v-textarea v-model="taskBeingCreated.description" label="Descripcio" hint="Descripció"></v-textarea>
-            <div class="text-xs-center">
-            <v-btn color="grey" @click.native="createDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>Sortir</v-btn>
-               <v-btn color="success" @click.native="create()"><v-icon class="mr-1">save</v-icon>Guardar</v-btn>
-                </div>
-        </v-form>
-                </v-card-text>
-      </v-card>
-
-  </v-dialog>
+      <task-create :users="users" @created="refresh"></task-create>
 
   <v-toolbar color="blue darken-1">
     <v-menu left>
@@ -105,7 +82,10 @@
         <v-card>
         <v-card-title>
             <v-layout row wrap>
-                <v-flex xs12>
+              <v-flex xs4>
+                  <user-select :users="dataUsers" label="Filtrar per usuari" class="pr-4"></user-select>
+              </v-flex>
+                <v-flex xs4>
                     <v-text-field
                             v-model="search"
                             append-icon="search"
@@ -190,27 +170,17 @@
                 </v-flex>
             </v-data-iterator>
         </v-card>
-        <v-btn
-            fab
-            bottom
-            right
-            color="pink"
-            fixed
-            class="white--text"
-            @click="showCreate"
-            v-if="$can('user.tasks.store')"
-        >
-            <v-icon>add</v-icon>
-
-        </v-btn>
     </span>
 </template>
 
 <script>
 import TaskCompletedToggle from './TaskCompletedToggle'
+import TaskCreate from './TaskCreate'
+
 export default{
   name: 'Tasques',
   components: {
+    TaskCreate,
     'task-completed-toggle': TaskCompletedToggle
   },
   data () {
@@ -325,21 +295,6 @@ export default{
     },
     opcio2 () {
       console.log('Opcio2')
-    },
-    create () {
-      this.creating = true
-      window.axios.post(this.uri, this.taskBeingCreated).then((response) => {
-        // this.refresh() // Problema -> rendiment
-        this.createTask(response.data)
-        this.$snackbar.showMessage("S'ha editat correctament la tasca")
-      }).catch((error) => {
-        this.$snackbar.showError(error)
-        this.creating = false
-        this.editDialog = false
-      }).finally(() => {
-        this.creating = false
-        this.createDialog = false
-      })
     },
     showCreate () {
       this.createDialog = true
