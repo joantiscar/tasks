@@ -12,8 +12,8 @@ class Task extends Model
     protected $hidden = [
 //        'created_at'
     ];
-    protected $guarded = [];
-//    protected $fillable = ['name','completed'];
+//    protected $guarded = [];
+    protected $fillable = ['name','completed', 'id', 'description', 'user_id'];
 
     public function File()
     {

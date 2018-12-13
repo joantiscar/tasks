@@ -84,7 +84,7 @@ export default {
       }).catch((error) => {
         this.$snackbar.showError(error)
         this.creating = false
-        this.reset
+        this.reset()
       }).finally(() => {
         this.creating = false
       })

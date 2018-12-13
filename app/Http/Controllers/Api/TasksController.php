@@ -33,10 +33,7 @@ class TasksController extends Controller
     public function edit(UpdateTask $request, Task $task) // Route Model Binding
     {
 
-        $task->name = $request->name;
-        $task->completed = $request->completed;
-        $task->description = $request->description;
-        $task->user_id = $request->user_id;
+        $task->update($request->all());
         $task->save();
 
         return $task->map();
@@ -52,11 +49,7 @@ class TasksController extends Controller
 //            'name' => 'required',
 //        ]);
 
-        $task = new Task();
-        $task->name = $request->name;
-        $task->completed = $request->completed;
-        $task->description = $request->description;
-        $task->user_id = $request->user_id;
+        $task = new Task($request->all());
         $task->save();
         return $task->map();
 //        return Task::findOrFail($request->task);
