@@ -30,8 +30,7 @@ export default {
       window.axios.get(this.url).then(response => {
         this.dataUsers = response.data
       }).catch(error => {
-        console.log(error)
-        // this.$snackbar.showerror(error)
+        this.$snackbar.showError(error)
       })
     }
   },
@@ -40,10 +39,10 @@ export default {
       console.log('astio')
       console.log(user)
       if (user) {
-        window.location.href = ('/impersonate/take/' + user)
+        window.location.href = ('/impersonate/take/' + user.id)
       }
     }
-  }
+  },
 }
 </script>
 

@@ -140,7 +140,9 @@ class TasksControllerTest extends TestCase
         $task = factory(Task::class)->create();
 
         $response = $this->post('/api/v1/tasks/',[
-            'name' => 'Comprar pa'
+            'name' => 'Comprar pa',
+            'description' => 'Hauria d\'anar a comprar pa, que no ne queda',
+            'user_id' => 1
         ]);
 
 //        $this->assertNotContains('')
@@ -291,7 +293,7 @@ class TasksControllerTest extends TestCase
         $result = json_decode($response->getContent());
 
         $this->assertCount(3,$result);
-        
+
 
     }
     public function test_manager_can_browse_tasks()

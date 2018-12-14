@@ -26,8 +26,7 @@
           <v-text-field v-model="editingTask.name" label="Nom" hint="El nom de la tasca..."></v-text-field>
           <v-switch v-model="editingTask.completed"
                     :label="editingTask.completed ? 'Completada' : 'Pendent'"></v-switch>
-          <v-select label="User" :items="dataUsers" v-model="editingTask.user_id" item-text="name" item-value="id"
-                    clearable></v-select>
+              <user-select :users="users" :user="editingTask.user" label="User" v-model="editingTask.user"></user-select>
 
           <v-textarea v-model="editingTask.description" label="Descripcio" hint="Descripció"></v-textarea>
           <div class="text-xs-center">
@@ -58,6 +57,7 @@ export default {
         name: this.task.name,
         description: this.task.description,
         user_id: this.task.user_id,
+        user: this.task.user
       },
       dialog: false
     }
@@ -76,7 +76,17 @@ export default {
       default: '/api/v1/tasks'
     }
   },
+  watch: {
+    task (task) {
+      this.updateUser(task)
+    }
+  },
   methods: {
+    updateUser (task) {
+      this.user = this.users.find((user) => {
+        return parseInt(user.id) === parseInt(task.user_id)
+      })
+    },
     edit () {
       this.loading = true
       window.axios.put(this.uri + '/' + this.task.id, this.editingTask).then((response) => {
@@ -92,6 +102,9 @@ export default {
         this.dialog = false
       })
     }
+  },
+  created () {
+    this.updateUser(this.task)
   }
 }
 

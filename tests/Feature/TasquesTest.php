@@ -49,7 +49,7 @@ class TasquesTest extends TestCase
         create_Example_tasks();
 
         $user = $this->loginAsTaskUser();
-        $task = task::create([
+        $task = Task::create([
             'name' => 'Tasca Usuari',
             'completed' => true,
             'user_id' => $user->id

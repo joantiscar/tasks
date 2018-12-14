@@ -23,7 +23,20 @@
                 clipped
                 app
         >
-            TODO PERFIL
+            <v-card>
+                <v-card-title class="grey darken-3 white--text"><h4>Perfil</h4></v-card-title>
+                <v-layout row wrap>
+                    <v-flex xs12>
+                        <ul>
+                            <li>Nom : {{ Auth::user()->name }}</li>
+                            <li>Email : {{ Auth::user()->email }}</li>
+                            <li>Admin : {{ Auth::user()->admin ? 'SI' : 'NO' }}</li>
+                            <li>Roles : {{ implode(',',Auth::user()->map()['roles']) }}</li>
+                            <li>Permissions : {{ implode(', ',Auth::user()->map()['permissions']) }}</li>
+                        </ul>
+                    </v-flex>
+                </v-layout>
+            </v-card>
 
             Administrador:
 

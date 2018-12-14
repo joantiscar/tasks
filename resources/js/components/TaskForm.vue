@@ -10,7 +10,7 @@
               :label="completed ? 'Completada' : 'Pendent'"></v-switch>
     <!--<v-select label="User" :items="users" v-model="user_id" item-text="name" item-value="id"-->
               <!--clearable></v-select>-->
-    <user-select :users="users" label="User" v-model="user_id"></user-select>
+    <user-select :users="users" label="User" v-model="user"></user-select>
 
     <v-textarea v-model="description" label="Descripcio" hint="Descripció"></v-textarea>
     <div class="text-xs-center">
@@ -36,6 +36,7 @@ export default {
   name: 'TaskForm',
   data () {
     return {
+      user: null,
       name: '',
       completed: false,
       description: '',
@@ -54,6 +55,11 @@ export default {
       default: '/api/v1/tasks'
     }
   },
+  watch: {
+    user (newValue) {
+      this.selectLoggedUser()
+    }
+  },
   computed: {
     nameErrors () {
       const errors = []
@@ -63,11 +69,19 @@ export default {
     }
   },
   methods: {
+    selectLoggedUser () {
+      if (window.laravel_user) {
+        this.user = this.users.find((user) => {
+          return parseInt(user.id) === window.laravel_user.id
+        })
+      }
+    },
     reset () {
       this.name = ''
       this.description = ''
       this.completed = ''
       this.user_id = ''
+      this.user = null
     },
     create () {
       this.creating = true
@@ -75,12 +89,13 @@ export default {
         'name': this.name,
         'description': this.description,
         'completed': this.completed,
-        'user_id': this.user_id
+        'user_id': this.user.id
       }
       window.axios.post(this.uri, task).then((response) => {
         // this.refresh() // Problema -> rendiment
         this.$snackbar.showMessage("S'ha editat correctament la tasca")
         this.$emit('created', response.data)
+        this.reset()
       }).catch((error) => {
         this.$snackbar.showError(error)
         this.creating = false
@@ -89,6 +104,9 @@ export default {
         this.creating = false
       })
     }
+  },
+  created () {
+    this.user = selectLoggedUser
   }
 }
 </script>
