@@ -8,6 +8,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="user" content="{{ logged_user() }}">
     <style>[v-cloak]{display: none}</style>
+    <meta name="git" content="{{ git() }}">
 
     <title>@yield('title','Put your title here')</title>
 
@@ -123,7 +124,8 @@
             <v-toolbar-side-icon @click="drawer = !drawer"></v-toolbar-side-icon>
             <v-toolbar-title>Lo pantano es de La Sénia</v-toolbar-title>
             <v-spacer></v-spacer>
-            {{ Auth::user()->name}} {{ Auth::user()->email }}
+
+            <span v-role="'SuperAdmin'"><git-info></git-info></span>
             <v-avatar @click="drawerRight = !drawerRight">
                 <img  src="https://www.gravatar.com/avatar/{{ md5(Auth::user()->email) }}" alt="avatar">
             </v-avatar>

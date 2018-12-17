@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\GitController;
 use App\Task;
 use Illuminate\Http\Request;
 
@@ -44,6 +45,7 @@ Route::put('/v1/user/tasks/{task}','Api\LoggedUserTasksController@update');
 Route::delete('/v1/user/tasks/{task}','Api\LoggedUserTasksController@destroy');
 
     Route::get('/v1/users/','Api\UsersController@index');
+    Route::get('/v1/git/info','\\' . GitController::class . '@index');
 });
 
 

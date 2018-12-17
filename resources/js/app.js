@@ -21,6 +21,7 @@ import UserList from './components/UserList.vue'
 import UserSelect from './components/UserSelect.vue'
 import Impersonate from './components/Impersonate.vue'
 import TaskCompletedToggle from './components/TaskCompletedToggle.vue'
+import GitInfoComponent from './components/git/GitInfoComponent.vue'
 import permissions from './plugins/permissions.js'
 import confirm from './plugins/confirm'
 import snackbar from './plugins/snackbar'
@@ -46,6 +47,7 @@ window.Vue.component('register-form', RegisterForm)
 window.Vue.component('user-list', UserList)
 window.Vue.component('impersonate', Impersonate)
 window.Vue.component('user-select', UserSelect)
+window.Vue.component('git-info', GitInfoComponent)
 window.Vue.component('task-completed-toggle', TaskCompletedToggle)
 
 const app = new window.Vue(AppComponent)

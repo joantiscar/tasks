@@ -53,6 +53,9 @@ if (user) {
   console.error('User not found at html meta')
 }
 
+let gitHeader = document.head.querySelector('meta[name="git"]')
+window.git = null
+if (gitHeader) if (gitHeader.content) window.git = JSON.parse(gitHeader.content)
 // import Echo from 'laravel-echo'
 
 // window.Pusher = require('pusher-js');

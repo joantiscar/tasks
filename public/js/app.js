@@ -13453,6 +13453,9 @@ if (user) {
   console.error('User not found at html meta');
 }
 
+var gitHeader = document.head.querySelector('meta[name="git"]');
+window.git = null;
+if (gitHeader) if (gitHeader.content) window.git = JSON.parse(gitHeader.content);
 // import Echo from 'laravel-echo'
 
 // window.Pusher = require('pusher-js');
@@ -26858,7 +26861,7 @@ var EventBus = new __WEBPACK_IMPORTED_MODULE_0_vue___default.a();
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(26);
-module.exports = __webpack_require__(160);
+module.exports = __webpack_require__(163);
 
 
 /***/ }),
@@ -26899,9 +26902,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_14__components_Impersonate_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_14__components_Impersonate_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_TaskCompletedToggle_vue__ = __webpack_require__(23);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_15__components_TaskCompletedToggle_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_15__components_TaskCompletedToggle_vue__);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__plugins_permissions_js__ = __webpack_require__(151);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__plugins_confirm__ = __webpack_require__(152);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__plugins_snackbar__ = __webpack_require__(156);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_git_GitInfoComponent_vue__ = __webpack_require__(151);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_16__components_git_GitInfoComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_16__components_git_GitInfoComponent_vue__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_17__plugins_permissions_js__ = __webpack_require__(154);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_18__plugins_confirm__ = __webpack_require__(155);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_19__plugins_snackbar__ = __webpack_require__(159);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -26928,13 +26933,14 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 
+
 __webpack_require__(13);
 
 window.Vue = __WEBPACK_IMPORTED_MODULE_1_vue___default.a;
 window.Vue.use(__WEBPACK_IMPORTED_MODULE_2_vuetify___default.a);
-window.Vue.use(__WEBPACK_IMPORTED_MODULE_17__plugins_confirm__["a" /* default */]);
-window.Vue.use(__WEBPACK_IMPORTED_MODULE_16__plugins_permissions_js__["a" /* default */]);
-window.Vue.use(__WEBPACK_IMPORTED_MODULE_18__plugins_snackbar__["a" /* default */]);
+window.Vue.use(__WEBPACK_IMPORTED_MODULE_18__plugins_confirm__["a" /* default */]);
+window.Vue.use(__WEBPACK_IMPORTED_MODULE_17__plugins_permissions_js__["a" /* default */]);
+window.Vue.use(__WEBPACK_IMPORTED_MODULE_19__plugins_snackbar__["a" /* default */]);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -26950,6 +26956,7 @@ window.Vue.component('register-form', __WEBPACK_IMPORTED_MODULE_11__components_R
 window.Vue.component('user-list', __WEBPACK_IMPORTED_MODULE_12__components_UserList_vue___default.a);
 window.Vue.component('impersonate', __WEBPACK_IMPORTED_MODULE_14__components_Impersonate_vue___default.a);
 window.Vue.component('user-select', __WEBPACK_IMPORTED_MODULE_13__components_UserSelect_vue___default.a);
+window.Vue.component('git-info', __WEBPACK_IMPORTED_MODULE_16__components_git_GitInfoComponent_vue___default.a);
 window.Vue.component('task-completed-toggle', __WEBPACK_IMPORTED_MODULE_15__components_TaskCompletedToggle_vue___default.a);
 
 var app = new window.Vue(__WEBPACK_IMPORTED_MODULE_0__components_App_vue___default.a);
@@ -73654,6 +73661,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   name: 'TaskForm',
   data: function data() {
     return {
+      user: null,
       name: '',
       completed: false,
       description: '',
@@ -73673,6 +73681,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       default: '/api/v1/tasks'
     }
   },
+  watch: {
+    user: function user(newValue) {
+      this.selectLoggedUser();
+    }
+  },
   computed: {
     nameErrors: function nameErrors() {
       var errors = [];
@@ -73682,11 +73695,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     }
   },
   methods: {
+    selectLoggedUser: function selectLoggedUser() {
+      if (window.laravel_user) {
+        this.user = this.users.find(function (user) {
+          return parseInt(user.id) === window.laravel_user.id;
+        });
+      }
+    },
     reset: function reset() {
       this.name = '';
       this.description = '';
       this.completed = '';
       this.user_id = '';
+      this.user = null;
     },
     create: function create() {
       var _this = this;
@@ -73696,12 +73717,13 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         'name': this.name,
         'description': this.description,
         'completed': this.completed,
-        'user_id': this.user_id
+        'user_id': this.user.id
       };
       window.axios.post(this.uri, task).then(function (response) {
         // this.refresh() // Problema -> rendiment
         _this.$snackbar.showMessage("S'ha editat correctament la tasca");
         _this.$emit('created', response.data);
+        _this.reset();
       }).catch(function (error) {
         _this.$snackbar.showError(error);
         _this.creating = false;
@@ -73710,6 +73732,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this.creating = false;
       });
     }
+  },
+  created: function created() {
+    this.user = selectLoggedUser;
   }
 });
 
@@ -74496,11 +74521,11 @@ var render = function() {
       _c("user-select", {
         attrs: { users: _vm.users, label: "User" },
         model: {
-          value: _vm.user_id,
+          value: _vm.user,
           callback: function($$v) {
-            _vm.user_id = $$v
+            _vm.user = $$v
           },
-          expression: "user_id"
+          expression: "user"
         }
       }),
       _vm._v(" "),
@@ -75962,7 +75987,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'task-edit',
@@ -75974,7 +75998,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         id: this.task.id,
         name: this.task.name,
         description: this.task.description,
-        user_id: this.task.user_id
+        user_id: this.task.user_id,
+        user: this.task.user
       },
       dialog: false
     };
@@ -75994,7 +76019,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       default: '/api/v1/tasks'
     }
   },
+  watch: {
+    task: function task(_task) {
+      this.updateUser(_task);
+    }
+  },
   methods: {
+    updateUser: function updateUser(task) {
+      this.user = this.users.find(function (user) {
+        return parseInt(user.id) === parseInt(task.user_id);
+      });
+    },
     edit: function edit() {
       var _this = this;
 
@@ -76012,6 +76047,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this.dialog = false;
       });
     }
+  },
+  created: function created() {
+    this.updateUser(this.task);
   }
 });
 
@@ -76164,20 +76202,18 @@ var render = function() {
                         }
                       }),
                       _vm._v(" "),
-                      _c("v-select", {
+                      _c("user-select", {
                         attrs: {
-                          label: "User",
-                          items: _vm.dataUsers,
-                          "item-text": "name",
-                          "item-value": "id",
-                          clearable: ""
+                          users: _vm.users,
+                          user: _vm.editingTask.user,
+                          label: "User"
                         },
                         model: {
-                          value: _vm.editingTask.user_id,
+                          value: _vm.editingTask.user,
                           callback: function($$v) {
-                            _vm.$set(_vm.editingTask, "user_id", $$v)
+                            _vm.$set(_vm.editingTask, "user", $$v)
                           },
-                          expression: "editingTask.user_id"
+                          expression: "editingTask.user"
                         }
                       }),
                       _vm._v(" "),
@@ -79181,7 +79217,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -79224,17 +79260,24 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'UserSelect',
   data: function data() {
     return {
-      selectedUser: null
+      selectedUser: this.user
     };
   },
 
+  model: {
+    prop: 'user',
+    event: 'selected'
+  },
   props: {
+    itemValue: {
+      type: String,
+      default: 'id'
+    },
     users: {
       type: Array,
       required: true
@@ -79242,6 +79285,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     label: {
       type: String,
       default: 'Usuaris'
+    },
+    user: {
+      type: Object,
+      default: function _default() {
+        return {};
+      }
     }
   },
   watch: {
@@ -79269,12 +79318,7 @@ var render = function() {
     { attrs: { two: "", line: "" } },
     [
       _c("v-autocomplete", {
-        attrs: {
-          items: _vm.users,
-          clearable: "",
-          "item-value": "id",
-          label: _vm.label
-        },
+        attrs: { items: _vm.users, clearable: "", label: _vm.label },
         scopedSlots: _vm._u([
           {
             key: "selection",
@@ -79292,7 +79336,7 @@ var render = function() {
                     _vm._v(
                       "\n                " +
                         _vm._s(user.name) +
-                        ",\n            "
+                        "\n            "
                     )
                   ],
                   1
@@ -79438,7 +79482,7 @@ exports = module.exports = __webpack_require__(3)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -79483,8 +79527,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       window.axios.get(this.url).then(function (response) {
         _this.dataUsers = response.data;
       }).catch(function (error) {
-        console.log(error);
-        // this.$snackbar.showerror(error)
+        _this.$snackbar.showError(error);
       });
     }
   },
@@ -79494,7 +79537,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       console.log('astio');
       console.log(user);
       if (user) {
-        window.location.href = '/impersonate/take/' + user;
+        window.location.href = '/impersonate/take/' + user.id;
       }
     }
   }
@@ -79525,6 +79568,315 @@ if (false) {
 
 /***/ }),
 /* 151 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var disposed = false
+var normalizeComponent = __webpack_require__(1)
+/* script */
+var __vue_script__ = __webpack_require__(152)
+/* template */
+var __vue_template__ = __webpack_require__(153)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/git/GitInfoComponent.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-0b299476", Component.options)
+  } else {
+    hotAPI.reload("data-v-0b299476", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 152 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'GitInfoComponent',
+  data: function data() {
+    return {
+      dialog: false,
+      dataGit: this.git
+    };
+  },
+
+  props: {
+    git: {
+      type: Object,
+      required: false
+    }
+  },
+  methods: {
+    githubUri: function githubUri() {
+      return this.dataGit.origin.split(':')[1].split('.')[0];
+    },
+    githubURL: function githubURL() {
+      return 'https://github.com/' + this.githubUri();
+    },
+    githubURLIssues: function githubURLIssues() {
+      return this.githubURL() + '/commits/master';
+    },
+    refresh: function refresh() {
+      var _this = this;
+
+      window.axios.get('/api/v1/git/info').then(function (response) {
+        _this.$snackbar.showMessage('Dades actualitzades correctament');
+        _this.dataGit = response.data;
+      }).catch(function (error) {
+        _this.$snackbar.showError(error);
+      });
+    }
+  },
+  created: function created() {
+    if (!this.git) this.dataGit = window.git;
+  }
+});
+
+/***/ }),
+/* 153 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "span",
+    [
+      _c(
+        "v-dialog",
+        {
+          attrs: { width: "500" },
+          model: {
+            value: _vm.dialog,
+            callback: function($$v) {
+              _vm.dialog = $$v
+            },
+            expression: "dialog"
+          }
+        },
+        [
+          _c(
+            "v-card",
+            [
+              _c(
+                "v-card-title",
+                {
+                  staticClass: "headline grey lighten-2",
+                  attrs: { "primary-title": "" }
+                },
+                [
+                  _vm._v(
+                    "\n              Informació versió de l'aplicació\n            "
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c("v-card-text", [
+                _c("ul", [
+                  _c("li", [_vm._v("Branca: " + _vm._s(_vm.dataGit.branch))]),
+                  _vm._v(" "),
+                  _c("li", [_vm._v("Commit: " + _vm._s(_vm.dataGit.commit))]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _vm._v("Commit_short: " + _vm._s(_vm.dataGit.commit_short))
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _vm._v("Autor: " + _vm._s(_vm.dataGit.author_name))
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _vm._v("Email: " + _vm._s(_vm.dataGit.author_email))
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _vm._v("Missatge: " + _vm._s(_vm.dataGit.message))
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _vm._v(
+                      "Data: " +
+                        _vm._s(_vm.dataGit.date_human) +
+                        " | " +
+                        _vm._s(_vm.dataGit.date_formatted)
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [_vm._v("Origin: " + _vm._s(_vm.dataGit.origin))]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _vm._v("Projecte Github: "),
+                    _c(
+                      "a",
+                      { attrs: { href: _vm.githubURL(), target: "_blank" } },
+                      [_vm._v(_vm._s(_vm.githubUri()))]
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("li", [
+                    _vm._v("Commits Github: "),
+                    _c(
+                      "a",
+                      {
+                        attrs: { href: _vm.githubURLIssues(), target: "_blank" }
+                      },
+                      [_vm._v(_vm._s(_vm.githubUri()))]
+                    )
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("v-divider"),
+              _vm._v(" "),
+              _c(
+                "v-card-actions",
+                [
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: {
+                        icon: "",
+                        small: "",
+                        title: "Actualitzeu les dades/flush de la cache"
+                      },
+                      on: { click: _vm.refresh }
+                    },
+                    [_c("v-icon", [_vm._v("refresh")])],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      attrs: { color: "primary", flat: "" },
+                      on: {
+                        click: function($event) {
+                          _vm.dialog = false
+                        }
+                      }
+                    },
+                    [_vm._v("\n                Tancar\n              ")]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v("\n        Versió: "),
+      _c(
+        "a",
+        {
+          staticClass: "white--text",
+          attrs: { href: "#", click: "dialog=true" },
+          on: {
+            click: function($event) {
+              _vm.dialog = true
+            }
+          }
+        },
+        [_vm._v(_vm._s(_vm.dataGit.commit_short))]
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-0b299476", module.exports)
+  }
+}
+
+/***/ }),
+/* 154 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -79616,11 +79968,11 @@ var cannot = function cannot(permission) {
 });
 
 /***/ }),
-/* 152 */
+/* 155 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Confirm_vue__ = __webpack_require__(153);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Confirm_vue__ = __webpack_require__(156);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Confirm_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Confirm_vue__);
 
 
@@ -79659,15 +80011,15 @@ if (typeof window !== 'undefined' && window.Vue) {
 /* harmony default export */ __webpack_exports__["a"] = (Install);
 
 /***/ }),
-/* 153 */
+/* 156 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(154)
+var __vue_script__ = __webpack_require__(157)
 /* template */
-var __vue_template__ = __webpack_require__(155)
+var __vue_template__ = __webpack_require__(158)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -79706,7 +80058,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 154 */
+/* 157 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -79787,7 +80139,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 155 */
+/* 158 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -79874,11 +80226,11 @@ if (false) {
 }
 
 /***/ }),
-/* 156 */
+/* 159 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Snackbar_vue__ = __webpack_require__(157);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Snackbar_vue__ = __webpack_require__(160);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Snackbar_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__Snackbar_vue__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__eventBus__ = __webpack_require__(24);
 
@@ -79903,15 +80255,15 @@ if (typeof window !== 'undefined' && window.Vue) {
 /* harmony default export */ __webpack_exports__["a"] = (Install);
 
 /***/ }),
-/* 157 */
+/* 160 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(1)
 /* script */
-var __vue_script__ = __webpack_require__(158)
+var __vue_script__ = __webpack_require__(161)
 /* template */
-var __vue_template__ = __webpack_require__(159)
+var __vue_template__ = __webpack_require__(162)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -79950,7 +80302,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 158 */
+/* 161 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -80000,7 +80352,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 159 */
+/* 162 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -80048,7 +80400,7 @@ if (false) {
 }
 
 /***/ }),
-/* 160 */
+/* 163 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
