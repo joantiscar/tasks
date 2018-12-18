@@ -30,6 +30,7 @@
                     >
                         <img src="img/vuetify.png" alt="Vuetify.js" height="200">
                         <h1 class="white--text mb-2 display-1 text-xs-center">Lo pantano és de La Sénia</h1>
+                        <v-btn href="https://github.com/joantiscar/tasks"><img height="30" class="pr-2" src="http://cdn.onlinewebfonts.com/svg/img_326384.png">  Github</v-btn>
                         <div class="subheading mb-3 text-xs-center">Powered by LOPUTOAMO</div>
                         <v-btn
                                 class="blue lighten-2 mt-5"

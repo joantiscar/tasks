@@ -83,6 +83,7 @@ export default {
   },
   created () {
     if (!this.git) this.dataGit = window.git
+    
   }
 }
 </script>
