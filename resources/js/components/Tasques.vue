@@ -24,7 +24,7 @@
 
   </v-dialog>
 
-          <tasks-list :tasks="dataTasks" :users="dataUsers"></tasks-list>
+          <tasks-list :tags="tags" :tasks="dataTasks" :users="dataUsers"></tasks-list>
           <task-create :users="users" @created="add"></task-create>
 
       <!--<v-data-iterator class="hidden-lg-and-up"-->
@@ -113,6 +113,10 @@ export default{
   },
   props: {
     tasks: {
+      type: Array,
+      required: true
+    },
+    tags: {
       type: Array,
       required: true
     },

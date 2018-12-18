@@ -106,7 +106,7 @@ export default {
     }
   },
   created () {
-    this.user = selectLoggedUser
+    this.user = this.selectLoggedUser()
   }
 }
 </script>

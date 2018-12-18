@@ -67,8 +67,9 @@
           <img :src="task.user_gravatar" alt="avatar">
         </v-avatar>
         <td>
-          <task-completed-toggle :task="task"></task-completed-toggle>
+          <task-completed-toggle :task="task" :tags="tags"></task-completed-toggle>
         </td>
+        <td><task-tags :tags="tags" :task="task"></task-tags></td>
         <td><span :title="task.created_at_formatted">{{task.created_at_human}}</span></td>
         <td><span :title="task.updated_at_formatted">{{task.updated_at_human}}</span></td>
         <td>
@@ -91,9 +92,10 @@ import TaskCompletedToggle from './TaskCompletedToggle'
 import TaskEdit from './TaskEdit'
 import TaskCreate from './TaskCreate'
 import TaskDestroy from './TaskDestroy'
+import TaskTags from './TaskTags'
 export default {
   name: 'tasks-list',
-  components: { TaskCompletedToggle, TaskEdit, TaskCreate, TaskDestroy },
+  components: { TaskCompletedToggle, TaskEdit, TaskCreate, TaskDestroy, TaskTags},
   data () {
     return {
       dataUsers: this.users,
@@ -105,6 +107,7 @@ export default {
         { text: 'Nom', value: 'name' },
         { text: 'Usuari', value: 'user' },
         { text: 'Completat', value: 'completed' },
+        { text: 'Etiquetes', value: 'tags' },
         { text: 'Creat', value: 'created_at_timestamp' },
         { text: 'Modificat', value: 'updated_at_timestamp' },
         { text: 'Accions', sortable: false, value: 'full_search' }
@@ -121,6 +124,10 @@ export default {
       required: true
     },
     users: {
+      type: Array,
+      required: true
+    },
+    tags: {
       type: Array,
       required: true
     },

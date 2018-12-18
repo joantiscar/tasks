@@ -466,6 +466,31 @@ if (! function_exists('git_remote_origin_url')) {
         return $output[0];
     }
 }
+if (! function_exists('create_example_task_with_tags')) {
+    function create_example_task_with_tags($user)
+    {
+
+        $task = Task::create([
+            'name' => 'Comprar pa',
+            'completed' => false,
+            'user_id' => $user->id
+        ]);
+        $tag1 = Tag::create([
+            'name' => 'Astio',
+            'color' => 'blue',
+            'description' => 'astio'
+        ]);
+        $tag2 = Tag::create([
+            'name' => 'asdada',
+            'color' => 'red',
+            'description' => 'asdada'
+        ]);
+        $task->addTag($tag1);
+        $task->addTag($tag2);
+        return $task;
+    }
+}
+
 // TODO: Crear multiples usuaris amb diferents rols
 // TODO: Com gestionar el superadmin
 

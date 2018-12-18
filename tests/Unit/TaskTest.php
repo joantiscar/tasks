@@ -159,11 +159,8 @@ class TaskTest extends TestCase
     public function test_map()
     {
         $user = factory(User::class)->create();
-        $task = Task::create([
-            'name' => 'Comprar pa',
-            'completed' => false,
-            'user_id' => $user->id
-        ]);
+        $task = create_example_task_with_tags($user);
+
         $mappedTask = $task->map();
 
         $this->assertEquals($mappedTask['id'],1);
@@ -173,7 +170,12 @@ class TaskTest extends TestCase
         $this->assertEquals($mappedTask['user_name'],$user->name);
         $this->assertEquals($mappedTask['user_email'], $user->email);
         $this->assertTrue($user->is($mappedTask['user']));
-
+        $this->assertEquals($mappedTask['tags'][0]->name, 'Astio'); //Todo
+        $this->assertEquals($mappedTask['tags'][0]->color, 'blue'); //Todo
+        $this->assertEquals($mappedTask['tags'][0]->description, 'astio'); //Todo
+        $this->assertEquals($mappedTask['tags'][1]->name, 'asdada'); //Todo
+        $this->assertEquals($mappedTask['tags'][1]->color, 'red'); //Todo
+        $this->assertEquals($mappedTask['tags'][1]->description, 'asdada'); //Todo
 
         //3
 

@@ -25,11 +25,15 @@ class TasquesTest extends TestCase
         $this->withoutExceptionHandling();
         initialize_roles();
         create_Example_tasks();
+        create_Example_tags();
         $this->loginAsSuperAdmin('web');
         $response = $this->get('/tasques');
         $response->assertSuccessful();
         $response->assertViewHas('tasks', function($tasks) {
             return count($tasks)===3;
+        });
+        $response->assertViewHas('tags', function($tags) {
+            return count($tags)===3;
         });
     }
     public function test_can_taskManager_index_tasks()
