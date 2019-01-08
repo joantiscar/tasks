@@ -1,6 +1,6 @@
 <template>
   <span>
-  <v-toolbar color="blue darken-1">
+  <v-toolbar color="secondary darken-1">
     <v-menu left>
 
       <v-btn slot="activator" icon dark>
@@ -58,7 +58,7 @@
     :pagination.sync="pagination"
     >
 
-    <v-progress-linear slot="progress" color="blue" indeterminate></v-progress-linear>
+    <v-progress-linear slot="progress" color="secondary" indeterminate></v-progress-linear>
     <template slot="items" slot-scope="{item: task}">
       <tr>
         <td>{{ task.id}}</td>

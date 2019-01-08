@@ -122,7 +122,7 @@
         </template>
       </v-list>
     </v-navigation-drawer>
-        <v-toolbar color="indigo" dark fixed app clipped-right clipped-left>
+        <v-toolbar color="primary" dark fixed app clipped-right clipped-left>
             <v-toolbar-side-icon @click="drawer = !drawer"></v-toolbar-side-icon>
             <v-toolbar-title>Lo pantano es de La Sénia</v-toolbar-title>
             <v-spacer></v-spacer>
@@ -150,7 +150,7 @@
             </v-flex>
             </v-layout>
         </v-content>
-        <v-footer color="indigo" app inset>
+        <v-footer color="primary" app inset>
             <span class="white--text">&copy; 2017</span>
         </v-footer>
     </v-app>

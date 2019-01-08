@@ -2,11 +2,11 @@
     <span>
   <v-dialog v-model="showDialog" @keydown.esc="showDialog = false">
         <v-toolbar color="primary" class="white--text">
-            <v-btn color="white" flat icon @click.native="showDialog = false"><v-icon class="mr-1">close</v-icon></v-btn>
+            <v-btn color="secondary" flat icon @click.native="showDialog = false"><v-icon class="mr-1">close</v-icon></v-btn>
 
                 Crear tasca
-               <v-spacer></v-spacer> <v-btn color="white" flat @click.native="showDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>Sortir</v-btn>
-               <v-btn color="white" flat @click.native="showDialog = false"><v-icon class="mr-1">save</v-icon>Guardar</v-btn>
+               <v-spacer></v-spacer> <v-btn color="secondary" flat @click.native="showDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>Sortir</v-btn>
+               <v-btn color="secondary" flat @click.native="showDialog = false"><v-icon class="mr-1">save</v-icon>Guardar</v-btn>
             </v-toolbar>
             <v-card>
                 <v-card-text>
@@ -16,7 +16,7 @@
             <v-text-field readonly label="User" v-model="taskBeingShown.user_name" item-text="name" item-value="id" clearable></v-text-field>
                 <v-textarea readonly v-model="taskBeingShown.description" label="Descripcio" hint="Descripció"></v-textarea>
             <div class="text-xs-center">
-            <v-btn color="grey" @click.native="showDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>Sortir</v-btn>
+            <v-btn color="secondary" @click.native="showDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>Sortir</v-btn>
                 </div>
         </v-form>
                 </v-card-text>

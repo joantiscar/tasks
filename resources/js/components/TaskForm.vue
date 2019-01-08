@@ -14,7 +14,7 @@
 
     <v-textarea v-model="description" label="Descripcio" hint="Descripció"></v-textarea>
     <div class="text-xs-center">
-      <v-btn color="grey" @click.native="$emit('close')">
+      <v-btn color="secondary" @click.native="$emit('close')">
         <v-icon class="mr-1">exit_to_app</v-icon>
         Sortir
       </v-btn>

@@ -5,17 +5,17 @@
   </v-btn>
   <v-dialog v-model="dialog" @keydown.esc="dialog = false">
     <v-toolbar color="primary" class="white--text">
-      <v-btn color="white" flat icon @click.native="dialog = false">
+      <v-btn color="secondary" flat icon @click.native="dialog = false">
         <v-icon class="mr-1">close</v-icon>
       </v-btn>
 
       Editar tasca
       <v-spacer></v-spacer>
-      <v-btn color="white" flat @click.native="dialog = false">
+      <v-btn color="secondary" flat @click.native="dialog = false">
         <v-icon class="mr-1">exit_to_app</v-icon>
         Sortir
       </v-btn>
-      <v-btn color="white" flat @click.native="dialog = false">
+      <v-btn color="secondary" flat @click.native="dialog = false">
         <v-icon class="mr-1">save</v-icon>
         Guardar
       </v-btn>
@@ -30,7 +30,7 @@
 
           <v-textarea v-model="editingTask.description" label="Descripcio" hint="Descripció"></v-textarea>
           <div class="text-xs-center">
-            <v-btn color="grey" @click.native="dialog = false">
+            <v-btn color="secondary" @click.native="dialog = false">
               <v-icon class="mr-1">exit_to_app</v-icon>
               Sortir
             </v-btn>

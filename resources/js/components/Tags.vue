@@ -2,11 +2,11 @@
     <span>
   <v-dialog v-model="editDialog" @keydown.esc="editDialog = false">
             <v-toolbar color="primary" class="white--text">
-            <v-btn color="white" flat icon @click.native="editDialog = false"><v-icon class="mr-1">close</v-icon></v-btn>
+            <v-btn color="secondary" flat icon @click.native="editDialog = false"><v-icon class="mr-1">close</v-icon></v-btn>
 
                 Editar tag
-               <v-spacer></v-spacer> <v-btn color="white" flat @click.native="editDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>Sortir</v-btn>
-               <v-btn color="white" flat @click.native="editDialog = false"><v-icon class="mr-1">save</v-icon>Guardar</v-btn>
+               <v-spacer></v-spacer> <v-btn color="secondary" flat @click.native="editDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>Sortir</v-btn>
+               <v-btn color="secondary" flat @click.native="editDialog = false"><v-icon class="mr-1">save</v-icon>Guardar</v-btn>
             </v-toolbar>
             <v-card>
                 <v-card-text>
@@ -15,7 +15,7 @@
           <input type="color" v-model="tagBeingEdited.color">
           <v-textarea v-model="tagBeingEdited.description" label="Descripcio" hint="Descripció"></v-textarea>
             <div class="text-xs-center">
-            <v-btn color="grey" @click.native="editDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>Sortir</v-btn>
+            <v-btn color="secondary" @click.native="editDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>Sortir</v-btn>
                <v-btn color="success" @click.native="edit()"><v-icon class="mr-1">save</v-icon>Guardar</v-btn>
                 </div>
         </v-form>
@@ -25,11 +25,11 @@
   </v-dialog>
   <v-dialog v-model="showDialog" @keydown.esc="showDialog = false">
         <v-toolbar color="primary" class="white--text">
-            <v-btn color="white" flat icon @click.native="showDialog = false"><v-icon class="mr-1">close</v-icon></v-btn>
+            <v-btn color="secondary" flat icon @click.native="showDialog = false"><v-icon class="mr-1">close</v-icon></v-btn>
 
                 Crear tag
-               <v-spacer></v-spacer> <v-btn color="white" flat @click.native="showDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>Sortir</v-btn>
-               <v-btn color="white" flat @click.native="showDialog = false"><v-icon class="mr-1">save</v-icon>Guardar</v-btn>
+               <v-spacer></v-spacer> <v-btn color="secondary" flat @click.native="showDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>Sortir</v-btn>
+               <v-btn color="secondary" flat @click.native="showDialog = false"><v-icon class="mr-1">save</v-icon>Guardar</v-btn>
             </v-toolbar>
             <v-card>
                 <v-card-text>
@@ -38,7 +38,7 @@
           <input type="color" v-model="tagBeingEdited.color" readonly>
           <v-textarea readonly v-model="tagBeingShown.description" label="Descripcio" hint="Descripció"></v-textarea>
             <div class="text-xs-center">
-            <v-btn color="grey" @click.native="showDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>Sortir</v-btn>
+            <v-btn color="secondary" @click.native="showDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>Sortir</v-btn>
                 </div>
         </v-form>
                 </v-card-text>
@@ -47,11 +47,11 @@
   </v-dialog>
   <v-dialog v-model="createDialog" @keydown.esc="createDialog = false">
             <v-toolbar color="primary" class="white--text">
-            <v-btn color="white" flat icon @click.native="createDialog = false"><v-icon class="mr-1">close</v-icon></v-btn>
+            <v-btn color="secondary" flat icon @click.native="createDialog = false"><v-icon class="mr-1">close</v-icon></v-btn>
 
                 Crear tag
-               <v-spacer></v-spacer> <v-btn color="white" flat @click.native="createDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>Sortir</v-btn>
-               <v-btn color="white" flat @click.native="createDialog = false"><v-icon class="mr-1">save</v-icon>Guardar</v-btn>
+               <v-spacer></v-spacer> <v-btn color="secondary" flat @click.native="createDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>Sortir</v-btn>
+               <v-btn color="secondary" flat @click.native="createDialog = false"><v-icon class="mr-1">save</v-icon>Guardar</v-btn>
             </v-toolbar>
             <v-card>
                 <v-card-text>
@@ -60,7 +60,7 @@
           <input type="color" v-model="tagBeingCreated.color">
           <v-textarea v-model="tagBeingCreated.description" label="Descripcio" hint="Descripció"></v-textarea>
             <div class="text-xs-center">
-            <v-btn color="grey" @click.native="createDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>Sortir</v-btn>
+            <v-btn color="secondary" @click.native="createDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>Sortir</v-btn>
                <v-btn color="success" @click.native="create()"><v-icon class="mr-1">save</v-icon>Guardar</v-btn>
                 </div>
         </v-form>
@@ -69,7 +69,7 @@
 
   </v-dialog>
 
-  <v-toolbar color="blue darken-1">
+  <v-toolbar color="secondary darken-1">
     <v-menu left>
 
       <v-btn slot="activator" icon dark>
@@ -124,7 +124,7 @@
               :pagination.sync="pagination"
               class="hidden-md-and-down">
 
-                <v-progress-linear slot="progress" color="blue" indeterminate></v-progress-linear>
+                <v-progress-linear slot="progress" color="secondary" indeterminate></v-progress-linear>
                 <template slot="items" slot-scope="{item: tag}">
                     <tr>
                         <td>{{ tag.id}}</td>
@@ -156,7 +156,7 @@
           fab
           bottom
           right
-          color="pink"
+          color="accent"
           fixed
           class="white--text"
           @click="showCreate"

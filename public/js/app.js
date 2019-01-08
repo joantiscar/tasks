@@ -26937,7 +26937,19 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 __webpack_require__(13);
 
 window.Vue = __WEBPACK_IMPORTED_MODULE_1_vue___default.a;
-window.Vue.use(__WEBPACK_IMPORTED_MODULE_2_vuetify___default.a);
+window.Vuetify = __WEBPACK_IMPORTED_MODULE_2_vuetify___default.a;
+var PRIMARY_COLOR_KEY = 'primary_color_key';
+
+var primaryColor = window.localStorage.getItem(PRIMARY_COLOR_KEY) || '#123456';
+
+// window.Vue.use(Vuetify)
+window.Vue.use(__WEBPACK_IMPORTED_MODULE_2_vuetify___default.a, {
+  theme: {
+    primary: {
+      base: primaryColor
+    }
+  }
+});
 window.Vue.use(__WEBPACK_IMPORTED_MODULE_18__plugins_confirm__["a" /* default */]);
 window.Vue.use(__WEBPACK_IMPORTED_MODULE_17__plugins_permissions_js__["a" /* default */]);
 window.Vue.use(__WEBPACK_IMPORTED_MODULE_19__plugins_snackbar__["a" /* default */]);
@@ -74551,7 +74563,7 @@ var render = function() {
           _c(
             "v-btn",
             {
-              attrs: { color: "grey" },
+              attrs: { color: "secondary" },
               nativeOn: {
                 click: function($event) {
                   _vm.$emit("close")
@@ -74643,7 +74655,7 @@ var render = function() {
               _c(
                 "v-btn",
                 {
-                  attrs: { color: "white", flat: "", icon: "" },
+                  attrs: { color: "secondary", flat: "", icon: "" },
                   nativeOn: {
                     click: function($event) {
                       _vm.dialog = false
@@ -74659,7 +74671,7 @@ var render = function() {
               _c(
                 "v-btn",
                 {
-                  attrs: { color: "white", flat: "" },
+                  attrs: { color: "secondary", flat: "" },
                   nativeOn: {
                     click: function($event) {
                       _vm.dialog = false
@@ -74678,7 +74690,7 @@ var render = function() {
               _c(
                 "v-btn",
                 {
-                  attrs: { color: "white", flat: "" },
+                  attrs: { color: "secondary", flat: "" },
                   nativeOn: {
                     click: function($event) {
                       _vm.dialog = false
@@ -74729,7 +74741,7 @@ var render = function() {
                 fab: "",
                 bottom: "",
                 right: "",
-                color: "pink",
+                color: "accent",
                 fixed: ""
               },
               on: {
@@ -76127,7 +76139,7 @@ var render = function() {
               _c(
                 "v-btn",
                 {
-                  attrs: { color: "white", flat: "", icon: "" },
+                  attrs: { color: "secondary", flat: "", icon: "" },
                   nativeOn: {
                     click: function($event) {
                       _vm.dialog = false
@@ -76143,7 +76155,7 @@ var render = function() {
               _c(
                 "v-btn",
                 {
-                  attrs: { color: "white", flat: "" },
+                  attrs: { color: "secondary", flat: "" },
                   nativeOn: {
                     click: function($event) {
                       _vm.dialog = false
@@ -76162,7 +76174,7 @@ var render = function() {
               _c(
                 "v-btn",
                 {
-                  attrs: { color: "white", flat: "" },
+                  attrs: { color: "secondary", flat: "" },
                   nativeOn: {
                     click: function($event) {
                       _vm.dialog = false
@@ -76247,7 +76259,7 @@ var render = function() {
                           _c(
                             "v-btn",
                             {
-                              attrs: { color: "grey" },
+                              attrs: { color: "secondary" },
                               nativeOn: {
                                 click: function($event) {
                                   _vm.dialog = false
@@ -76846,7 +76858,7 @@ var render = function() {
     [
       _c(
         "v-toolbar",
-        { attrs: { color: "blue darken-1" } },
+        { attrs: { color: "secondary darken-1" } },
         [
           _c(
             "v-menu",
@@ -77085,7 +77097,11 @@ var render = function() {
             },
             [
               _c("v-progress-linear", {
-                attrs: { slot: "progress", color: "blue", indeterminate: "" },
+                attrs: {
+                  slot: "progress",
+                  color: "secondary",
+                  indeterminate: ""
+                },
                 slot: "progress"
               })
             ],
@@ -77149,7 +77165,7 @@ var render = function() {
               _c(
                 "v-btn",
                 {
-                  attrs: { color: "white", flat: "", icon: "" },
+                  attrs: { color: "secondary", flat: "", icon: "" },
                   nativeOn: {
                     click: function($event) {
                       _vm.showDialog = false
@@ -77165,7 +77181,7 @@ var render = function() {
               _c(
                 "v-btn",
                 {
-                  attrs: { color: "white", flat: "" },
+                  attrs: { color: "secondary", flat: "" },
                   nativeOn: {
                     click: function($event) {
                       _vm.showDialog = false
@@ -77184,7 +77200,7 @@ var render = function() {
               _c(
                 "v-btn",
                 {
-                  attrs: { color: "white", flat: "" },
+                  attrs: { color: "secondary", flat: "" },
                   nativeOn: {
                     click: function($event) {
                       _vm.showDialog = false
@@ -77280,7 +77296,7 @@ var render = function() {
                           _c(
                             "v-btn",
                             {
-                              attrs: { color: "grey" },
+                              attrs: { color: "secondary" },
                               nativeOn: {
                                 click: function($event) {
                                   _vm.showDialog = false
@@ -77818,7 +77834,7 @@ var render = function() {
               _c(
                 "v-btn",
                 {
-                  attrs: { color: "white", flat: "", icon: "" },
+                  attrs: { color: "secondary", flat: "", icon: "" },
                   nativeOn: {
                     click: function($event) {
                       _vm.editDialog = false
@@ -77834,7 +77850,7 @@ var render = function() {
               _c(
                 "v-btn",
                 {
-                  attrs: { color: "white", flat: "" },
+                  attrs: { color: "secondary", flat: "" },
                   nativeOn: {
                     click: function($event) {
                       _vm.editDialog = false
@@ -77853,7 +77869,7 @@ var render = function() {
               _c(
                 "v-btn",
                 {
-                  attrs: { color: "white", flat: "" },
+                  attrs: { color: "secondary", flat: "" },
                   nativeOn: {
                     click: function($event) {
                       _vm.editDialog = false
@@ -77933,7 +77949,7 @@ var render = function() {
                           _c(
                             "v-btn",
                             {
-                              attrs: { color: "grey" },
+                              attrs: { color: "secondary" },
                               nativeOn: {
                                 click: function($event) {
                                   _vm.editDialog = false
@@ -78013,7 +78029,7 @@ var render = function() {
               _c(
                 "v-btn",
                 {
-                  attrs: { color: "white", flat: "", icon: "" },
+                  attrs: { color: "secondary", flat: "", icon: "" },
                   nativeOn: {
                     click: function($event) {
                       _vm.showDialog = false
@@ -78029,7 +78045,7 @@ var render = function() {
               _c(
                 "v-btn",
                 {
-                  attrs: { color: "white", flat: "" },
+                  attrs: { color: "secondary", flat: "" },
                   nativeOn: {
                     click: function($event) {
                       _vm.showDialog = false
@@ -78048,7 +78064,7 @@ var render = function() {
               _c(
                 "v-btn",
                 {
-                  attrs: { color: "white", flat: "" },
+                  attrs: { color: "secondary", flat: "" },
                   nativeOn: {
                     click: function($event) {
                       _vm.showDialog = false
@@ -78136,7 +78152,7 @@ var render = function() {
                           _c(
                             "v-btn",
                             {
-                              attrs: { color: "grey" },
+                              attrs: { color: "secondary" },
                               nativeOn: {
                                 click: function($event) {
                                   _vm.showDialog = false
@@ -78197,7 +78213,7 @@ var render = function() {
               _c(
                 "v-btn",
                 {
-                  attrs: { color: "white", flat: "", icon: "" },
+                  attrs: { color: "secondary", flat: "", icon: "" },
                   nativeOn: {
                     click: function($event) {
                       _vm.createDialog = false
@@ -78213,7 +78229,7 @@ var render = function() {
               _c(
                 "v-btn",
                 {
-                  attrs: { color: "white", flat: "" },
+                  attrs: { color: "secondary", flat: "" },
                   nativeOn: {
                     click: function($event) {
                       _vm.createDialog = false
@@ -78232,7 +78248,7 @@ var render = function() {
               _c(
                 "v-btn",
                 {
-                  attrs: { color: "white", flat: "" },
+                  attrs: { color: "secondary", flat: "" },
                   nativeOn: {
                     click: function($event) {
                       _vm.createDialog = false
@@ -78312,7 +78328,7 @@ var render = function() {
                           _c(
                             "v-btn",
                             {
-                              attrs: { color: "grey" },
+                              attrs: { color: "secondary" },
                               nativeOn: {
                                 click: function($event) {
                                   _vm.createDialog = false
@@ -78364,7 +78380,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "v-toolbar",
-        { attrs: { color: "blue darken-1" } },
+        { attrs: { color: "secondary darken-1" } },
         [
           _c(
             "v-menu",
@@ -78626,7 +78642,11 @@ var render = function() {
             },
             [
               _c("v-progress-linear", {
-                attrs: { slot: "progress", color: "blue", indeterminate: "" },
+                attrs: {
+                  slot: "progress",
+                  color: "secondary",
+                  indeterminate: ""
+                },
                 slot: "progress"
               })
             ],
@@ -78645,7 +78665,7 @@ var render = function() {
                 fab: "",
                 bottom: "",
                 right: "",
-                color: "pink",
+                color: "accent",
                 fixed: ""
               },
               on: { click: _vm.showCreate }

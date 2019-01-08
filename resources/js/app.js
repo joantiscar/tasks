@@ -28,7 +28,19 @@ import snackbar from './plugins/snackbar'
 require('./bootstrap')
 
 window.Vue = Vue
-window.Vue.use(Vuetify)
+window.Vuetify = Vuetify
+const PRIMARY_COLOR_KEY = 'primary_color_key'
+
+const primaryColor = window.localStorage.getItem(PRIMARY_COLOR_KEY) || '#123456'
+
+// window.Vue.use(Vuetify)
+window.Vue.use(Vuetify, {
+  theme: {
+    primary: {
+      base: primaryColor
+    }
+  }
+})
 window.Vue.use(confirm)
 window.Vue.use(permissions)
 window.Vue.use(snackbar)
