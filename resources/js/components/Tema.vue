@@ -1,8 +1,9 @@
 <template>
-  <span>
+  <v-card>
+    <v-card-title>Tema</v-card-title>
   Color principal: <br> <swatches v-model="colorPrincipal"></swatches>
   Color secundari: <br> <swatches v-model="colorSecundari"></swatches>
-    </span>
+    </v-card>
 </template>
 
 <script>
