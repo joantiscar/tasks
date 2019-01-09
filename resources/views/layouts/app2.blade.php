@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#2F3BA2"/>
 
     <title>@yield('title','Put your title here')</title>
 

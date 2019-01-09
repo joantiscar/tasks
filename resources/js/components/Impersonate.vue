@@ -13,7 +13,10 @@ export default {
   },
   props: {
     users: {
-      type: Array
+      type: Array,
+      default: function () {
+        return []
+      }
     },
     url: {
       type: String,

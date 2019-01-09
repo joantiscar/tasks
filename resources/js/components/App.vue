@@ -1,10 +1,12 @@
-  <script>
+<script>
+
 export default {
   el: '#app',
   data: () => ({
     title: 'Lo pantano és de La Sénia',
     drawer: false,
     drawerRight: false,
+
     items: [
       { icon: 'contacts', text: 'Welcome', url: '/' },
       { icon: 'history', text: 'About', url: '/about' },

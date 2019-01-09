@@ -14,7 +14,6 @@ class RegularUsersController extends Controller
 {
     public function index(Request $request)
     {
-        // Scopes
         return map_collection(User::regular()->get());
     }
 }

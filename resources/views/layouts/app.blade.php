@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="manifest" href="/manifest.json">
-
+    <meta name="theme-color" content="#2F3BA2"/>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="user" content="{{ logged_user() }}">
     <style>[v-cloak]{display: none}</style>
@@ -27,7 +27,7 @@
                 app
         >
             <v-card>
-                <v-card-title class="grey darken-3 white--text"><h4>Perfil</h4></v-card-title>
+                <v-card-title class="primary darken-3 white--text"><h4>Perfil</h4></v-card-title>
                 <v-layout row wrap>
                     <v-flex xs12>
                         <ul>
@@ -40,13 +40,13 @@
                     </v-flex>
                 </v-layout>
             </v-card>
-
+            @canImpersonate
             Administrador:
 
             Llista de tots els usuaris
 
-            @canImpersonate
-            <impersonate url="/api/v1/regular_users"></impersonate>
+
+            <impersonate url="/api/v1/regular_users" ></impersonate>
             @endCanImpersonate
 
 
@@ -54,6 +54,8 @@
             El usuari {{ Auth::user()->impersonatedBy()->name }} està suplantant a {{ Auth::user()->impersonatedBy()->name }}
             <a href="/impersonate/leave">Abandonar la suplantació</a>
             @endImpersonating
+
+            <tema></tema>
 
         </v-navigation-drawer>
         <v-navigation-drawer

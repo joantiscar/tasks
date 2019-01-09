@@ -20,6 +20,7 @@ import RegisterForm from './components/RegisterForm.vue'
 import UserList from './components/UserList.vue'
 import UserSelect from './components/UserSelect.vue'
 import Impersonate from './components/Impersonate.vue'
+import Tema from './components/Tema.vue'
 import TaskCompletedToggle from './components/TaskCompletedToggle.vue'
 import GitInfoComponent from './components/git/GitInfoComponent.vue'
 import permissions from './plugins/permissions.js'
@@ -29,15 +30,20 @@ require('./bootstrap')
 
 window.Vue = Vue
 window.Vuetify = Vuetify
-const PRIMARY_COLOR_KEY = 'primary_color_key'
+const PRIMARY_COLOR_KEY = 'PRIMARY_COLOR_KEY'
+const SECONDARY_COLOR_KEY = 'SECONDARY_COLOR_KEY'
 
 const primaryColor = window.localStorage.getItem(PRIMARY_COLOR_KEY) || '#123456'
+const secondaryColor = window.localStorage.getItem(SECONDARY_COLOR_KEY) || '#654321'
 
 // window.Vue.use(Vuetify)
 window.Vue.use(Vuetify, {
   theme: {
     primary: {
       base: primaryColor
+    },
+    secondary: {
+      base: secondaryColor
     }
   }
 })
@@ -61,5 +67,6 @@ window.Vue.component('impersonate', Impersonate)
 window.Vue.component('user-select', UserSelect)
 window.Vue.component('git-info', GitInfoComponent)
 window.Vue.component('task-completed-toggle', TaskCompletedToggle)
+window.Vue.component('tema', Tema)
 
 const app = new window.Vue(AppComponent)
