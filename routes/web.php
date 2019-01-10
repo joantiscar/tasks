@@ -33,6 +33,7 @@ Route::get('/prova',function(){
 
 Route::middleware((['auth']))->group(function () {
 
+    Route::post('/photo', 'PhotoController@store');
     Route::delete('/tasks/{id}', 'TasksController@delete');
     Route::get('/tasks','TasksController@index');
     Route::post('/tasks','TasksController@store');
@@ -43,9 +44,12 @@ Route::middleware((['auth']))->group(function () {
     Route::get('/tasks_vue', 'TasksVueController@index');
     Route::get('/tasques', 'TasquesController@index');
     Route::get('/tags', 'TagsController@index');
+    Route::get('/profile', 'ProfileController@show');
     Route::delete('/completed_task/{task}','CompletedTasksController@destroy');//DELETE
     Route::post('/completed_task/{task}','CompletedTasksController@store');           //CREATE
     Route::get('/user/tasks','LoggedUserTasksController@index');
+    Route::get('/user/photo', 'LoggedUserPhotoController@show');
+
     Route::impersonate();
 
 });

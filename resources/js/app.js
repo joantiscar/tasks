@@ -23,6 +23,7 @@ import Impersonate from './components/Impersonate.vue'
 import Tema from './components/Tema.vue'
 import TaskCompletedToggle from './components/TaskCompletedToggle.vue'
 import GitInfoComponent from './components/git/GitInfoComponent.vue'
+import Profile from './components/Profile.vue'
 import permissions from './plugins/permissions.js'
 import confirm from './plugins/confirm'
 import snackbar from './plugins/snackbar'
@@ -68,5 +69,6 @@ window.Vue.component('user-select', UserSelect)
 window.Vue.component('git-info', GitInfoComponent)
 window.Vue.component('task-completed-toggle', TaskCompletedToggle)
 window.Vue.component('tema', Tema)
+window.Vue.component('profile', Profile)
 
 const app = new window.Vue(AppComponent)
