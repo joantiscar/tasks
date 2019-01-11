@@ -18,7 +18,7 @@
 <body>
 <div id="app" v-cloak>
     <snackbar></snackbar>
-    <v-app id="inspire">
+    <v-app id="inspire" :dark="dark">
         <v-navigation-drawer
                 fixed
                 v-model="drawerRight"
@@ -138,9 +138,12 @@
                 <v-btn type="submit">
                     Logout
                 </v-btn>
+                <v-btn icon @click.native="dark = !dark"><v-icon>lens</v-icon></v-btn>
+
                 <v-toolbar-side-icon @click="drawerRight = !drawerRight"></v-toolbar-side-icon>
 
             </v-form>
+
         </v-toolbar>
 
         <v-content fluid fill-height fluid fill-height>

@@ -26947,7 +26947,13 @@ window.Vue = __WEBPACK_IMPORTED_MODULE_1_vue___default.a;
 window.Vuetify = __WEBPACK_IMPORTED_MODULE_2_vuetify___default.a;
 var PRIMARY_COLOR_KEY = 'PRIMARY_COLOR_KEY';
 var SECONDARY_COLOR_KEY = 'SECONDARY_COLOR_KEY';
+var DARK_THEME_KEY = 'DARK_THEME_KEY';
+var DRAWER_STATE_KEY = 'DRAWER_STATE_KEY';
+var DRAWER_RIGHT_STATE_KEY = 'DRAWER_RIGHT_STATE_KEY';
 
+var drawerToggle = window.localStorage.getItem(DRAWER_STATE_KEY) || false;
+var drawerRightToggle = window.localStorage.getItem(DRAWER_RIGHT_STATE_KEY) || false;
+var darkToggle = window.localStorage.getItem(DARK_THEME_KEY) || false;
 var primaryColor = window.localStorage.getItem(PRIMARY_COLOR_KEY) || '#123456';
 var secondaryColor = window.localStorage.getItem(SECONDARY_COLOR_KEY) || '#654321';
 
@@ -27047,8 +27053,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   data: function data() {
     return {
       title: 'Lo pantano és de La Sénia',
-      drawer: false,
-      drawerRight: false,
+      drawer: window.localStorage.getItem('DRAWER_STATE_KEY') === 'true',
+      drawerRight: window.localStorage.getItem('DRAWER_RIGHT_STATE_KEY') === 'true',
+      dark: window.localStorage.getItem('DARK_THEME_KEY') === 'true',
 
       items: [{ icon: 'contacts', text: 'Welcome', url: '/' }, { icon: 'history', text: 'About', url: '/about' }, { icon: 'history', text: 'Contact', url: '/contact' }, {
         icon: 'keyboard_arrow_up',
@@ -27063,6 +27070,17 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   },
   props: {
     source: String
+  },
+  watch: {
+    dark: function dark(newValue) {
+      window.localStorage.setItem('DARK_THEME_KEY', newValue);
+    },
+    drawer: function drawer(newValue) {
+      window.localStorage.setItem('DRAWER_STATE_KEY', newValue);
+    },
+    drawerRight: function drawerRight(newValue) {
+      window.localStorage.setItem('DRAWER_RIGHT_STATE_KEY', newValue);
+    }
   }
 });
 

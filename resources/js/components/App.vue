@@ -4,8 +4,9 @@ export default {
   el: '#app',
   data: () => ({
     title: 'Lo pantano és de La Sénia',
-    drawer: false,
-    drawerRight: false,
+    drawer: (window.localStorage.getItem('DRAWER_STATE_KEY') === 'true'),
+    drawerRight: (window.localStorage.getItem('DRAWER_RIGHT_STATE_KEY') === 'true'),
+    dark: (window.localStorage.getItem('DARK_THEME_KEY') === 'true'),
 
     items: [
       { icon: 'contacts', text: 'Welcome', url: '/' },
@@ -32,6 +33,17 @@ export default {
   }),
   props: {
     source: String
+  },
+  watch: {
+    dark (newValue) {
+      window.localStorage.setItem('DARK_THEME_KEY', newValue)
+    },
+    drawer (newValue) {
+      window.localStorage.setItem('DRAWER_STATE_KEY', newValue)
+    },
+    drawerRight (newValue) {
+      window.localStorage.setItem('DRAWER_RIGHT_STATE_KEY', newValue)
+    }
   }
 }
 </script>

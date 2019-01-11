@@ -33,7 +33,13 @@ window.Vue = Vue
 window.Vuetify = Vuetify
 const PRIMARY_COLOR_KEY = 'PRIMARY_COLOR_KEY'
 const SECONDARY_COLOR_KEY = 'SECONDARY_COLOR_KEY'
+const DARK_THEME_KEY = 'DARK_THEME_KEY'
+const DRAWER_STATE_KEY = 'DRAWER_STATE_KEY'
+const DRAWER_RIGHT_STATE_KEY = 'DRAWER_RIGHT_STATE_KEY'
 
+const drawerToggle = window.localStorage.getItem(DRAWER_STATE_KEY) || false
+const drawerRightToggle = window.localStorage.getItem(DRAWER_RIGHT_STATE_KEY) || false
+const darkToggle = window.localStorage.getItem(DARK_THEME_KEY) || false
 const primaryColor = window.localStorage.getItem(PRIMARY_COLOR_KEY) || '#123456'
 const secondaryColor = window.localStorage.getItem(SECONDARY_COLOR_KEY) || '#654321'
 
