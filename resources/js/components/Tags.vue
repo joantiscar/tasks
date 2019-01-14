@@ -276,7 +276,7 @@ export default{
         this.createTag(response.data)
         this.$snackbar.showMessage("S'ha editat correctament la tag")
       }).catch((error) => {
-        this.$snackbar.showError(error)
+        this.$snackbar.showError(error.message)
         this.creating = false
         this.editDialog = false
       }).finally(() => {
@@ -322,7 +322,7 @@ export default{
           this.removeTag(tag)
           this.$snackbar.showMessage("S'ha esborrat correctament la tag")
         }).catch(error => {
-          this.$snackbar.showError(error)
+          this.$snackbar.showError(error.message)
           this.removing = null
           this.destroyDialog = false
         }).finally(() => {
@@ -339,7 +339,7 @@ export default{
         this.editTag(this.tagBeingEdited)
         this.$snackbar.showMessage("S'ha editat correctament la tag")
       }).catch((error) => {
-        this.$snackbar.showError(error)
+        this.$snackbar.showError(error.message)
         this.editing = false
         this.editDialog = false
       }).finally(() => {

@@ -77,13 +77,13 @@ export default {
         this.$snackbar.showMessage('Dades actualitzades correctament')
         this.dataGit = response.data
       }).catch(error => {
-        this.$snackbar.showError(error)
+        this.$snackbar.showError(error.message)
       })
     }
   },
   created () {
     if (!this.git) this.dataGit = window.git
-    
+
   }
 }
 </script>

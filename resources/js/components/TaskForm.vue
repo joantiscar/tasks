@@ -97,7 +97,7 @@ export default {
         this.$emit('created', response.data)
         this.reset()
       }).catch((error) => {
-        this.$snackbar.showError(error)
+        this.$snackbar.showError(error.message)
         this.creating = false
         this.reset()
       }).finally(() => {

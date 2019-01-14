@@ -72835,14 +72835,14 @@ var filters = {
           _this3.$snackbar.showMessage("S'ha descompletat correctament la tasca");
           _this3.dataTasks.splice(_this3.dataTasks.indexOf(task), 1, response.data);
         }).catch(function (error) {
-          _this3.$snackbar.showError(error);
+          _this3.$snackbar.showError(error.message);
         }); // TODO ACABAR
       } else {
         window.axios.post('/api/v1/completed_task/' + task.id).then(function (response) {
           _this3.$snackbar.showMessage("S'ha completat correctament la tasca");
           _this3.dataTasks.splice(_this3.dataTasks.indexOf(task), 1, response.data);
         }).catch(function (error) {
-          _this3.$snackbar.showError(error);
+          _this3.$snackbar.showError(error.message);
         });
       }
     }
@@ -73841,7 +73841,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this.$emit('created', response.data);
         _this.reset();
       }).catch(function (error) {
-        _this.$snackbar.showError(error);
+        _this.$snackbar.showError(error.message);
         _this.creating = false;
         _this.reset();
       }).finally(function () {
@@ -75151,7 +75151,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                   _this.$snackbar.showMessage("S'ha descompletat correctament la tasca");
                   _this.loading = false;
                 }).catch(function (error) {
-                  _this.$snackbar.showError(error);
+                  _this.$snackbar.showError(error.message);
                   _this.removing = null;
                 });
 
@@ -75183,7 +75183,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                   _this2.$snackbar.showMessage("S'ha completat correctament la tasca");
                   _this2.loading = false;
                 }).catch(function (error) {
-                  _this2.$snackbar.showError(error);
+                  _this2.$snackbar.showError(error.message);
                   _this2.removing = null;
                 });
 
@@ -76163,7 +76163,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this.$snackbar.showMessage("S'ha editat correctament la tasca");
         _this.$emit('edited', response.data);
       }).catch(function (error) {
-        _this.$snackbar.showError(error);
+        _this.$snackbar.showError(error.message);
         _this.loading = false;
         _this.dialog = false;
       }).finally(function () {
@@ -76535,7 +76535,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                     _this.$emit('removed', _this.task);
                     _this.$snackbar.showMessage("S'ha esborrat correctament la tasca");
                   }).catch(function (error) {
-                    _this.$snackbar.showError(error);
+                    _this.$snackbar.showError(error.message);
                     _this.loading = false;
                   }).finally(function () {
                     _this.loading = false;
@@ -76727,7 +76727,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
       window.axios.post('/api/v1/task/' + this.task.id + '/tags', this.newTag).then(function (response) {
         _this.$snackbar.showMessage('Etiqueta afegida correctament');
       }).catch(function (error) {
-        _this.$snackbar.showError(error);
+        _this.$snackbar.showError(error.message);
       });
     },
     removeTag: function () {
@@ -76749,7 +76749,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                   window.axios.post('/api/v1/task/' + this.task.id + '/tags/' + this.tag).then(function (response) {
                     _this2.$snackbar.showMessage('Etiqueta eliminada correctament');
                   }).catch(function (error) {
-                    _this2.$snackbar.showError(error);
+                    _this2.$snackbar.showError(error.message);
                   });
                 }
 
@@ -77776,7 +77776,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         _this2.createTag(response.data);
         _this2.$snackbar.showMessage("S'ha editat correctament la tag");
       }).catch(function (error) {
-        _this2.$snackbar.showError(error);
+        _this2.$snackbar.showError(error.message);
         _this2.creating = false;
         _this2.editDialog = false;
       }).finally(function () {
@@ -77833,7 +77833,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
                     _this3.removeTag(tag);
                     _this3.$snackbar.showMessage("S'ha esborrat correctament la tag");
                   }).catch(function (error) {
-                    _this3.$snackbar.showError(error);
+                    _this3.$snackbar.showError(error.message);
                     _this3.removing = null;
                     _this3.destroyDialog = false;
                   }).finally(function () {
@@ -77866,7 +77866,7 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
         _this4.editTag(_this4.tagBeingEdited);
         _this4.$snackbar.showMessage("S'ha editat correctament la tag");
       }).catch(function (error) {
-        _this4.$snackbar.showError(error);
+        _this4.$snackbar.showError(error.message);
         _this4.editing = false;
         _this4.editDialog = false;
       }).finally(function () {
@@ -79549,7 +79549,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this.dataUsers = response.data;
       }).catch(function (error) {
         console.log(error);
-        // this.$snackbar.showerror(error)
+        // this.$snackbar.showError(error.message)
       });
     }
   }
@@ -79976,7 +79976,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       window.axios.get(this.url).then(function (response) {
         _this.dataUsers = response.data;
       }).catch(function (error) {
-        _this.$snackbar.showError(error);
+        _this.$snackbar.showError(error.message);
       });
     }
   },
@@ -80498,7 +80498,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         _this.$snackbar.showMessage('Dades actualitzades correctament');
         _this.dataGit = response.data;
       }).catch(function (error) {
-        _this.$snackbar.showError(error);
+        _this.$snackbar.showError(error.message);
       });
     }
   },

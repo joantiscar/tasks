@@ -66,7 +66,7 @@ export default {
       window.axios.post(('/api/v1/task/' + this.task.id + '/tags'), this.newTag).then((response) => {
         this.$snackbar.showMessage('Etiqueta afegida correctament')
       }).catch((error) => {
-        this.$snackbar.showError(error)
+        this.$snackbar.showError(error.message)
       })
     },
     async removeTag () {
@@ -76,7 +76,7 @@ export default {
         window.axios.post(('/api/v1/task/' + this.task.id + '/tags/' + this.tag)).then((response) => {
           this.$snackbar.showMessage('Etiqueta eliminada correctament')
         }).catch((error) => {
-          this.$snackbar.showError(error)
+          this.$snackbar.showError(error.message)
         })
       }
     }

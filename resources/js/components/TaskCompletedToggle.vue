@@ -42,7 +42,7 @@ export default {
         this.$snackbar.showMessage("S'ha descompletat correctament la tasca")
         this.loading = false
       }).catch(error => {
-        this.$snackbar.showError(error)
+        this.$snackbar.showError(error.message)
         this.removing = null
       }) // TODO ACABAR
     },
@@ -52,7 +52,7 @@ export default {
         this.$snackbar.showMessage("S'ha completat correctament la tasca")
         this.loading = false
       }).catch(error => {
-        this.$snackbar.showError(error)
+        this.$snackbar.showError(error.message)
         this.removing = null
       }) // TODO ACABAR
     }

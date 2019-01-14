@@ -172,14 +172,14 @@ export default {
           this.$snackbar.showMessage("S'ha descompletat correctament la tasca")
           this.dataTasks.splice(this.dataTasks.indexOf(task), 1, response.data)
         }).catch(error => {
-          this.$snackbar.showError(error)
+          this.$snackbar.showError(error.message)
         }) // TODO ACABAR
       } else {
         window.axios.post('/api/v1/completed_task/' + task.id).then((response) => {
           this.$snackbar.showMessage("S'ha completat correctament la tasca")
           this.dataTasks.splice(this.dataTasks.indexOf(task), 1, response.data)
         }).catch(error => {
-          this.$snackbar.showError(error)
+          this.$snackbar.showError(error.message)
         })
       }
     }

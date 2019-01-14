@@ -130,9 +130,11 @@
             <v-spacer></v-spacer>
 
             <span v-role="'SuperAdmin'"><git-info></git-info></span>
-            <v-avatar @click="drawerRight = !drawerRight">
-                <img  src="https://www.gravatar.com/avatar/{{ md5(Auth::user()->email) }}" alt="avatar">
+            <v-btn icon @click="" href="/profile">
+            <v-avatar>
+                <img src="https://www.gravatar.com/avatar/{{ md5(Auth::user()->email) }}" alt="avatar">
             </v-avatar>
+            </v-btn>
             <v-form action="logout" method="POST">
                 @csrf
                 <v-btn type="submit" color="accent">

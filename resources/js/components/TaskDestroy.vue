@@ -37,7 +37,7 @@ export default{
           this.$emit('removed', this.task)
           this.$snackbar.showMessage("S'ha esborrat correctament la tasca")
         }).catch(error => {
-          this.$snackbar.showError(error)
+          this.$snackbar.showError(error.message)
           this.loading = false
         }).finally(() => {
           this.loading = false

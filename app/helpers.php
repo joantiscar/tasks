@@ -35,18 +35,18 @@ if (!function_exists('create_example_tasks')){
 if (!function_exists('create_example_tags')) {
     function create_example_tags() {
         Tag::create([
-            'name' => 'Compras',
-            'description' => 'Aqui van las compras',
+            'name' => 'Compres',
+            'description' => 'Aquí van les compres',
             'color' => '#04B404'
         ]);
         Tag::create([
-            'name' => 'Estudios',
-            'description' => 'Aqui van los estudios',
+            'name' => 'Estudis',
+            'description' => 'Aquí van els estudis',
             'color' => '#04B404'
         ]);
         Tag::create([
-            'name' => 'Trabajo',
-            'description' => 'Aqui van los trabajos',
+            'name' => 'Faena',
+            'description' => 'Aquí van les coses de la faena',
             'color' => '#04B404'
         ]);
     }

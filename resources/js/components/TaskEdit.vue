@@ -94,7 +94,7 @@ export default {
         this.$snackbar.showMessage("S'ha editat correctament la tasca")
         this.$emit('edited', response.data)
       }).catch((error) => {
-        this.$snackbar.showError(error)
+        this.$snackbar.showError(error.message)
         this.loading = false
         this.dialog = false
       }).finally(() => {
