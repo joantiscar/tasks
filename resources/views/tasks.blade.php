@@ -27,7 +27,7 @@
         <form action="/tasks/{{ $task->id }}" method="POST">
             @csrf
             {{ method_field('PATCH') }}
-            <button><v-btn color="info">Completar</v-btn></button>
+            <button><v-btn color="primary">Completar</v-btn></button>
         </form>
         <form action="/tasks/{{ $task->id }}" method="POST">
             @csrf
@@ -35,7 +35,7 @@
             <button><v-btn color="error">Eliminar</v-btn></button>
         </form>
                 <a href="/tasks_edit/{{ $task->id }}">
-                    <button><v-btn color="warning">Modificar</v-btn></button>
+                    <button><v-btn color="secondary">Modificar</v-btn></button>
                 </a>
       </v-layout>
         </v-layout>

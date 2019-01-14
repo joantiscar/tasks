@@ -40,17 +40,83 @@ const DRAWER_RIGHT_STATE_KEY = 'DRAWER_RIGHT_STATE_KEY'
 const drawerToggle = window.localStorage.getItem(DRAWER_STATE_KEY) || false
 const drawerRightToggle = window.localStorage.getItem(DRAWER_RIGHT_STATE_KEY) || false
 const darkToggle = window.localStorage.getItem(DARK_THEME_KEY) || false
-const primaryColor = window.localStorage.getItem(PRIMARY_COLOR_KEY) || '#123456'
-const secondaryColor = window.localStorage.getItem(SECONDARY_COLOR_KEY) || '#654321'
+const primaryColor = window.localStorage.getItem(PRIMARY_COLOR_KEY) || '#BA2525'
+const secondaryColor = window.localStorage.getItem(SECONDARY_COLOR_KEY) || '#F0B429'
 
 // window.Vue.use(Vuetify)
-window.Vue.use(Vuetify, {
+window.Vue.use(window.Vuetify, {
   theme: {
     primary: {
-      base: primaryColor
+      base: primaryColor,
+      lighten1: '#D64545',
+      lighten2: '#E66A6A',
+      lighten3: '#F29B9B',
+      lighten4: '#FACDCD',
+      lighten5: '#FFEEEE',
+      darken1: '#A61B1B',
+      darken2: '#911111',
+      darken3: '#780A0A',
+      darken4: '#610404'
     },
     secondary: {
-      base: secondaryColor
+      base: secondaryColor,
+      lighten1: '#F7C948',
+      lighten2: '#FADB5F',
+      lighten3: '#FCE588',
+      lighten4: '#FFF3C4',
+      lighten5: '#FFFBEA',
+      darken1: '#DE911D',
+      darken2: '#CB6E17',
+      darken3: '#B44D12',
+      darken4: '#8D2B0B'
+    },
+    accent: {
+      base: '#2CB1BC',
+      lighten1: '#38BEC9',
+      lighten2: '#54D1DB',
+      lighten3: '#87EAF2',
+      lighten4: '#BEF8FD',
+      lighten5: '#E0FCFF',
+      darken1: '#14919B',
+      darken2: '#0E7C86',
+      darken3: '#0A6C74',
+      darken4: '#044E54'
+    },
+    error: {
+      base: '#C65D21',
+      lighten1: '#E67635',
+      lighten2: '#EF8E58',
+      lighten3: '#FAB38B',
+      lighten4: '#FFD3BA',
+      lighten5: '#FFEFE6',
+      darken1: '#AB4E19',
+      darken2: '#8C3D10',
+      darken3: '#77340D',
+      darken4: '#572508'
+    },
+    success: {
+      base: '#7BB026',
+      lighten1: '#94C843',
+      lighten2: '#ABDB5E',
+      lighten3: '#C7EA8F',
+      lighten4: '#E2F7C2',
+      lighten5: '#F2FDE0',
+      darken1: '#63921A',
+      darken2: '#507712',
+      darken3: '#42600C',
+      darken4: '#2B4005'
+    },
+    grey: {
+      base: '#857F72',
+      lighten1: '#A39E93',
+      lighten2: '#B8B2A7',
+      lighten3: '#D3CEC4',
+      lighten4: '#E8E6E1',
+      lighten5: '#FAF9F7',
+      darken1: '#625D52',
+      darken2: '#504A40',
+      darken3: '#423D33',
+      darken4: '#27241D'
     }
   }
 })

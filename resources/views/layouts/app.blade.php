@@ -124,7 +124,7 @@
         </template>
       </v-list>
     </v-navigation-drawer>
-        <v-toolbar color="primary" dark fixed app clipped-right clipped-left>
+        <v-toolbar color="primary darken-1" dark fixed app clipped-right clipped-left>
             <v-toolbar-side-icon @click="drawer = !drawer"></v-toolbar-side-icon>
             <v-toolbar-title>Lo pantano es de La Sénia</v-toolbar-title>
             <v-spacer></v-spacer>
@@ -135,12 +135,12 @@
             </v-avatar>
             <v-form action="logout" method="POST">
                 @csrf
-                <v-btn type="submit">
+                <v-btn type="submit" color="accent">
                     Logout
                 </v-btn>
                 <v-btn icon @click.native="dark = !dark"><v-icon>lens</v-icon></v-btn>
 
-                <v-toolbar-side-icon @click="drawerRight = !drawerRight"></v-toolbar-side-icon>
+                <v-toolbar-side-icon color="grey darken-1" @click="drawerRight = !drawerRight"></v-toolbar-side-icon>
 
             </v-form>
 
