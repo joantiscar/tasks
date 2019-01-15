@@ -1,5 +1,5 @@
 <template>
-    <v-switch :loading="loading" :disabled="loading" v-model="dataTask.completed" :label="dataTask.completed ? 'Completada' : 'Pendent'"></v-switch>
+    <v-switch :loading="loading" :disabled="loading" v-model="dataStatus" :label="dataTask.completed ? 'Completada' : 'Pendent'"></v-switch>
 </template>
 
 <script>
@@ -7,6 +7,7 @@ export default {
   name: 'Toggle',
   data () {
     return {
+      dataStatus: this.status,
       dataTask: this.task,
       loading: false
     }
@@ -15,24 +16,30 @@ export default {
     task: {
       type: Object,
       required: true
+    },
+    status: {
+      type: Boolean,
+      required: true
     }
   },
   watch: {
     // task (task) {
     //   this.dataTask = task
     // },
-    dataTask: {
-      handler: function (dataTask, dataTaskOld) {
-        // if (dataTask.completed !== dataTaskOld) {
-        if (dataTask.completed) this.completeTask()
-        else this.uncompleteTask()
-        // }
-      },
-      deep: true
+    dataStatus: {
+      handler: function (dataStatus) {
+        if (dataStatus !== this.dataTask.completed) {
+          if (dataStatus) this.completeTask()
+          else this.uncompleteTask()
+        }
+      }
     },
-    // task (task) {
-    //   this.dataTask = task
-    // }
+    task (task) {
+      this.dataTask = task
+    },
+    status (status) {
+      this.dataStatus = status
+    }
     // Watchers Imperativa NO DECLARATIVA
 
   },
@@ -43,9 +50,12 @@ export default {
       await window.axios.delete('/api/v1/completed_task/' + this.task.id).then((response) => {
         this.$snackbar.showMessage("S'ha descompletat correctament la tasca")
         this.loading = false
+        this.dataTask.completed = false
       }).catch(error => {
         this.$snackbar.showError(error.message)
         this.removing = null
+        this.loading = null
+        this.dataStatus = !this.dataStatus
       }) // TODO ACABAR
     },
     async completeTask () {
@@ -53,9 +63,12 @@ export default {
       await window.axios.post('/api/v1/completed_task/' + this.task.id).then((response) => {
         this.$snackbar.showMessage("S'ha completat correctament la tasca")
         this.loading = false
+        this.dataTask.completed = true
       }).catch(error => {
         this.$snackbar.showError(error.message)
         this.removing = null
+        this.loading = null
+        this.dataStatus = !this.dataStatus
       }) // TODO ACABAR
     }
   }

@@ -99,6 +99,7 @@
               v-for="(child, i) in item.children"
               :key="i"
               @click=""
+              v-bind:class="{ active: isActive(child.url) }"
               :href="child.url"
             >
               <v-list-tile-action v-if="child.icon" @click="" :href="item.url">

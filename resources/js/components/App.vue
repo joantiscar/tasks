@@ -34,6 +34,16 @@ export default {
   props: {
     source: String
   },
+  methods: {
+    isActive (url) {
+      return this.active === url
+    }
+  },
+  computed: {
+    active () {
+      return window.location.pathname
+    }
+  },
   watch: {
     dark (newValue) {
       window.localStorage.setItem('DARK_THEME_KEY', newValue)

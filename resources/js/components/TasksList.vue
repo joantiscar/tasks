@@ -70,7 +70,7 @@
           <img :src="task.user_gravatar" alt="avatar">
         </v-avatar>
         <td>
-          <task-completed-toggle :task="task" :tags="tags"></task-completed-toggle>
+          <task-completed-toggle :status="task.completed" :task="task" :tags="tags"></task-completed-toggle>
         </td>
         <td><task-tags :tags="tags" :task="task"></task-tags></td>
         <td><span :title="task.created_at_formatted">{{task.created_at_human}}</span></td>
