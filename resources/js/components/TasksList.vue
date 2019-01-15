@@ -33,7 +33,10 @@
     <v-card-title>
       <v-layout row wrap>
         <v-flex xs4>
-          <user-select :users="dataUsers" label="Filtrar per usuari" class="pr-4"></user-select>
+          <user-select @cleared="selectedUser = null" v-model="selectedUser" :users="dataUsers" label="Filtrar per usuari" class="pr-4"></user-select>
+        </v-flex>
+        <v-flex xs4>
+          <v-autocomplete v-model="selectedStatus" :items="estats" label="Filtarar per estat" class="pr-4" item-value="valor" item-text="nom"></v-autocomplete>
         </v-flex>
         <v-flex xs4>
           <v-text-field
@@ -48,7 +51,7 @@
     </v-card-title>
   <v-data-table
     :headers="headers"
-    :items="dataTasks"
+    :items="filteredTasks"
     :search="search"
     no-results-text="No s'ha trobat cap registre coincident"
     :loading="loading"
@@ -95,11 +98,13 @@ import TaskDestroy from './TaskDestroy'
 import TaskTags from './TaskTags'
 export default {
   name: 'tasks-list',
-  components: { TaskCompletedToggle, TaskEdit, TaskCreate, TaskDestroy, TaskTags},
+  components: { TaskCompletedToggle, TaskEdit, TaskCreate, TaskDestroy, TaskTags },
   data () {
     return {
       dataUsers: this.users,
       search: '',
+      selectedUser: null,
+      selectedStatus: 'Totes',
       dataTasks: this.tasks,
       loading: false,
       headers: [
@@ -114,7 +119,12 @@ export default {
       ],
       pagination: {
         rowsPerPage: 25
-      }
+      },
+      estats: [
+        { nom: 'Totes', valor: 'Totes' },
+        { nom: 'Completades', valor: true },
+        { nom: 'Pendents', valor: false }
+      ]
 
     }
   },
@@ -134,6 +144,22 @@ export default {
     uri: {
       type: String,
       default: '/api/v1/tasks'
+    }
+  },
+  computed: {
+    filteredTasks () {
+      let tasks = this.dataTasks
+      if (this.selectedUser !== null) {
+        tasks = tasks.filter((task) => {
+          return task.user_id === this.selectedUser.id
+        })
+      }
+      if (this.selectedStatus !== 'Totes') {
+        tasks = tasks.filter((task) => {
+          return task.completed === this.selectedStatus
+        })
+      }
+      return tasks
     }
   },
   methods: {

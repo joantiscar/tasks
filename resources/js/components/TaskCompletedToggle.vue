@@ -22,15 +22,17 @@ export default {
     //   this.dataTask = task
     // },
     dataTask: {
-      handler: function (dataTask) {
+      handler: function (dataTask, dataTaskOld) {
+        // if (dataTask.completed !== dataTaskOld) {
         if (dataTask.completed) this.completeTask()
         else this.uncompleteTask()
+        // }
       },
       deep: true
-    }
+    },
     // task (task) {
-    //   this.dataCompleted = task.completed
-    // },
+    //   this.dataTask = task
+    // }
     // Watchers Imperativa NO DECLARATIVA
 
   },

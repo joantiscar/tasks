@@ -46,6 +46,14 @@ const darkToggle = window.localStorage.getItem(DARK_THEME_KEY) || false
 const primaryColor = window.localStorage.getItem(PRIMARY_COLOR_KEY) || '#BA2525'
 const secondaryColor = window.localStorage.getItem(SECONDARY_COLOR_KEY) || '#F0B429'
 
+window.Vue.use(VueTimeago, {
+  locale: 'ca', // Default locale
+  locales: {
+    'ca': require('date-fns/locale/ca')
+  }
+})
+
+window.Vue.use(TreeView)
 // window.Vue.use(Vuetify)
 window.Vue.use(window.Vuetify, {
   theme: {

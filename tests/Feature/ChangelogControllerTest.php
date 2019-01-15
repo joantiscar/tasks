@@ -20,7 +20,7 @@ class ChangelogControllerTest extends TestCase
     public function show_changelog()
     {
 //        $this->withoutExceptionHandling();
-        $logs = sample_logs();
+        $logs = create_example_logs();
         $user = factory(User::class)->create();
         $role = Role::firstOrCreate(['name' => 'ChangelogManager']);
         $user->assignRole($role);

@@ -3,7 +3,7 @@
         <v-autocomplete
                 :items="users"
                 v-model="selectedUser"
-                clearable
+                :clearable="true"
                 :label="label"
         >
             <template slot="selection" slot-scope="{item: user}">
@@ -66,6 +66,8 @@ export default {
     selectedUser (newValue) {
       if (newValue) {
         this.$emit('selected', newValue)
+      } else {
+        this.$emit('cleared')
       }
     },
     users () {

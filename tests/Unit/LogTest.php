@@ -89,7 +89,7 @@ class LogTest extends TestCase
     public function scopeModule()
     {
         $this->assertCount(0,Log::module('Tasks')->get());
-        sample_logs();
+        create_example_logs();
         $this->assertCount(3,Log::module('Tasks')->get());
     }
 
@@ -101,7 +101,7 @@ class LogTest extends TestCase
         $user = factory(User::class)->create();
         $this->assertCount(0,Log::fromUser($user)->get());
         $this->assertCount(0,Log::fromUser($user->id)->get());
-        sample_logs();
+        create_example_logs();
         $this->assertCount(0,Log::fromUser($user)->get());
         $this->assertCount(0,Log::fromUser($user->id)->get());
         $user2 = User::findOrFail(2);
