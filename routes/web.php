@@ -10,6 +10,9 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+use App\Http\Controllers\ChangelogController;
+
 Auth::routes();
 Route::post('/login_alt','Auth\LoginAltController@login');
 Route::post('/register_alt','Auth\RegisterAltController@register');
@@ -49,6 +52,7 @@ Route::middleware((['auth']))->group(function () {
     Route::post('/completed_task/{task}','CompletedTasksController@store');           //CREATE
     Route::get('/user/tasks','LoggedUserTasksController@index');
     Route::get('/user/photo', 'LoggedUserPhotoController@show');
+    Route::get('/changelog','\\'. ChangelogController::class . '@index');
 
     Route::impersonate();
 

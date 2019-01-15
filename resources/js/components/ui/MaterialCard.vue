@@ -25,11 +25,11 @@
           <h4
                   class="title font-weight-light mb-2"
                   v-text="title"
-          />
+          ></h4>
           <p
                   class="category font-weight-thin"
                   v-text="text"
-          />
+          ></p>
         </span>
             </v-card>
             <slot

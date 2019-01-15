@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\Changelog\ChangelogController;
 use App\Http\Controllers\Api\GitController;
 use App\Task;
 use Illuminate\Http\Request;
@@ -46,6 +47,15 @@ Route::delete('/v1/user/tasks/{task}','Api\LoggedUserTasksController@destroy');
 
     Route::get('/v1/users/','Api\UsersController@index');
     Route::get('/v1/git/info','\\' . GitController::class . '@index');
+
+    //Changelog
+    Route::get('/v1/changelog','\\' . ChangelogController::class . '@index');
+    Route::get('/v1/changelog/module/{module}','Api\Changelog\ChangelogModuleController@index');
+    Route::get('/v1/changelog/user/{user}','Api\Changelog\ChangelogUserController@index');
+    Route::get('/v1/changelog/loggable/{loggable}/{loggableId}','Api\Changelog\ChangelogLoggableController@index');
+
+
+
 });
 
 

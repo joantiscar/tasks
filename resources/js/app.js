@@ -24,9 +24,12 @@ import Tema from './components/Tema.vue'
 import TaskCompletedToggle from './components/TaskCompletedToggle.vue'
 import GitInfoComponent from './components/git/GitInfoComponent.vue'
 import Profile from './components/Profile.vue'
+import Changelog from './components/changelog/ChangelogComponent.vue'
 import permissions from './plugins/permissions.js'
 import confirm from './plugins/confirm'
 import snackbar from './plugins/snackbar'
+import VueTimeago from 'vue-timeago'
+import TreeView from 'vue-json-tree-view'
 require('./bootstrap')
 
 window.Vue = Vue
@@ -142,5 +145,6 @@ window.Vue.component('git-info', GitInfoComponent)
 window.Vue.component('task-completed-toggle', TaskCompletedToggle)
 window.Vue.component('tema', Tema)
 window.Vue.component('profile', Profile)
+window.Vue.component('changelog', Changelog)
 
 const app = new window.Vue(AppComponent)
