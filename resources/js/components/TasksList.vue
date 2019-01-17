@@ -77,7 +77,7 @@
         <td><span :title="task.updated_at_formatted">{{task.updated_at_human}}</span></td>
         <td>
           <task-destroy :task="task" @removed="removeTask" :uri="uri"></task-destroy>
-            <task-edit :task="task" :users="dataUsers" @edited="refresh"></task-edit>
+            <task-edit :tags="tags" :task="task" :users="dataUsers" @edited="refresh"></task-edit>
           <!--<v-btn v-if="$can('tasks.show', task)" color="success" icon flat title="Modificar la tasca"-->
                  <!--@click="showShow">-->
             <!--<v-icon>remove_red_eye</v-icon>-->

@@ -22,43 +22,21 @@
     </v-toolbar>
     <v-card>
       <v-card-text>
-        <v-form>
-          <v-text-field v-model="editingTask.name" label="Nom" hint="El nom de la tasca..."></v-text-field>
-          <v-switch v-model="editingTask.completed"
-                    :label="editingTask.completed ? 'Completada' : 'Pendent'"></v-switch>
-              <user-select :users="users" :user="editingTask.user" label="User" v-model="editingTask.user"></user-select>
-
-          <v-textarea v-model="editingTask.description" label="Descripcio" hint="Descripció"></v-textarea>
-          <div class="text-xs-center">
-            <v-btn color="secondary" @click.native="dialog = false">
-              <v-icon class="mr-1">exit_to_app</v-icon>
-              Sortir
-            </v-btn>
-            <v-btn color="success" @click.native="edit" :disabled="loading" :loading="loading">
-              <v-icon class="mr-1">save</v-icon>
-              Guardar
-            </v-btn>
-          </div>
-        </v-form>
+        <task-form :task="task" :users="users" :tags="tags" @saved="edit"></task-form>
       </v-card-text>
     </v-card>
   </v-dialog>
     </span>
 </template>
 <script>
+import TaskForm from './TaskForm'
 export default {
   name: 'task-edit',
+  components: { TaskForm },
   data () {
     return {
       loading: false,
       dataUsers: this.users,
-      editingTask: {
-        id: this.task.id,
-        name: this.task.name,
-        description: this.task.description,
-        user_id: this.task.user_id,
-        user: this.task.user
-      },
       dialog: false
     }
   },
@@ -74,6 +52,10 @@ export default {
     uri: {
       type: String,
       default: '/api/v1/tasks'
+    },
+    tags: {
+      type: Array,
+      required: true
     }
   },
   watch: {
@@ -87,9 +69,9 @@ export default {
         return parseInt(user.id) === parseInt(task.user_id)
       })
     },
-    edit () {
+    edit (task) {
       this.loading = true
-      window.axios.put(this.uri + '/' + this.task.id, this.editingTask).then((response) => {
+      window.axios.put(this.uri + '/' + this.task.id, task).then((response) => {
         // this.refresh() // Problema -> rendiment
         this.$snackbar.showMessage("S'ha editat correctament la tasca")
         this.$emit('edited', response.data)

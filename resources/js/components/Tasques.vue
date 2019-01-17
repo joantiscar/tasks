@@ -25,7 +25,7 @@
   </v-dialog>
 
           <tasks-list :tags="tags" :tasks="dataTasks" :users="dataUsers"></tasks-list>
-          <task-create :users="users" @created="add"></task-create>
+          <task-create :tags="tags" :users="users" @created="add"></task-create>
 
       <!--<v-data-iterator class="hidden-lg-and-up"-->
                                <!--:items="dataTasks"-->
@@ -67,7 +67,7 @@
 import TaskCreate from './TaskCreate'
 import TasksList from './TasksList'
 
-export default{
+export default {
   name: 'Tasques',
   components: {
     TasksList,

@@ -31,6 +31,7 @@
         "material-design-icons-iconfont": "^3.0.3",
         "vue-json-tree-view": "^2.1.4",
         "vue-swatches": "^1.0.2",
+        "vue-template-compiler": "^2.5.22",
         "vue-timeago": "^5.0.0",
         "vuelidate": "^0.7.4",
         "vuetify": "^1.4.1"

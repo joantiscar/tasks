@@ -13,12 +13,13 @@ class Task extends Model
 //        'created_at'
     ];
 //    protected $guarded = [];
-    protected $fillable = ['name','completed', 'id', 'description', 'user_id'];
+    protected $fillable = ['name', 'completed', 'id', 'description', 'user_id'];
 
     public function File()
     {
         return $this->hasOne(File::class);
     }
+
     public function assignFile(File $file)
     {
         $file->task_id = $this->id;
@@ -30,29 +31,44 @@ class Task extends Model
         return $this->belongsToMany(Task::class);
 
     }
+
     public function addTags($tags)
     {
 
         $this->tags()->saveMany($tags);
 
     }
+
     public function addTag($tag)
     {
 
         $this->tags()->save($tag);
 
     }
+
     public function addTasks($tasks)
     {
 
         $this->tasks()->saveMany($tasks);
 
     }
+
     public function addTask($tag)
     {
-
         $this->tasks()->save($tag);
+    }
 
+    public function syncTags($tags)
+    {
+        if (sizeof($tags) > 0) {
+            $tagsids = [];
+            foreach ($tags as $tag) {
+                array_push($tagsids, $tag['id'], false);
+            }
+            $this->tags()->sync($tagsids);
+            return $this->map();
+        }
+            return $this->map();
     }
 
     public function tags()
@@ -71,9 +87,10 @@ class Task extends Model
     {
         return $this->belongsTo(User::class);
     }
+
     public function toggleCompleted()
     {
-        $this->completed=!$this->completed;
+        $this->completed = !$this->completed;
         $this->save();
     }
 
@@ -83,8 +100,8 @@ class Task extends Model
             'id' => $this->id,
             'name' => $this->name,
             'description' => $this->description,
-            'completed' => (boolean) $this->completed,
-            'user_id' => (int) $this->user_id,
+            'completed' => (boolean)$this->completed,
+            'user_id' => (int)$this->user_id,
             'user_name' => optional($this->user)->name,
             'user_email' => optional($this->user)->email,
             'user_gravatar' => optional($this->user)->gravatar,

@@ -6,13 +6,14 @@
                   @blur="$v.name.$touch()"
                   label="Nom"
                   hint="El nom de la tasca..."></v-text-field>
-    <v-switch v-model="completed"
-              :label="completed ? 'Completada' : 'Pendent'"></v-switch>
-    <!--<v-select label="User" :items="users" v-model="user_id" item-text="name" item-value="id"-->
+    <v-switch v-model="editingTask.completed"
+              :label="editingTask.completed ? 'Completada' : 'Pendent'"></v-switch>
+    <!--<v-select label="User" :items="users" v-model="editingTask.user_id" item-text="name" item-value="id"-->
               <!--clearable></v-select>-->
-    <user-select :users="users" label="User" v-model="user"></user-select>
+    <task-tags-chips v-model="editingTask.tags" :selected-tasks="editingTask.tags" :task="editingTask" :tags="tags"></task-tags-chips>
+    <user-select :users="users" label="User" v-model="editingTask.user"></user-select>
 
-    <v-textarea v-model="description" label="Descripcio" hint="Descripció"></v-textarea>
+    <v-textarea v-model="editingTask.description" label="Descripcio" hint="Descripció"></v-textarea>
     <div class="text-xs-center">
       <v-btn color="secondary" @click.native="$emit('close')">
         <v-icon class="mr-1">exit_to_app</v-icon>
@@ -28,7 +29,9 @@
 <script>
 import { validationMixin } from 'vuelidate'
 import { required } from 'vuelidate/lib/validators'
+import TaskTagsChips from './TaskTagsChips'
 export default {
+  components: { TaskTagsChips },
   mixins: [validationMixin],
   validations: {
     name: { required }
@@ -36,13 +39,17 @@ export default {
   name: 'TaskForm',
   data () {
     return {
-      user: null,
-      name: '',
-      completed: false,
-      description: '',
-      user_id: '',
-      loading: false
-
+      loading: false,
+      name: this.task.name,
+      editingTask: {
+        id: this.task.id,
+        name: this.task.name,
+        completed: this.task.completed,
+        description: this.task.description,
+        user_id: this.task.user_id,
+        user: this.task.user,
+        tags: this.task.tags
+      }
     }
   },
   props: {
@@ -50,9 +57,21 @@ export default {
       type: Array,
       required: true
     },
+    tags: {
+      type: Array,
+      required: true
+    },
     uri: {
       type: String,
       default: '/api/v1/tasks'
+    },
+    task: {
+      type: Object,
+      default: function () {
+        return {
+          tags: []
+        }
+      }
     }
   },
   watch: {
@@ -77,36 +96,38 @@ export default {
       }
     },
     reset () {
-      this.name = ''
-      this.description = ''
-      this.completed = ''
-      this.user_id = ''
-      this.user = null
+      this.editingTask.name = ''
+      this.editingTask.description = ''
+      this.editingTask.completed = false
+      this.editingTask.user_id = ''
+      this.editingTask.user = null
     },
     create () {
       this.creating = true
       const task = {
         'name': this.name,
-        'description': this.description,
-        'completed': this.completed,
-        'user_id': this.user.id
+        'description': this.editingTask.description,
+        'completed': this.editingTask.completed,
+        'user_id': this.editingTask.user.id,
+        'tags': this.editingTask.tags
       }
-      window.axios.post(this.uri, task).then((response) => {
-        // this.refresh() // Problema -> rendiment
-        this.$snackbar.showMessage("S'ha editat correctament la tasca")
-        this.$emit('created', response.data)
-        this.reset()
-      }).catch((error) => {
-        this.$snackbar.showError(error.message)
-        this.creating = false
-        this.reset()
-      }).finally(() => {
-        this.creating = false
-      })
+      this.$emit('saved', task)
+      // window.axios.post(this.uri, task).then((response) => {
+      //   // this.refresh() // Problema -> rendiment
+      //   this.$snackbar.showMessage("S'ha editat correctament la tasca")
+      //   this.$emit('created', response.data)
+      //   this.reset()
+      // }).catch((error) => {
+      //   this.$snackbar.showError(error.message)
+      //   this.creating = false
+      //   this.reset()
+      // }).finally(() => {
+      //   this.creating = false
+      // })
     }
   },
   created () {
-    this.user = this.selectLoggedUser()
+    if (!this.task.user) this.editingTask.user = this.selectLoggedUser()
   }
 }
 </script>

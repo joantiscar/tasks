@@ -19,7 +19,7 @@
     </v-toolbar>
     <v-card>
       <v-card-text>
-        <task-form :users="users" @close="dialog=false" @created="created"></task-form>
+        <task-form :tags="tags" :users="users" @close="dialog=false" @saved="created"></task-form>
       </v-card-text>
     </v-card>
   </v-dialog>
@@ -54,13 +54,27 @@ export default {
     users: {
       type: Array,
       required: true
+    },
+    tags: {
+      type: Array,
+      required: true
+    },
+    uri: {
+      type: String,
+      default: '/api/v1/tasks'
     }
 
   },
   methods: {
     created (task) {
-      this.dialog = false
-      this.$emit('created', task)
+      window.axios.post(this.uri, task).then((response) => {
+        this.$snackbar.showMessage("S'ha editat correctament la tasca")
+        this.$emit('created', response.data)
+      }).catch((error) => {
+        this.$snackbar.showError(error.message)
+      }).finally(() => {
+        this.dialog = false
+      })
     }
   }
 }

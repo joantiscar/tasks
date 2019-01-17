@@ -45,6 +45,11 @@ Route::post('/v1/user/tasks','Api\LoggedUserTasksController@store');
 Route::put('/v1/user/tasks/{task}','Api\LoggedUserTasksController@update');
 Route::delete('/v1/user/tasks/{task}','Api\LoggedUserTasksController@destroy');
 
+
+    Route::post('/v1/task/{task}/tags/multiple','Api\TaskTagsController@addMultipleTags');
+    Route::delete('/v1/task/{task}/tags/{tag}','Api\TaskTagsController@removeTag');
+
+
     Route::get('/v1/users/','Api\UsersController@index');
     Route::get('/v1/git/info','\\' . GitController::class . '@index');
 
