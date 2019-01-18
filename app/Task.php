@@ -52,7 +52,10 @@ class Task extends Model
         $this->tasks()->saveMany($tasks);
 
     }
-
+    public function subject()
+    {
+        return ellipsis('Tasca pendent (' . $this->id . '): ' . $this->name . ' s\'ha marcat com a pendent', 80);
+    }
     public function addTask($tag)
     {
         $this->tasks()->save($tag);

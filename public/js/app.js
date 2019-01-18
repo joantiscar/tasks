@@ -77490,6 +77490,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 
@@ -80024,7 +80029,10 @@ var render = function() {
                 { text: "Totes", value: -1 }
               ],
               loading: _vm.loading,
-              pagination: _vm.pagination
+              pagination: _vm.pagination,
+              "content-tag": "v-layout",
+              row: "",
+              wrap: ""
             },
             on: {
               "update:pagination": function($event) {
@@ -80038,121 +80046,115 @@ var render = function() {
                   var task = ref.item
                   return _c(
                     "v-flex",
-                    { attrs: { xs12: "" } },
+                    {
+                      staticClass: "pb-2",
+                      attrs: { xs12: "", sm6: "", md4: "", lg3: "" }
+                    },
                     [
                       _c(
-                        "v-flex",
-                        { staticClass: "pa-2", attrs: { xs12: "", sm6: "" } },
+                        "v-card",
                         [
                           _c(
-                            "v-card",
+                            "v-toolbar",
+                            {
+                              staticClass: "secondary darken-2",
+                              attrs: { dark: "" }
+                            },
                             [
+                              _c("span", { staticClass: "title" }, [
+                                _vm._v(_vm._s(task.name))
+                              ]),
+                              _vm._v(" "),
+                              _c("v-spacer"),
+                              _vm._v(" "),
                               _c(
-                                "v-toolbar",
-                                {
-                                  staticClass: "secondary darken-2",
-                                  attrs: { dark: "" }
-                                },
+                                "v-menu",
+                                { attrs: { left: "" } },
                                 [
-                                  _c("span", { staticClass: "title" }, [
-                                    _vm._v(_vm._s(task.name))
-                                  ]),
-                                  _vm._v(" "),
-                                  _c("v-spacer"),
+                                  _c(
+                                    "v-btn",
+                                    {
+                                      attrs: {
+                                        slot: "activator",
+                                        icon: "",
+                                        dark: ""
+                                      },
+                                      slot: "activator"
+                                    },
+                                    [_c("v-icon", [_vm._v("more_vert")])],
+                                    1
+                                  ),
                                   _vm._v(" "),
                                   _c(
-                                    "v-menu",
-                                    { attrs: { left: "" } },
+                                    "v-list",
                                     [
                                       _c(
-                                        "v-btn",
-                                        {
-                                          attrs: {
-                                            slot: "activator",
-                                            icon: "",
-                                            dark: ""
-                                          },
-                                          slot: "activator"
-                                        },
-                                        [_c("v-icon", [_vm._v("more_vert")])],
+                                        "v-list-tile",
+                                        [
+                                          _c("v-list-tile-title", [
+                                            _vm._v("Detalls")
+                                          ]),
+                                          _vm._v(" "),
+                                          _c(
+                                            "v-list-tile-action",
+                                            [
+                                              _c("task-show-mobile", {
+                                                attrs: {
+                                                  tags: _vm.tags,
+                                                  task: task,
+                                                  users: _vm.dataUsers
+                                                },
+                                                on: { edited: _vm.refresh }
+                                              })
+                                            ],
+                                            1
+                                          )
+                                        ],
                                         1
                                       ),
                                       _vm._v(" "),
                                       _c(
-                                        "v-list",
+                                        "v-list-tile",
                                         [
-                                          _c(
-                                            "v-list-tile",
-                                            [
-                                              _c("v-list-tile-title", [
-                                                _vm._v("Detalls")
-                                              ]),
-                                              _vm._v(" "),
-                                              _c(
-                                                "v-list-tile-action",
-                                                [
-                                                  _c("task-show-mobile", {
-                                                    attrs: {
-                                                      tags: _vm.tags,
-                                                      task: task,
-                                                      users: _vm.dataUsers
-                                                    },
-                                                    on: { edited: _vm.refresh }
-                                                  })
-                                                ],
-                                                1
-                                              )
-                                            ],
-                                            1
-                                          ),
+                                          _c("v-list-tile-title", [
+                                            _vm._v("Editar")
+                                          ]),
                                           _vm._v(" "),
                                           _c(
-                                            "v-list-tile",
+                                            "v-list-tile-action",
                                             [
-                                              _c("v-list-tile-title", [
-                                                _vm._v("Editar")
-                                              ]),
-                                              _vm._v(" "),
-                                              _c(
-                                                "v-list-tile-action",
-                                                [
-                                                  _c("task-edit", {
-                                                    attrs: {
-                                                      tags: _vm.tags,
-                                                      task: task,
-                                                      users: _vm.dataUsers
-                                                    },
-                                                    on: { edited: _vm.refresh }
-                                                  })
-                                                ],
-                                                1
-                                              )
+                                              _c("task-edit", {
+                                                attrs: {
+                                                  tags: _vm.tags,
+                                                  task: task,
+                                                  users: _vm.dataUsers
+                                                },
+                                                on: { edited: _vm.refresh }
+                                              })
                                             ],
                                             1
-                                          ),
+                                          )
+                                        ],
+                                        1
+                                      ),
+                                      _vm._v(" "),
+                                      _c(
+                                        "v-list-tile",
+                                        [
+                                          _c("v-list-tile-title", [
+                                            _vm._v("Esborrar")
+                                          ]),
                                           _vm._v(" "),
                                           _c(
-                                            "v-list-tile",
+                                            "v-list-tile-action",
                                             [
-                                              _c("v-list-tile-title", [
-                                                _vm._v("Esborrar")
-                                              ]),
-                                              _vm._v(" "),
-                                              _c(
-                                                "v-list-tile-action",
-                                                [
-                                                  _c("task-destroy", {
-                                                    attrs: {
-                                                      task: task,
-                                                      uri: _vm.uri
-                                                    },
-                                                    on: {
-                                                      removed: _vm.removeTask
-                                                    }
-                                                  })
-                                                ],
-                                                1
-                                              )
+                                              _c("task-destroy", {
+                                                attrs: {
+                                                  task: task,
+                                                  uri: _vm.uri
+                                                },
+                                                on: { removed: _vm.removeTask }
+                                              })
                                             ],
                                             1
                                           )
@@ -80164,61 +80166,46 @@ var render = function() {
                                   )
                                 ],
                                 1
-                              ),
-                              _vm._v(" "),
+                              )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-card-text",
+                            [
                               _c(
-                                "v-card-text",
+                                "v-layout",
+                                {
+                                  attrs: {
+                                    "align-center": "",
+                                    "justify-center": "",
+                                    row: "",
+                                    "fill-height": ""
+                                  }
+                                },
                                 [
                                   _c(
-                                    "v-layout",
+                                    "v-flex",
                                     {
-                                      attrs: {
-                                        "align-center": "",
-                                        "justify-center": "",
-                                        row: "",
-                                        "fill-height": ""
-                                      }
+                                      staticClass: "pt-2 pb-2",
+                                      attrs: { xs5: "" }
                                     },
                                     [
                                       _c(
                                         "v-flex",
-                                        {
-                                          staticClass: "pt-2 pb-2",
-                                          attrs: { xs5: "" }
-                                        },
+                                        { attrs: { xs12: "" } },
                                         [
                                           _c(
-                                            "v-flex",
-                                            { attrs: { xs12: "" } },
+                                            "v-avatar",
+                                            { attrs: { size: "100" } },
                                             [
-                                              _c(
-                                                "v-avatar",
-                                                { attrs: { size: "100" } },
-                                                [
-                                                  _c("img", {
-                                                    attrs: {
-                                                      alt: task.user_name,
-                                                      src: task.user_gravatar
-                                                    }
-                                                  })
-                                                ]
-                                              )
-                                            ],
-                                            1
-                                          ),
-                                          _vm._v(" "),
-                                          _c(
-                                            "v-flex",
-                                            {
-                                              staticClass: "pt-2",
-                                              attrs: { xs12: "" }
-                                            },
-                                            [
-                                              _c(
-                                                "span",
-                                                { staticClass: "subheading" },
-                                                [_vm._v(_vm._s(task.user_name))]
-                                              )
+                                              _c("img", {
+                                                attrs: {
+                                                  alt: task.user_name,
+                                                  src: task.user_gravatar
+                                                }
+                                              })
                                             ]
                                           )
                                         ],
@@ -80227,32 +80214,43 @@ var render = function() {
                                       _vm._v(" "),
                                       _c(
                                         "v-flex",
-                                        { attrs: { xs7: "" } },
+                                        {
+                                          staticClass: "pt-2",
+                                          attrs: { xs12: "" }
+                                        },
                                         [
                                           _c(
-                                            "v-list",
-                                            { staticClass: "pb-3 pb-3" },
+                                            "span",
+                                            { staticClass: "subheading" },
+                                            [_vm._v(_vm._s(task.user_name))]
+                                          )
+                                        ]
+                                      )
+                                    ],
+                                    1
+                                  ),
+                                  _vm._v(" "),
+                                  _c(
+                                    "v-flex",
+                                    { attrs: { xs7: "" } },
+                                    [
+                                      _c(
+                                        "v-list",
+                                        { staticClass: "pb-3 pb-3" },
+                                        [
+                                          _c(
+                                            "v-list-tile",
                                             [
                                               _c(
-                                                "v-list-tile",
+                                                "v-list-tile-content",
                                                 [
-                                                  _c(
-                                                    "v-list-tile-content",
-                                                    [
-                                                      _c(
-                                                        "task-completed-toggle",
-                                                        {
-                                                          attrs: {
-                                                            status:
-                                                              task.completed,
-                                                            task: task,
-                                                            tags: _vm.tags
-                                                          }
-                                                        }
-                                                      )
-                                                    ],
-                                                    1
-                                                  )
+                                                  _c("task-completed-toggle", {
+                                                    attrs: {
+                                                      status: task.completed,
+                                                      task: task,
+                                                      tags: _vm.tags
+                                                    }
+                                                  })
                                                 ],
                                                 1
                                               )
@@ -80267,19 +80265,19 @@ var render = function() {
                                   )
                                 ],
                                 1
-                              ),
-                              _vm._v(" "),
-                              _c(
-                                "v-card-actions",
-                                [
-                                  _c("v-spacer"),
-                                  _vm._v(" "),
-                                  _c("task-tags", {
-                                    attrs: { tags: _vm.tags, task: task }
-                                  })
-                                ],
-                                1
                               )
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "v-card-actions",
+                            [
+                              _c("v-spacer"),
+                              _vm._v(" "),
+                              _c("task-tags", {
+                                attrs: { tags: _vm.tags, task: task }
+                              })
                             ],
                             1
                           )

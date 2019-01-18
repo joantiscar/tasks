@@ -38,8 +38,8 @@ class TasksController extends Controller
 //        return $request->all();
         $task = new Task($request->all());
         $task->save();
-        $data = (array) $request->only('tags');
-        $task->syncTags($data['tags']);
+//        $data = (array) $request->only('tags');
+//        $task->syncTags($data['tags']);
 
         $task->save();
         return $task->map();

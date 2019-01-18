@@ -14,6 +14,14 @@ use Illuminate\Support\Facades\Hash;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 
+if (! function_exists('ellipsis')) {
+    function ellipsis($text,$max=50)
+    {
+        $ellipted = strlen($text) > $max ? substr($text,0,$max)."..." : $text;
+        return $ellipted;
+    }
+}
+
 if (!function_exists('create_example_tasks')){
     function create_Example_tasks(){
         $task = Task::create([

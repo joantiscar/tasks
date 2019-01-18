@@ -100,13 +100,19 @@
         :rows-per-page-items="[5,10,25,50,100,{'text':'Totes','value':-1}]"
         :loading="loading"
         :pagination.sync="pagination"
+        content-tag="v-layout"
+        row
+        wrap
       >
                 <v-flex
                   slot="item"
                   slot-scope="{item:task}"
                   xs12
+                  sm6
+                  md4
+                  lg3
+                  class="pb-2"
                 >
-                    <v-flex xs12 sm6 class="pa-2">
                       <v-card>
                         <v-toolbar dark class="secondary darken-2">
                           <span class="title">{{ task.name }}</span>
@@ -165,7 +171,6 @@
                                     <task-tags :tags="tags" :task="task"></task-tags>
                         </v-card-actions>
                         </v-card>
-                    </v-flex>
                 </v-flex>
             </v-data-iterator>
   </v-card>
