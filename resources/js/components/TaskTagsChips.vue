@@ -12,6 +12,7 @@
            label="Escull o tria una etiqueta"
            multiple
            chips
+           :readonly="readonly"
          >
            <template slot="selection" slot-scope="data">
              <v-chip>
@@ -29,14 +30,14 @@
          </v-combobox>
          </v-card-text>
         <v-divider></v-divider>
-        <v-card-actions>
+        <v-card-actions v-if="!readonly">
         <v-btn color="error" flat @click="dialog = false">Cancelar</v-btn>
         <v-btn color="primary" flat @click="add()">Afegir</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
   <v-chip v-for="tag in dataTask.tags" v-text="tag.name" :key="tag.id" :color="tag.color" @dblclick="removeTag(tag)"></v-chip>
-    <v-btn icon @click="dialog = true"><v-icon>add</v-icon></v-btn>
+    <v-btn v-if="!readonly" icon @click="dialog = true"><v-icon>add</v-icon></v-btn>
   </span>
 </template>
 
@@ -70,6 +71,10 @@ export default {
     selectedTags: {
       type: Array,
       required: true
+    },
+    readonly: {
+      type: Boolean,
+      default: false
     }
   },
   methods: {

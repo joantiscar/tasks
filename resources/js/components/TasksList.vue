@@ -33,10 +33,12 @@
     <v-card-title>
       <v-layout row wrap>
         <v-flex xs4>
-          <user-select @cleared="selectedUser = null" v-model="selectedUser" :users="dataUsers" label="Filtrar per usuari" class="pr-4"></user-select>
+          <user-select @cleared="selectedUser = null" v-model="selectedUser" :users="dataUsers"
+                       label="Filtrar per usuari" class="pr-4"></user-select>
         </v-flex>
         <v-flex xs4>
-          <v-autocomplete v-model="selectedStatus" :items="estats" label="Filtarar per estat" class="pr-4" item-value="valor" item-text="nom"></v-autocomplete>
+          <v-autocomplete v-model="selectedStatus" :items="estats" label="Filtarar per estat" class="pr-4"
+                          item-value="valor" item-text="nom"></v-autocomplete>
         </v-flex>
         <v-flex xs4>
           <v-text-field
@@ -59,7 +61,8 @@
     rows-per-page-text="Tasques per pàgina"
     :rows-per-page-items="[5,10,25,50,100,200,{'text':'Tots','value':-1}]"
     :pagination.sync="pagination"
-    >
+    class="hidden-md-and-down"
+  >
 
     <v-progress-linear slot="progress" color="secondary" indeterminate></v-progress-linear>
     <template slot="items" slot-scope="{item: task}">
@@ -79,14 +82,92 @@
           <task-destroy :task="task" @removed="removeTask" :uri="uri"></task-destroy>
             <task-edit :tags="tags" :task="task" :users="dataUsers" @edited="refresh"></task-edit>
           <!--<v-btn v-if="$can('tasks.show', task)" color="success" icon flat title="Modificar la tasca"-->
-                 <!--@click="showShow">-->
-            <!--<v-icon>remove_red_eye</v-icon>-->
+          <!--@click="showShow">-->
+          <!--<v-icon>remove_red_eye</v-icon>-->
           <!--</v-btn>-->
         </td>
       </tr>
 
     </template>
   </v-data-table>
+      <v-data-iterator
+        class="hidden-lg-and-up"
+        :items="filteredTasks"
+        :search="search"
+        no-results-text="No s'ha trobat cap tasca coincident"
+        no-data-text="No hi ha dades disponibles"
+        rows-per-page-text="Tasks per pagina"
+        :rows-per-page-items="[5,10,25,50,100,{'text':'Totes','value':-1}]"
+        :loading="loading"
+        :pagination.sync="pagination"
+      >
+                <v-flex
+                  slot="item"
+                  slot-scope="{item:task}"
+                  xs12
+                >
+                    <v-flex xs12 sm6 class="pa-2">
+                      <v-card>
+                        <v-toolbar dark class="secondary darken-2">
+                          <span class="title">{{ task.name }}</span>
+                            <v-spacer></v-spacer>
+                           <v-menu left>
+                            <v-btn slot="activator" icon dark>
+                              <v-icon>more_vert</v-icon>
+                            </v-btn>
+                            <v-list>
+                              <v-list-tile>
+                                <v-list-tile-title>Detalls</v-list-tile-title>
+                                <v-list-tile-action>
+                                 <task-show-mobile :tags="tags" :task="task" :users="dataUsers" @edited="refresh"></task-show-mobile>
+                                </v-list-tile-action>
+                              </v-list-tile>
+                              <v-list-tile>
+                                <v-list-tile-title>Editar</v-list-tile-title>
+                                <v-list-tile-action>
+                                  <task-edit :tags="tags" :task="task" :users="dataUsers" @edited="refresh"></task-edit>
+                                </v-list-tile-action>
+                              </v-list-tile>
+                              <v-list-tile>
+                                <v-list-tile-title>Esborrar</v-list-tile-title>
+                                <v-list-tile-action>
+                                  <task-destroy :task="task" @removed="removeTask" :uri="uri"></task-destroy>
+                                </v-list-tile-action>
+                              </v-list-tile>
+                            </v-list>
+                          </v-menu>
+                        </v-toolbar>
+                        <v-card-text>
+                        <v-layout align-center justify-center row fill-height>
+                          <v-flex xs5 class="pt-2 pb-2">
+                            <v-flex xs12>
+                              <v-avatar size="100">
+                            <img :alt="task.user_name" :src="task.user_gravatar">
+                            </v-avatar>
+                            </v-flex>
+                            <v-flex xs12 class="pt-2">
+                                <span class="subheading">{{ task.user_name }}</span>
+                            </v-flex>
+                          </v-flex>
+                          <v-flex xs7>
+                              <v-list class="pb-3 pb-3">
+                                <v-list-tile>
+                                  <v-list-tile-content>
+                                     <task-completed-toggle :status="task.completed" :task="task" :tags="tags"></task-completed-toggle>
+                                  </v-list-tile-content>
+                                </v-list-tile>
+                              </v-list>
+                          </v-flex>
+                        </v-layout>
+                          </v-card-text>
+                        <v-card-actions>
+                          <v-spacer></v-spacer>
+                                    <task-tags :tags="tags" :task="task"></task-tags>
+                        </v-card-actions>
+                        </v-card>
+                    </v-flex>
+                </v-flex>
+            </v-data-iterator>
   </v-card>
   </span>
 </template>
@@ -96,9 +177,11 @@ import TaskEdit from './TaskEdit'
 import TaskCreate from './TaskCreate'
 import TaskDestroy from './TaskDestroy'
 import TaskTags from './TaskTags'
+import TaskShowMobile from './TaskShowMobile'
+
 export default {
   name: 'tasks-list',
-  components: { TaskCompletedToggle, TaskEdit, TaskCreate, TaskDestroy, TaskTags },
+  components: { TaskCompletedToggle, TaskEdit, TaskCreate, TaskDestroy, TaskTags, TaskShowMobile },
   data () {
     return {
       dataUsers: this.users,

@@ -118,16 +118,16 @@ window.Vue.use(window.Vuetify, {
       darken4: '#2B4005'
     },
     grey: {
-      base: '#857F72',
-      lighten1: '#A39E93',
-      lighten2: '#B8B2A7',
-      lighten3: '#D3CEC4',
-      lighten4: '#E8E6E1',
-      lighten5: '#FAF9F7',
-      darken1: '#625D52',
-      darken2: '#504A40',
-      darken3: '#423D33',
-      darken4: '#27241D'
+      base: '#627D98',
+      lighten1: '#829AB1',
+      lighten2: '#9FB3C8',
+      lighten3: '#BCCCDC',
+      lighten4: '#D9E2EC',
+      lighten5: '#F0F4F8',
+      darken1: '#486581',
+      darken2: '#334E68',
+      darken3: '#243B53',
+      darken4: '#102A43'
     }
   }
 })

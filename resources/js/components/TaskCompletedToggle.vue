@@ -1,5 +1,5 @@
 <template>
-    <v-switch :loading="loading" :disabled="loading" v-model="dataStatus" :label="dataTask.completed ? 'Completada' : 'Pendent'"></v-switch>
+    <v-switch :readonly="readonly" :loading="loading" :disabled="loading" v-model="dataStatus" :label="dataTask.completed ? 'Completada' : 'Pendent'"></v-switch>
 </template>
 
 <script>
@@ -20,6 +20,10 @@ export default {
     status: {
       type: Boolean,
       required: true
+    },
+    readonly: {
+      type: Boolean,
+      default: false
     }
   },
   watch: {

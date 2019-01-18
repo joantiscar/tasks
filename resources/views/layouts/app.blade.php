@@ -16,9 +16,8 @@
 
 </head>
 <body>
-<div id="app" v-cloak>
-    <snackbar></snackbar>
-    <v-app id="inspire" :dark="dark">
+    <v-app id="app" v-cloak :dark="dark">
+        <snackbar></snackbar>
         <v-navigation-drawer
                 fixed
                 v-model="drawerRight"
@@ -149,20 +148,13 @@
 
         </v-toolbar>
 
-        <v-content fluid fill-height fluid fill-height>
-            <v-layout
-                    align-center justify-center row fill-height
-            >
-            <v-flex justify-center grid-list-md text-xs-center>
+        <v-layout align-center justify-center row fluid>
                 @yield('content')
-            </v-flex>
-            </v-layout>
-        </v-content>
+        </v-layout>
         <v-footer color="primary" app inset>
             <span class="white--text">&copy; 2017</span>
         </v-footer>
     </v-app>
-</div>
 <script src="{{ mix('js/app.js') }}"></script>
 </body>
 </html>
