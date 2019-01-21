@@ -1,11 +1,5 @@
 <template>
-    <v-container fluid grid-list-md text-xs-center>
-        <v-layout row wrap>
-            <v-flex xs12>
-                <changelog-list :refresh-url="refreshUrl" :return-url="returnUrl" :title="title" :channel="channel" :users="users" :logs="logs"></changelog-list>
-            </v-flex>
-        </v-layout>
-    </v-container>
+    <changelog-list :refresh-url="refreshUrl" :return-url="returnUrl" :title="title" :channel="channel" :users="users" :logs="logs"></changelog-list>
 </template>
 
 <script>

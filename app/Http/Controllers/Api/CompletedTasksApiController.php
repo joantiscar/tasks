@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\TaskCompleted;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CompleteUserTask;
-use App\Http\Requests\UpdateUserTask;
-use App\Log;
-use App\Mail\TaskUncompleted;
+use App\Events\TaskUncompleted;
 use App\Task;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
+
 
 class CompletedTasksApiController extends Controller
 {
@@ -20,6 +17,7 @@ class CompletedTasksApiController extends Controller
     {
         $task->completed = true;
         $task->save();
+        event(new TaskCompleted($task));
 
         return $task;
     }

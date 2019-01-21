@@ -84783,12 +84783,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -87014,37 +87008,16 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "v-container",
-    { attrs: { fluid: "", "grid-list-md": "", "text-xs-center": "" } },
-    [
-      _c(
-        "v-layout",
-        { attrs: { row: "", wrap: "" } },
-        [
-          _c(
-            "v-flex",
-            { attrs: { xs12: "" } },
-            [
-              _c("changelog-list", {
-                attrs: {
-                  "refresh-url": _vm.refreshUrl,
-                  "return-url": _vm.returnUrl,
-                  title: _vm.title,
-                  channel: _vm.channel,
-                  users: _vm.users,
-                  logs: _vm.logs
-                }
-              })
-            ],
-            1
-          )
-        ],
-        1
-      )
-    ],
-    1
-  )
+  return _c("changelog-list", {
+    attrs: {
+      "refresh-url": _vm.refreshUrl,
+      "return-url": _vm.returnUrl,
+      title: _vm.title,
+      channel: _vm.channel,
+      users: _vm.users,
+      logs: _vm.logs
+    }
+  })
 }
 var staticRenderFns = []
 render._withStripped = true
