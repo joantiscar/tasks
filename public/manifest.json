@@ -4,6 +4,8 @@
   "display": "browser",
   "Scope": "/",
   "start_url": "/",
+  "name": "Tasques Joan Tíscar",
+  "short_name": "tsks",
   "icons": [
     {
       "src": "images/icons/icon-72x72.png",
