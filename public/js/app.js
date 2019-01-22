@@ -27786,7 +27786,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
         text: 'Tasques',
         model: true,
         children: [{ icon: 'build', text: 'Tasques amb PHP', url: '/tasks' }, { icon: 'build', text: 'Tasques amb tailwind', url: '/tasks_vue' }, { icon: 'build', text: 'Tasques', url: '/tasques' }, { icon: 'build', text: 'User Tasques', url: '/user/tasks' }]
-      }, { icon: 'history', text: 'Tags', url: '/tags' }],
+      }, { icon: 'history', text: 'Tags', url: '/tags' }, { icon: 'track_changes', text: 'Changelog', url: '/changelog' }],
       loginForm: false,
       registerForm: false
     };

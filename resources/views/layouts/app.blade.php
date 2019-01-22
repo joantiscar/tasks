@@ -67,6 +67,7 @@
         <template v-for="item in items">
           <v-layout
             v-if="item.heading"
+            v-bind:class="{ 'primary lighten-4': isActive(item.url) }"
             :key="item.heading"
             row
             align-center
@@ -87,7 +88,8 @@
             :prepend-icon="item.model ? item.icon : item['icon-alt']"
             append-icon=""
           >
-            <v-list-tile slot="activator"z>
+            <v-list-tile slot="activator"
+            >
               <v-list-tile-content>
                 <v-list-tile-title>
                   @{{ item.text }}
@@ -98,7 +100,7 @@
               v-for="(child, i) in item.children"
               :key="i"
               @click=""
-              v-bind:class="{ active: isActive(child.url) }"
+              v-bind:class="{ 'primary lighten-4': isActive(child.url) }"
               :href="child.url"
             >
               <v-list-tile-action v-if="child.icon" @click="" :href="item.url">
@@ -111,7 +113,9 @@
               </v-list-tile-content>
             </v-list-tile>
           </v-list-group>
-          <v-list-tile v-else :key="item.text" @click="" :href="item.url">
+          <v-list-tile v-else :key="item.text" @click="" :href="item.url"
+                       v-bind:class="{ 'primary lighten-4': isActive(item.url) }"
+          >
             <v-list-tile-action>
               <v-icon>@{{ item.icon }}</v-icon>
             </v-list-tile-action>
