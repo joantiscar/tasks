@@ -1,7 +1,7 @@
 {
   "theme_color": "#BA2525",
   "background_color": "#BA2525",
-  "display": "browser",
+  "display": "fullscreen",
   "Scope": "/",
   "start_url": "/",
   "name": "Tasques Joan Tíscar",
