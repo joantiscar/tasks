@@ -30,6 +30,7 @@ import confirm from './plugins/confirm'
 import snackbar from './plugins/snackbar'
 import VueTimeago from 'vue-timeago'
 import TreeView from 'vue-json-tree-view'
+import ServiceWorker from './components/ServiceWorker'
 require('./bootstrap')
 
 window.Vue = Vue
@@ -154,5 +155,6 @@ window.Vue.component('task-completed-toggle', TaskCompletedToggle)
 window.Vue.component('tema', Tema)
 window.Vue.component('profile', Profile)
 window.Vue.component('changelog', Changelog)
+window.Vue.component('service-worker', ServiceWorker)
 
 const app = new window.Vue(AppComponent)

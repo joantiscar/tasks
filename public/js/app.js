@@ -27502,7 +27502,7 @@ module.exports = buildFormattingTokensRegExp
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(31);
-module.exports = __webpack_require__(238);
+module.exports = __webpack_require__(241);
 
 
 /***/ }),
@@ -27557,12 +27557,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_23_vue_timeago__ = __webpack_require__(220);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24_vue_json_tree_view__ = __webpack_require__(234);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_24_vue_json_tree_view___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_24_vue_json_tree_view__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__components_ServiceWorker__ = __webpack_require__(235);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_25__components_ServiceWorker___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_25__components_ServiceWorker__);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
+
 
 
 
@@ -27608,7 +27611,7 @@ var secondaryColor = window.localStorage.getItem(SECONDARY_COLOR_KEY) || '#F0B42
 window.Vue.use(__WEBPACK_IMPORTED_MODULE_23_vue_timeago__["a" /* default */], {
   locale: 'ca', // Default locale
   locales: {
-    'ca': __webpack_require__(235)
+    'ca': __webpack_require__(238)
   }
 });
 
@@ -27713,6 +27716,7 @@ window.Vue.component('task-completed-toggle', __WEBPACK_IMPORTED_MODULE_16__comp
 window.Vue.component('tema', __WEBPACK_IMPORTED_MODULE_15__components_Tema_vue___default.a);
 window.Vue.component('profile', __WEBPACK_IMPORTED_MODULE_18__components_Profile_vue___default.a);
 window.Vue.component('changelog', __WEBPACK_IMPORTED_MODULE_19__components_changelog_ChangelogComponent_vue___default.a);
+window.Vue.component('service-worker', __WEBPACK_IMPORTED_MODULE_25__components_ServiceWorker___default.a);
 
 var app = new window.Vue(__WEBPACK_IMPORTED_MODULE_0__components_App_vue___default.a);
 
@@ -88526,8 +88530,96 @@ module.exports = buildFormatLocale
 /* 235 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var buildDistanceInWordsLocale = __webpack_require__(236)
-var buildFormatLocale = __webpack_require__(237)
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(236)
+/* template */
+var __vue_template__ = __webpack_require__(237)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/ServiceWorker.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-370b04b8", Component.options)
+  } else {
+    hotAPI.reload("data-v-370b04b8", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 236 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'ServiceWorker',
+  // VULL EXECUTAR EL REGISTRE DEL SERVICE WORKER
+  mounted: function mounted() {
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('/service-worker.js');
+    } else {
+      console.log('missatge d\'error');
+    }
+  }
+});
+
+/***/ }),
+/* 237 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div")
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-370b04b8", module.exports)
+  }
+}
+
+/***/ }),
+/* 238 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var buildDistanceInWordsLocale = __webpack_require__(239)
+var buildFormatLocale = __webpack_require__(240)
 
 /**
  * @category Locales
@@ -88541,7 +88633,7 @@ module.exports = {
 
 
 /***/ }),
-/* 236 */
+/* 239 */
 /***/ (function(module, exports) {
 
 function buildDistanceInWordsLocale () {
@@ -88646,7 +88738,7 @@ module.exports = buildDistanceInWordsLocale
 
 
 /***/ }),
-/* 237 */
+/* 240 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var buildFormattingTokensRegExp = __webpack_require__(29)
@@ -88736,7 +88828,7 @@ module.exports = buildFormatLocale
 
 
 /***/ }),
-/* 238 */
+/* 241 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin

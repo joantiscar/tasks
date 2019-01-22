@@ -18,6 +18,7 @@
 <body>
     <v-app id="app" v-cloak :dark="dark">
         <snackbar></snackbar>
+        <service-worker></service-worker>
         <v-navigation-drawer
                 fixed
                 v-model="drawerRight"
