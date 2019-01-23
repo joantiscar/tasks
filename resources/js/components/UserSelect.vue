@@ -5,6 +5,8 @@
                 v-model="selectedUser"
                 :clearable="true"
                 :label="label"
+                return-object
+                item-value="id"
         >
             <template slot="selection" slot-scope="{item: user}">
                 <v-chip>

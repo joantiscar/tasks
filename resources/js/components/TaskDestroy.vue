@@ -1,13 +1,23 @@
 <template>
+  <span>
+      <v-btn v-if="$can('tasks.destroy', task)" :loading="loading === task.id" :disabled="loading === task.id"
+             color="error" flat icon title="Eliminar la tasca" class="hidden-md-and-down"
 
-  <v-btn v-if="$can('tasks.destroy', task)" :loading="loading === task.id" :disabled="loading === task.id"
-  color="error" flat icon title="Eliminar la tasca"
-  @click="destroy">
+             @click="destroy">
   <v-icon>delete</v-icon>
   </v-btn>
+
+  <v-list-tile class="hidden-lg-and-up" v-if="$can('tasks.destroy', task)"  @click="destroy">
+    <v-list-tile-title>Esborrar</v-list-tile-title>
+    <v-list-tile-action>
+
+  <v-icon color="primary" title="Eliminar la tasca">delete</v-icon>
+    </v-list-tile-action>
+  </v-list-tile>
+    </span>
 </template>
 <script>
-export default{
+export default {
   'name': 'TaskDestroy',
   data () {
     return {

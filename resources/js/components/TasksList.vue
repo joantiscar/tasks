@@ -122,24 +122,9 @@
                               <v-icon>more_vert</v-icon>
                             </v-btn>
                             <v-list>
-                              <v-list-tile>
-                                <v-list-tile-title>Detalls</v-list-tile-title>
-                                <v-list-tile-action>
                                  <task-show-mobile :tags="tags" :task="task" :users="dataUsers" @edited="refresh"></task-show-mobile>
-                                </v-list-tile-action>
-                              </v-list-tile>
-                              <v-list-tile>
-                                <v-list-tile-title>Editar</v-list-tile-title>
-                                <v-list-tile-action>
                                   <task-edit :tags="tags" :task="task" :users="dataUsers" @edited="refresh"></task-edit>
-                                </v-list-tile-action>
-                              </v-list-tile>
-                              <v-list-tile>
-                                <v-list-tile-title>Esborrar</v-list-tile-title>
-                                <v-list-tile-action>
                                   <task-destroy :task="task" @removed="removeTask" :uri="uri"></task-destroy>
-                                </v-list-tile-action>
-                              </v-list-tile>
                             </v-list>
                           </v-menu>
                         </v-toolbar>

@@ -48,7 +48,7 @@ export default {
     return {
       dialog: false,
       newTag: '',
-      dataSelectedTags: [],
+      dataSelectedTags: this.selectedTags,
       data: '',
       dataTask: this.task
     }
@@ -70,7 +70,9 @@ export default {
     },
     selectedTags: {
       type: Array,
-      required: true
+      default: function () {
+        return []
+      }
     },
     readonly: {
       type: Boolean,
@@ -80,6 +82,7 @@ export default {
   methods: {
     add () {
       this.$emit('updated', this.dataSelectedTags)
+      this.dialog = false
     },
     removeTag (tag) {
       this.$emit('deleted', tag)
