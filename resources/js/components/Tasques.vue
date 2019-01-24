@@ -9,6 +9,8 @@
                <v-btn color="secondary" flat @click.native="showDialog = false"><v-icon class="mr-1">save</v-icon>Guardar</v-btn>
             </v-toolbar>
             <v-card>
+                      <!--Fet per lo de La Sénia-->
+
                 <v-card-text>
         <v-form>
             <v-text-field readonly v-model="taskBeingShown.name" label="Nom" hint="El nom de la tasca..."></v-text-field>
@@ -95,7 +97,7 @@ export default {
       createDialog: false,
       editDialog: false,
       showDialog: false,
-
+      //Fet per lo de La Sénia
       user: 'Astio',
       filter: 'Totes',
       dataUsers: this.users,

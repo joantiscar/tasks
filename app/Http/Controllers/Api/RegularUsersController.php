@@ -17,3 +17,4 @@ class RegularUsersController extends Controller
         return map_collection(User::regular()->get());
     }
 }
+//Fet per lo de La Sénia

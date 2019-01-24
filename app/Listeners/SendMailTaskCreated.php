@@ -2,10 +2,12 @@
 
 namespace App\Listeners;
 
+use App\Mail\TaskCreated;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Support\Facades\Mail;
 
-class AddRolesToRegisterUser
+class SendMailTaskCreated
 {
     /**
      * Create the event listener.
@@ -14,7 +16,7 @@ class AddRolesToRegisterUser
      */
     public function __construct()
     {
-        //// Creat per lo de La Sénia
+        //
     }
 
     /**
@@ -25,6 +27,9 @@ class AddRolesToRegisterUser
      */
     public function handle($event)
     {
-//        $event->user->assignRole('Tasks');
+        $subject = $event->task->subject();
+        Mail::to($event->task->user)
+            ->cc(config('tasks.manager_email'))
+            ->send((new TaskCreated($event->task))->subject($subject));
     }
 }

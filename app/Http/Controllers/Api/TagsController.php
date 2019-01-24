@@ -16,7 +16,8 @@ class TagsController extends Controller
     public function show(ShowTag $request, Tag $tag) // Route Model Binding
     {
 
-        return $tag->map();
+        return $tag->map();        //Fet per lo de La Sénia
+
 
 //        return Tag::findOrFail($request->tags);
     }

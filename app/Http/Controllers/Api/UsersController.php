@@ -16,7 +16,7 @@ class UsersController extends Controller
     //
 //    public function show(UserShow $request, User $user) // Route Model Binding
 //    {
-//
+//        //Fet per lo de La Sénia
 //        return $user->map();
 //
 ////        return User::findOrFail($request->user);

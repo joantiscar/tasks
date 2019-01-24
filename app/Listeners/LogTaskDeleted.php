@@ -8,7 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class LogTaskUncompleted
+class LogTaskDeleted
 {
     /**
      * Create the event listener.
@@ -29,17 +29,16 @@ class LogTaskUncompleted
     public function handle($event)
     {
         Log::create([
-            'text' => "S'ha marcat com a pendent la tasca '" . $event->task->name ."'",
+            'text' => "S'ha borrat la tasca '" . $event->task->name ."'",
             'time' =>  Carbon::now(),
-            'action_type' => 'descompletar',
+            'action_type' => 'borrar',
             'module_type' => 'Tasques',
             'icon' => 'lock_open',
             'color' => 'primary',
             'user_id' => $event->task->id,
             'loggable_id' => $event->task->id,
             'loggable_type' => Task::class,
-            'new_value' => json_encode(false),
-            'old_value' => json_encode(true),
+            'old_value' => json_encode($event->task)
         ]);
     }
 }

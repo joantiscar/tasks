@@ -15,7 +15,7 @@ class LogTaskCompleted
      */
     public function __construct()
     {
-        //
+        // Creat per lo de La Sénia
     }
 
     /**

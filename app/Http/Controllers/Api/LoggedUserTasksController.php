@@ -15,6 +15,7 @@ class LoggedUserTasksController extends Controller
 {
     public function index(IndexUserTask $request)
     {
+        //Fet per lo de La Sénia
 
 //        return Task::where('user_id', Auth::user()->id);
         return map_collection(Auth::user()->tasks);

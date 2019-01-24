@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Mail;
 
 class SendMailTaskCompleted
 {
-
+// Creat per lo de La Sénia
     /**
      * SendMailTaskCompleted constructor.
      */

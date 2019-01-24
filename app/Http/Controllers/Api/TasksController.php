@@ -2,15 +2,15 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\TaskCreated;
+use App\Events\TaskDeleted;
+use App\Events\TaskUpdated;
 use App\Http\Requests\DestroyTask;
 use App\Http\Requests\IndexTask;
 use App\Http\Requests\StoreTask;
 use App\Http\Requests\TaskShow;
 use App\Http\Requests\UpdateTask;
-use App\Http\Requests\UpdateTaskTags;
-use App\Tag;
 use App\Task;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class TasksController extends Controller
@@ -23,6 +23,8 @@ class TasksController extends Controller
     public function destroy(DestroyTask $request, Task $task) // Route Model Binding
     {
         $task->delete();
+        event(new TaskDeleted($task));
+
     }
     public function edit(UpdateTask $request, Task $task) // Route Model Binding
     {
@@ -31,6 +33,7 @@ class TasksController extends Controller
         $data = (array) $request->only('tags');
         $task->syncTags($data['tags']);
         $task->save();
+        event(new TaskUpdated($task));
         return $task->map();
     }
     public function store(StoreTask $request) // Route Model Binding
@@ -42,6 +45,8 @@ class TasksController extends Controller
 //        $task->syncTags($data['tags']);
 
         $task->save();
+        event(new TaskCreated($task));
+
         return $task->map();
     }
     public function index(IndexTask $request)

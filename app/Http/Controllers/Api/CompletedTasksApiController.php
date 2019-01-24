@@ -18,6 +18,7 @@ class CompletedTasksApiController extends Controller
         $task->completed = true;
         $task->save();
         event(new TaskCompleted($task));
+        //Fet per lo de La Sénia
 
         return $task;
     }
