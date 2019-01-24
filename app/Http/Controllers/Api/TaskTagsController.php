@@ -24,7 +24,7 @@ class TaskTagsController extends Controller
     }
     public function removeTag(RemoveTaskTags $request, Task $task, Tag $tag)
     {
-        //Fet per lo de La Sénia
+        //                                                                                                                                                                                                                                                                                                                                     Fet per lo de La Sénia
 
         $task->tags()->detach($tag['id']);
 

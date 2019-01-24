@@ -52,9 +52,12 @@ export default {
   watch: {
     colorPrincipal () {
       window.localStorage.setItem('PRIMARY_COLOR_KEY', this.colorPrincipal)
+      this.$vuetify.theme.primary = this.colorPrincipal
     },
     colorSecundari () {
       window.localStorage.setItem('SECONDARY_COLOR_KEY', this.colorSecundari)
+      this.$vuetify.theme.secondary = this.colorSecundari
+
     }
   },
   methods: {

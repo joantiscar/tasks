@@ -3,7 +3,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\GitIndex;
 use Illuminate\Support\Facades\Cache;
-//Fet per lo de La Sénia
+//                                                                                                                                                                                                                                                                                                                                     Fet per lo de La Sénia
 
 /**
  * Class GitController

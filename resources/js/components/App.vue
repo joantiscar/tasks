@@ -55,6 +55,9 @@ export default {
     drawerRight (newValue) {
       window.localStorage.setItem('DRAWER_RIGHT_STATE_KEY', newValue)
     }
+  },
+  created(){
+    this.$vuetify.theme.primary = window.localStorage.getItem('PRIMARY_COLOR_KEY')
   }
 }
 </script>

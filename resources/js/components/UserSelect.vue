@@ -16,7 +16,7 @@
                     {{user.name}}
                 </v-chip>
             </template>
-            <!--Fet per lo de La Sénia-->
+            <!--                                                                                                                                                                                                                                                                                                                                     Fet per lo de La Sénia-->
 
             <template slot="item" slot-scope="{item: user}">
                 <v-list-tile-avatar>
@@ -65,7 +65,7 @@ export default {
         return {}
       }
     }
-    //Fet per lo de La Sénia
+    //                                                                                                                                                                                                                                                                                                                                     Fet per lo de La Sénia
   },
   watch: {
     selectedUser (newValue) {

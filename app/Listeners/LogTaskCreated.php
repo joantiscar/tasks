@@ -17,7 +17,7 @@ class LogTaskCreated
      */
     public function __construct()
     {
-        //Fet per lo de La Sénia
+        //                                                                                                                                                                                                                                                                                                                                     Fet per lo de La Sénia
     }
 
     /**

@@ -27818,6 +27818,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     drawerRight: function drawerRight(newValue) {
       window.localStorage.setItem('DRAWER_RIGHT_STATE_KEY', newValue);
     }
+  },
+  created: function created() {
+    this.$vuetify.theme.primary = window.localStorage.getItem('PRIMARY_COLOR_KEY');
   }
 });
 
@@ -75599,7 +75602,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       createDialog: false,
       editDialog: false,
       showDialog: false,
-      //Fet per lo de La Sénia
+      //                                                                                                                                                                                                                                                                                                                                     Fet per lo de La Sénia
       user: 'Astio',
       filter: 'Totes',
       dataUsers: this.users,
@@ -82895,7 +82898,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       default: function _default() {
         return {};
       }
-      //Fet per lo de La Sénia
+      //                                                                                                                                                                                                                                                                                                                                     Fet per lo de La Sénia
     } },
   watch: {
     selectedUser: function selectedUser(newValue) {
@@ -83267,7 +83270,7 @@ exports = module.exports = __webpack_require__(2)(false);
 
 
 // module
-exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
+exports.push([module.i, "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n", ""]);
 
 // exports
 
@@ -83337,9 +83340,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   watch: {
     colorPrincipal: function colorPrincipal() {
       window.localStorage.setItem('PRIMARY_COLOR_KEY', this.colorPrincipal);
+      this.$vuetify.theme.primary = this.colorPrincipal;
     },
     colorSecundari: function colorSecundari() {
       window.localStorage.setItem('SECONDARY_COLOR_KEY', this.colorSecundari);
+      this.$vuetify.theme.secondary = this.colorSecundari;
     }
   },
   methods: {
