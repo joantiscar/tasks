@@ -28,7 +28,9 @@ Route::get('/prova',function(){
     $prova ='aidfnaofnaofafa';
     dd($prova);
 });
-
+Route::get('/prova_cua', function () {
+    App\Jobs\SleepJob::dispatch();
+});
 
 // Middleware
 
