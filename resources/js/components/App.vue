@@ -8,7 +8,7 @@ export default {
     drawerRight: (window.localStorage.getItem('DRAWER_RIGHT_STATE_KEY') === 'true'),
     dark: (window.localStorage.getItem('DARK_THEME_KEY') === 'true'),
 
-    items: [
+    itemsMenu: [
       { icon: 'contacts', text: 'Welcome', url: '/' },
       { icon: 'history', text: 'About', url: '/about' },
       { icon: 'history', text: 'Contact', url: '/contact' },
@@ -35,16 +35,6 @@ export default {
   props: {
     source: String
   },
-  methods: {
-    isActive (url) {
-      return this.active === url
-    }
-  },
-  computed: {
-    active () {
-      return window.location.pathname
-    }
-  },
   watch: {
     dark (newValue) {
       window.localStorage.setItem('DARK_THEME_KEY', newValue)
@@ -56,8 +46,8 @@ export default {
       window.localStorage.setItem('DRAWER_RIGHT_STATE_KEY', newValue)
     }
   },
-  created(){
-    this.$vuetify.theme.primary = window.localStorage.getItem('PRIMARY_COLOR_KEY')
+  created () {
+    if (window.localStorage.getItem('PRIMARY_COLOR_KEY')) this.$vuetify.theme.primary = window.localStorage.getItem('PRIMARY_COLOR_KEY')
   }
 }
 </script>

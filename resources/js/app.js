@@ -24,6 +24,7 @@ import Tema from './components/Tema.vue'
 import TaskCompletedToggle from './components/TaskCompletedToggle.vue'
 import GitInfoComponent from './components/git/GitInfoComponent.vue'
 import Profile from './components/Profile.vue'
+import SidebarMenu from './components/SidebarMenu.vue'
 import Changelog from './components/changelog/ChangelogComponent.vue'
 import permissions from './plugins/permissions.js'
 import confirm from './plugins/confirm'
@@ -57,6 +58,9 @@ window.Vue.use(VueTimeago, {
 window.Vue.use(TreeView)
 // window.Vue.use(Vuetify)
 window.Vue.use(window.Vuetify, {
+  options: {
+    customProperties: true
+  },
   theme: {
     primary: {
       base: primaryColor,
@@ -155,6 +159,7 @@ window.Vue.component('task-completed-toggle', TaskCompletedToggle)
 window.Vue.component('tema', Tema)
 window.Vue.component('profile', Profile)
 window.Vue.component('changelog', Changelog)
+window.Vue.component('sidebar-menu', SidebarMenu)
 window.Vue.component('service-worker', ServiceWorker)
 
 const app = new window.Vue(AppComponent)

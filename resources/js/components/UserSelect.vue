@@ -1,5 +1,4 @@
 <template>
-    <v-list two line>
         <v-autocomplete
                 :items="users"
                 v-model="selectedUser"
@@ -30,8 +29,6 @@
                 </v-list-tile-content>
             </template>
         </v-autocomplete>
-
-    </v-list>
 </template>
 
 <script>

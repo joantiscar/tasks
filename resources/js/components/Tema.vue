@@ -63,7 +63,6 @@ export default {
   methods: {
     principalDefault () {
       window.localStorage.removeItem('PRIMARY_COLOR_KEY')
-
     },
     secundariDefault () {
       window.localStorage.removeItem('SECONDARY_COLOR_KEY')
