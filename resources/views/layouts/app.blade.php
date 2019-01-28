@@ -52,7 +52,7 @@
             Llista de tots els usuaris
 
 
-            <impersonate url="/api/v1/regular_users" ></impersonate>
+            <impersonate url="/api/v1/regular_users"></impersonate>
             @endCanImpersonate
 
 

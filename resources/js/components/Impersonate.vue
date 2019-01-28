@@ -28,8 +28,7 @@ export default {
     }
   },
   created () {
-    if (this.users) this.dataUsers = this.users
-    else {
+    if (this.dataUsers.length === 0) {
       window.axios.get(this.url).then(response => {
         this.dataUsers = response.data
       }).catch(error => {
@@ -45,7 +44,7 @@ export default {
         window.location.href = ('/impersonate/take/' + user.id)
       }
     }
-  },
+  }
 }
 </script>
 
