@@ -9,6 +9,7 @@
     <meta name="theme-color" content="#2F3BA2"/>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="user" content="{{ logged_user() }}">
+    <meta name="impersonating" content="{{ app('impersonate')->getImpersonatorId() }}">
     <style>[v-cloak]{display: none}</style>
     <meta name="git" content="{{ git() }}">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">

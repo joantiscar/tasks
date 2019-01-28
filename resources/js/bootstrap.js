@@ -53,6 +53,11 @@ if (user) {
 } else {
   console.error('User not found at html meta')
 }
+var impersonating = document.head.querySelector('meta[name="impersonating"]');
+if (impersonating) {
+  // TODO
+  window.laravel_user_impersonating = true
+}
 
 let gitHeader = document.head.querySelector('meta[name="git"]')
 window.git = null
