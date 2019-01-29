@@ -91,7 +91,7 @@
                 </v-btn>
                 <v-btn icon @click.native="dark = !dark"><v-icon>lens</v-icon></v-btn>
 
-                <v-toolbar-side-icon color="grey darken-1" @click="drawerRight = !drawerRight"></v-toolbar-side-icon>
+                <v-toolbar-side-icon @click="drawerRight = !drawerRight"></v-toolbar-side-icon>
 
             </v-form>
 
