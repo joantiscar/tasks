@@ -32,6 +32,7 @@ import snackbar from './plugins/snackbar'
 import VueTimeago from 'vue-timeago'
 import TreeView from 'vue-json-tree-view'
 import ServiceWorker from './components/ServiceWorker'
+import NotificationsWidget from './components/ui/NotificationsWidget'
 require('./bootstrap')
 
 window.Vue = Vue
@@ -161,5 +162,6 @@ window.Vue.component('profile', Profile)
 window.Vue.component('changelog', Changelog)
 window.Vue.component('sidebar-menu', SidebarMenu)
 window.Vue.component('service-worker', ServiceWorker)
+window.Vue.component('NotificationsWidget', NotificationsWidget)
 
 const app = new window.Vue(AppComponent)

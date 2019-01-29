@@ -1,8 +1,8 @@
 <template>
     <span>
-        <v-avatar color="grey lighten-4" :size="size" v-if="hashId" :tile="tile" @click="change" @dblclick="$emit('dblclick')">
+        <v-avatar color="grey lighten-4" class="mx-auto d-block" :size="size" :tile="tile" @click="change" @dblclick="$emit('dblclick')">
             <img ref="previewImage"
-                 :src="'/user/' + hashId + '/photo'"
+                 :src="src"
                  :alt="alt"
                  :title="alt">
             <form class="upload" v-if="editable">
@@ -20,14 +20,13 @@
                       color="pink"
                       :working="deleting"
                       @confirmed="remove()"
-                      tooltip="Eliminar foto"
-                      message="Segur que voleu esborrar la foto de l'usuari?"
+                      :tooltip="tooltip"
+                      :message="message"
         ></confirm-icon>
     </span>
 </template>
 
 <script>
-import axios from 'axios'
 import ConfirmIconComponent from './ConfirmIconComponent'
 
 export default {
@@ -55,7 +54,16 @@ export default {
       type: Object,
       default: () => { return {} }
     },
-    hashId: {
+    tooltip: {
+      type: String,
+      required: true
+    },
+    message: {
+      type: String,
+      required: true
+    },
+    uri: {
+      type: String,
       required: true
     },
     size: {
@@ -63,6 +71,10 @@ export default {
       default: '40'
     },
     alt: {
+      required: true
+    },
+    src: {
+      type: String,
       required: true
     },
     tile: {
@@ -82,7 +94,8 @@ export default {
       }
     },
     save (formData) {
-      axios.post('/api/v1/user/' + this.user.id + '/photo', formData)
+      console.log(formData)
+      window.axios.post(this.uri, formData)
         .then(response => {
           this.uploading = false
           this.path = response.data
@@ -90,7 +103,7 @@ export default {
         })
         .catch(error => {
           this.uploading = false
-          this.showError(error)
+          this.$snackbar.showError(error)
         })
     },
     preview () {
@@ -108,7 +121,7 @@ export default {
     },
     remove () {
       this.deleting = true
-      axios.delete('/api/v1/user/' + this.user.id + '/photo')
+      window.axios.delete(this.uri)
         .then(response => {
           this.deleting = false
           this.path = ''
@@ -118,7 +131,7 @@ export default {
         })
         .catch(error => {
           this.deleting = false
-          this.showError(error)
+          this.$snackbar.showError(error)
         })
     }
   }

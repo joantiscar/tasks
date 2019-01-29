@@ -45,6 +45,9 @@ Route::post('/v1/user/tasks','Api\LoggedUserTasksController@store');
 Route::put('/v1/user/tasks/{task}','Api\LoggedUserTasksController@update');
 Route::delete('/v1/user/tasks/{task}','Api\LoggedUserTasksController@destroy');
 
+    Route::post('/v1/user/photo', 'PhotoController@store');
+    Route::post('/v1/user/avatar', 'AvatarController@store');
+
 
     Route::post('/v1/task/{task}/tags/multiple','Api\TaskTagsController@addMultipleTags');
     Route::delete('/v1/task/{task}/tags/{tag}','Api\TaskTagsController@removeTag');

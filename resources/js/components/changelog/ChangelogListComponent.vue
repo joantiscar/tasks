@@ -72,9 +72,9 @@
                         <v-layout justify-space-between>
                             <v-flex xs2 text-xs-left align-self-center>
                                 <template v-if="log.user_name">
-                                    <user-avatar class="mr-2" :hash-id="log.user_hashid"
+                                    <image-upload-component class="mr-2" :hash-id="log.user_hashid"
                                                  :alt="log.user_name"
-                                    ></user-avatar>
+                                    ></image-upload-component>
                                     <span :title="log.user_email">{{log.user_name}}</span>
                                 </template>
                                 <template v-else>Cap usuari</template>
@@ -119,7 +119,7 @@ import FullScreenDialog from '../ui/FullScreenDialog'
 import JsonDialogComponent from '../ui/JsonDialogComponent'
 import CompareValuesComponent from '../ui/CompareValuesComponent'
 import ChangelogSettings from './ChangelogSettingsComponent'
-import UserAvatar from '../ui/UserAvatarComponent'
+import ImageUploadComponent from '../ui/ImageUploadComponent'
 
 export default {
   name: 'ChangelogList',
@@ -128,7 +128,7 @@ export default {
     'json-dialog-component': JsonDialogComponent,
     'compare-values': CompareValuesComponent,
     'changelog-settings': ChangelogSettings,
-    'user-avatar': UserAvatar
+    'user-avatar': ImageUploadComponent
   },
   data () {
     return {

@@ -39,6 +39,7 @@ Route::get('/prova_cua', function () {
 Route::middleware((['auth']))->group(function () {
 
     Route::post('/photo', 'PhotoController@store');
+    Route::post('/avatar', 'AvatarController@store');
     Route::delete('/tasks/{id}', 'TasksController@delete');
     Route::get('/tasks','TasksController@index');
     Route::post('/tasks','TasksController@store');

@@ -77,8 +77,10 @@
             <v-toolbar-side-icon @click="drawer = !drawer"></v-toolbar-side-icon>
             <v-toolbar-title>Lo pantano es de La Sénia</v-toolbar-title>
             <v-spacer></v-spacer>
-
-            <span v-role="'SuperAdmin'"><git-info></git-info></span>
+            <notifications-widget></notifications-widget>
+            <v-spacer></v-spacer>
+            <span v-role="'SuperAdmin'">
+                <git-info></git-info></span>
             <v-btn icon @click="" href="/profile">
             <v-avatar>
                 <img src="https://www.gravatar.com/avatar/{{ md5(Auth::user()->email) }}" alt="avatar">
