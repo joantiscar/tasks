@@ -20,22 +20,22 @@
                         <v-container py-0>
                             <v-layout wrap>
                                 <v-flex xs12 md6>
-                                    <v-text-field class="purple-input" label="User Name"/>
+                                    <v-text-field v-model="user.name" class="purple-input" label="User Name"/>
                                 </v-flex>
                                 <v-flex xs12 md6>
-                                    <v-text-field label="Email Address" class="purple-input"/>
+                                    <v-text-field v-model="user.email" label="Email Address" class="purple-input"/>
                                 </v-flex>
                                 <v-flex
                                         xs12
                                         md6
                                 >
-                                    <v-text-field label="Admin" class="purple-input"/>
+                                    <v-text-field v-model="user.admin" label="Admin" class="purple-input"/>
                                 </v-flex>
                                 <v-flex xs12 md6>
-                                    <v-text-field label="Roles" class="purple-input"/>
+                                    <v-text-field v-model="user.roles" label="Roles" class="purple-input"/>
                                 </v-flex>
                                 <v-flex xs12 md12>
-                                    <v-text-field label="Permissions" class="purple-input"/>
+                                    <v-text-field v-model="user.permissions" label="Permissions" class="purple-input"/>
                                 </v-flex>
                                 <v-flex
                                         xs12
@@ -58,8 +58,8 @@
                     md4
             >
                 <material-card class="v-card-profile">
-                    <image-upload-component slot="offset" size="130"
-                                            src="/usr/avatar" :uri="'/api/v1/user/avatar'"
+                    <image-upload-component image-type-name="avatar" slot="offset" size="130"
+                                            src="/user/avatar" :uri="'/api/v1/user/avatar'"
                                             :tooltip="'Eliminar foto'" :message="'Estas segur de que vols borrar el avatar?'"
                                             :removable="true" :editable="true" :user="user" :alt="user.name"></image-upload-component>
                     <v-card-text class="text-xs-center">
@@ -103,6 +103,11 @@ export default {
   components: {
     ImageUploadComponent,
     'material-card': MaterialCard
+  },
+  data () {
+    return {
+      // user: window.laravel_user
+    }
   },
   props: {
     user: {

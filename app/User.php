@@ -37,6 +37,11 @@ class User extends Authenticatable
         return $this->hasOne(Photo::class);
     }
 
+    public function getAvatar()
+    {
+        return $this->avatars[0];
+    }
+
     public function assignPhoto(Photo $photo)
     {
         $photo->user_id = $this->id;

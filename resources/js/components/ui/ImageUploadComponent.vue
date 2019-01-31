@@ -80,6 +80,10 @@ export default {
     tile: {
       type: Boolean,
       default: false
+    },
+    imageTypeName: {
+      type: String,
+      required: true
     }
   },
   methods: {
@@ -88,7 +92,7 @@ export default {
       let target = event.target || event.srcElement
       if (target.value.length !== 0) {
         const formData = new FormData()
-        formData.append('photo', this.$refs.file.files[0])
+        formData.append(this.imageTypeName, this.$refs.file.files[0])
         this.preview()
         this.save(formData)
       }

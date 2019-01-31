@@ -84001,6 +84001,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     ImageUploadComponent: __WEBPACK_IMPORTED_MODULE_1__ui_ImageUploadComponent___default.a,
     'material-card': __WEBPACK_IMPORTED_MODULE_0__ui_MaterialCard___default.a
   },
+  data: function data() {
+    return {
+      // user: window.laravel_user
+    };
+  },
+
   props: {
     user: {
       type: Object,
@@ -84591,6 +84597,10 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     tile: {
       type: Boolean,
       default: false
+    },
+    imageTypeName: {
+      type: String,
+      required: true
     }
   },
   methods: {
@@ -84599,7 +84609,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
       var target = event.target || event.srcElement;
       if (target.value.length !== 0) {
         var formData = new FormData();
-        formData.append('photo', this.$refs.file.files[0]);
+        formData.append(this.imageTypeName, this.$refs.file.files[0]);
         this.preview();
         this.save(formData);
       }
@@ -85050,7 +85060,14 @@ var render = function() {
                                 [
                                   _c("v-text-field", {
                                     staticClass: "purple-input",
-                                    attrs: { label: "User Name" }
+                                    attrs: { label: "User Name" },
+                                    model: {
+                                      value: _vm.user.name,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.user, "name", $$v)
+                                      },
+                                      expression: "user.name"
+                                    }
                                   })
                                 ],
                                 1
@@ -85062,7 +85079,14 @@ var render = function() {
                                 [
                                   _c("v-text-field", {
                                     staticClass: "purple-input",
-                                    attrs: { label: "Email Address" }
+                                    attrs: { label: "Email Address" },
+                                    model: {
+                                      value: _vm.user.email,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.user, "email", $$v)
+                                      },
+                                      expression: "user.email"
+                                    }
                                   })
                                 ],
                                 1
@@ -85074,7 +85098,14 @@ var render = function() {
                                 [
                                   _c("v-text-field", {
                                     staticClass: "purple-input",
-                                    attrs: { label: "Admin" }
+                                    attrs: { label: "Admin" },
+                                    model: {
+                                      value: _vm.user.admin,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.user, "admin", $$v)
+                                      },
+                                      expression: "user.admin"
+                                    }
                                   })
                                 ],
                                 1
@@ -85086,7 +85117,14 @@ var render = function() {
                                 [
                                   _c("v-text-field", {
                                     staticClass: "purple-input",
-                                    attrs: { label: "Roles" }
+                                    attrs: { label: "Roles" },
+                                    model: {
+                                      value: _vm.user.roles,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.user, "roles", $$v)
+                                      },
+                                      expression: "user.roles"
+                                    }
                                   })
                                 ],
                                 1
@@ -85098,7 +85136,14 @@ var render = function() {
                                 [
                                   _c("v-text-field", {
                                     staticClass: "purple-input",
-                                    attrs: { label: "Permissions" }
+                                    attrs: { label: "Permissions" },
+                                    model: {
+                                      value: _vm.user.permissions,
+                                      callback: function($$v) {
+                                        _vm.$set(_vm.user, "permissions", $$v)
+                                      },
+                                      expression: "user.permissions"
+                                    }
                                   })
                                 ],
                                 1
@@ -85150,8 +85195,9 @@ var render = function() {
                   _c("image-upload-component", {
                     attrs: {
                       slot: "offset",
+                      "image-type-name": "avatar",
                       size: "130",
-                      src: "/usr/avatar",
+                      src: "/user/avatar",
                       uri: "/api/v1/user/avatar",
                       tooltip: "Eliminar foto",
                       message: "Estas segur de que vols borrar el avatar?",

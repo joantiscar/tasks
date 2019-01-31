@@ -55,6 +55,7 @@ Route::middleware((['auth']))->group(function () {
     Route::post('/completed_task/{task}','CompletedTasksController@store');           //CREATE
     Route::get('/user/tasks','LoggedUserTasksController@index');
     Route::get('/user/photo', 'LoggedUserPhotoController@show');
+    Route::get('/user/avatar', 'LoggedUserAvatarController@show');
     Route::get('/changelog','\\'. ChangelogController::class . '@index');
 
     Route::impersonate();

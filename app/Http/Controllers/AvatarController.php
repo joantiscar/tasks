@@ -10,9 +10,10 @@ class AvatarController extends Controller
 
     public function store(AvatarStore $request)
     {
+//        return $request;
         $extension = $request->file('avatar')->getClientOriginalExtension();
         $path = $request->file('avatar')->storeAs(
-            'avatars', $request->user()->id. '.'. $extension
+            'avatars', $request->user()->id. '_' . time() . '.' . $extension
         );
         $request->file('avatar')->storeAs(
             '', $request->user()->id. '.'. $extension,'google'
