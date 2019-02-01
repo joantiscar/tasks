@@ -19,12 +19,10 @@ class TaskTagsController extends Controller
 
     public function addMultipleTags(UpdateTaskTags $request, Task $task) // Route Model Binding
     {
-
         return $task->syncTags($request->all());
     }
     public function removeTag(RemoveTaskTags $request, Task $task, Tag $tag)
     {
-        //                                                                                                                                                                                                                                                                                                                                     Fet per lo de La Sénia
 
         $task->tags()->detach($tag['id']);
 

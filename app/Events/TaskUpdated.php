@@ -14,13 +14,13 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 class TaskUpdated
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               // Creat per lo de La Sénia
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Task $task)
+    public function __construct(Task $task)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   // Creat per lo de La Sénia
     {
         $this->task = $task;
     }

@@ -63,16 +63,24 @@ class Task extends Model
 
     public function syncTags($tags)
     {
+        $tagsids = [];
         if (sizeof($tags) > 0) {
-            $tagsids = [];
             foreach ($tags as $tag) {
-                array_push($tagsids, $tag['id'], false);
+                if (is_array($tag)) array_push($tagsids, $tag['id'], false);
+                else {
+                    $tag = Tag::create([
+                        'color' => 'grey',
+                        'name' => $tag,
+                        'description' => ''
+                    ]);
+                    $tag->save();
+                    array_push($tagsids, $tag->id, false);
+                }
+            };
             }
             $this->tags()->sync($tagsids);
             return $this->map();
         }
-            return $this->map();
-    }
 
     public function tags()
     {
