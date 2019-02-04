@@ -23,7 +23,7 @@ if (! function_exists('ellipsis')) {
 }
 
 if (!function_exists('create_example_tasks')){
-    function create_Example_tasks(){
+    function create_example_tasks(){
         $task = Task::create([
             'name' => 'Comprar pa',
             'completed' => false,
@@ -39,6 +39,13 @@ if (!function_exists('create_example_tasks')){
             'completed' => true,
             'user_id' => 3
         ]);
+    }
+}
+if (!function_exists('fload_with_tasks')){
+    function fload_with_tasks(){
+        for ($i = 1; $i < 10000; $i++){
+            create_example_tasks();
+        }
     }
 }
 if (!function_exists('create_example_tags')) {

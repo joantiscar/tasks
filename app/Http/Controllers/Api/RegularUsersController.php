@@ -14,7 +14,7 @@ class RegularUsersController extends Controller
 {
     public function index(Request $request)
     {
-        return map_collection(User::regular()->get());
+        return map_collection(User::regular()->with('roles', 'permissions')->get());
     }
 }
 //                                                                                                                                                                                                                                                                                                                                     Fet per lo de La Sénia
