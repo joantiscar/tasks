@@ -12,13 +12,14 @@ class AvatarController extends Controller
     {
 //        return $request;
         $extension = $request->file('avatar')->getClientOriginalExtension();
+        $user = $request->user();
         $path = $request->file('avatar')->storeAs(
-            'avatars', $request->user()->id. '_' . time() . '.' . $extension
+            'avatars', $user->id. '_' . time() . '.' . $extension
         );
         $request->file('avatar')->storeAs(
-            '', $request->user()->id. '.'. $extension,'google'
+            '', $user->id. '.'. $extension,'google'
         );
-        if ($avatar = Avatar::where('user_id',$request->user()->id)->first()) {
+        if ($avatar = Avatar::where('user_id',$user->id)->first()) {
             $avatar->url = $path;
             $avatar->save();
         } else {
@@ -27,6 +28,7 @@ class AvatarController extends Controller
                 'user_id' => $request->user()->id
             ]);
         }
+
         return back();
     }
 

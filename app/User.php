@@ -15,6 +15,10 @@ class User extends Authenticatable
 {
     use Notifiable, HasApiTokens, HasRoles, Impersonate;
 
+    const DEFAULT_PHOTO = 'default.png';
+    const DEFAULT_PHOTO_PATH1 = 'photos/' . self::DEFAULT_PHOTO;
+    const DEFAULT_PHOTO_PATH = 'app/' . self::DEFAULT_PHOTO_PATH1;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -37,9 +41,9 @@ class User extends Authenticatable
         return $this->hasOne(Photo::class);
     }
 
-    public function getAvatar()
+    public function getCurrentAvatar()
     {
-        return $this->avatars[0];
+        return $this->avatars[0] ?? '';
     }
 
     public function assignPhoto(Photo $photo)
@@ -103,6 +107,17 @@ class User extends Authenticatable
 
         ];
     }
+    public function mapSimple()
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'email' => $this->email,
+            'gravatar' => $this->gravatar,
+            'admin' => (boolean) $this->admin,
+            'hash_id' => $this->hash_id,
+        ];
+    }
 
     public function getGravatarAttribute()
     {
@@ -124,5 +139,21 @@ class User extends Authenticatable
     public function scopeAdmin($query)
     {
         return $query->where('admin',true);
+    }
+    protected function hashedKey()
+    {
+        $hashids = new \Hashids\Hashids(config('tasks.salt'));
+        return $hashids->encode($this->getKey());
+    }
+
+    /**
+     * Get the photo path prefix.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getHashIdAttribute($value)
+    {
+        return $this->hashedKey();
     }
 }

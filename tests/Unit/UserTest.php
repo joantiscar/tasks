@@ -261,4 +261,11 @@ class UserText extends TestCase{
 
     }
 
+    public function test_hash_id()
+    {
+        $user = factory(User::class)->create();
+        $hashids = new \Hashids\Hashids(config('tasks.salt'));
+        $this->assertEquals($user->hashid,$hashids->encode($user->getKey()));
+    }
+
 }

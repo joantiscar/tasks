@@ -27,7 +27,7 @@ class AvatarControllerTest extends TestCase
         ]);
         $response->assertRedirect();
 
-        Storage::disk('local')->assertExists($avatarUrl = 'avatars/' . $user->id . '.jpg');
+        Storage::disk('local')->assertExists($avatarUrl = 'avatars/' . $user->id . '_' . time() . '.jpg');
         Storage::disk('google')->assertExists($user->id . '.jpg');
 
         $avatar = Avatar::first();
@@ -35,8 +35,8 @@ class AvatarControllerTest extends TestCase
         $this->assertNotNull($avatar->user);
         $this->assertEquals($user->id, $avatar->user->id);
         $user = $user->fresh();
-        $this->assertNotNull($user->avatar);
-        $this->assertEquals($avatarUrl, $user->avatar->url);
+        $this->assertNotNull($user->getCurrentAvatar());
+        $this->assertEquals($avatarUrl, $user->getCurrentAvatar()->url);
     }
 
     /**
@@ -67,7 +67,7 @@ class AvatarControllerTest extends TestCase
         $this->assertEquals($user->id, $avatar->user->id);
         $user = $user->fresh();
         $this->assertNotNull($user->avatars);
-        $this->assertEquals($avatarUrl, $user->getAvatar()->url);
+        $this->assertEquals($avatarUrl, $user->getCurrentAvatar()->url);
     }
 
 }

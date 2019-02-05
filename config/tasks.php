@@ -13,5 +13,6 @@ return [
     |
     |
     */
-    'manager_email' => env('TASK_MANAGER_EMAIL', 'taskmanager@miempresa.com')
+    'manager_email' => env('TASK_MANAGER_EMAIL', 'taskmanager@miempresa.com'),
+    'salt' => env('TASKS_SALT')
 ];
