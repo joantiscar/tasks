@@ -18,6 +18,7 @@
     <link rel="manifest" href="/site.webmanifest">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
+    <meta property="og:type" content="website">
     <meta property="og:image" content="https://tasks.joantiscar.scool.cat/img/landing_image.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="628">
