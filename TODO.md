@@ -1,64 +1,75 @@
-A 12/11/2018:
+# Petites explicacions pendents
 
-- [x] Vue i Vuetify instal·lat
-- [x] Welcome page:
-  - [x] Welcome page amb Vuetify i Parallax theme (https://vuetifyjs.com/en/layout/pre-made-themes)
-  - [x] Utilitzar layout Blade diferent de la "intranet" (@extends('layouts.landing')
-  - [x] CTA (Call To action - Boto principal enmig de la pantall) que porti a la home
-  - [x] Acció de login (Boto)
-    - [x] Opcional-> El registre/login es poden mostrar en un dialog no una URL a part
-  - [x] Acció de registre (Boto)
-- [x] Login
-  - [x] Pàgina de Login: 
-    - [x] Vista Laravel amb layout propi (Contingut centrat)
-    - [x] Realitzada amb PHP (no cal Axios ni peticions XHR)
-    - [x] Errors de validació amb Laravel i PHP (objecte error)
-    - [x] El formulari manté els valors ja introduits en cas d'error de validació (old)
-    - [x] Validació en línia (Javascript) amb vuelidate
-  - [x] Testos del Login de Laravel
-  - [x] Testos i implementació alternativa (feta per naltros) de Login (LoginAlt)
-- [x] Registre
-  - [x] Pàgina de registre: 
-    - [x] Vista Laravel amb layout propi (Contingut centrat)
-    - [x] Realitzada amb PHP (no cal Axios ni peticions XHR)
-    - [x] Errors de validació amb Laravel i PHP (objecte error)
-    - [x] Validació en línia amb vuelidate
-  - [x] Testos del registre de Laravel
-  - [x] Testos i implementació alternativa (feta per naltros) de registre
-  - [x] El formulari manté els valors ja introduits en cas d'error de validació (old)
-- [x] Home
-  - [x] Layout app per a intranet (seccions Header, menu navegació, footer, contingut)
-  - [x] HEADER
-    - [x] Avatar de vuetify amb el Gravatar de l'usuari Logat i el nom
-    - [x] Botó de Logout
-  - [x] Menú de navegació
-    - [x]  Component App.vue amb un array items amb els items del menu
-  -
-- [x] Pàgines estatíques about/contact:
-- [x] Versions de l'aplicació de tasques
-  - [x] Versió simple inicial PHP
-    - [x] Totes les operacions CRUD (CREATE RETRIEVE UPDATE DELETE), només PHP
-  - [x] Versió simple inicial PHP+VUE  
-    - [x] Presentació amb TailwindCSS   
-  - [x] Versió definitiva  WIP
-    - [x] Presentació amb Vuetify
-- [x] Preparació de la base de dades, usuaris, permisos i entorns:
- - [x] Usuari personal creat per defecte (el vostre propi usuari)
-   - [x] Helper per a crear usuari per defecte
-   - [x] Executar als seeders
-- [ ] Tags
-  - [ ] TagsControllerTest. Totes les operacions CRUD
-    - [ ] TagsControllerTest api   
-    - [ ] TagsControllerTest web (només index)
-    - [ ] Utilitzar objectes request i validació (errors 422)
-    - [ ] Testos Utilitzar objectes request i validació (errors 422)
-    - [ ] Route Model Binding? FindOrFail
-    - [ ] Usuaris logats (funció Login)
-- Testos
- - [ ] TasksControllerTest
-   - [ ] TasksControllerTest web
-   - [ ] TasksControllerTest api
-    - [ ] Utilitzar objectes request i validació (errors 422)
-       - [ ] Testos Utilitzar objectes request i validació (errors 422)
-       - [ ] Route Model Binding? FindOrFail
-       - [ ] Usuaris logats (funció Login)
+- Feu una ullada a document PDF Component Gallery
+
+# Recordatori de Tasques
+
+## Drop area
+- TODO -> millorar la interfície de pujada de fitxers
+
+## File Uploads
+
+
+
+## Empty states
+- [ ] No Mostrar datatables quan no hi ha cap tasca al sistema
+  - [ ] Mostrar més aviat quelcom més similar a una welcome Page
+  - [ ] Tres items:
+    - [ ] Imatge SVG 
+    - [ ] Text gran (simpàtic i esxpliqui que cal fer)
+    - [ ] Botó CTA 
+    - [ ] Opcional: background opcions: color paleta de grisos, patro, algun pattern de fons parcial 
+
+## Refactoritzacions
+
+- Moure als seus propis components parts del layout principal:
+  - [ ] component pel nemú de navegació de l'esquerra
+
+## Menu seleccionat Actiu
+
+- [ ] Utilitzar tècnica "discreta" de colorejar un border (el dret) amb un color accent
+- Cal abans refactoritzar la vista app.blade.php per crear un nou component
+- [ ] Opcional: canviar el color de les icones per que no siguin negres. FET per Vuetify
+- [ ] Color de les lletres un gris molt fos en comptes de negre
+## Profile usuari
+
+- Settings: permetre canviar el color primary com a mínim (pràctica simple utilitzar LocalStorage)
+  - [ ] "Selector de tema" / Theme Selector
+  
+# Manifest.json i PWA
+- Colors i icones al manifest de la system bar i de la barra de navegació 
+- Add to Home Screen: Service Worker simple i comprovar la instal·lació a mòbils 
+- FAVICON:   https://realfavicongenerator.net/
+
+# Background colors
+  
+- Utilitzar l'escala de grisos que hem definit per substituir algun fons blanc
+- Es pot utilitzar un gradient com a scool: 
+  - https://github.com/acacha/scool/blob/master/resources/views/tenants/layouts/app.blade.php
+  
+  style="background: #F0F4F8;background: -webkit-linear-gradient(to right, #F0F4F8, #D9E2EC, #BCCCDC);
+              background: linear-gradient(to right, #F0F4F8, #D9E2EC, #BCCCDC);"
+              
+##US/UI i estils
+
+- [ ] No utilitzar color roig als botons acció eliminar que tenen una opció de confirmació de l'acció. Si tenen confirmació no són tant perillosos
+  - [ ] Aplicar jerarquia per NO destacar el botó acció d'esborrar (secondari o terciari com a mínim)
+- [ ] Sí utilitzar botó roig al menú de confirmació on realment s'elimina el recurs
+- [ ] Botons cancel: terciaris arreu
+
+CARDS:
+- Vista mòbil les tasques han de ser una card cada tasca:
+ - Utilitzar font-weigth en comptes de mides de lletra o semantiques h1, h2, p per fer jerarquia:
+  • A normal font weight (400 or 500 depending on the font) for most text
+  • A heavier font weight (600 or 700) for text you want to emphasize
+- Elevation: provar la elevation
+- Intentar no utilitzar labels
+  
+TIPOGRAFIA:  
+- Colors de lletres en escala de grisos
+  - A dark color for primary content (like the headline of an article)
+  - A grey for secondary content (like the date an article was published)
+  - A lighter grey for tertiary content (maybe the copyright notice in a footer)
+  
+FAVICON i altres icones 2:
+- MASTER:140x140pixels Exemple: https://realfavicongenerator.net/files/aa721752ab56d736bb190769232caefe50591992/master_favicon_thumbnail.png

@@ -62,7 +62,18 @@ Route::delete('/v1/user/tasks/{task}','Api\LoggedUserTasksController@destroy');
     Route::get('/v1/changelog/user/{user}','Api\Changelog\ChangelogUserController@index');
     Route::get('/v1/changelog/loggable/{loggable}/{loggableId}','Api\Changelog\ChangelogLoggableController@index');
 
+    // Notifications
+    Route::get('/v1/notifications', 'Api\Notifications\NotificationsController@index');
+    Route::post('/v1/notifications/multiple', 'Api\Notifications\NotificationsController@destroyMultiple');
+    Route::delete('/v1/notifications/{notification}', 'Api\Notifications\NotificationsController@destroy');
+    Route::get('/v1/user/notifications', 'Api\Notifications\UserNotificationsController@index');
+    Route::get('/v1/user/unread_notifications', 'Api\Notifications\UserUnreadNotificationsController@index');
+    Route::delete('/v1/user/unread_notifications/all', 'Api\Notifications\UserUnreadNotificationsController@destroyAll');
+    Route::delete('/v1/user/unread_notifications/{notification}', 'Api\Notifications\UserUnreadNotificationsController@destroy');
 
+
+    // Simple notifications
+    Route::post('/v1/simple_notifications/', 'Api\Notifications\SimpleNotificationsController@store');
 
 });
 

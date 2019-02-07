@@ -25,9 +25,21 @@
       </v-card>
 
   </v-dialog>
-
+            <template v-if="dataTasks.length > 0">
           <tasks-list :tags="tags" :tasks="dataTasks" :users="dataUsers"></tasks-list>
           <task-create :tags="tags" :users="users" @created="add"></task-create>
+                </template>
+        <template v-else>
+            <v-card>
+                <v-card-title>
+                    <img src="img/task_not_found.svg">
+                </v-card-title>
+                <v-card-text>
+                    <span class="header">No hi ha cap tasca!</span>
+                <empty-tasks-create-button :tags="tags" :users="users" @created="add"></empty-tasks-create-button>
+                </v-card-text>
+            </v-card>
+        </template>
 
       <!--<v-data-iterator class="hidden-lg-and-up"-->
                                <!--:items="dataTasks"-->
@@ -68,10 +80,12 @@
 <script>
 import TaskCreate from './TaskCreate'
 import TasksList from './TasksList'
+import EmptyTasksCreateButton from './EmptyTasksCreateButton'
 
 export default {
   name: 'Tasques',
   components: {
+    EmptyTasksCreateButton,
     TasksList,
     TaskCreate
   },
@@ -147,7 +161,7 @@ export default {
   // },
   methods: {
     add (task) {
-      console.log(task);
+      console.log(task)
       this.dataTasks.push(task)
     },
     showCreate () {
