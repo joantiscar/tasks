@@ -15,6 +15,13 @@
     <link rel="manifest" href="/site.webmanifest">
     <meta name="msapplication-TileColor" content="#da532c">
     <meta name="theme-color" content="#ffffff">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://tasks.joantiscar.scool.cat/img/landing_image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="628">
+    <meta property="og:description" content="Pos moltes tasques">
+    <meta property="og:url" content="https://tasks.joantiscar.scool.cat">
+    <meta property="og:title" content="Tasques">
 </head>
 <body>
 <div id="app" v-cloak>
