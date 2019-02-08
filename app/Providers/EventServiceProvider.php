@@ -8,6 +8,7 @@ use App\Events\TaskDeleted;
 use App\Events\TaskUncompleted;
 use App\Events\TaskUpdated;
 use App\Listeners\AddRolesToRegisterUser;
+use App\Listeners\ForgetTasksCache;
 use App\Listeners\LogTaskCompleted;
 use App\Listeners\LogTaskCreated;
 use App\Listeners\LogTaskDeleted;
@@ -25,37 +26,44 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 
 class EventServiceProvider extends ServiceProvider
 {
+
     /**
      * The event listener mappings for the application.
      *
      * @var array
      */
-    protected $listen = [
+    protected $listen
+      = [
         Registered::class => [
-            SendEmailVerificationNotification::class,
-            AddRolesToRegisterUser::class,
+          SendEmailVerificationNotification::class,
+          AddRolesToRegisterUser::class,
         ],
         TaskUncompleted::class => [
-            SendMailTaskUncompleted::class,
-            LogTaskUncompleted::class,
+          SendMailTaskUncompleted::class,
+          LogTaskUncompleted::class,
+          ForgetTasksCache::class,
         ],
         TaskCompleted::class => [
-            SendMailTaskCompleted::class,
-            LogTaskCompleted::class,
+          SendMailTaskCompleted::class,
+          LogTaskCompleted::class,
+          ForgetTasksCache::class,
         ],
         TaskCreated::class => [
-            SendMailTaskCreated::class,
-            LogTaskCreated::class,
+          SendMailTaskCreated::class,
+          LogTaskCreated::class,
+          ForgetTasksCache::class,
         ],
         TaskUpdated::class => [
-            SendMailTaskUpdated::class,
-            LogTaskUpdated::class,
+          SendMailTaskUpdated::class,
+          LogTaskUpdated::class,
+          ForgetTasksCache::class,
         ],
         TaskDeleted::class => [
-            SendMailTaskDeleted::class,
-            LogTaskDeleted::class,
-        ]
-    ];
+          SendMailTaskDeleted::class,
+          LogTaskDeleted::class,
+          ForgetTasksCache::class,
+        ],
+      ];
 
     /**
      * Register any events for your application.
@@ -65,7 +73,6 @@ class EventServiceProvider extends ServiceProvider
     public function boot()
     {
         parent::boot();
-
         //
     }
 }

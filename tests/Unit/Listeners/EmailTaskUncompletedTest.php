@@ -10,6 +10,7 @@ use Tests\TestCase;
 
 class SendMailTaskUncompletedTest extends TestCase
 {
+
     use RefreshDatabase;
 
     /**
@@ -20,20 +21,21 @@ class SendMailTaskUncompletedTest extends TestCase
         // 1 Preparar
         $user = factory(User::class)->create();
         $task = Task::create([
-            'name' => 'Comprar pa',
-            'user_id' => $user->id
+          'name'    => 'Comprar pa',
+          'user_id' => $user->id,
         ]);
 
         // Executar
-//        event(new TaskUncompleted($task));
+        //        event(new TaskUncompleted($task));
         Mail::fake();
         $listener = new \App\Listeners\SendMailTaskUncompleted();
         $listener->handle(new \App\Events\TaskUncompleted($task));
         // 3 ASSERT
-        Mail::assertSent(TaskUncompleted::class, function ($mail) use ($task, $user) {
-            return $mail->task->is($task) &&
-                $mail->hasTo($user->email) &&
-                $mail->hasCc(config('tasks.manager_email'));
-        });
+        Mail::assertSent(TaskUncompleted::class,
+          function ($mail) use ($task, $user) {
+              return $mail->task->is($task)
+                && $mail->hasTo($user->email)
+                && $mail->hasCc(config('tasks.manager_email'));
+          });
     }
 }

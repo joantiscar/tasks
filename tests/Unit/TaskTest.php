@@ -11,14 +11,15 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class TaskTest extends TestCase
 {
+
     use RefreshDatabase;
 
     public function test_can_assign_user_to_task()
     {
         $user = factory(User::class)->create();
-                $this->actingAs($user);
+        $this->actingAs($user);
         $task = Task::create([
-            'name' => 'Comprar pa'
+          'name' => 'Comprar pa',
         ]);
 
         $userOriginal = factory(User::class)->create();
@@ -30,14 +31,15 @@ class TaskTest extends TestCase
         $this->assertTrue($user->is($userOriginal));
     }
 
-    public function test_can_assign_tag_to_task() {
+    public function test_can_assign_tag_to_task()
+    {
         // 1 Prepare
         $user = factory(User::class)->create();
-                $this->actingAs($user);
+        $this->actingAs($user);
         $task = factory(Task::class)->create();
 
         $tag = Tag::create([
-            'name' => 'home'
+          'name' => 'home',
         ]);
         // execució
         $task->addTag($tag);
@@ -45,27 +47,26 @@ class TaskTest extends TestCase
         // Assertion
         $tags = $task->tags;
         $this->assertTrue($tags[0]->is($tag));
-
-
     }
 
-    public function test_a_task_can_have_tags() {
+    public function test_a_task_can_have_tags()
+    {
         // 1 Prepare
         $user = factory(User::class)->create();
-                $this->actingAs($user);
+        $this->actingAs($user);
         $task = Task::create([
-            'name' => 'Comprar pa'
+          'name' => 'Comprar pa',
         ]);
 
         $tag1 = Tag::create([
-            'name' => 'home'
+          'name' => 'home',
         ]);
         $tag2 = Tag::create([
-            'name' => 'work'
+          'name' => 'work',
         ]);
 
         $tag3 = Tag::create([
-            'name' => 'studies'
+          'name' => 'studies',
         ]);
 
         $tags = [$tag1, $tag2, $tag3];
@@ -79,10 +80,7 @@ class TaskTest extends TestCase
         $this->assertTrue($tags[0]->is($tag1));
         $this->assertTrue($tags[1]->is($tag2));
         $this->assertTrue($tags[2]->is($tag3));
-
-
     }
-
 
     /**
      * @test
@@ -91,30 +89,29 @@ class TaskTest extends TestCase
     {
         // 1 Prepare
         $user = factory(User::class)->create();
-                $this->actingAs($user);
+        $this->actingAs($user);
         $task = Task::create([
-            'name' => 'Comprar pa'
+          'name' => 'Comprar pa',
         ]);
 
         $fileOriginal = File::create([
-            'path' => 'fitxer1.pdf'
+          'path' => 'fitxer1.pdf',
         ]);
 
-//        add_file_to_task($file, $task);
+        //        add_file_to_task($file, $task);
         $task->assignFile($fileOriginal);
 
         // 2 Executo -> Wishful programming
 
         // IMPORTANT 2 maneres
         // 1 Aixó torna tota la relació, treball extra
-//        $file = $task->files()->where('path','');
+        //        $file = $task->files()->where('path','');
         // 2 Això retorna el object:
         $file = $task->file;
 
         // 3 Comprovo
         // $file
         $this->assertTrue($file->is($fileOriginal));
-
     }
 
     /**
@@ -123,10 +120,10 @@ class TaskTest extends TestCase
     public function a_task_file_returns_null_when_no_file_is_assigned()
     {
         $user = factory(User::class)->create();
-                $this->actingAs($user);
+        $this->actingAs($user);
         // 1 Prepare
         $task = Task::create([
-            'name' => 'Comprar pa'
+          'name' => 'Comprar pa',
         ]);
         // 2 Executo -> Wishful programming
         $file = $task->file;
@@ -134,23 +131,23 @@ class TaskTest extends TestCase
         // 3 Comprovo
         // $file
         $this->assertNull($file);
-
     }
 
     public function test_can_toggle_completed()
     {
         $user = factory(User::class)->create();
-                $this->actingAs($user);
+        $this->actingAs($user);
         $task = factory(Task::class)->create([
-            'completed' => false
+          'completed' => false,
         ]);
         $task->toggleCompleted();
         $this->assertTrue($task->completed);
     }
+
     public function test_can_toggle_uncompleted()
     {
         $task = factory(Task::class)->create([
-            'completed' => true
+          'completed' => true,
         ]);
         $task->toggleCompleted();
         $this->assertFalse($task->completed);
@@ -163,19 +160,21 @@ class TaskTest extends TestCase
 
         $mappedTask = $task->map();
 
-        $this->assertEquals($mappedTask['id'],1);
-        $this->assertEquals($mappedTask['name'],'Comprar pa');
-        $this->assertEquals($mappedTask['completed'],false);
-        $this->assertEquals($mappedTask['user_id'],$user->id);
-        $this->assertEquals($mappedTask['user_name'],$user->name);
+        $this->assertEquals($mappedTask['id'], 1);
+        $this->assertEquals($mappedTask['name'], 'Comprar pa');
+        $this->assertEquals($mappedTask['completed'], false);
+        $this->assertEquals($mappedTask['user_id'], $user->id);
+        $this->assertEquals($mappedTask['user_name'], $user->name);
         $this->assertEquals($mappedTask['user_email'], $user->email);
         $this->assertTrue($user->is($mappedTask['user']));
         $this->assertEquals($mappedTask['tags'][0]->name, 'Astio'); //Todo
         $this->assertEquals($mappedTask['tags'][0]->color, 'blue'); //Todo
-        $this->assertEquals($mappedTask['tags'][0]->description, 'astio'); //Todo
+        $this->assertEquals($mappedTask['tags'][0]->description,
+          'astio'); //Todo
         $this->assertEquals($mappedTask['tags'][1]->name, 'asdada'); //Todo
         $this->assertEquals($mappedTask['tags'][1]->color, 'red'); //Todo
-        $this->assertEquals($mappedTask['tags'][1]->description, 'asdada'); //Todo
+        $this->assertEquals($mappedTask['tags'][1]->description,
+          'asdada'); //Todo
 
         //3
 

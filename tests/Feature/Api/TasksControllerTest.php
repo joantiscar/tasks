@@ -8,7 +8,6 @@
 
 namespace Tests\Feature\Api;
 
-
 use App\Task;
 use App\User;
 
@@ -21,6 +20,7 @@ use Tests\TestCase;
 
 class TasksControllerTest extends TestCase
 {
+
     use RefreshDatabase, CanLogin;
 
     public function test_superadmin_can_show_a_task()
@@ -30,19 +30,15 @@ class TasksControllerTest extends TestCase
         $user->save();
         $task = factory(Task::class)->create();
 
-
         $this->withoutExceptionHandling();
 
-
-
         $response = $this->get('/api/v1/tasks/' . $task->id);
-
 
         $result = json_decode($response->getContent());
 
         $response->assertSuccessful();
         $this->assertEquals($task->name, $result->name);
-        $this->assertEquals($task->completed, (boolean) $result->completed);
+        $this->assertEquals($task->completed, (boolean)$result->completed);
     }
 
     public function test_manager_can_show_a_task()
@@ -55,17 +51,15 @@ class TasksControllerTest extends TestCase
 
         $this->withoutExceptionHandling();
 
-
-
         $response = $this->get('/api/v1/tasks/' . $task->id);
-
 
         $result = json_decode($response->getContent());
 
         $response->assertSuccessful();
         $this->assertEquals($task->name, $result->name);
-        $this->assertEquals($task->completed, (boolean) $result->completed);
+        $this->assertEquals($task->completed, (boolean)$result->completed);
     }
+
     public function test_regular_user_cannot_show_a_task()
     {
 
@@ -75,11 +69,9 @@ class TasksControllerTest extends TestCase
         $task->user_id = 1234;
         $task->save();
 
-//        $this->withoutExceptionHandling();
-
+        //        $this->withoutExceptionHandling();
 
         $response = $this->get('/api/v1/tasks/' . $task->id);
-
 
         $result = json_decode($response->getContent());
 
@@ -95,12 +87,13 @@ class TasksControllerTest extends TestCase
 
         $response = $this->DELETE('/api/v1/tasks/' . $task->id);
 
-//        $this->assertNotContains('')
+        //        $this->assertNotContains('')
         $result = json_decode($response->getContent());
         $this->assertEquals('', $result);
-//        $this->assertDatabaseMissing('tasks', $task);
+        //        $this->assertDatabaseMissing('tasks', $task);
         $this->assertNull(Task::find($task->id));
     }
+
     public function test_manager_can_delete_task()
     {
         initialize_roles();
@@ -112,12 +105,13 @@ class TasksControllerTest extends TestCase
 
         $response = $this->DELETE('/api/v1/tasks/' . $task->id);
 
-//        $this->assertNotContains('')
+        //        $this->assertNotContains('')
         $result = json_decode($response->getContent());
         $this->assertEquals('', $result);
-//        $this->assertDatabaseMissing('tasks', $task);
+        //        $this->assertDatabaseMissing('tasks', $task);
         $this->assertNull(Task::find($task->id));
     }
+
     public function test_regular_user_cannot_delete_task()
     {
         $user = $this->login('api');
@@ -128,12 +122,13 @@ class TasksControllerTest extends TestCase
 
         $response = $this->DELETE('/api/v1/tasks/' . $task->id);
 
-//        $this->assertNotContains('')
+        //        $this->assertNotContains('')
 
         $result = json_decode($response->getContent());
 
         $response->assertStatus(403);
     }
+
     public function test_superAdmin_can_create_task()
     {
         Mail::fake();
@@ -143,13 +138,13 @@ class TasksControllerTest extends TestCase
         $user->save();
         $task = factory(Task::class)->create();
 
-        $response = $this->json('POST','/api/v1/tasks/',[
-            'name' => 'Comprar pa',
-            'description' => 'Hauria d\'anar a comprar pa, que no ne queda',
-            'user_id' => 1
+        $response = $this->json('POST', '/api/v1/tasks/', [
+          'name'        => 'Comprar pa',
+          'description' => 'Hauria d\'anar a comprar pa, que no ne queda',
+          'user_id'     => 1,
         ]);
 
-//        $this->assertNotContains('')
+        //        $this->assertNotContains('')
         $result = json_decode($response->getContent());
 
         $this->assertNotNull($task = Task::find($result->id));
@@ -158,6 +153,7 @@ class TasksControllerTest extends TestCase
 
         $this->assertFalse($result->completed);
     }
+
     public function test_manager_can_create_task()
     {
         initialize_roles();
@@ -169,13 +165,12 @@ class TasksControllerTest extends TestCase
         $user->assignRole('TaskManager');
         $task = factory(Task::class)->create();
 
-        $response = $this->json('POST', '/api/v1/tasks/',[
-            'name' => 'Comprar pa'
+        $response = $this->json('POST', '/api/v1/tasks/', [
+          'name' => 'Comprar pa',
         ]);
 
-//        $this->assertNotContains('')
+        //        $this->assertNotContains('')
         $result = json_decode($response->getContent());
-
 
         $this->assertNotNull($task = Task::find($result->id));
 
@@ -183,6 +178,7 @@ class TasksControllerTest extends TestCase
 
         $this->assertFalse($result->completed);
     }
+
     public function test_regular_user_cannot_create_task()
     {
         $user = $this->login('api');
@@ -190,15 +186,15 @@ class TasksControllerTest extends TestCase
         $task = factory(Task::class)->create();
         $task->user_id = 1234;
         $task->save();
-        $response = $this->post('/api/v1/tasks/',[
-            'name' => 'Comprar pa'
+        $response = $this->post('/api/v1/tasks/', [
+          'name' => 'Comprar pa',
         ]);
-
 
         $result = json_decode($response->getContent());
 
         $response->assertStatus(403);
     }
+
     public function test_superAdmin_can_edit_a_task()
     {
         $user = $this->loginAsSuperAdmin('api');
@@ -206,23 +202,24 @@ class TasksControllerTest extends TestCase
         $user->save();
         //1
         $task = Task::create([
-            'name' => 'Comprar lejia',
-            'completed' => false
+          'name'      => 'Comprar lejia',
+          'completed' => false,
         ]);
         //2
-        $response = $this->json('PUT','/api/v1/tasks/' . $task->id, [
-            'name' => 'Comprar pa',
-            'completed' => true
+        $response = $this->json('PUT', '/api/v1/tasks/' . $task->id, [
+          'name'      => 'Comprar pa',
+          'completed' => true,
         ]);
         // 2 opcions
-//        $this->assertDatabaseHas('tasks',$newTask);
-//        $this->assertDatabaseMissing('tasks',$task);
+        //        $this->assertDatabaseHas('tasks',$newTask);
+        //        $this->assertDatabaseMissing('tasks',$task);
 
         $task = $task->fresh();
-        $this->assertEquals($task->name,'Comprar pa');
+        $this->assertEquals($task->name, 'Comprar pa');
         $this->assertEquals($task->completed, true);
-        $this->assertTrue((boolean) $task->completed);
+        $this->assertTrue((boolean)$task->completed);
     }
+
     public function test_manager_can_edit_a_task()
     {
         initialize_roles();
@@ -232,24 +229,25 @@ class TasksControllerTest extends TestCase
         $user->assignRole('TaskManager');
         //1
         $task = Task::create([
-            'name' => 'Comprar lejia',
-            'completed' => false
+          'name'      => 'Comprar lejia',
+          'completed' => false,
         ]);
         //2
-        $response = $this->json('PUT','/api/v1/tasks/' . $task->id, [
-            'name' => 'Comprar pa',
-            'completed' => true
+        $response = $this->json('PUT', '/api/v1/tasks/' . $task->id, [
+          'name'      => 'Comprar pa',
+          'completed' => true,
         ]);
 
         // 2 opcions
-//        $this->assertDatabaseHas('tasks',$newTask);
-//        $this->assertDatabaseMissing('tasks',$task);
+        //        $this->assertDatabaseHas('tasks',$newTask);
+        //        $this->assertDatabaseMissing('tasks',$task);
 
         $task = $task->fresh();
-        $this->assertEquals($task->name,'Comprar pa');
+        $this->assertEquals($task->name, 'Comprar pa');
         $this->assertEquals($task->completed, true);
-        $this->assertTrue((boolean) $task->completed);
+        $this->assertTrue((boolean)$task->completed);
     }
+
     public function test_regular_user_cannot_edit_a_task()
     {
         $user = $this->login('api');
@@ -259,18 +257,18 @@ class TasksControllerTest extends TestCase
         $task->save();
         //1
         $task = Task::create([
-            'name' => 'Comprar lejia',
-            'completed' => false
+          'name'      => 'Comprar lejia',
+          'completed' => false,
         ]);
         //2
-        $response = $this->json('PUT','/api/v1/tasks/' . $task->id, [
-            'name' => 'Comprar pa',
-            'completed' => true
+        $response = $this->json('PUT', '/api/v1/tasks/' . $task->id, [
+          'name'      => 'Comprar pa',
+          'completed' => true,
         ]);
 
         // 2 opcions
-//        $this->assertDatabaseHas('tasks',$newTask);
-//        $this->assertDatabaseMissing('tasks',$task);
+        //        $this->assertDatabaseHas('tasks',$newTask);
+        //        $this->assertDatabaseMissing('tasks',$task);
 
         $result = json_decode($response->getContent());
 
@@ -287,20 +285,18 @@ class TasksControllerTest extends TestCase
         $task2 = factory(Task::class)->create();
         $task3 = factory(Task::class)->create();
 
-
-        $this->post('/api/v1/tasks/'.$task1);
-        $this->post('/api/v1/tasks/'.$task2);
-        $this->post('/api/v1/tasks/'.$task3);
+        $this->post('/api/v1/tasks/' . $task1);
+        $this->post('/api/v1/tasks/' . $task2);
+        $this->post('/api/v1/tasks/' . $task3);
 
         $response = $this->get('/api/v1/tasks');
         $response->assertSuccessful();
 
         $result = json_decode($response->getContent());
 
-        $this->assertCount(3,$result);
-
-
+        $this->assertCount(3, $result);
     }
+
     public function test_manager_can_browse_tasks()
     {
         initialize_roles();
@@ -311,20 +307,18 @@ class TasksControllerTest extends TestCase
         $task2 = factory(Task::class)->create();
         $task3 = factory(Task::class)->create();
 
-
-        $this->post('/api/v1/tasks/'.$task1);
-        $this->post('/api/v1/tasks/'.$task2);
-        $this->post('/api/v1/tasks/'.$task3);
+        $this->post('/api/v1/tasks/' . $task1);
+        $this->post('/api/v1/tasks/' . $task2);
+        $this->post('/api/v1/tasks/' . $task3);
 
         $response = $this->get('/api/v1/tasks');
         $response->assertSuccessful();
 
         $result = json_decode($response->getContent());
 
-        $this->assertCount(3,$result);
-
-
+        $this->assertCount(3, $result);
     }
+
     public function test_regular_user_cannot_browse_tasks()
     {
         $user = $this->login('api');
@@ -337,19 +331,15 @@ class TasksControllerTest extends TestCase
         $task2 = factory(Task::class)->create();
         $task3 = factory(Task::class)->create();
 
-
-        $this->post('/api/v1/tasks/'.$task1);
-        $this->post('/api/v1/tasks/'.$task2);
-        $this->post('/api/v1/tasks/'.$task3);
+        $this->post('/api/v1/tasks/' . $task1);
+        $this->post('/api/v1/tasks/' . $task2);
+        $this->post('/api/v1/tasks/' . $task3);
 
         $response = $this->get('/api/v1/tasks');
-
 
         $result = json_decode($response->getContent());
 
         $response->assertStatus(403);
-
-
     }
 
     public function test_cannot_create_tasks_without_name()
@@ -359,20 +349,17 @@ class TasksControllerTest extends TestCase
         $user->save();
 
         // XHR -> JSON
-        $response = $this->json('POST', '/api/v1/tasks',[
-            'name' => ''
+        $response = $this->json('POST', '/api/v1/tasks', [
+          'name' => '',
         ]);
 
-
-//        $this->withoutExceptionHandling();
-//        $response = $this->post('/api/v1/tasks/', [
-//            'name' => ''
-//            ])
+        //        $this->withoutExceptionHandling();
+        //        $response = $this->post('/api/v1/tasks/', [
+        //            'name' => ''
+        //            ])
         $response->assertStatus(422);
-
-
-
     }
+
     public function test_cannot_edit_tasks_without_name()
     {
         $user = $this->login('api');
@@ -380,24 +367,20 @@ class TasksControllerTest extends TestCase
         $user->save();
         //1
         $task = Task::create([
-            'name' => 'Comprar lejia',
-            'completed' => false
+          'name'      => 'Comprar lejia',
+          'completed' => false,
         ]);
         //2
-        $response = $this->json('PUT','/api/v1/tasks/' . $task->id,$newTask = [
-            'name' => '',
-            'completed' => true
-        ]);
+        $response = $this->json('PUT', '/api/v1/tasks/' . $task->id,
+          $newTask = [
+            'name'      => '',
+            'completed' => true,
+          ]);
 
-
-//        $this->withoutExceptionHandling();
-//        $response = $this->post('/api/v1/tasks/', [
-//            'name' => ''
-//            ])
+        //        $this->withoutExceptionHandling();
+        //        $response = $this->post('/api/v1/tasks/', [
+        //            'name' => ''
+        //            ])
         $response->assertStatus(422);
-
-
-
     }
-
 }

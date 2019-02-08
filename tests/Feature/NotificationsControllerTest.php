@@ -15,6 +15,7 @@ use Tests\TestCase;
  */
 class NotificationsControllerTest extends TestCase
 {
+
     use RefreshDatabase, CanLogin;
 
     /**
@@ -25,8 +26,8 @@ class NotificationsControllerTest extends TestCase
     {
         $this->withoutExceptionHandling();
         factory(User::class)->create([
-            'name' => 'Pepe Pardo Jeans',
-            'email' => 'pepepardo@jeans.com'
+          'name'  => 'Pepe Pardo Jeans',
+          'email' => 'pepepardo@jeans.com',
         ]);
         $user = $this->loginAsSuperAdmin();
         set_sample_notifications_to_user($user);
@@ -36,25 +37,28 @@ class NotificationsControllerTest extends TestCase
         $response->assertSuccessful();
 
         $response->assertViewIs('notifications.index');
-        $response->assertViewHas('userNotifications', function ($returnedUserNotifications) {
-            return
-                count($returnedUserNotifications) === 3 &&
-                $returnedUserNotifications[0]->data['title'] === 'Notification 1' &&
-                $returnedUserNotifications[1]->data['title'] === 'Notification 2' &&
-                $returnedUserNotifications[2]->data['title'] === 'Notification 3';
-        });
-        $response->assertViewHas('notifications', function ($returnedNotifications) {
-            return
-                count($returnedNotifications) === 5;
-        });
-        $response->assertViewHas('users', function ($returnedUsers) use ($user) {
-            return
-                count($returnedUsers) === 4 &&
-                $returnedUsers[0]['name'] === 'Pepe Pardo Jeans' &&
-                $returnedUsers[0]['email'] === 'pepepardo@jeans.com' &&
-                $returnedUsers[1]['name'] === $user->name &&
-                $returnedUsers[1]['email'] === $user->email;
-        });
+        $response->assertViewHas('userNotifications',
+          function ($returnedUserNotifications) {
+              return count($returnedUserNotifications) === 3
+                && $returnedUserNotifications[0]->data['title']
+                === 'Notification 1'
+                && $returnedUserNotifications[1]->data['title']
+                === 'Notification 2'
+                && $returnedUserNotifications[2]->data['title']
+                === 'Notification 3';
+          });
+        $response->assertViewHas('notifications',
+          function ($returnedNotifications) {
+              return count($returnedNotifications) === 5;
+          });
+        $response->assertViewHas('users',
+          function ($returnedUsers) use ($user) {
+              return count($returnedUsers) === 4
+                && $returnedUsers[0]['name'] === 'Pepe Pardo Jeans'
+                && $returnedUsers[0]['email'] === 'pepepardo@jeans.com'
+                && $returnedUsers[1]['name'] === $user->name
+                && $returnedUsers[1]['email'] === $user->email;
+          });
     }
 
     /**
@@ -65,8 +69,8 @@ class NotificationsControllerTest extends TestCase
     {
         $this->withoutExceptionHandling();
         factory(User::class)->create([
-            'name' => 'Pepe Pardo Jeans',
-            'email' => 'pepepardo@jeans.com'
+          'name'  => 'Pepe Pardo Jeans',
+          'email' => 'pepepardo@jeans.com',
         ]);
         $user = $this->login();
         set_sample_notifications_to_user($user);
@@ -76,20 +80,22 @@ class NotificationsControllerTest extends TestCase
         $response->assertSuccessful();
 
         $response->assertViewIs('notifications.index');
-        $response->assertViewHas('userNotifications', function ($returnedUserNotifications) {
-            return
-                count($returnedUserNotifications) === 3 &&
-                $returnedUserNotifications[0]->data['title'] === 'Notification 1' &&
-                $returnedUserNotifications[1]->data['title'] === 'Notification 2' &&
-                $returnedUserNotifications[2]->data['title'] === 'Notification 3';
-        });
-        $response->assertViewHas('notifications', function ($returnedNotifications) {
-            return
-                count($returnedNotifications) === 0;
-        });
+        $response->assertViewHas('userNotifications',
+          function ($returnedUserNotifications) {
+              return count($returnedUserNotifications) === 3
+                && $returnedUserNotifications[0]->data['title']
+                === 'Notification 1'
+                && $returnedUserNotifications[1]->data['title']
+                === 'Notification 2'
+                && $returnedUserNotifications[2]->data['title']
+                === 'Notification 3';
+          });
+        $response->assertViewHas('notifications',
+          function ($returnedNotifications) {
+              return count($returnedNotifications) === 0;
+          });
         $response->assertViewHas('users', function ($returnedUsers) {
-            return
-                count($returnedUsers) === 0;
+            return count($returnedUsers) === 0;
         });
     }
 
@@ -102,5 +108,4 @@ class NotificationsControllerTest extends TestCase
         $response = $this->get('/notifications');
         $response->assertRedirect('login');
     }
-
 }

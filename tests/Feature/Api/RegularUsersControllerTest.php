@@ -8,7 +8,6 @@
 
 namespace Tests\Feature\Api;
 
-
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\Feature\Traits\CanLogin;
@@ -16,26 +15,27 @@ use Tests\TestCase;
 
 class RegularUsersControllerTest extends TestCase
 {
+
     use RefreshDatabase, CanLogin;
 
     public function test_can_retrieve_regular_users_list()
     {
         $user1 = factory(User::class)->create([
-            'name' => 'Pepe',
-            'email' => 'pepe@gmail.com'
+          'name'  => 'Pepe',
+          'email' => 'pepe@gmail.com',
         ]);
         $user2 = factory(User::class)->create([
-            'name' => 'Pepa',
-            'email' => 'pepa@gmail.com'
+          'name'  => 'Pepa',
+          'email' => 'pepa@gmail.com',
         ]);
         $user3 = factory(User::class)->create([
-            'name' => 'Pipo',
-            'email' => 'pipo@gmail.com'
+          'name'  => 'Pipo',
+          'email' => 'pipo@gmail.com',
         ]);
         $user3->admin = true;
         $user3->save();
         $this->actingAs($user1, 'api');
-        $users = [$user1,$user2,$user3];
+        $users = [$user1, $user2, $user3];
 
         $response = $this->json('GET', '/api/v1/regular_users');
         $response->assertSuccessful();
@@ -43,13 +43,13 @@ class RegularUsersControllerTest extends TestCase
         $this->assertEquals($result[0]->name, 'Pepe');
         $this->assertEquals($result[0]->id, 1);
         $this->assertEquals($result[0]->email, 'pepe@gmail.com');
-        $this->assertEquals($result[0]->gravatar, 'https://www.gravatar.com/avatar/' . md5('pepe@gmail.com'));
+        $this->assertEquals($result[0]->gravatar,
+          'https://www.gravatar.com/avatar/' . md5('pepe@gmail.com'));
         $this->assertEquals($result[1]->name, 'Pepa');
         $this->assertEquals($result[1]->id, 2);
         $this->assertEquals($result[1]->email, 'pepa@gmail.com');
-        $this->assertEquals($result[1]->gravatar, 'https://www.gravatar.com/avatar/' . md5('pepa@gmail.com'));
+        $this->assertEquals($result[1]->gravatar,
+          'https://www.gravatar.com/avatar/' . md5('pepa@gmail.com'));
         $this->assertCount(2, $result);
-
-
     }
 }

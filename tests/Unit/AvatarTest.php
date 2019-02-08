@@ -7,6 +7,7 @@ use Tests\TestCase;
 
 class AvatarTest extends TestCase
 {
+
     use RefreshDatabase;
 
     /**
@@ -15,7 +16,7 @@ class AvatarTest extends TestCase
     public function setUser()
     {
         $avatar = Avatar::create([
-            'url' => '/photo1.png',
+          'url' => '/photo1.png',
         ]);
         $this->assertNull($avatar->user);
         $avatar->setUser($user = factory(User::class)->create());
@@ -30,10 +31,10 @@ class AvatarTest extends TestCase
     public function map()
     {
         $avatar = Avatar::create([
-            'url' => '/avatar.png',
+          'url' => '/avatar.png',
         ]);
         $mappedAvatar = $avatar->map();
-        $this->assertEquals($mappedAvatar['id'],1);
-        $this->assertEquals($mappedAvatar['url'],'/avatar.png');
+        $this->assertEquals($mappedAvatar['id'], 1);
+        $this->assertEquals($mappedAvatar['url'], '/avatar.png');
     }
 }

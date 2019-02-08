@@ -14,10 +14,11 @@ use Tests\TestCase;
 
 class TasksVueControllertest extends TestCase
 {
+
     use RefreshDatabase;
-    
-    
-    public function test_can_show_vue_tasks(){
+
+    public function test_can_show_vue_tasks()
+    {
         // 1 PREPARE
         $this->withExceptionHandling();
         $user = factory(User::class)->create();
@@ -31,18 +32,16 @@ class TasksVueControllertest extends TestCase
 
         // 3 ASSERT
 
-        $response ->assertSuccessful();
+        $response->assertSuccessful();
 
         $response->assertViewIs('tasks_vue');
 
         $response->assertViewHas('tasks');
 
-        $response->assertViewHas('tasks',[]);
+        $response->assertViewHas('tasks', []);
 
-//        $response->assertSee('Comprar llet');
-//        $response->assertSee('Comprar pa');
-//        $response->assertSee('Estudiar PHP');
+        //        $response->assertSee('Comprar llet');
+        //        $response->assertSee('Comprar pa');
+        //        $response->assertSee('Estudiar PHP');
     }
-    
-    
 }

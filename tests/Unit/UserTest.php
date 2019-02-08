@@ -9,8 +9,8 @@ use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
-class UserText extends TestCase{
-
+class UserText extends TestCase
+{
 
     use RefreshDatabase;
 
@@ -19,13 +19,13 @@ class UserText extends TestCase{
         $user = factory(User::class)->create();
         $this->assertNull($user->photo);
         $photo = Photo::create([
-            'url' => '/photo1.png',
+          'url' => '/photo1.png',
         ]);
         $user->assignPhoto($photo);
         $user = $user->fresh();
         $this->assertNotNull($user->photo);
-        $this->assertEquals('/photo1.png',$user->photo->url);
-        $this->assertEquals($user->id,$user->photo->user_id);
+        $this->assertEquals('/photo1.png', $user->photo->url);
+        $this->assertEquals($user->id, $user->photo->user_id);
     }
 
     /**
@@ -34,16 +34,17 @@ class UserText extends TestCase{
     public function addAvatar()
     {
         $user = factory(User::class)->create();
-        $this->assertCount(0,$user->avatars);
+        $this->assertCount(0, $user->avatars);
         $avatar = Avatar::create([
-            'url' => '/avatar.png',
+          'url' => '/avatar.png',
         ]);
         $user->addTask($avatar);
         $user = $user->fresh();
-        $this->assertCount(1,$user->avatars);
-        $this->assertEquals('/avatar.png',$user->avatars[0]->url);
-        $this->assertEquals($user->id,$user->avatars[0]->id);
+        $this->assertCount(1, $user->avatars);
+        $this->assertEquals('/avatar.png', $user->avatars[0]->url);
+        $this->assertEquals($user->id, $user->avatars[0]->id);
     }
+
     public function test_can_add_task_to_user()
     {
         // 1 Prepare
@@ -51,32 +52,26 @@ class UserText extends TestCase{
         $user = factory(User::class)->create();
         $task = factory(Task::class)->create();
 
-
-
         //2 execute
         $user->addTask($task);
         $tasks = $user->tasks;
 
-
         //3 Comprovar
         $this->assertTrue($tasks[0]->is($task));
     }
+
     public function test_user_tasks_returns_null_when_no_tasks()
     {
         // 1 Prepare
 
         $user = factory(User::class)->create();
 
-
-
         //2 execute
         $tasks = $user->tasks;
-
 
         //3 Comprovar
         $this->assertEmpty($tasks);
     }
-
 
     public function test_user_can_have_tasks()
     {
@@ -93,15 +88,11 @@ class UserText extends TestCase{
         //2 execute
         $tasks = $user->tasks;
 
-
         //3 Comprovar
         $this->assertTrue($tasks[0]->is($task1));
         $this->assertTrue($tasks[1]->is($task2));
         $this->assertTrue($tasks[2]->is($task3));
-
-
     }
-
 
     public function test_can_add_tasks_to_user()
     {
@@ -113,11 +104,9 @@ class UserText extends TestCase{
         $task3 = factory(Task::class)->create();
         $tasks = [$task1, $task2, $task3];
 
-
         //2 execute
         $user->addTasks($tasks);
         $tasks = $user->tasks;
-
 
         //3 Comprovar
         $this->assertTrue($tasks[0]->is($task1));
@@ -131,23 +120,18 @@ class UserText extends TestCase{
         $user = factory(User::class)->create();
         $task = factory(Task::class)->create();
 
-
-
         //2 execute
         $user->addTask($task);
-
 
         $tascaRetornada = $user->have_task($task);
 
         $this->assertEquals($task->map(), $tascaRetornada->map());
-
     }
+
     public function test_remove_task()
     {
         $user = factory(User::class)->create();
         $task = factory(Task::class)->create();
-
-
 
         //2 execute
         $user->addTask($task);
@@ -159,7 +143,6 @@ class UserText extends TestCase{
         $user->removeTask($task);
 
         $this->assertEmpty($user->tasks);
-
     }
 
     public function test_is_Super_Admin()
@@ -177,14 +160,15 @@ class UserText extends TestCase{
     {
 
         $user = factory(User::class)->create([
-            'name' => 'pepe',
-            'email' => 'pepe@gmail.com',
+          'name'  => 'pepe',
+          'email' => 'pepe@gmail.com',
             // Accessors i mutators
         ]);
         $mappedUser = $user->map();
         $this->assertEquals($mappedUser['name'], 'pepe');
         $this->assertEquals($mappedUser['email'], 'pepe@gmail.com');
-        $this->assertEquals($mappedUser['gravatar'], 'https://www.gravatar.com/avatar/6b0becddecd5a06042b3f8078c97f2e0');
+        $this->assertEquals($mappedUser['gravatar'],
+          'https://www.gravatar.com/avatar/6b0becddecd5a06042b3f8078c97f2e0');
         $this->assertEquals($mappedUser['admin'], 0);
         $this->assertCount(0, $mappedUser['permissions']);
         $this->assertCount(0, $mappedUser['roles']);
@@ -194,26 +178,24 @@ class UserText extends TestCase{
         $mappedUser = $user->map();
         $this->assertEquals($mappedUser['admin'], true);
 
-
-
         $per1 = Permission::create([
-            'name' => 'per1'
+          'name' => 'per1',
         ]);
         $per2 = Permission::create([
-            'name' => 'per2'
+          'name' => 'per2',
         ]);
         $per3 = Permission::create([
-            'name' => 'per3'
+          'name' => 'per3',
         ]);
 
         $rol1 = Role::create([
-            'name' => 'rol1'
+          'name' => 'rol1',
         ]);
-        $rol2= Role::create([
-            'name' => 'rol2'
+        $rol2 = Role::create([
+          'name' => 'rol2',
         ]);
         $rol3 = Role::create([
-            'name' => 'rol3'
+          'name' => 'rol3',
         ]);
 
         $user->givePermissionTo($per1);
@@ -229,7 +211,6 @@ class UserText extends TestCase{
         $this->assertEquals($mappedUser['permissions'][0], 'per1');
         $this->assertEquals($mappedUser['permissions'][1], 'per2');
         $this->assertEquals($mappedUser['permissions'][2], 'per3');
-
     }
 
     public function test_regulars()
@@ -237,35 +218,33 @@ class UserText extends TestCase{
         $this->assertCount(0, User::regular()->get());
 
         $user1 = factory(User::class)->create([
-            'name' => 'Pepe',
-            'email' => 'pepe@gmail.com'
+          'name'  => 'Pepe',
+          'email' => 'pepe@gmail.com',
         ]);
         $user2 = factory(User::class)->create([
-            'name' => 'Pepa',
-            'email' => 'pepa@gmail.com'
+          'name'  => 'Pepa',
+          'email' => 'pepa@gmail.com',
         ]);
         $user3 = factory(User::class)->create([
-            'name' => 'Pipo',
-            'email' => 'pipo@gmail.com'
+          'name'  => 'Pipo',
+          'email' => 'pipo@gmail.com',
         ]);
         $user3->admin = true;
         $user3->save();
         $this->assertCount(2, $regularUsers = User::regular()->get());
-        $this->assertEquals($regularUsers[0]->name,  $user1->name);
-        $this->assertEquals($regularUsers[1]->name,  $user2->name);
-        try{
+        $this->assertEquals($regularUsers[0]->name, $user1->name);
+        $this->assertEquals($regularUsers[1]->name, $user2->name);
+        try {
             $this->assertNull($regularUsers[2]);
-        }catch(Exception $e){
-//            $this->assert
+        } catch (Exception $e) {
+            //            $this->assert
         }
-
     }
 
     public function test_hash_id()
     {
         $user = factory(User::class)->create();
         $hashids = new \Hashids\Hashids(config('tasks.salt'));
-        $this->assertEquals($user->hashid,$hashids->encode($user->getKey()));
+        $this->assertEquals($user->hashid, $hashids->encode($user->getKey()));
     }
-
 }

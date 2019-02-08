@@ -11,6 +11,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class PhotoControllerTest extends TestCase
 {
+
     use RefreshDatabase, CanLogin;
 
     /**
@@ -22,12 +23,13 @@ class PhotoControllerTest extends TestCase
         Storage::fake('google');
         $this->withoutExceptionHandling();
         $user = $this->login();
-        $response = $this->post('/photo',[
-            'photo' => UploadedFile::fake()->image('photo.jpg')
+        $response = $this->post('/photo', [
+          'photo' => UploadedFile::fake()->image('photo.jpg'),
         ]);
         $response->assertRedirect();
 
-        Storage::disk('local')->assertExists($photoUrl = 'photos/' . $user->id . '.jpg');
+        Storage::disk('local')->assertExists(
+          $photoUrl = 'photos/' . $user->id . '.jpg');
         Storage::disk('google')->assertExists($user->id . '.jpg');
 
         $photo = Photo::first();
@@ -48,14 +50,14 @@ class PhotoControllerTest extends TestCase
         $user = $this->login();
         $photoUrl = 'photos/' . $user->id . '.jpg';
         Photo::create([
-            'url' => $photoUrl,
-            'user_id' => $user->id
+          'url'     => $photoUrl,
+          'user_id' => $user->id,
         ]);
 
         Storage::fake('local');
 
-        $response = $this->post('/photo',[
-            'photo' => UploadedFile::fake()->image('photo.jpg')
+        $response = $this->post('/photo', [
+          'photo' => UploadedFile::fake()->image('photo.jpg'),
         ]);
         $response->assertRedirect();
 
@@ -69,5 +71,4 @@ class PhotoControllerTest extends TestCase
         $this->assertNotNull($user->photo);
         $this->assertEquals($photoUrl, $user->photo->url);
     }
-
 }

@@ -13,6 +13,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class AvatarControllerTest extends TestCase
 {
+
     use RefreshDatabase, CanLogin;
 
     /**
@@ -24,12 +25,13 @@ class AvatarControllerTest extends TestCase
         Storage::fake('google');
         $this->withoutExceptionHandling();
         $user = $this->login();
-        $response = $this->post('/avatar',[
-            'avatar' => UploadedFile::fake()->image('avatar.jpg')
+        $response = $this->post('/avatar', [
+          'avatar' => UploadedFile::fake()->image('avatar.jpg'),
         ]);
         $response->assertRedirect();
 
-        Storage::disk('local')->assertExists($avatarUrl = 'avatars/' . $user->id . '_' . time() . '.jpg');
+        Storage::disk('local')->assertExists(
+          $avatarUrl = 'avatars/' . $user->id . '_' . time() . '.jpg');
         Storage::disk('google')->assertExists($user->id . '.jpg');
 
         $avatar = Avatar::first();
@@ -48,16 +50,16 @@ class AvatarControllerTest extends TestCase
     {
         $this->withoutExceptionHandling();
         $user = $this->login();
-        $avatarUrl = 'avatars/' . $user->id . '_' . time() .'.jpg';
+        $avatarUrl = 'avatars/' . $user->id . '_' . time() . '.jpg';
         Avatar::create([
-            'url' => $avatarUrl,
-            'user_id' => $user->id
+          'url'     => $avatarUrl,
+          'user_id' => $user->id,
         ]);
 
         Storage::fake('local');
 
-        $response = $this->post('/avatar',[
-            'avatar' => UploadedFile::fake()->image('avatar.jpg')
+        $response = $this->post('/avatar', [
+          'avatar' => UploadedFile::fake()->image('avatar.jpg'),
         ]);
         $response->assertRedirect();
 
@@ -71,5 +73,4 @@ class AvatarControllerTest extends TestCase
         $this->assertNotNull($user->avatars);
         $this->assertEquals($avatarUrl, $user->getCurrentAvatar()->url);
     }
-
 }

@@ -11,7 +11,9 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class MailTest extends TestCase
 {
+
     use RefreshDatabase, CanLogin;
+
     /**
      * A basic test example.
      *

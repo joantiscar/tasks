@@ -8,7 +8,6 @@
 
 namespace Tests\Feature;
 
-
 use App\Task;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -17,6 +16,7 @@ use Tests\TestCase;
 
 class LoggedUserTaskControllerTest extends TestCase
 {
+
     use RefreshDatabase, CanLogin;
 
     public function test_can_list_logged_user_tasks()
@@ -30,15 +30,13 @@ class LoggedUserTaskControllerTest extends TestCase
         $user->addTasks($tasks);
         $this->actingAs($user, 'api');
 
-
-
         $response = $this->get('/user/tasks');
         $response->assertSuccessful();
 
         $response->assertViewIs('tasques');
         $response->assertViewHas('tasks', map_collection($user->tasks));
-
     }
+
     public function test_cannot_see_tasks_if_user_is_not_logged()
     {
         $task = factory(Task::class)->create();

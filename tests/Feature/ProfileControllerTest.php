@@ -8,6 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class ProfileControllerTest extends TestCase
 {
+
     use RefreshDatabase, CanLogin;
 
     /**
@@ -20,9 +21,8 @@ class ProfileControllerTest extends TestCase
         $response = $this->get('/profile');
         $response->assertSuccessful();
         $response->assertViewIs('profile');
-        $response->assertViewHas('user', function($returnedUser) use ($user) {
+        $response->assertViewHas('user', function ($returnedUser) use ($user) {
             return $returnedUser->name === $user->name;
         });
     }
-
 }

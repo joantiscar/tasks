@@ -8,6 +8,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class Task2Test extends TestCase
 {
+
     /**
      * A basic test example.
      *

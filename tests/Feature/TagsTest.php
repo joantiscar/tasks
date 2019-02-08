@@ -12,7 +12,9 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class TagsTest extends TestCase
 {
+
     use RefreshDatabase, CanLogin;
+
     /**
      * A basic test example.
      *
@@ -29,19 +31,13 @@ class TagsTest extends TestCase
         $tag2 = factory(Tag::class)->create();
         $tag3 = factory(Tag::class)->create();
 
-
-
         $response = $this->get('/tags');
 
-
-//        dd($response);
+        //        dd($response);
         $response->assertSuccessful();
         $response->assertSee($tag1->name);
         $response->assertSee($tag2->name);
         $response->assertSee($tag3->name);
-
-
         //comprovar que es veuen les tasques que hi ha a la base de dades
     }
-
 }

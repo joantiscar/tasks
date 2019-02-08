@@ -12,7 +12,8 @@ use Tests\TestCase;
  *
  * @package Tests\Feature\Tenants\Api
  */
-class ChangelogControllerTest extends TestCase {
+class ChangelogControllerTest extends TestCase
+{
 
     use RefreshDatabase;
 
@@ -25,16 +26,16 @@ class ChangelogControllerTest extends TestCase {
         $user = factory(User::class)->create();
         $role = Role::firstOrCreate(['name' => 'ChangelogManager']);
         $user->assignRole($role);
-        $this->actingAs($user,'api');
+        $this->actingAs($user, 'api');
 
-        $response =  $this->json('GET','/api/v1/changelog');
+        $response = $this->json('GET', '/api/v1/changelog');
         $response->assertSuccessful();
         $result = json_decode($response->getContent());
-//        dump($result);
-        $this->assertCount(4,$result);
+        //        dump($result);
+        $this->assertCount(4, $result);
 
-        $this->assertEquals($logs[0]->id,$result[0]->id);
-        $this->assertEquals($logs[0]->text,$result[0]->text);
+        $this->assertEquals($logs[0]->id, $result[0]->id);
+        $this->assertEquals($logs[0]->text, $result[0]->text);
         $this->assertNotNull($result[0]->time);
         $this->assertNotNull($result[0]->human_time);
         $this->assertNotNull($result[0]->timestamp);
@@ -48,13 +49,12 @@ class ChangelogControllerTest extends TestCase {
         $this->assertEquals($logs[0]->color, $result[0]->color);
     }
 
-
     /**
      * @test
      */
     public function guest_cannot_list_logs()
     {
-        $response =  $this->json('GET','/api/v1/changelog');
+        $response = $this->json('GET', '/api/v1/changelog');
         $response->assertStatus(401);
     }
 
@@ -64,8 +64,8 @@ class ChangelogControllerTest extends TestCase {
     public function regular_user_cannot_list_logs()
     {
         $user = factory(User::class)->create();
-        $this->actingAs($user,'api');
-        $response =  $this->json('GET','/api/v1/changelog');
+        $this->actingAs($user, 'api');
+        $response = $this->json('GET', '/api/v1/changelog');
         $response->assertStatus(403);
     }
 }

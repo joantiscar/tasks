@@ -14,12 +14,13 @@ use Tests\TestCase;
  */
 class ChangelogControllerTest extends TestCase
 {
+
     use RefreshDatabase;
 
     /** @test */
     public function show_changelog()
     {
-//        $this->withoutExceptionHandling();
+        //        $this->withoutExceptionHandling();
         $logs = create_example_logs();
         $user = factory(User::class)->create();
         $role = Role::firstOrCreate(['name' => 'ChangelogManager']);
@@ -29,17 +30,19 @@ class ChangelogControllerTest extends TestCase
         $response->assertSuccessful();
         $response->assertViewIs('changelog.index');
         $response->assertViewHas('logs', function ($returnedLogs) use ($logs) {
-            return
-                $returnedLogs[0]['user_name']=== $logs[0]['user']->name &&
-                $returnedLogs[0]['color'] === 'teal' &&
-                $returnedLogs[0]['action_type'] === 'store' &&
-                $returnedLogs[0]['text'] === "Ha creat la tasca TODO_LINK_TASCA" &&
-                $returnedLogs[0]['icon'] === 'home' &&
-                $returnedLogs[1]['text'] === "Ha modificat la tasca TODO_LINK_TASCA" &&
-                $returnedLogs[1]['action_type'] === 'update' &&
-                $returnedLogs[2]['text'] === "Ha modificat la tasca TODO_LINK_TASCA" &&
-                $returnedLogs[2]['action_type'] === 'update' &&
-                $returnedLogs[3]['text'] === "BLA BLA BLA";
+            return $returnedLogs[0]['user_name'] === $logs[0]['user']->name
+              && $returnedLogs[0]['color'] === 'teal'
+              && $returnedLogs[0]['action_type'] === 'store'
+              && $returnedLogs[0]['text']
+              === "Ha creat la tasca TODO_LINK_TASCA"
+              && $returnedLogs[0]['icon'] === 'home'
+              && $returnedLogs[1]['text']
+              === "Ha modificat la tasca TODO_LINK_TASCA"
+              && $returnedLogs[1]['action_type'] === 'update'
+              && $returnedLogs[2]['text']
+              === "Ha modificat la tasca TODO_LINK_TASCA"
+              && $returnedLogs[2]['action_type'] === 'update'
+              && $returnedLogs[3]['text'] === "BLA BLA BLA";
         });
         $response->assertViewHas('users');
     }
@@ -59,5 +62,4 @@ class ChangelogControllerTest extends TestCase
         $response = $this->get('/changelog');
         $response->assertStatus(403);
     }
-
 }

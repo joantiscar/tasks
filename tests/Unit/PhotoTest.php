@@ -7,6 +7,7 @@ use Tests\TestCase;
 
 class PhotoTest extends TestCase
 {
+
     use RefreshDatabase;
 
     /**
@@ -15,7 +16,7 @@ class PhotoTest extends TestCase
     public function setUser()
     {
         $photo = Photo::create([
-            'url' => '/photo1.png',
+          'url' => '/photo1.png',
         ]);
         $this->assertNull($photo->user);
         $photo->setUser($user = factory(User::class)->create());
@@ -30,10 +31,10 @@ class PhotoTest extends TestCase
     public function map()
     {
         $photo = Photo::create([
-            'url' => '/photo1.png',
+          'url' => '/photo1.png',
         ]);
         $mappedPhoto = $photo->map();
-        $this->assertEquals($mappedPhoto['id'],1);
-        $this->assertEquals($mappedPhoto['url'],'/photo1.png');
+        $this->assertEquals($mappedPhoto['id'], 1);
+        $this->assertEquals($mappedPhoto['url'], '/photo1.png');
     }
 }
