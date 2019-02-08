@@ -16,7 +16,13 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <style>[v-cloak]{display: none}</style>
     <title>@yield('title','Put your title here')</title>
-
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://tasks.joantiscar.scool.cat/img/landing_image.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="628">
+    <meta property="og:description" content="Pos moltes tasques">
+    <meta property="og:url" content="https://tasks.joantiscar.scool.cat">
+    <meta property="og:title" content="Tasques">
 </head>
 <body>
 <div id="app" v-cloak>

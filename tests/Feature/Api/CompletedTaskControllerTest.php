@@ -19,16 +19,19 @@ class CompletedTaskControllerTest extends TestCase {
      */
     public function can_complete_a_task()
     {
-        $this->loginAsSuperAdmin('api');
+        Mail::fake();
+        Event::fake();
+        $this->withoutExceptionHandling();
+        $user = $this->loginAsSuperAdmin('api');
         $task= Task::create([
-            'name' => 'comprar pa',
-            'completed' => false
+          'name' => 'comprar pa',
+          'completed' => false
         ]);
-        $this->loginAsSuperAdmin('api');
+        //2
         $response = $this->json('POST','/api/v1/completed_task/' . $task->id);
         $response->assertSuccessful();
         $task = $task->fresh();
-        $this->assertEquals($task->completed, true);
+        $this->assertEquals((boolean) $task->completed, true);
     }
 
     /**
@@ -47,7 +50,7 @@ class CompletedTaskControllerTest extends TestCase {
      */
     public function can_uncomplete_a_task()
     {
-//        Mail::fake();
+        Mail::fake();
         Event::fake();
         $this->withoutExceptionHandling();
         $user = $this->loginAsSuperAdmin('api');

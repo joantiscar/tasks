@@ -9,6 +9,8 @@ class Task extends Model
 {
     use FormattedDates;
 
+    const TASKS_CACHE_KEY = 'tasks.joantiscar.scool.cat';
+
     protected $hidden = [
 //        'created_at'
     ];

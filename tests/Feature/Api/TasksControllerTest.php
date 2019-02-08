@@ -13,7 +13,9 @@ use App\Task;
 use App\User;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Mail;
 use Tests\Feature\Traits\CanLogin;
 use Tests\TestCase;
 
@@ -134,12 +136,14 @@ class TasksControllerTest extends TestCase
     }
     public function test_superAdmin_can_create_task()
     {
+        Mail::fake();
+        Event::fake();
         $user = $this->login('api');
         $user->admin = true;
         $user->save();
         $task = factory(Task::class)->create();
 
-        $response = $this->post('/api/v1/tasks/',[
+        $response = $this->json('POST','/api/v1/tasks/',[
             'name' => 'Comprar pa',
             'description' => 'Hauria d\'anar a comprar pa, que no ne queda',
             'user_id' => 1
@@ -147,7 +151,6 @@ class TasksControllerTest extends TestCase
 
 //        $this->assertNotContains('')
         $result = json_decode($response->getContent());
-
 
         $this->assertNotNull($task = Task::find($result->id));
 
@@ -158,13 +161,15 @@ class TasksControllerTest extends TestCase
     public function test_manager_can_create_task()
     {
         initialize_roles();
+        Mail::fake();
+        Event::fake();
         $user = $this->login('api');
         $task = factory(Task::class)->create();
 
         $user->assignRole('TaskManager');
         $task = factory(Task::class)->create();
 
-        $response = $this->post('/api/v1/tasks/',[
+        $response = $this->json('POST', '/api/v1/tasks/',[
             'name' => 'Comprar pa'
         ]);
 

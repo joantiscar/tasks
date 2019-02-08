@@ -12,6 +12,7 @@ use App\Http\Requests\TaskShow;
 use App\Http\Requests\UpdateTask;
 use App\Task;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Cache;
 
 class TasksController extends Controller
 {
@@ -44,8 +45,10 @@ class TasksController extends Controller
 //        $data = (array) $request->only('tags');
 //        $task->syncTags($data['tags']);
 
-        $data = $request->only('tags');
-        $task->syncTags($data['tags']);
+        $tags = $request->only('tags');
+        if (sizeof($tags) > 0){
+            $task->syncTags($tags['tags']);
+        }
         $task->save();
 
         event(new TaskCreated($task));
@@ -54,6 +57,11 @@ class TasksController extends Controller
     }
     public function index(IndexTask $request)
     {
-        return map_collection(Task::orderBy('created_at', 'desc')->get());
+
+        return Cache::rememberForever(Task::TASKS_CACHE_KEY, function () {
+            return map_collection(Task::with('user', 'tags')
+              ->orderBy('created_at', 'desc')
+              ->get());
+        });
     }
 }

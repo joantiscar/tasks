@@ -4,6 +4,8 @@ namespace Tests\Feature;
 
 use App\Avatar;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Event;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Tests\Feature\Traits\CanLogin;
 use Tests\TestCase;
@@ -46,7 +48,7 @@ class AvatarControllerTest extends TestCase
     {
         $this->withoutExceptionHandling();
         $user = $this->login();
-        $avatarUrl = 'avatars/' . $user->id . '.jpg';
+        $avatarUrl = 'avatars/' . $user->id . '_' . time() .'.jpg';
         Avatar::create([
             'url' => $avatarUrl,
             'user_id' => $user->id
