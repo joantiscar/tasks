@@ -211,6 +211,7 @@ class UserText extends TestCase
         $this->assertEquals($mappedUser['permissions'][0], 'per1');
         $this->assertEquals($mappedUser['permissions'][1], 'per2');
         $this->assertEquals($mappedUser['permissions'][2], 'per3');
+        $this->assertFalse($mappedUser['isOnline']);
     }
 
     public function test_regulars()

@@ -46,7 +46,7 @@ Route::middleware((['auth']))->group(function () {
     Route::put('/tasks/{id}', 'TasksController@update');
     Route::get('/tasks_edit/{id}','TasksController@edit');
     Route::patch('/tasks/{id}','TasksController@completar');
-    Route::get('/home','TasksController@index');
+    Route::get('/home','TasquesController@index');
     Route::get('/tasks_vue', 'TasksVueController@index');
     Route::get('/tasques', 'TasquesController@index');
     Route::get('/tags', 'TagsController@index');
