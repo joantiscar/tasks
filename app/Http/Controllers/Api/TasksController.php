@@ -29,12 +29,13 @@ class TasksController extends Controller
     }
     public function edit(UpdateTask $request, Task $task) // Route Model Binding
     {
+        $oldTask = $task->toArray();
         $task->update($request->all());
         $task->save();
         $data = (array) $request->only('tags');
         $task->syncTags($data['tags']);
         $task->save();
-        event(new TaskUpdated($task));
+        event(new TaskUpdated($oldTask, $task));
         return $task->map();
     }
     public function store(StoreTask $request) // Route Model Binding

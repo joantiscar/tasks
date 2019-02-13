@@ -131,7 +131,14 @@ class Task extends Model
             'tags' => $this->tags
         ];
     }
-
+    public function scopeCompleted($query)
+    {
+        return $query->where('completed', 1);
+    }
+    public function scopeUncompleted($query)
+    {
+        return $query->where('completed', 0);
+    }
     public function getFullSearchAttribute()
     {
         $state = $this->completed ? 'Completada' : 'Pendent';

@@ -14,15 +14,21 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 class TaskUpdated
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
+
+    public $newTask;
+    public $oldTask;
+
+
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                // Creat per lo de La Sénia
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Task $task)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   // Creat per lo de La Sénia
+    public function __construct(array $oldTask, Task $newTask)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   // Creat per lo de La Sénia
     {
-        $this->task = $task;
+        $this->oldTask = $oldTask;
+        $this->newTask = $newTask;
     }
 
     /**

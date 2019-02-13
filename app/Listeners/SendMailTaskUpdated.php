@@ -27,9 +27,9 @@ class SendMailTaskUpdated implements shouldQueue
      */
     public function handle($event)
     {
-        $subject = $event->task->subject();
-        Mail::to($event->task->user)
+        $subject = $event->newTask->subject();
+        Mail::to($event->newTask->user)
             ->cc(config('tasks.manager_email'))
-            ->send((new TaskUpdated($event->task))->subject($subject));
+            ->send((new TaskUpdated($event->oldTask, $event->newTask))->subject($subject));
     }
 }

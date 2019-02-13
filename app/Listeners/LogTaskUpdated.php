@@ -29,17 +29,17 @@ class LogTaskUpdated implements shouldQueue
     public function handle($event)
     {
         Log::create([
-            'text' => "S'ha editat la tasca '" . $event->task->name ."'",
+            'text' => "S'ha editat la tasca '" . $event->oldTask['name'] ."'",
             'time' =>  Carbon::now(),
             'action_type' => 'editar',
             'module_type' => 'Tasques',
             'icon' => 'lock_open',
             'color' => 'primary',
-            'user_id' => $event->task->id,
-            'loggable_id' => $event->task->id,
+            'user_id' => $event->oldTask['id'],
+            'loggable_id' => $event->oldTask['id'],
             'loggable_type' => Task::class,
-            'new_value' => json_encode($event->task),
-            'old_value' => json_encode($event->task)
+//            'new_value' => json_encode($event->newTask)
+//            'old_value' => json_encode($event->oldTask)
         ]);
     }
 }
