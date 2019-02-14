@@ -9,7 +9,7 @@
         align-center
       >
         <v-flex xs6>
-          <v-subheader v-if="item.heading">
+          <v-subheader v-if="item.heading" class="grey--text text--darken-4">
             {{ item.heading }}
           </v-subheader>
         </v-flex>
@@ -21,13 +21,15 @@
         v-else-if="item.children"
         v-model="item.model"
         :key="item.text"
-        :prepend-icon="item.model ? item.icon : item['icon-alt']"
         append-icon=""
       >
         <v-list-tile slot="activator"
         >
+          <v-list-tile-action v-if="item.icon" @click="" :href="item.url">
+            <v-icon color="primary lighten-1">{{ item.icon }}</v-icon>
+          </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>
+            <v-list-tile-title class="grey--text text--darken-4">
               {{ item.text }}
             </v-list-tile-title>
           </v-list-tile-content>
@@ -40,10 +42,10 @@
           :href="child.url"
         >
           <v-list-tile-action v-if="child.icon" @click="" :href="item.url">
-            <v-icon>{{ child.icon }}</v-icon>
+            <v-icon color="primary lighten-1">{{ child.icon }}</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>
+            <v-list-tile-title class="grey--text text--darken-4">
               {{ child.text }}
             </v-list-tile-title>
           </v-list-tile-content>
@@ -53,10 +55,10 @@
                    v-bind:class="{ 'active': isActive(item.url) }"
       >
         <v-list-tile-action>
-          <v-icon>{{ item.icon }}</v-icon>
+          <v-icon color="primary lighten-1">{{ item.icon }}</v-icon>
         </v-list-tile-action>
         <v-list-tile-content>
-          <v-list-tile-title>
+          <v-list-tile-title class="grey--text text--darken-4">
             {{ item.text }}
           </v-list-tile-title>
         </v-list-tile-content>

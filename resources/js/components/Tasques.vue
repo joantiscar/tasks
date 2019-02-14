@@ -32,11 +32,17 @@
         <template v-else>
             <v-card>
                 <v-card-title>
+                    <v-flex xs12>
                     <img src="img/task_not_found.svg">
+                        </v-flex>
                 </v-card-title>
                 <v-card-text>
-                    <span class="header">No hi ha cap tasca!</span>
+                    <v-flex xs12>
+                        <span class="headline text-xs-center">No hi ha cap tasca!</span>
+                    </v-flex>
+                    <v-flex xs12>
                 <empty-tasks-create-button :tags="tags" :users="users" @created="add"></empty-tasks-create-button>
+                        </v-flex>
                 </v-card-text>
             </v-card>
         </template>
@@ -161,7 +167,6 @@ export default {
   // },
   methods: {
     add (task) {
-      console.log(task)
       this.dataTasks.push(task)
     },
     showCreate () {

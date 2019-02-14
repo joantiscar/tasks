@@ -75838,6 +75838,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 
@@ -75919,7 +75925,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
   // },
   methods: {
     add: function add(task) {
-      console.log(task);
       this.dataTasks.push(task);
     },
     showCreate: function showCreate() {
@@ -81155,21 +81160,36 @@ var render = function() {
             _c(
               "v-card",
               [
-                _c("v-card-title", [
-                  _c("img", { attrs: { src: "img/task_not_found.svg" } })
-                ]),
+                _c(
+                  "v-card-title",
+                  [
+                    _c("v-flex", { attrs: { xs12: "" } }, [
+                      _c("img", { attrs: { src: "img/task_not_found.svg" } })
+                    ])
+                  ],
+                  1
+                ),
                 _vm._v(" "),
                 _c(
                   "v-card-text",
                   [
-                    _c("span", { staticClass: "header" }, [
-                      _vm._v("No hi ha cap tasca!")
+                    _c("v-flex", { attrs: { xs12: "" } }, [
+                      _c("span", { staticClass: "headline text-xs-center" }, [
+                        _vm._v("No hi ha cap tasca!")
+                      ])
                     ]),
                     _vm._v(" "),
-                    _c("empty-tasks-create-button", {
-                      attrs: { tags: _vm.tags, users: _vm.users },
-                      on: { created: _vm.add }
-                    })
+                    _c(
+                      "v-flex",
+                      { attrs: { xs12: "" } },
+                      [
+                        _c("empty-tasks-create-button", {
+                          attrs: { tags: _vm.tags, users: _vm.users },
+                          on: { created: _vm.add }
+                        })
+                      ],
+                      1
+                    )
                   ],
                   1
                 )
@@ -85946,6 +85966,8 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'SidebarMenu',
@@ -85995,13 +86017,17 @@ var render = function() {
                     { attrs: { xs6: "" } },
                     [
                       item.heading
-                        ? _c("v-subheader", [
-                            _vm._v(
-                              "\n          " +
-                                _vm._s(item.heading) +
-                                "\n        "
-                            )
-                          ])
+                        ? _c(
+                            "v-subheader",
+                            { staticClass: "grey--text text--darken-4" },
+                            [
+                              _vm._v(
+                                "\n          " +
+                                  _vm._s(item.heading) +
+                                  "\n        "
+                              )
+                            ]
+                          )
                         : _vm._e()
                     ],
                     1
@@ -86029,10 +86055,7 @@ var render = function() {
                 "v-list-group",
                 {
                   key: item.text,
-                  attrs: {
-                    "prepend-icon": item.model ? item.icon : item["icon-alt"],
-                    "append-icon": ""
-                  },
+                  attrs: { "append-icon": "" },
                   model: {
                     value: item.model,
                     callback: function($$v) {
@@ -86046,16 +86069,38 @@ var render = function() {
                     "v-list-tile",
                     { attrs: { slot: "activator" }, slot: "activator" },
                     [
+                      item.icon
+                        ? _c(
+                            "v-list-tile-action",
+                            {
+                              attrs: { href: item.url },
+                              on: { click: function($event) {} }
+                            },
+                            [
+                              _c(
+                                "v-icon",
+                                { attrs: { color: "primary lighten-1" } },
+                                [_vm._v(_vm._s(item.icon))]
+                              )
+                            ],
+                            1
+                          )
+                        : _vm._e(),
+                      _vm._v(" "),
                       _c(
                         "v-list-tile-content",
                         [
-                          _c("v-list-tile-title", [
-                            _vm._v(
-                              "\n            " +
-                                _vm._s(item.text) +
-                                "\n          "
-                            )
-                          ])
+                          _c(
+                            "v-list-tile-title",
+                            { staticClass: "grey--text text--darken-4" },
+                            [
+                              _vm._v(
+                                "\n            " +
+                                  _vm._s(item.text) +
+                                  "\n          "
+                              )
+                            ]
+                          )
                         ],
                         1
                       )
@@ -86080,7 +86125,13 @@ var render = function() {
                                 attrs: { href: item.url },
                                 on: { click: function($event) {} }
                               },
-                              [_c("v-icon", [_vm._v(_vm._s(child.icon))])],
+                              [
+                                _c(
+                                  "v-icon",
+                                  { attrs: { color: "primary lighten-1" } },
+                                  [_vm._v(_vm._s(child.icon))]
+                                )
+                              ],
                               1
                             )
                           : _vm._e(),
@@ -86088,13 +86139,17 @@ var render = function() {
                         _c(
                           "v-list-tile-content",
                           [
-                            _c("v-list-tile-title", [
-                              _vm._v(
-                                "\n            " +
-                                  _vm._s(child.text) +
-                                  "\n          "
-                              )
-                            ])
+                            _c(
+                              "v-list-tile-title",
+                              { staticClass: "grey--text text--darken-4" },
+                              [
+                                _vm._v(
+                                  "\n            " +
+                                    _vm._s(child.text) +
+                                    "\n          "
+                                )
+                              ]
+                            )
                           ],
                           1
                         )
@@ -86116,18 +86171,26 @@ var render = function() {
                 [
                   _c(
                     "v-list-tile-action",
-                    [_c("v-icon", [_vm._v(_vm._s(item.icon))])],
+                    [
+                      _c("v-icon", { attrs: { color: "primary lighten-1" } }, [
+                        _vm._v(_vm._s(item.icon))
+                      ])
+                    ],
                     1
                   ),
                   _vm._v(" "),
                   _c(
                     "v-list-tile-content",
                     [
-                      _c("v-list-tile-title", [
-                        _vm._v(
-                          "\n          " + _vm._s(item.text) + "\n        "
-                        )
-                      ])
+                      _c(
+                        "v-list-tile-title",
+                        { staticClass: "grey--text text--darken-4" },
+                        [
+                          _vm._v(
+                            "\n          " + _vm._s(item.text) + "\n        "
+                          )
+                        ]
+                      )
                     ],
                     1
                   )

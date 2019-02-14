@@ -17,38 +17,33 @@
     - [x] Text gran (simpàtic i expliqui que cal fer)
     - [x] Botó CTA 
     - [ ] Opcional: background opcions: color paleta de grisos, patro, algun pattern de fons parcial 
-
+- [] El mateix per a tags
 ## Refactoritzacions
 
 - Moure als seus propis components parts del layout principal:
-  - [ ] component pel menú de navegació de l'esquerra
+  - [x] component pel menú de navegació de l'esquerra
 
 ## Menu seleccionat Actiu
 
-- [ ] Utilitzar tècnica "discreta" de colorejar un border (el dret) amb un color accent
-- Cal abans refactoritzar la vista app.blade.php per crear un nou component
-- [ ] Opcional: canviar el color de les icones per que no siguin negres. FET per Vuetify
-- [ ] Color de les lletres un gris molt fos en comptes de negre
+- [x] Utilitzar tècnica "discreta" de colorejar un border (el dret) amb un color accent
+- [x] Cal abans refactoritzar la vista app.blade.php per crear un nou component
+- [x] Opcional: canviar el color de les icones per que no siguin negres. FET per Vuetify
+- [x] Color de les lletres un gris molt fos en comptes de negre
 
 ## Profile usuari
 
 - Settings: permetre canviar el color primary com a mínim (pràctica simple utilitzar LocalStorage)
-  - [ ] "Selector de tema" / Theme Selector
+  - [x] "Selector de tema" / Theme Selector
   
 # Manifest.json i PWA
-- Colors i icones al manifest de la system bar i de la barra de navegació 
-- Add to Home Screen: Service Worker simple i comprovar la instal·lació a mòbils 
-- FAVICON:   https://realfavicongenerator.net/
+- [x] Colors i icones al manifest de la system bar i de la barra de navegació 
+- [x] Add to Home Screen: Service Worker simple i comprovar la instal·lació a mòbils 
+- [x] FAVICON:   https://realfavicongenerator.net/
 
 # Background colors
   
-- Utilitzar l'escala de grisos que hem definit per substituir algun fons blanc
-- Es pot utilitzar un gradient com a scool: 
-  - https://github.com/acacha/scool/blob/master/resources/views/tenants/layouts/app.blade.php
-  
-  style="background: #F0F4F8;background: -webkit-linear-gradient(to right, #F0F4F8, #D9E2EC, #BCCCDC);
-              background: linear-gradient(to right, #F0F4F8, #D9E2EC, #BCCCDC);"
-              
+- [x] Utilitzar l'escala de grisos que hem definit per substituir algun fons blanc
+
 ##US/UI i estils
 
 - [ ] No utilitzar color roig als botons acció eliminar que tenen una opció de confirmació de l'acció. Si tenen confirmació no són tant perillosos
@@ -57,21 +52,21 @@
 - [ ] Botons cancel: terciaris arreu
 
 CARDS:
-- Vista mòbil les tasques han de ser una card cada tasca:
- - Utilitzar font-weigth en comptes de mides de lletra o semantiques h1, h2, p per fer jerarquia:
-  • A normal font weight (400 or 500 depending on the font) for most text
-  • A heavier font weight (600 or 700) for text you want to emphasize
-- Elevation: provar la elevation
-- Intentar no utilitzar labels
+- [x] Vista mòbil les tasques han de ser una card cada tasca:
+ - [ ]Utilitzar font-weigth en comptes de mides de lletra o semantiques h1, h2, p per fer jerarquia:
+  • [ ]A normal font weight (400 or 500 depending on the font) for most text
+  • [ ]A heavier font weight (600 or 700) for text you want to emphasize
+- [ ]Elevation: provar la elevation
+- [x] Intentar no utilitzar labels
   
 TIPOGRAFIA:  
-- Colors de lletres en escala de grisos
-  - A dark color for primary content (like the headline of an article)
-  - A grey for secondary content (like the date an article was published)
-  - A lighter grey for tertiary content (maybe the copyright notice in a footer)
+- [ ]Colors de lletres en escala de grisos
+  - [ ]A dark color for primary content (like the headline of an article)
+  - [ ]A grey for secondary content (like the date an article was published)
+  - [ ]A lighter grey for tertiary content (maybe the copyright notice in a footer)
   
 FAVICON i altres icones 2:
-- MASTER:140x140pixels Exemple: https://realfavicongenerator.net/files/aa721752ab56d736bb190769232caefe50591992/master_favicon_thumbnail.png
+- [x] MASTER:140x140pixels Exemple: https://realfavicongenerator.net/files/aa721752ab56d736bb190769232caefe50591992/master_favicon_thumbnail.png
 
 # WHAT WEB CAN DO TODAY
 
@@ -81,7 +76,7 @@ Llegiu SOCIAL_SHARING.md
 
 ## API CREDENTIALS JAVASCRIPT
 
-Permet guardar la paraula de pas i password al gestor de credencials de Android
+- [ ] Permet guardar la paraula de pas i password al gestor de credencials de Android
 - Seguretat? 
 - Comoditat: a tots els dispositius mateix compte Google es recordara l'accés
 - Canviar el component de Login per utilitzar aquesta api
@@ -97,7 +92,7 @@ Recursos:
 
 ## PUSH NOTIFICATIONS
 
-- CAL SERVICE WORKERS I SUPORT BROADCAST O INFRAESTRUCTURA DE SERVIDOR
+- [ ]CAL SERVICE WORKERS I SUPORT BROADCAST O INFRAESTRUCTURA DE SERVIDOR
 
 # PWA
 
@@ -107,22 +102,22 @@ Recursos:
 
 ### Notifications
 
-Exemple Event:
-- Tasca Completada
-  - Ara:
-    - Enviem Email
-    - Changelog
-  - Suposem també volem:
-    - Enviar SMS
-    - Enviar petició de broadcast en temps real: altres
-    - Guardar a una base de dades la notificació per poder mostrar a l'usuari les notificacions
-    - Enviar missatge Chat/Slack/Telegram
-    - Push notificacion
-    - Tot això són notificacions   
+-[ ] Exemple Event:
+	- Tasca Completada
+	  - Ara:
+		- Enviem Email
+		- Changelog
+	  - Suposem també volem:
+		- Enviar SMS
+		- Enviar petició de broadcast en temps real: altres
+		- Guardar a una base de dades la notificació per poder mostrar a l'usuari les notificacions
+		- Enviar missatge Chat/Slack/Telegram
+		- Push notificacion
+		- Tot això són notificacions   
 
 ### Widget de Notificacions
 
-Boto Icona amb Menú Dropdown: https://codepen.io/pen/?&editable=true&editors=101 | https://vuetifyjs.com/en/components/menus
+[x] Boto Icona amb Menú Dropdown: https://codepen.io/pen/?&editable=true&editors=101 | https://vuetifyjs.com/en/components/menus
 
 STORING NOTIFICACIONS:
 
@@ -181,21 +176,21 @@ https://adminlte.io/themes/AdminLTE/index2.html#
 
 ## EAGER LOADING
 
-- [ ] Fer un estudi de com impacte les relacions i el Lazy Loading en el rendiment de l'aplicació
-- [ ] Laravel Telescope/ Laravel Debugbar per fer l'analisi
+- [x] Fer un estudi de com impacte les relacions i el Lazy Loading en el rendiment de l'aplicació
+- [x] Laravel Telescope/ Laravel Debugbar per fer l'analisi
 
 ## CACHE
 
-- [ ] Explicar com funciona el cache
-- [ ] TODO -> Buscar un exemple de com aplicar. Podriem fer amb les etiquetes
-  - [ ] Russian Dolls: utilitzar Event per controlar el cache i el cache refresh 
+- [x] Explicar com funciona el cache
+- [x] TODO -> Buscar un exemple de com aplicar. Podriem fer amb les etiquetes
+  - [x] Russian Dolls: utilitzar Event per controlar el cache i el cache refresh 
 ## TASK SCHEDULING
 
-- [ ] Explicar com funciona
-  - [ ] Buscar exemple aplicació
+- [x] Explicar com funciona
+  - [x] Buscar exemple aplicació
 
 ## APLICACIÓ EN EXPLOTACIÓ
 
 - [ ] npm run prod
 - [ ] cache config i altres
-- [ ] Cuas a explotació
+- [x] Cuas a explotació

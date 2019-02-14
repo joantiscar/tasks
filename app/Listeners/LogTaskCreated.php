@@ -38,7 +38,7 @@ class LogTaskCreated implements shouldQueue
             'user_id' => $event->task->id,
             'loggable_id' => $event->task->id,
             'loggable_type' => Task::class,
-            'new_value' => json_encode($event->task)
+            'new_value' => json_encode($event->task->mapSimple())
         ]);
     }
 }

@@ -86,7 +86,8 @@
             <notifications-widget></notifications-widget>
             <v-spacer></v-spacer>
             <span v-role="'SuperAdmin'">
-                <git-info></git-info></span>
+                <git-info></git-info>
+            </span>
             <v-btn icon @click="" href="/profile">
             <v-avatar>
                 <img src="https://www.gravatar.com/avatar/{{ md5(Auth::user()->email) }}" alt="avatar">
@@ -105,7 +106,7 @@
 
         </v-toolbar>
 
-        <v-layout align-center justify-center row fluid>
+        <v-layout align-center justify-center row fluid class="grey lighten-5">
                 @yield('content')
         </v-layout>
         <v-footer color="primary" app inset>
