@@ -9,12 +9,12 @@
             <v-btn @click="registerForm = !registerForm">Register</v-btn>
             <v-dialog v-model="loginForm" max-width="1000">
                 <v-card>
-                    <login-form email="{{old('email')}}" csrf-token="{{csrf_token()}}"></login-form>
+                    <login-form v-if="loginForm" email="{{old('email')}}" csrf-token="{{csrf_token()}}"></login-form>
                 </v-card>
             </v-dialog>
             <v-dialog v-model="registerForm" max-width="1000">
                 <v-card>
-                    <register-form email="{{old('email')}}" csrf-token="{{csrf_token()}}"></register-form>
+                    <register-form v-if="registerForm" email="{{old('email')}}" csrf-token="{{csrf_token()}}"></register-form>
                 </v-card>
 
             </v-dialog>
@@ -42,7 +42,7 @@
                         <h1
                                 style="text-shadow: 0 0 50px hsla(0, 0%, 0%, .4);font-family: 'Montserrat', sans-serif !important; z-index: 10;"
                                 class="black--text mb-2 display-1 text-xs-center">Lo pantano és de La Sénia</h1>
-                        <v-btn href="https://github.com/joantiscar/tasks"><img height="30" class="pr-2" src="http://cdn.onlinewebfonts.com/svg/img_326384.png">  Github</v-btn>
+                        <v-btn href="https://github.com/joantiscar/tasks"><img height="30" class="pr-2" src="https://cdn.onlinewebfonts.com/svg/img_326384.png">  Github</v-btn>
                         <div class="black--text subheading mb-3 text-xs-center"
                         style="text-shadow: 0 0 50px hsla(0, 0%, 0%, .4);font-family: 'Montserrat', sans-serif !important; z-index: 10;"
                         >Powered by LOPUTOAMO</div>
