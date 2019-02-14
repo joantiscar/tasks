@@ -29,7 +29,7 @@ class TasksController extends Controller
     }
     public function edit(UpdateTask $request, Task $task) // Route Model Binding
     {
-        $oldTask = $task->toArray();
+        $oldTask = $task->mapSimple();
         $task->update($request->all());
         $task->save();
         $data = (array) $request->only('tags');

@@ -72,9 +72,6 @@
                         <v-layout justify-space-between>
                             <v-flex xs2 text-xs-left align-self-center>
                                 <template v-if="log.user_name">
-                                    <image-upload-component class="mr-2" :hash-id="log.user_hashid"
-                                                 :alt="log.user_name"
-                                    ></image-upload-component>
                                     <span :title="log.user_email">{{log.user_name}}</span>
                                 </template>
                                 <template v-else>Cap usuari</template>
@@ -91,10 +88,10 @@
                                 <json-dialog-component name="Actual" title="Objecte actual" :json="log.loggable"></json-dialog-component>
                             </v-flex>
                             <v-flex xs1 text-xs-left align-self-center>
-                                <json-dialog-component name="Nou" title="Objecte nou" :json="JSON.parse(log.new_loggable)"></json-dialog-component>
+                                <json-dialog-component name="Nou" title="Objecte nou" :json="JSON.parse(log.new_value)"></json-dialog-component>
                             </v-flex>
                             <v-flex xs1 text-xs-left align-self-center>
-                                <json-dialog-component name="Àntic" title="Objecte en el moment de la modificació"  :json="JSON.parse(log.old_loggable)"></json-dialog-component>
+                                <json-dialog-component name="Àntic" title="Objecte en el moment de la modificació"  :json="JSON.parse(log.old_value)"></json-dialog-component>
                             </v-flex>
                             <v-flex xs1 text-xs-left align-self-center>
                                 <v-btn icon :href="log.module.href" :target="log.module.target">

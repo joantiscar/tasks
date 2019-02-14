@@ -25,6 +25,7 @@
 </head>
 <body>
 <div id="app" v-cloak>
+    <service-worker></service-worker>
     @yield('content')
 </div>
 <script src="{{ mix('js/app.js') }}"></script>

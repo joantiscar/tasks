@@ -86420,9 +86420,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 
 
@@ -87547,14 +87544,6 @@ var render = function() {
                                     [
                                       log.user_name
                                         ? [
-                                            _c("image-upload-component", {
-                                              staticClass: "mr-2",
-                                              attrs: {
-                                                "hash-id": log.user_hashid,
-                                                alt: log.user_name
-                                              }
-                                            }),
-                                            _vm._v(" "),
                                             _c(
                                               "span",
                                               {
@@ -87671,7 +87660,7 @@ var render = function() {
                                         attrs: {
                                           name: "Nou",
                                           title: "Objecte nou",
-                                          json: JSON.parse(log.new_loggable)
+                                          json: JSON.parse(log.new_value)
                                         }
                                       })
                                     ],
@@ -87693,7 +87682,7 @@ var render = function() {
                                           name: "Àntic",
                                           title:
                                             "Objecte en el moment de la modificació",
-                                          json: JSON.parse(log.old_loggable)
+                                          json: JSON.parse(log.old_value)
                                         }
                                       })
                                     ],
@@ -89369,16 +89358,26 @@ module.exports = Component.exports
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ServiceWorker',
   // VULL EXECUTAR EL REGISTRE DEL SERVICE WORKER
-  mounted: function mounted() {
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('/service-worker.js');
-    } else {
-      console.log('missatge d\'error');
+  methods: {
+    registerServiceWorker: function registerServiceWorker() {
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/service-worker.js').then(function (registration) {
+          console.log('Registration successful, sope is: ' + registration.scope);
+        }).catch(function (error) {
+          console.log('Service worker registration failed, error: ' + error);
+        });
+      } else {
+        console.log('missatge d\'error');
+      }
     }
+  },
+  created: function created() {
+    this.registerServiceWorker();
   }
 });
 
@@ -89390,7 +89389,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c("span")
 }
 var staticRenderFns = []
 render._withStripped = true

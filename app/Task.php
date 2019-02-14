@@ -131,6 +131,17 @@ class Task extends Model
             'tags' => $this->tags
         ];
     }
+
+    public function mapSimple()
+    {
+        return [
+          'id' => $this->id,
+          'name' => $this->name,
+          'description' => $this->description,
+          'completed' => (boolean)$this->completed,
+          'tags' => $this->tags
+        ];
+    }
     public function scopeCompleted($query)
     {
         return $query->where('completed', 1);

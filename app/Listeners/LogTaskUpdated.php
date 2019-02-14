@@ -35,11 +35,11 @@ class LogTaskUpdated implements shouldQueue
             'module_type' => 'Tasques',
             'icon' => 'lock_open',
             'color' => 'primary',
-            'user_id' => $event->oldTask['id'],
-            'loggable_id' => $event->oldTask['id'],
+            'user_id' => $event->newTask->user->id,
+            'loggable_id' => $event->newTask->id,
             'loggable_type' => Task::class,
-//            'new_value' => json_encode($event->newTask)
-//            'old_value' => json_encode($event->oldTask)
+            'new_value' => json_encode($event->newTask->mapSimple()),
+            'old_value' => json_encode($event->oldTask)
         ]);
     }
 }

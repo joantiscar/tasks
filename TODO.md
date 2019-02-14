@@ -9,21 +9,19 @@
 
 ## File Uploads
 
-
-
 ## Empty states
-- [ ] No Mostrar datatables quan no hi ha cap tasca al sistema
-  - [ ] Mostrar més aviat quelcom més similar a una welcome Page
-  - [ ] Tres items:
-    - [ ] Imatge SVG 
-    - [ ] Text gran (simpàtic i esxpliqui que cal fer)
-    - [ ] Botó CTA 
+- [x] No Mostrar datatables quan no hi ha cap tasca al sistema
+  - [x] Mostrar més aviat quelcom més similar a una welcome Page
+  - [x] Tres items:
+    - [x] Imatge SVG 
+    - [x] Text gran (simpàtic i expliqui que cal fer)
+    - [x] Botó CTA 
     - [ ] Opcional: background opcions: color paleta de grisos, patro, algun pattern de fons parcial 
 
 ## Refactoritzacions
 
 - Moure als seus propis components parts del layout principal:
-  - [ ] component pel nemú de navegació de l'esquerra
+  - [ ] component pel menú de navegació de l'esquerra
 
 ## Menu seleccionat Actiu
 
@@ -31,6 +29,7 @@
 - Cal abans refactoritzar la vista app.blade.php per crear un nou component
 - [ ] Opcional: canviar el color de les icones per que no siguin negres. FET per Vuetify
 - [ ] Color de les lletres un gris molt fos en comptes de negre
+
 ## Profile usuari
 
 - Settings: permetre canviar el color primary com a mínim (pràctica simple utilitzar LocalStorage)
@@ -73,3 +72,130 @@ TIPOGRAFIA:
   
 FAVICON i altres icones 2:
 - MASTER:140x140pixels Exemple: https://realfavicongenerator.net/files/aa721752ab56d736bb190769232caefe50591992/master_favicon_thumbnail.png
+
+# WHAT WEB CAN DO TODAY
+
+## SOCIAL SHARING
+
+Llegiu SOCIAL_SHARING.md
+
+## API CREDENTIALS JAVASCRIPT
+
+Permet guardar la paraula de pas i password al gestor de credencials de Android
+- Seguretat? 
+- Comoditat: a tots els dispositius mateix compte Google es recordara l'accés
+- Canviar el component de Login per utilitzar aquesta api
+
+## LOCAL NOTIFICATIONS | NOTIFICATIONS API
+
+- Permet a una aplicació web enviar notificacions de Sistema (són mostrades fora de la pàgina web utilitzant sistema notificacions de la plataforma/Sistema operatiu en ús)
+- És possible fins i tot combinant amb web workers/service workers fer-ho sense aplicació estar en execució
+
+Recursos:
+- https://developer.mozilla.org/en-US/docs/Web/API/Notifications_API
+- https://whatwebcando.today/local-notifications.html
+
+## PUSH NOTIFICATIONS
+
+- CAL SERVICE WORKERS I SUPORT BROADCAST O INFRAESTRUCTURA DE SERVIDOR
+
+# PWA
+
+# MILLORES APLICACIó PER FACILITAT PRÀCTIQUES EXPLOTACIó
+
+## Widgets Toolbar
+
+### Notifications
+
+Exemple Event:
+- Tasca Completada
+  - Ara:
+    - Enviem Email
+    - Changelog
+  - Suposem també volem:
+    - Enviar SMS
+    - Enviar petició de broadcast en temps real: altres
+    - Guardar a una base de dades la notificació per poder mostrar a l'usuari les notificacions
+    - Enviar missatge Chat/Slack/Telegram
+    - Push notificacion
+    - Tot això són notificacions   
+
+### Widget de Notificacions
+
+Boto Icona amb Menú Dropdown: https://codepen.io/pen/?&editable=true&editors=101 | https://vuetifyjs.com/en/components/menus
+
+STORING NOTIFICACIONS:
+
+```
+php artisan notifications:table
+2019_01_29_140800_create_notifications_table
+php artisan migrate
+```
+```
+Schema::create('notifications', function (Blueprint $table) {
+            $table->uuid('id')->primary();
+            $table->string('type');
+            $table->morphs('notifiable');
+            $table->text('data');
+            $table->timestamp('read_at')->nullable();
+            $table->timestamps();
+        });
+```        
+   
+- API: 
+  - $user->notifications
+  - $user->unreadNotifications
+  - $notification->markAsRead();
+  - $user->unreadNotifications->markAsRead();
+
+
+CANALS:
+- EMAIL -> Els usuaris tenen email
+- SMS -> Cal incorporar un mòbil al usuari
+- Slack-> ???
+- Telegram-> ?
+
+Sistema integral de notificacions per a una app:
+- [ ] Les notificacions poden ser emails/SMS/Missatges de Chat o múltiples opcions mateix temps
+
+- [ ] Task Scheduling de Laravel: utilitzar per fer neteja de notificacions antigues
+  - [ ] Comanda Laravel que netegi notificacions velles (poder indicar quin és el criteri per esboorar)
+  - [ ] Programar l'execució automàtica de la comanda
+
+### Widget Missatges Chat
+TODO
+
+### WIDGET TASQUES PENDENTS:
+- [ ] Icona tasques o similar
+- [ ] Badge amb el contador de tasques pendents
+- [ ] Un cop es fa click mostrar un menu amb la llista de tasques pendents
+- [ ] Cal incorporar camp al model Task -> progress: Enter entre 1 i 100 (tant per cent). MIgration DEFAULT: 0'
+- [ ] Al fet click a la tasca s'ha de mostrar la tasca:
+  - [ ] Cal fer show tasca
+  - [ ] Després del show tornar a la llista de tasques
+- REAL TIME SUPPORT: s'actualitzi en temps reals   
+Exemple: adminLTE: bandereta amb badget mostra llista de tasques pendents amb tant per cent execució
+https://adminlte.io/themes/AdminLTE/index2.html#
+
+# PERFORMANCE/RENDIMENT
+
+## EAGER LOADING
+
+- [ ] Fer un estudi de com impacte les relacions i el Lazy Loading en el rendiment de l'aplicació
+- [ ] Laravel Telescope/ Laravel Debugbar per fer l'analisi
+
+## CACHE
+
+- [ ] Explicar com funciona el cache
+- [ ] TODO -> Buscar un exemple de com aplicar. Podriem fer amb les etiquetes
+  - [ ] Russian Dolls: utilitzar Event per controlar el cache i el cache refresh 
+## TASK SCHEDULING
+
+- [ ] Explicar com funciona
+  - [ ] Buscar exemple aplicació
+
+## APLICACIÓ EN EXPLOTACIÓ
+
+- [ ] npm run prod
+- [ ] cache config i altres
+- [ ] Cuas a explotació
