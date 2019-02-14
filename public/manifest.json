@@ -1,10 +1,10 @@
 {
+  "name": "Tasques Joan Tíscar",
   "theme_color": "#BA2525",
   "background_color": "#BA2525",
-  "display": "fullscreen",
+  "display": "standalone",
   "Scope": "/",
   "start_url": "/",
-  "name": "Tasques Joan Tíscar",
   "short_name": "tsks",
   "icons": [
     {
