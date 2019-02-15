@@ -29,14 +29,14 @@ class LogTaskDeleted
     public function handle($event)
     {
         Log::create([
-            'text' => "S'ha borrat la tasca '" . $event->task->name ."'",
+            'text' => "S'ha borrat la tasca '" . $event->task['name'] ."'",
             'time' =>  Carbon::now(),
             'action_type' => 'borrar',
             'module_type' => 'Tasques',
             'icon' => 'lock_open',
             'color' => 'primary',
-            'user_id' => $event->task->id,
-            'loggable_id' => $event->task->id,
+            'user_id' => $event->task['user_id'],
+            'loggable_id' => $event->task['id'],
             'loggable_type' => Task::class,
             'old_value' => json_encode($event->task)
         ]);

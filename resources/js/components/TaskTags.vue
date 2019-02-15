@@ -28,7 +28,8 @@ export default {
     }
   },
   methods: {
-    add (tags) {
+    async add (tags) {
+
       window.axios.post(('/api/v1/task/' + this.task.id + '/tags/multiple'), tags).then((response) => {
         this.$snackbar.showMessage('Etiquetes afegides correctament')
       }).catch((error) => {

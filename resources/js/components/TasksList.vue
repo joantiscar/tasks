@@ -1,5 +1,6 @@
 <template>
-  <span>
+    <span>
+  <span v-if="dataTasks.length > 0">
   <v-toolbar color="secondary darken-1">
     <v-menu left>
 
@@ -42,26 +43,26 @@
         </v-flex>
         <v-flex xs4>
           <v-text-field
-            v-model="search"
-            append-icon="search"
-            label="Búsqueda"
-            single-line
-            hide-details
+                  v-model="search"
+                  append-icon="search"
+                  label="Búsqueda"
+                  single-line
+                  hide-details
           ></v-text-field>
         </v-flex>
       </v-layout>
     </v-card-title>
   <v-data-table
-    :headers="headers"
-    :items="filteredTasks"
-    :search="search"
-    no-results-text="No s'ha trobat cap registre coincident"
-    :loading="loading"
-    no-data-text=""
-    rows-per-page-text="Tasques per pàgina"
-    :rows-per-page-items="[5,10,25,50,100,200,{'text':'Tots','value':-1}]"
-    :pagination.sync="pagination"
-    class="hidden-md-and-down"
+          :headers="headers"
+          :items="filteredTasks"
+          :search="search"
+          no-results-text="No s'ha trobat cap registre coincident"
+          :loading="loading"
+          no-data-text=""
+          rows-per-page-text="Tasques per pàgina"
+          :rows-per-page-items="[5,10,25,50,100,200,{'text':'Tots','value':-1}]"
+          :pagination.sync="pagination"
+          class="hidden-md-and-down"
   >
 
     <v-progress-linear slot="progress" color="secondary" indeterminate></v-progress-linear>
@@ -81,37 +82,37 @@
         <td>
           <task-destroy :task="task" @removed="removeTask" :uri="uri"></task-destroy>
             <task-edit :tags="tags" :task="task" :users="dataUsers" @edited="refresh"></task-edit>
-          <!--<v-btn v-if="$can('tasks.show', task)" color="success" icon flat title="Modificar la tasca"-->
-          <!--@click="showShow">-->
-          <!--<v-icon>remove_red_eye</v-icon>-->
-          <!--</v-btn>-->
+            <!--<v-btn v-if="$can('tasks.show', task)" color="success" icon flat title="Modificar la tasca"-->
+            <!--@click="showShow">-->
+            <!--<v-icon>remove_red_eye</v-icon>-->
+            <!--</v-btn>-->
         </td>
       </tr>
 
     </template>
   </v-data-table>
       <v-data-iterator
-        class="hidden-lg-and-up"
-        :items="filteredTasks"
-        :search="search"
-        no-results-text="No s'ha trobat cap tasca coincident"
-        no-data-text="No hi ha dades disponibles"
-        rows-per-page-text="Tasks per pagina"
-        :rows-per-page-items="[5,10,25,50,100,{'text':'Totes','value':-1}]"
-        :loading="loading"
-        :pagination.sync="pagination"
-        content-tag="v-layout"
-        row
-        wrap
+              class="hidden-lg-and-up"
+              :items="filteredTasks"
+              :search="search"
+              no-results-text="No s'ha trobat cap tasca coincident"
+              no-data-text="No hi ha dades disponibles"
+              rows-per-page-text="Tasks per pagina"
+              :rows-per-page-items="[5,10,25,50,100,{'text':'Totes','value':-1}]"
+              :loading="loading"
+              :pagination.sync="pagination"
+              content-tag="v-layout"
+              row
+              wrap
       >
                 <v-flex
-                  slot="item"
-                  slot-scope="{item:task}"
-                  xs12
-                  sm6
-                  md4
-                  lg3
-                  class="pb-2"
+                        slot="item"
+                        slot-scope="{item:task}"
+                        xs12
+                        sm6
+                        md4
+                        lg3
+                        class="pb-2"
                 >
                       <v-card>
                         <v-toolbar dark class="secondary darken-2">
@@ -122,7 +123,8 @@
                               <v-icon>more_vert</v-icon>
                             </v-btn>
                             <v-list>
-                                 <task-show-mobile :tags="tags" :task="task" :users="dataUsers" @edited="refresh"></task-show-mobile>
+                                 <task-show-mobile :tags="tags" :task="task" :users="dataUsers"
+                                                   @edited="refresh"></task-show-mobile>
                                   <task-edit :tags="tags" :task="task" :users="dataUsers" @edited="refresh"></task-edit>
                                   <task-destroy :task="task" @removed="removeTask" :uri="uri"></task-destroy>
                             </v-list>
@@ -137,14 +139,20 @@
                             </v-avatar>
                             </v-flex>
                             <v-flex xs12 class="pt-2">
-                                <span class="subheading">{{ task.user_name }}</span>
+                                <span class="font-weight-bold">{{ task.user_name }}</span>
                             </v-flex>
                           </v-flex>
                           <v-flex xs7>
                               <v-list class="pb-3 pb-3">
+                                  <v-list-tile>
+                                  <v-list-tile-content>
+                                      <span class="font-weight-thin">{{ task.description }}</span>
+                                  </v-list-tile-content>
+                                </v-list-tile>
                                 <v-list-tile>
                                   <v-list-tile-content>
-                                     <task-completed-toggle :status="task.completed" :task="task" :tags="tags"></task-completed-toggle>
+                                     <task-completed-toggle :status="task.completed" :task="task"
+                                                            :tags="tags"></task-completed-toggle>
                                   </v-list-tile-content>
                                 </v-list-tile>
                               </v-list>
@@ -158,8 +166,27 @@
                         </v-card>
                 </v-flex>
             </v-data-iterator>
+      <task-create :tags="tags" :users="users" @created="addTask"></task-create>
   </v-card>
   </span>
+    <template v-else>
+        <v-card>
+            <v-card-title>
+                <v-flex xs12>
+                    <img src="img/task_not_found.svg">
+                </v-flex>
+            </v-card-title>
+            <v-card-text>
+                <v-flex xs12>
+                    <span class="headline text-xs-center">No hi ha cap tasca!</span>
+                </v-flex>
+                <v-flex xs12>
+                    <empty-tasks-create-button :tags="tags" :users="users" @created="addTask"></empty-tasks-create-button>
+                </v-flex>
+            </v-card-text>
+        </v-card>
+    </template>
+        </span>
 </template>
 <script>
 import TaskCompletedToggle from './TaskCompletedToggle'
@@ -167,11 +194,12 @@ import TaskEdit from './TaskEdit'
 import TaskCreate from './TaskCreate'
 import TaskDestroy from './TaskDestroy'
 import TaskTags from './TaskTags'
+import EmptyTasksCreateButton from './EmptyTasksCreateButton'
 import TaskShowMobile from './TaskShowMobile'
 
 export default {
   name: 'tasks-list',
-  components: { TaskCompletedToggle, TaskEdit, TaskCreate, TaskDestroy, TaskTags, TaskShowMobile },
+  components: { EmptyTasksCreateButton, TaskCompletedToggle, TaskEdit, TaskCreate, TaskDestroy, TaskTags, TaskShowMobile },
   data () {
     return {
       dataUsers: this.users,
@@ -252,6 +280,9 @@ export default {
     },
     removeTask (task) {
       this.dataTasks.splice(this.dataTasks.indexOf(task), 1)
+    },
+    addTask (task) {
+      this.dataTasks.push(task)
     },
     opcio1 () {
       console.log('Opcio1')

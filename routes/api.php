@@ -24,6 +24,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::middleware(['auth:api'])->group(function () {
 
     Route::get('/v1/tasks','Api\TasksController@index');            //BROWSE
+    Route::get('/v1/tasks/refresh','Api\TasksController@refresh');            //BROWSE
     Route::get('/v1/tasks/{task}','Api\TasksController@show');      //READ
     Route::delete('/v1/tasks/{task}','Api\TasksController@destroy');//DELETE
     Route::post('/v1/tasks','Api\TasksController@store');           //CREATE

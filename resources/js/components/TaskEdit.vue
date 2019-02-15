@@ -3,7 +3,7 @@
      <v-btn v-if="$can('tasks.update', task)" color="success" icon flat title="Modificar la tasca" class="hidden-md-and-down" @click="dialog  = true">
     <v-icon>border_color</v-icon>
   </v-btn>
-  <v-list-tile class="hidden-lg-and-up" v-if="$can('tasks.update', task)" @click="dialog = false">
+  <v-list-tile class="hidden-lg-and-up" v-if="$can('tasks.update', task)" @click="dialog = true">
     <v-list-tile-title>Editar</v-list-tile-title>
     <v-list-tile-action>
     <v-icon color="success" title="Modificar la tasca">border_color</v-icon>

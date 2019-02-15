@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Events\TaskUpdated;
 use App\Http\Requests\DestroyTask;
 use App\Http\Requests\IndexTask;
 use App\Http\Requests\RemoveTaskTags;
@@ -19,14 +20,21 @@ class TaskTagsController extends Controller
 
     public function addMultipleTags(UpdateTaskTags $request, Task $task) // Route Model Binding
     {
-        return $task->syncTags($request->all());
+        $oldTask = $task->mapSimple();
+        $task->syncTags($request->all());
+        $task->save();
+        event(new TaskUpdated($oldTask, $task));
+        return $task;
     }
     public function removeTag(RemoveTaskTags $request, Task $task, Tag $tag)
     {
+        $oldTask = $task->mapSimple();
 
         $task->tags()->detach($tag['id']);
 
         $task->save();
+
+        event(new TaskUpdated($oldTask, $task));
 
         return $task->map();
 

@@ -75,7 +75,7 @@ import TaskForm from './TaskForm'
 import TaskTagsChips from './TaskTagsChips'
 
 export default {
-  name: 'task-edit',
+  name: 'task-show',
   components: { TaskTagsChips, TaskForm },
   data () {
     return {

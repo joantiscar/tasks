@@ -66,7 +66,7 @@ class Task extends Model
     public function syncTags($tags)
     {
         $tagsids = [];
-        if (sizeof($tags) > 0) {
+            if (sizeof($tags) > 0) {
             foreach ($tags as $tag) {
                 if (is_array($tag)) array_push($tagsids, $tag['id'], false);
                 else {
@@ -139,7 +139,7 @@ class Task extends Model
           'name' => $this->name,
           'description' => $this->description,
           'completed' => (boolean)$this->completed,
-          'tags' => $this->tags
+          'user_id' => $this->user->id
         ];
     }
     public function scopeCompleted($query)

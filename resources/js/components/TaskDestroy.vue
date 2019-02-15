@@ -1,7 +1,7 @@
 <template>
   <span>
       <v-btn v-if="$can('tasks.destroy', task)" :loading="loading === task.id" :disabled="loading === task.id"
-             color="error" flat icon title="Eliminar la tasca" class="hidden-md-and-down"
+             color="grey" flat icon title="Eliminar la tasca" class="hidden-md-and-down"
 
              @click="destroy">
   <v-icon>delete</v-icon>
@@ -39,7 +39,7 @@ export default {
       // ES6 async await
 
       let result = await this.$confirm('Les tasques esborrades no es poden recuperar',
-        { title: 'Esteu segurs?', buttonTrueText: 'Eliminar', buttonFalseText: 'Cancel·lar', color: 'blue' })
+        { title: 'Esteu segurs?', buttonTrueText: 'Eliminar', buttonFalseText: 'Cancel·lar', color: 'blue', buttonFalseColor: 'grey' })
       if (result) {
         this.loading = true
         window.axios.delete(this.uri + '/' + this.task.id).then(() => {

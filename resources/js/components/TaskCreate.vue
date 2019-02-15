@@ -68,7 +68,7 @@ export default {
   methods: {
     created (task) {
       window.axios.post(this.uri, task).then((response) => {
-        this.$snackbar.showMessage("S'ha editat correctament la tasca")
+        this.$snackbar.showMessage("S'ha creat correctament la tasca")
         this.$emit('created', response.data)
       }).catch((error) => {
         this.$snackbar.showError(error.message)

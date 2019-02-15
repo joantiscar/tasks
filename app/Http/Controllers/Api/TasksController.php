@@ -16,38 +16,43 @@ use Illuminate\Support\Facades\Cache;
 
 class TasksController extends Controller
 {
+
     //
     public function show(TaskShow $request, Task $task) // Route Model Binding
     {
         return $task->map();
     }
+
     public function destroy(DestroyTask $request, Task $task) // Route Model Binding
     {
+        $oldTask = $task->mapSimple();
         $task->delete();
-        event(new TaskDeleted($task));
+        event(new TaskDeleted($oldTask));
 
     }
+
     public function edit(UpdateTask $request, Task $task) // Route Model Binding
     {
         $oldTask = $task->mapSimple();
         $task->update($request->all());
         $task->save();
-        $data = (array) $request->only('tags');
+        $data = (array)$request->only('tags');
         $task->syncTags($data['tags']);
         $task->save();
         event(new TaskUpdated($oldTask, $task));
         return $task->map();
     }
+
     public function store(StoreTask $request) // Route Model Binding
     {
-//        return $request->all();
+        //        return $request->all();
         $task = new Task($request->all());
         $task->save();
-//        $data = (array) $request->only('tags');
-//        $task->syncTags($data['tags']);
+        //        $data = (array) $request->only('tags');
+        //        $task->syncTags($data['tags']);
 
         $tags = $request->only('tags');
-        if (sizeof($tags) > 0){
+        if (sizeof($tags) > 0) {
             $task->syncTags($tags['tags']);
         }
         $task->save();
@@ -56,6 +61,7 @@ class TasksController extends Controller
 
         return $task->map();
     }
+
     public function index(IndexTask $request)
     {
 
@@ -65,4 +71,12 @@ class TasksController extends Controller
               ->get());
         });
     }
+
+    public function refresh(IndexTask $request)
+    {
+        return map_collection(Task::with('user', 'tags')
+          ->orderBy('created_at', 'desc')
+          ->get());
+    }
 }
+

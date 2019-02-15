@@ -31,7 +31,7 @@
          </v-card-text>
         <v-divider></v-divider>
         <v-card-actions v-if="!readonly">
-        <v-btn color="error" flat @click="dialog = false">Cancelar</v-btn>
+        <v-btn flat @click="dialog = false">Cancelar</v-btn>
         <v-btn color="primary" flat @click="add()">Afegir</v-btn>
         </v-card-actions>
       </v-card>

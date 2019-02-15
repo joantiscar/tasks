@@ -14,7 +14,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\Feature\Traits\CanLogin;
 use Tests\TestCase;
 
-class LoggedUserTaskApiControllerTest extends TestCase
+class OnlineUsersTest extends TestCase
 {
 
     use RefreshDatabase, CanLogin;

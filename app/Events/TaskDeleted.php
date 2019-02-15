@@ -15,12 +15,14 @@ class TaskDeleted
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
+    public $task;
+
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Task $task)
+    public function __construct(array $task)
     {
         $this->task = $task;
     }

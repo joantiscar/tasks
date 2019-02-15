@@ -46,16 +46,16 @@
 
 ##US/UI i estils
 
-- [ ] No utilitzar color roig als botons acció eliminar que tenen una opció de confirmació de l'acció. Si tenen confirmació no són tant perillosos
-  - [ ] Aplicar jerarquia per NO destacar el botó acció d'esborrar (secondari o terciari com a mínim)
-- [ ] Sí utilitzar botó roig al menú de confirmació on realment s'elimina el recurs
-- [ ] Botons cancel: terciaris arreu
+- [x] No utilitzar color roig als botons acció eliminar que tenen una opció de confirmació de l'acció. Si tenen confirmació no són tant perillosos
+  - [x] Aplicar jerarquia per NO destacar el botó acció d'esborrar (secondari o terciari com a mínim)
+- [x] Sí utilitzar botó roig al menú de confirmació on realment s'elimina el recurs
+- [x] Botons cancel: terciaris arreu
 
 CARDS:
 - [x] Vista mòbil les tasques han de ser una card cada tasca:
  - [ ]Utilitzar font-weigth en comptes de mides de lletra o semantiques h1, h2, p per fer jerarquia:
-  • [ ]A normal font weight (400 or 500 depending on the font) for most text
-  • [ ]A heavier font weight (600 or 700) for text you want to emphasize
+  • [x] A normal font weight (400 or 500 depending on the font) for most text
+  • [x] A heavier font weight (600 or 700) for text you want to emphasize
 - [ ]Elevation: provar la elevation
 - [x] Intentar no utilitzar labels
   
@@ -92,7 +92,7 @@ Recursos:
 
 ## PUSH NOTIFICATIONS
 
-- [ ]CAL SERVICE WORKERS I SUPORT BROADCAST O INFRAESTRUCTURA DE SERVIDOR
+- [x] CAL SERVICE WORKERS I SUPORT BROADCAST O INFRAESTRUCTURA DE SERVIDOR
 
 # PWA
 
@@ -102,7 +102,7 @@ Recursos:
 
 ### Notifications
 
--[ ] Exemple Event:
+-[x] Exemple Event:
 	- Tasca Completada
 	  - Ara:
 		- Enviem Email
