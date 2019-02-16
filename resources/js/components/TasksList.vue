@@ -269,7 +269,7 @@ export default {
     refresh () {
       this.loading = true
       // todo -> axios
-      window.axios.get(this.uri).then(response => {
+      window.axios.get(this.uri + '/refresh').then(response => {
         console.log(response)
         this.dataTasks = response.data
       }).catch(error => {

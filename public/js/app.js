@@ -77872,7 +77872,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
       this.loading = true;
       // todo -> axios
-      window.axios.get(this.uri).then(function (response) {
+      window.axios.get(this.uri + '/refresh').then(function (response) {
         console.log(response);
         _this2.dataTasks = response.data;
       }).catch(function (error) {
