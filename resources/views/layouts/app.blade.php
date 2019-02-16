@@ -112,9 +112,7 @@
         <v-layout align-center justify-center row fluid class="grey lighten-5">
                 @yield('content')
         </v-layout>
-        <v-footer color="primary" app inset>
-            <span class="white--text">&copy; 2017</span>
-        </v-footer>
+        <footer-component></footer-component>
     </v-app>
 <script src="{{ mix('js/app.js') }}"></script>
 </body>

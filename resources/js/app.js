@@ -34,6 +34,7 @@ import TreeView from 'vue-json-tree-view'
 import ServiceWorker from './components/ServiceWorker'
 import NotificationsWidget from './components/notifications/NotificationsWidget'
 import Notifications from './components/notifications/Notifications'
+import FooterComponent from './components/FooterComponent.vue'
 
 require('./bootstrap')
 
@@ -166,5 +167,6 @@ window.Vue.component('sidebar-menu', SidebarMenu)
 window.Vue.component('service-worker', ServiceWorker)
 window.Vue.component('NotificationsWidget', NotificationsWidget)
 window.Vue.component('Notifications', Notifications)
+window.Vue.component('FooterComponent', FooterComponent)
 
 const app = new window.Vue(AppComponent)

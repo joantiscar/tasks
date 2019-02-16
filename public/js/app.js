@@ -27797,7 +27797,7 @@ module.exports = Component.exports
 /***/ (function(module, exports, __webpack_require__) {
 
 __webpack_require__(37);
-module.exports = __webpack_require__(294);
+module.exports = __webpack_require__(297);
 
 
 /***/ }),
@@ -27860,12 +27860,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_27__components_notifications_NotificationsWidget___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_27__components_notifications_NotificationsWidget__);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__components_notifications_Notifications__ = __webpack_require__(252);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_28__components_notifications_Notifications___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_28__components_notifications_Notifications__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__components_FooterComponent_vue__ = __webpack_require__(291);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_29__components_FooterComponent_vue___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_29__components_FooterComponent_vue__);
 
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
+
 
 
 
@@ -27916,7 +27919,7 @@ var secondaryColor = window.localStorage.getItem(SECONDARY_COLOR_KEY) || '#2BB0E
 window.Vue.use(__WEBPACK_IMPORTED_MODULE_24_vue_timeago__["a" /* default */], {
   locale: 'ca', // Default locale
   locales: {
-    'ca': __webpack_require__(291)
+    'ca': __webpack_require__(294)
   }
 });
 
@@ -28028,6 +28031,7 @@ window.Vue.component('sidebar-menu', __WEBPACK_IMPORTED_MODULE_19__components_Si
 window.Vue.component('service-worker', __WEBPACK_IMPORTED_MODULE_26__components_ServiceWorker___default.a);
 window.Vue.component('NotificationsWidget', __WEBPACK_IMPORTED_MODULE_27__components_notifications_NotificationsWidget___default.a);
 window.Vue.component('Notifications', __WEBPACK_IMPORTED_MODULE_28__components_notifications_Notifications___default.a);
+window.Vue.component('FooterComponent', __WEBPACK_IMPORTED_MODULE_29__components_FooterComponent_vue___default.a);
 
 var app = new window.Vue(__WEBPACK_IMPORTED_MODULE_0__components_App_vue___default.a);
 
@@ -93928,8 +93932,144 @@ if (false) {
 /* 291 */
 /***/ (function(module, exports, __webpack_require__) {
 
-var buildDistanceInWordsLocale = __webpack_require__(292)
-var buildFormatLocale = __webpack_require__(293)
+var disposed = false
+var normalizeComponent = __webpack_require__(0)
+/* script */
+var __vue_script__ = __webpack_require__(292)
+/* template */
+var __vue_template__ = __webpack_require__(293)
+/* template functional */
+var __vue_template_functional__ = false
+/* styles */
+var __vue_styles__ = null
+/* scopeId */
+var __vue_scopeId__ = null
+/* moduleIdentifier (server only) */
+var __vue_module_identifier__ = null
+var Component = normalizeComponent(
+  __vue_script__,
+  __vue_template__,
+  __vue_template_functional__,
+  __vue_styles__,
+  __vue_scopeId__,
+  __vue_module_identifier__
+)
+Component.options.__file = "resources/js/components/FooterComponent.vue"
+
+/* hot reload */
+if (false) {(function () {
+  var hotAPI = require("vue-hot-reload-api")
+  hotAPI.install(require("vue"), false)
+  if (!hotAPI.compatible) return
+  module.hot.accept()
+  if (!module.hot.data) {
+    hotAPI.createRecord("data-v-abfbddf2", Component.options)
+  } else {
+    hotAPI.reload("data-v-abfbddf2", Component.options)
+  }
+  module.hot.dispose(function (data) {
+    disposed = true
+  })
+})()}
+
+module.exports = Component.exports
+
+
+/***/ }),
+/* 292 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'FooterComponent',
+  data: function data() {
+    return {};
+  }
+});
+
+/***/ }),
+/* 293 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-footer",
+    { attrs: { height: "auto", color: "primary lighten-1" } },
+    [
+      _c(
+        "v-layout",
+        { attrs: { "justify-center": "", row: "", wrap: "" } },
+        [
+          _c(
+            "v-flex",
+            {
+              attrs: {
+                primary: "",
+                "lighten-2": "",
+                "py-3": "",
+                "text-xs-center": "",
+                "white--text": "",
+                xs12: ""
+              }
+            },
+            [
+              _vm._v(
+                "\n            El pantano es de La Sénia, perque el pantano es troba a la pobla, que com tots sabem forma part de lo imperi senienc\n        "
+              )
+            ]
+          )
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+module.exports = { render: render, staticRenderFns: staticRenderFns }
+if (false) {
+  module.hot.accept()
+  if (module.hot.data) {
+    require("vue-hot-reload-api")      .rerender("data-v-abfbddf2", module.exports)
+  }
+}
+
+/***/ }),
+/* 294 */
+/***/ (function(module, exports, __webpack_require__) {
+
+var buildDistanceInWordsLocale = __webpack_require__(295)
+var buildFormatLocale = __webpack_require__(296)
 
 /**
  * @category Locales
@@ -93943,7 +94083,7 @@ module.exports = {
 
 
 /***/ }),
-/* 292 */
+/* 295 */
 /***/ (function(module, exports) {
 
 function buildDistanceInWordsLocale () {
@@ -94048,7 +94188,7 @@ module.exports = buildDistanceInWordsLocale
 
 
 /***/ }),
-/* 293 */
+/* 296 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var buildFormattingTokensRegExp = __webpack_require__(33)
@@ -94138,7 +94278,7 @@ module.exports = buildFormatLocale
 
 
 /***/ }),
-/* 294 */
+/* 297 */
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
