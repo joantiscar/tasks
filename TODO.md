@@ -16,8 +16,8 @@
     - [x] Imatge SVG 
     - [x] Text gran (simpàtic i expliqui que cal fer)
     - [x] Botó CTA 
-    - [ ] Opcional: background opcions: color paleta de grisos, patro, algun pattern de fons parcial 
-- [] El mateix per a tags
+    - [x] Opcional: background opcions: color paleta de grisos, patro, algun pattern de fons parcial 
+- [x] El mateix per a tags
 ## Refactoritzacions
 
 - Moure als seus propis components parts del layout principal:
@@ -53,17 +53,17 @@
 
 CARDS:
 - [x] Vista mòbil les tasques han de ser una card cada tasca:
- - [ ]Utilitzar font-weigth en comptes de mides de lletra o semantiques h1, h2, p per fer jerarquia:
+ - [x]Utilitzar font-weigth en comptes de mides de lletra o semantiques h1, h2, p per fer jerarquia:
   • [x] A normal font weight (400 or 500 depending on the font) for most text
   • [x] A heavier font weight (600 or 700) for text you want to emphasize
-- [ ]Elevation: provar la elevation
+- [x]Elevation: provar la elevation
 - [x] Intentar no utilitzar labels
   
 TIPOGRAFIA:  
-- [ ]Colors de lletres en escala de grisos
-  - [ ]A dark color for primary content (like the headline of an article)
-  - [ ]A grey for secondary content (like the date an article was published)
-  - [ ]A lighter grey for tertiary content (maybe the copyright notice in a footer)
+- [x]Colors de lletres en escala de grisos
+  - [x]A dark color for primary content (like the headline of an article)
+  - [x]A grey for secondary content (like the date an article was published)
+  - [x]A lighter grey for tertiary content (maybe the copyright notice in a footer)
   
 FAVICON i altres icones 2:
 - [x] MASTER:140x140pixels Exemple: https://realfavicongenerator.net/files/aa721752ab56d736bb190769232caefe50591992/master_favicon_thumbnail.png

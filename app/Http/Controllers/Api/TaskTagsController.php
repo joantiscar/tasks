@@ -24,7 +24,7 @@ class TaskTagsController extends Controller
         $task->syncTags($request->all());
         $task->save();
         event(new TaskUpdated($oldTask, $task));
-        return $task;
+        return $task->map();
     }
     public function removeTag(RemoveTaskTags $request, Task $task, Tag $tag)
     {

@@ -3,7 +3,7 @@
 
     <v-app light>
         <v-toolbar class="white">
-            <v-toolbar-title v-text="title"></v-toolbar-title>
+            <v-toolbar-title v-text="title" class="hidden-md-and-down"></v-toolbar-title>
             <v-spacer></v-spacer>
             <v-btn @click="loginForm = !loginForm">Login</v-btn>
             <v-btn @click="registerForm = !registerForm">Register</v-btn>
@@ -36,6 +36,7 @@
                             align-center
                             justify-center
                             class="white--text"
+                            fill-height
                     >
 
                         <img src="img/icon-192x192.png" alt="icon" height="200">
@@ -45,14 +46,14 @@
                         <v-btn href="https://github.com/joantiscar/tasks"><img height="30" class="pr-2" src="https://cdn.onlinewebfonts.com/svg/img_326384.png">  Github</v-btn>
                         <div class="black--text subheading mb-3 text-xs-center"
                         style="text-shadow: 0 0 50px hsla(0, 0%, 0%, .4);font-family: 'Montserrat', sans-serif !important; z-index: 10;"
-                        >Powered by LOPUTOAMO</div>
+                        >Fet per Joan Tíscar</div>
                         <v-btn
                                 class="blue darken-1 mt-5"
                                 dark
                                 large
                                 href="/home"
                         >
-                            Get Started
+                            Ves a les teves tasques!
                         </v-btn>
                     </v-layout>
 

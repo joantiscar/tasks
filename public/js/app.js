@@ -27910,8 +27910,8 @@ var DRAWER_RIGHT_STATE_KEY = 'DRAWER_RIGHT_STATE_KEY';
 var drawerToggle = window.localStorage.getItem(DRAWER_STATE_KEY) || false;
 var drawerRightToggle = window.localStorage.getItem(DRAWER_RIGHT_STATE_KEY) || false;
 var darkToggle = window.localStorage.getItem(DARK_THEME_KEY) || false;
-var primaryColor = window.localStorage.getItem(PRIMARY_COLOR_KEY) || '#BA2525';
-var secondaryColor = window.localStorage.getItem(SECONDARY_COLOR_KEY) || '#F0B429';
+var primaryColor = window.localStorage.getItem(PRIMARY_COLOR_KEY) || '#627D98';
+var secondaryColor = window.localStorage.getItem(SECONDARY_COLOR_KEY) || '#2BB0ED';
 
 window.Vue.use(__WEBPACK_IMPORTED_MODULE_24_vue_timeago__["a" /* default */], {
   locale: 'ca', // Default locale
@@ -27929,63 +27929,63 @@ window.Vue.use(window.Vuetify, {
   theme: {
     primary: {
       base: primaryColor,
-      lighten1: '#D64545',
-      lighten2: '#E66A6A',
-      lighten3: '#F29B9B',
-      lighten4: '#FACDCD',
-      lighten5: '#FFEEEE',
-      darken1: '#A61B1B',
-      darken2: '#911111',
-      darken3: '#780A0A',
-      darken4: '#610404'
+      lighten1: '#829AB1',
+      lighten2: '#9FB3C8',
+      lighten3: '#BCCCDC',
+      lighten4: '#D9E2EC',
+      lighten5: '#F0F4F8',
+      darken1: '#486581',
+      darken2: '#334E68',
+      darken3: '#243B53',
+      darken4: '#102A43'
     },
     secondary: {
       base: secondaryColor,
-      lighten1: '#F7C948',
-      lighten2: '#FADB5F',
-      lighten3: '#FCE588',
-      lighten4: '#FFF3C4',
-      lighten5: '#FFFBEA',
-      darken1: '#DE911D',
-      darken2: '#CB6E17',
-      darken3: '#B44D12',
-      darken4: '#8D2B0B'
+      lighten1: '#40C3F7',
+      lighten2: '#5ED0FA',
+      lighten3: '#81DEFD',
+      lighten4: '#B3ECFF',
+      lighten5: '#E3F8FF',
+      darken1: '#1992D4',
+      darken2: '#127FBF',
+      darken3: '#0B69A3',
+      darken4: '#035388'
     },
     accent: {
-      base: '#2CB1BC',
-      lighten1: '#38BEC9',
-      lighten2: '#54D1DB',
-      lighten3: '#87EAF2',
-      lighten4: '#BEF8FD',
-      lighten5: '#E0FCFF',
-      darken1: '#14919B',
-      darken2: '#0E7C86',
-      darken3: '#0A6C74',
-      darken4: '#044E54'
+      base: '#DA127D',
+      lighten1: '#E8368F',
+      lighten2: '#F364A2',
+      lighten3: '#FF8CBA',
+      lighten4: '#FFB8D2',
+      lighten5: '#FFE3EC',
+      darken1: '#BC0A6F',
+      darken2: '#A30664',
+      darken3: '#870557',
+      darken4: '#620042'
     },
     error: {
-      base: '#C65D21',
-      lighten1: '#E67635',
-      lighten2: '#EF8E58',
-      lighten3: '#FAB38B',
-      lighten4: '#FFD3BA',
-      lighten5: '#FFEFE6',
-      darken1: '#AB4E19',
-      darken2: '#8C3D10',
-      darken3: '#77340D',
-      darken4: '#572508'
+      base: '#E12D39',
+      lighten1: '#EF4E4E',
+      lighten2: '#F86A6A',
+      lighten3: '#FF9B9B',
+      lighten4: '#FFBDBD',
+      lighten5: '#FFE3E3',
+      darken1: '#CF1124',
+      darken2: '#AB091E',
+      darken3: '#8A041A',
+      darken4: '#610316'
     },
     success: {
-      base: '#7BB026',
-      lighten1: '#94C843',
-      lighten2: '#ABDB5E',
-      lighten3: '#C7EA8F',
-      lighten4: '#E2F7C2',
-      lighten5: '#F2FDE0',
-      darken1: '#63921A',
-      darken2: '#507712',
-      darken3: '#42600C',
-      darken4: '#2B4005'
+      base: '#27AB83',
+      lighten1: '#3EBD93',
+      lighten2: '#65D6AD',
+      lighten3: '#8EEDC7',
+      lighten4: '#C6F7E2',
+      lighten5: '#EFFCF6',
+      darken1: '#199473',
+      darken2: '#147D64',
+      darken3: '#0C6B58',
+      darken4: '#014D40'
     },
     grey: {
       base: '#627D98',
@@ -76008,9 +76008,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 
 
@@ -77300,20 +77297,27 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _c("task-tags-chips", {
-        attrs: {
-          "selected-tasks": _vm.editingTask.tags,
-          task: _vm.editingTask,
-          tags: _vm.tags
-        },
-        model: {
-          value: _vm.editingTask.tags,
-          callback: function($$v) {
-            _vm.$set(_vm.editingTask, "tags", $$v)
-          },
-          expression: "editingTask.tags"
-        }
-      }),
+      _c(
+        "span",
+        [
+          _vm._v("Tags: "),
+          _c("task-tags-chips", {
+            attrs: {
+              "selected-tasks": _vm.editingTask.tags,
+              task: _vm.editingTask,
+              tags: _vm.tags
+            },
+            model: {
+              value: _vm.editingTask.tags,
+              callback: function($$v) {
+                _vm.$set(_vm.editingTask, "tags", $$v)
+              },
+              expression: "editingTask.tags"
+            }
+          })
+        ],
+        1
+      ),
       _vm._v(" "),
       _c("user-select", {
         attrs: { users: _vm.users, label: "User" },
@@ -77344,18 +77348,15 @@ var render = function() {
           _c(
             "v-btn",
             {
-              attrs: { color: "secondary" },
+              staticClass: "grey--text",
+              attrs: { flat: "" },
               nativeOn: {
                 click: function($event) {
                   _vm.$emit("close")
                 }
               }
             },
-            [
-              _c("v-icon", { staticClass: "mr-1" }, [_vm._v("exit_to_app")]),
-              _vm._v("\n      Sortir\n    ")
-            ],
-            1
+            [_vm._v("\n        Sortir\n    ")]
           ),
           _vm._v(" "),
           _c(
@@ -77433,20 +77434,10 @@ var render = function() {
             "v-toolbar",
             { staticClass: "white--text", attrs: { color: "primary" } },
             [
-              _c(
-                "v-btn",
-                {
-                  attrs: { color: "secondary", flat: "", icon: "" },
-                  nativeOn: {
-                    click: function($event) {
-                      _vm.dialog = false
-                    }
-                  }
-                },
-                [_c("v-icon", { staticClass: "mr-1" }, [_vm._v("close")])],
-                1
-              ),
-              _vm._v("\n\n    Crear tasca\n    "),
+              _c("span", { staticClass: "hidden-md-and-down" }, [
+                _vm._v("Crear tasca")
+              ]),
+              _vm._v(" "),
               _c("v-spacer"),
               _vm._v(" "),
               _c(
@@ -77891,6 +77882,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     },
     addTask: function addTask(task) {
       this.dataTasks.push(task);
+    },
+    updateTask: function updateTask(task) {
+      this.dataTasks.splice(this.dataTasks.indexOf(task), 1, task);
     },
     opcio1: function opcio1() {
       console.log('Opcio1');
@@ -78932,9 +78926,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -79091,24 +79082,10 @@ var render = function() {
                     "v-toolbar",
                     { staticClass: "white--text", attrs: { color: "primary" } },
                     [
-                      _c(
-                        "v-btn",
-                        {
-                          attrs: { color: "secondary", flat: "", icon: "" },
-                          nativeOn: {
-                            click: function($event) {
-                              _vm.dialog = false
-                            }
-                          }
-                        },
-                        [
-                          _c("v-icon", { staticClass: "mr-1" }, [
-                            _vm._v("close")
-                          ])
-                        ],
-                        1
-                      ),
-                      _vm._v("\n      Editar tasca\n      "),
+                      _c("span", { staticClass: "hidden-md-and-down" }, [
+                        _vm._v("Editar tasca")
+                      ]),
+                      _vm._v(" "),
                       _c("v-spacer"),
                       _vm._v(" "),
                       _c(
@@ -79165,7 +79142,12 @@ var render = function() {
                               user: _vm.task.user,
                               tags: _vm.tags
                             },
-                            on: { saved: _vm.edit }
+                            on: {
+                              saved: _vm.edit,
+                              close: function($event) {
+                                _vm.dialog = false
+                              }
+                            }
                           })
                         ],
                         1
@@ -79505,9 +79487,9 @@ function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, a
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-
                 window.axios.post('/api/v1/task/' + this.task.id + '/tags/multiple', tags).then(function (response) {
                   _this.$snackbar.showMessage('Etiquetes afegides correctament');
+                  _this.$emit('updated', response.data);
                 }).catch(function (error) {
                   _this.$snackbar.showError(error.message);
                 });
@@ -80494,7 +80476,7 @@ var render = function() {
                         [
                           _c(
                             "v-flex",
-                            { attrs: { xs4: "" } },
+                            { attrs: { xs12: "", md4: "" } },
                             [
                               _c("user-select", {
                                 staticClass: "pr-4",
@@ -80521,7 +80503,7 @@ var render = function() {
                           _vm._v(" "),
                           _c(
                             "v-flex",
-                            { attrs: { xs4: "" } },
+                            { attrs: { xs12: "", md4: "" } },
                             [
                               _c("v-autocomplete", {
                                 staticClass: "pr-4",
@@ -80545,7 +80527,7 @@ var render = function() {
                           _vm._v(" "),
                           _c(
                             "v-flex",
-                            { attrs: { xs4: "" } },
+                            { attrs: { xs12: "", md4: "" } },
                             [
                               _c("v-text-field", {
                                 attrs: {
@@ -80645,7 +80627,8 @@ var render = function() {
                                     "td",
                                     [
                                       _c("task-tags", {
-                                        attrs: { tags: _vm.tags, task: task }
+                                        attrs: { tags: _vm.tags, task: task },
+                                        on: { updated: _vm.updateTask }
                                       })
                                     ],
                                     1
@@ -80750,7 +80733,7 @@ var render = function() {
                           return _c(
                             "v-flex",
                             {
-                              staticClass: "pb-2",
+                              staticClass: "pa-1 elevation-10",
                               attrs: { xs12: "", sm6: "", md4: "", lg3: "" }
                             },
                             [
@@ -80883,7 +80866,7 @@ var render = function() {
                                                     "span",
                                                     {
                                                       staticClass:
-                                                        "font-weight-bold"
+                                                        "font-weight-bold grey--text"
                                                     },
                                                     [
                                                       _vm._v(
@@ -80915,7 +80898,7 @@ var render = function() {
                                                             "span",
                                                             {
                                                               staticClass:
-                                                                "font-weight-thin"
+                                                                "font-weight-thin grey--text"
                                                             },
                                                             [
                                                               _vm._v(
@@ -80973,7 +80956,8 @@ var render = function() {
                                       _c("v-spacer"),
                                       _vm._v(" "),
                                       _c("task-tags", {
-                                        attrs: { tags: _vm.tags, task: task }
+                                        attrs: { tags: _vm.tags, task: task },
+                                        on: { updated: _vm.updateTask }
                                       })
                                     ],
                                     1
@@ -81141,6 +81125,89 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 function _asyncToGenerator(fn) { return function () { var gen = fn.apply(this, arguments); return new Promise(function (resolve, reject) { function step(key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { return Promise.resolve(value).then(function (value) { step("next", value); }, function (err) { step("throw", err); }); } } return step("next"); }); }; }
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -81534,724 +81601,911 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "span",
-    [
-      _c(
-        "v-dialog",
-        {
-          on: {
-            keydown: function($event) {
-              if (
-                !("button" in $event) &&
-                _vm._k($event.keyCode, "esc", 27, $event.key, ["Esc", "Escape"])
-              ) {
-                return null
-              }
-              _vm.editDialog = false
-            }
-          },
-          model: {
-            value: _vm.editDialog,
-            callback: function($$v) {
-              _vm.editDialog = $$v
-            },
-            expression: "editDialog"
+  return _c("span", [
+    _c(
+      "span",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.dataTags.length > 0,
+            expression: "dataTags.length > 0"
           }
-        },
-        [
-          _c(
-            "v-toolbar",
-            { staticClass: "white--text", attrs: { color: "primary" } },
-            [
-              _c(
-                "v-btn",
-                {
-                  attrs: { color: "secondary", flat: "", icon: "" },
-                  nativeOn: {
-                    click: function($event) {
-                      _vm.editDialog = false
-                    }
-                  }
-                },
-                [_c("v-icon", { staticClass: "mr-1" }, [_vm._v("close")])],
-                1
-              ),
-              _vm._v("\n\n              Editar tag\n             "),
-              _c("v-spacer"),
-              _vm._v(" "),
-              _c(
-                "v-btn",
-                {
-                  attrs: { color: "secondary", flat: "" },
-                  nativeOn: {
-                    click: function($event) {
-                      _vm.editDialog = false
-                    }
-                  }
-                },
-                [
-                  _c("v-icon", { staticClass: "mr-1" }, [
-                    _vm._v("exit_to_app")
-                  ]),
-                  _vm._v("Sortir")
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-btn",
-                {
-                  attrs: { color: "secondary", flat: "" },
-                  nativeOn: {
-                    click: function($event) {
-                      _vm.editDialog = false
-                    }
-                  }
-                },
-                [
-                  _c("v-icon", { staticClass: "mr-1" }, [_vm._v("save")]),
-                  _vm._v("Guardar")
-                ],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-card",
-            [
-              _c(
-                "v-card-text",
-                [
-                  _c(
-                    "v-form",
-                    [
-                      _c("v-text-field", {
-                        attrs: { label: "Nom", hint: "El nom de la tag..." },
-                        model: {
-                          value: _vm.tagBeingEdited.name,
-                          callback: function($$v) {
-                            _vm.$set(_vm.tagBeingEdited, "name", $$v)
-                          },
-                          expression: "tagBeingEdited.name"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.tagBeingEdited.color,
-                            expression: "tagBeingEdited.color"
-                          }
-                        ],
-                        attrs: { type: "color" },
-                        domProps: { value: _vm.tagBeingEdited.color },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.tagBeingEdited,
-                              "color",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("v-textarea", {
-                        attrs: { label: "Descripcio", hint: "Descripció" },
-                        model: {
-                          value: _vm.tagBeingEdited.description,
-                          callback: function($$v) {
-                            _vm.$set(_vm.tagBeingEdited, "description", $$v)
-                          },
-                          expression: "tagBeingEdited.description"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "text-xs-center" },
-                        [
-                          _c(
-                            "v-btn",
-                            {
-                              attrs: { color: "secondary" },
-                              nativeOn: {
-                                click: function($event) {
-                                  _vm.editDialog = false
-                                }
-                              }
-                            },
-                            [
-                              _c("v-icon", { staticClass: "mr-1" }, [
-                                _vm._v("exit_to_app")
-                              ]),
-                              _vm._v("Sortir")
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-btn",
-                            {
-                              attrs: { color: "success" },
-                              nativeOn: {
-                                click: function($event) {
-                                  _vm.edit()
-                                }
-                              }
-                            },
-                            [
-                              _c("v-icon", { staticClass: "mr-1" }, [
-                                _vm._v("save")
-                              ]),
-                              _vm._v("Guardar")
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-dialog",
-        {
-          on: {
-            keydown: function($event) {
-              if (
-                !("button" in $event) &&
-                _vm._k($event.keyCode, "esc", 27, $event.key, ["Esc", "Escape"])
-              ) {
-                return null
+        ]
+      },
+      [
+        _c(
+          "v-dialog",
+          {
+            on: {
+              keydown: function($event) {
+                if (
+                  !("button" in $event) &&
+                  _vm._k($event.keyCode, "esc", 27, $event.key, [
+                    "Esc",
+                    "Escape"
+                  ])
+                ) {
+                  return null
+                }
+                _vm.editDialog = false
               }
-              _vm.showDialog = false
-            }
-          },
-          model: {
-            value: _vm.showDialog,
-            callback: function($$v) {
-              _vm.showDialog = $$v
             },
-            expression: "showDialog"
-          }
-        },
-        [
-          _c(
-            "v-toolbar",
-            { staticClass: "white--text", attrs: { color: "primary" } },
-            [
-              _c(
-                "v-btn",
-                {
-                  attrs: { color: "secondary", flat: "", icon: "" },
-                  nativeOn: {
-                    click: function($event) {
-                      _vm.showDialog = false
-                    }
-                  }
-                },
-                [_c("v-icon", { staticClass: "mr-1" }, [_vm._v("close")])],
-                1
-              ),
-              _vm._v("\n\n              Crear tag\n             "),
-              _c("v-spacer"),
-              _vm._v(" "),
-              _c(
-                "v-btn",
-                {
-                  attrs: { color: "secondary", flat: "" },
-                  nativeOn: {
-                    click: function($event) {
-                      _vm.showDialog = false
-                    }
-                  }
-                },
-                [
-                  _c("v-icon", { staticClass: "mr-1" }, [
-                    _vm._v("exit_to_app")
-                  ]),
-                  _vm._v("Sortir")
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-btn",
-                {
-                  attrs: { color: "secondary", flat: "" },
-                  nativeOn: {
-                    click: function($event) {
-                      _vm.showDialog = false
-                    }
-                  }
-                },
-                [
-                  _c("v-icon", { staticClass: "mr-1" }, [_vm._v("save")]),
-                  _vm._v("Guardar")
-                ],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-card",
-            [
-              _c(
-                "v-card-text",
-                [
-                  _c(
-                    "v-form",
-                    [
-                      _c("v-text-field", {
-                        attrs: {
-                          readonly: "",
-                          label: "Nom",
-                          hint: "El nom de la tag..."
-                        },
-                        model: {
-                          value: _vm.tagBeingShown.name,
-                          callback: function($$v) {
-                            _vm.$set(_vm.tagBeingShown, "name", $$v)
-                          },
-                          expression: "tagBeingShown.name"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.tagBeingEdited.color,
-                            expression: "tagBeingEdited.color"
-                          }
-                        ],
-                        attrs: { type: "color", readonly: "" },
-                        domProps: { value: _vm.tagBeingEdited.color },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.tagBeingEdited,
-                              "color",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("v-textarea", {
-                        attrs: {
-                          readonly: "",
-                          label: "Descripcio",
-                          hint: "Descripció"
-                        },
-                        model: {
-                          value: _vm.tagBeingShown.description,
-                          callback: function($$v) {
-                            _vm.$set(_vm.tagBeingShown, "description", $$v)
-                          },
-                          expression: "tagBeingShown.description"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "text-xs-center" },
-                        [
-                          _c(
-                            "v-btn",
-                            {
-                              attrs: { color: "secondary" },
-                              nativeOn: {
-                                click: function($event) {
-                                  _vm.showDialog = false
-                                }
-                              }
-                            },
-                            [
-                              _c("v-icon", { staticClass: "mr-1" }, [
-                                _vm._v("exit_to_app")
-                              ]),
-                              _vm._v("Sortir")
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-dialog",
-        {
-          on: {
-            keydown: function($event) {
-              if (
-                !("button" in $event) &&
-                _vm._k($event.keyCode, "esc", 27, $event.key, ["Esc", "Escape"])
-              ) {
-                return null
-              }
-              _vm.createDialog = false
-            }
-          },
-          model: {
-            value: _vm.createDialog,
-            callback: function($$v) {
-              _vm.createDialog = $$v
-            },
-            expression: "createDialog"
-          }
-        },
-        [
-          _c(
-            "v-toolbar",
-            { staticClass: "white--text", attrs: { color: "primary" } },
-            [
-              _c(
-                "v-btn",
-                {
-                  attrs: { color: "secondary", flat: "", icon: "" },
-                  nativeOn: {
-                    click: function($event) {
-                      _vm.createDialog = false
-                    }
-                  }
-                },
-                [_c("v-icon", { staticClass: "mr-1" }, [_vm._v("close")])],
-                1
-              ),
-              _vm._v("\n\n              Crear tag\n             "),
-              _c("v-spacer"),
-              _vm._v(" "),
-              _c(
-                "v-btn",
-                {
-                  attrs: { color: "secondary", flat: "" },
-                  nativeOn: {
-                    click: function($event) {
-                      _vm.createDialog = false
-                    }
-                  }
-                },
-                [
-                  _c("v-icon", { staticClass: "mr-1" }, [
-                    _vm._v("exit_to_app")
-                  ]),
-                  _vm._v("Sortir")
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-btn",
-                {
-                  attrs: { color: "secondary", flat: "" },
-                  nativeOn: {
-                    click: function($event) {
-                      _vm.createDialog = false
-                    }
-                  }
-                },
-                [
-                  _c("v-icon", { staticClass: "mr-1" }, [_vm._v("save")]),
-                  _vm._v("Guardar")
-                ],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-card",
-            [
-              _c(
-                "v-card-text",
-                [
-                  _c(
-                    "v-form",
-                    [
-                      _c("v-text-field", {
-                        attrs: { label: "Nom", hint: "El nom de la tag..." },
-                        model: {
-                          value: _vm.tagBeingCreated.name,
-                          callback: function($$v) {
-                            _vm.$set(_vm.tagBeingCreated, "name", $$v)
-                          },
-                          expression: "tagBeingCreated.name"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.tagBeingCreated.color,
-                            expression: "tagBeingCreated.color"
-                          }
-                        ],
-                        attrs: { type: "color" },
-                        domProps: { value: _vm.tagBeingCreated.color },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.tagBeingCreated,
-                              "color",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("v-textarea", {
-                        attrs: { label: "Descripcio", hint: "Descripció" },
-                        model: {
-                          value: _vm.tagBeingCreated.description,
-                          callback: function($$v) {
-                            _vm.$set(_vm.tagBeingCreated, "description", $$v)
-                          },
-                          expression: "tagBeingCreated.description"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        { staticClass: "text-xs-center" },
-                        [
-                          _c(
-                            "v-btn",
-                            {
-                              attrs: { color: "secondary" },
-                              nativeOn: {
-                                click: function($event) {
-                                  _vm.createDialog = false
-                                }
-                              }
-                            },
-                            [
-                              _c("v-icon", { staticClass: "mr-1" }, [
-                                _vm._v("exit_to_app")
-                              ]),
-                              _vm._v("Sortir")
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c(
-                            "v-btn",
-                            {
-                              attrs: { color: "success" },
-                              nativeOn: {
-                                click: function($event) {
-                                  _vm.create()
-                                }
-                              }
-                            },
-                            [
-                              _c("v-icon", { staticClass: "mr-1" }, [
-                                _vm._v("save")
-                              ]),
-                              _vm._v("Guardar")
-                            ],
-                            1
-                          )
-                        ],
-                        1
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-toolbar",
-        { attrs: { color: "secondary darken-1" } },
-        [
-          _c(
-            "v-menu",
-            { attrs: { left: "" } },
-            [
-              _c(
-                "v-btn",
-                {
-                  attrs: { slot: "activator", icon: "", dark: "" },
-                  slot: "activator"
-                },
-                [_c("v-icon", [_vm._v("settings")])],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "v-list",
-                [
-                  _c(
-                    "v-list-tile",
-                    { on: { click: _vm.opcio1 } },
-                    [_c("v-list-tile-title", [_vm._v("Opció 1")])],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-list-tile",
-                    { on: { click: _vm.opcio2 } },
-                    [_c("v-list-tile-title", [_vm._v("Opció 2")])],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-list-tile",
-                    { attrs: { href: "google.com" } },
-                    [_c("v-list-tile-title", [_vm._v("Google")])],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c("v-toolbar-title", { staticClass: "white--text" }, [
-            _vm._v("Tags")
-          ]),
-          _vm._v(" "),
-          _c("v-spacer"),
-          _vm._v(" "),
-          _c(
-            "v-btn",
-            { staticClass: "white--text", attrs: { icon: "", dark: "" } },
-            [_c("v-icon", [_vm._v("settings")])],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-btn",
-            {
-              staticClass: "white--text",
-              attrs: {
-                icon: "",
-                dark: "",
-                loading: _vm.loading,
-                disabled: _vm.loading
+            model: {
+              value: _vm.editDialog,
+              callback: function($$v) {
+                _vm.editDialog = $$v
               },
-              on: { click: _vm.refresh }
+              expression: "editDialog"
+            }
+          },
+          [
+            _c(
+              "v-toolbar",
+              { staticClass: "white--text", attrs: { color: "primary" } },
+              [
+                _c(
+                  "v-btn",
+                  {
+                    attrs: { color: "secondary", flat: "", icon: "" },
+                    nativeOn: {
+                      click: function($event) {
+                        _vm.editDialog = false
+                      }
+                    }
+                  },
+                  [_c("v-icon", { staticClass: "mr-1" }, [_vm._v("close")])],
+                  1
+                ),
+                _vm._v(" "),
+                _c("span", { staticClass: "hidden-md-and-down" }, [
+                  _vm._v("Editar tag")
+                ]),
+                _vm._v(" "),
+                _c("v-spacer"),
+                _vm._v(" "),
+                _c(
+                  "v-btn",
+                  {
+                    attrs: { color: "secondary", flat: "" },
+                    nativeOn: {
+                      click: function($event) {
+                        _vm.editDialog = false
+                      }
+                    }
+                  },
+                  [
+                    _c("v-icon", { staticClass: "mr-1" }, [
+                      _vm._v("exit_to_app")
+                    ]),
+                    _vm._v("Sortir")
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "v-btn",
+                  {
+                    attrs: { color: "secondary", flat: "" },
+                    nativeOn: {
+                      click: function($event) {
+                        _vm.editDialog = false
+                      }
+                    }
+                  },
+                  [
+                    _c("v-icon", { staticClass: "mr-1" }, [_vm._v("save")]),
+                    _vm._v("Guardar")
+                  ],
+                  1
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "v-card",
+              [
+                _c(
+                  "v-card-text",
+                  [
+                    _c(
+                      "v-form",
+                      [
+                        _c("v-text-field", {
+                          attrs: { label: "Nom", hint: "El nom de la tag..." },
+                          model: {
+                            value: _vm.tagBeingEdited.name,
+                            callback: function($$v) {
+                              _vm.$set(_vm.tagBeingEdited, "name", $$v)
+                            },
+                            expression: "tagBeingEdited.name"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.tagBeingEdited.color,
+                              expression: "tagBeingEdited.color"
+                            }
+                          ],
+                          attrs: { type: "color" },
+                          domProps: { value: _vm.tagBeingEdited.color },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.tagBeingEdited,
+                                "color",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("v-textarea", {
+                          attrs: { label: "Descripcio", hint: "Descripció" },
+                          model: {
+                            value: _vm.tagBeingEdited.description,
+                            callback: function($$v) {
+                              _vm.$set(_vm.tagBeingEdited, "description", $$v)
+                            },
+                            expression: "tagBeingEdited.description"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "text-xs-center" },
+                          [
+                            _c(
+                              "v-btn",
+                              {
+                                attrs: { color: "secondary" },
+                                nativeOn: {
+                                  click: function($event) {
+                                    _vm.editDialog = false
+                                  }
+                                }
+                              },
+                              [
+                                _c("v-icon", { staticClass: "mr-1" }, [
+                                  _vm._v("exit_to_app")
+                                ]),
+                                _vm._v("Sortir")
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "v-btn",
+                              {
+                                attrs: { color: "success" },
+                                nativeOn: {
+                                  click: function($event) {
+                                    _vm.edit()
+                                  }
+                                }
+                              },
+                              [
+                                _c("v-icon", { staticClass: "mr-1" }, [
+                                  _vm._v("save")
+                                ]),
+                                _vm._v("Guardar")
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "v-dialog",
+          {
+            on: {
+              keydown: function($event) {
+                if (
+                  !("button" in $event) &&
+                  _vm._k($event.keyCode, "esc", 27, $event.key, [
+                    "Esc",
+                    "Escape"
+                  ])
+                ) {
+                  return null
+                }
+                _vm.showDialog = false
+              }
             },
-            [_c("v-icon", [_vm._v("refresh")])],
-            1
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "v-card",
-        [
-          _c(
-            "v-card-title",
-            [
-              _c(
-                "v-layout",
-                { attrs: { row: "", wrap: "" } },
-                [
-                  _c(
-                    "v-flex",
-                    { attrs: { xs12: "" } },
-                    [
-                      _c("v-text-field", {
-                        attrs: {
-                          "append-icon": "search",
-                          label: "Búsqueda",
-                          "single-line": "",
-                          "hide-details": ""
-                        },
-                        model: {
-                          value: _vm.search,
-                          callback: function($$v) {
-                            _vm.search = $$v
+            model: {
+              value: _vm.showDialog,
+              callback: function($$v) {
+                _vm.showDialog = $$v
+              },
+              expression: "showDialog"
+            }
+          },
+          [
+            _c(
+              "v-toolbar",
+              { staticClass: "white--text", attrs: { color: "primary" } },
+              [
+                _c(
+                  "v-btn",
+                  {
+                    attrs: { color: "secondary", flat: "", icon: "" },
+                    nativeOn: {
+                      click: function($event) {
+                        _vm.showDialog = false
+                      }
+                    }
+                  },
+                  [_c("v-icon", { staticClass: "mr-1" }, [_vm._v("close")])],
+                  1
+                ),
+                _vm._v(" "),
+                _c("span", { staticClass: "hidden-md-and-down" }, [
+                  _vm._v("Crear tag")
+                ]),
+                _vm._v(" "),
+                _c("v-spacer"),
+                _vm._v(" "),
+                _c(
+                  "v-btn",
+                  {
+                    attrs: { color: "secondary", flat: "" },
+                    nativeOn: {
+                      click: function($event) {
+                        _vm.showDialog = false
+                      }
+                    }
+                  },
+                  [
+                    _c("v-icon", { staticClass: "mr-1" }, [
+                      _vm._v("exit_to_app")
+                    ]),
+                    _vm._v("Sortir")
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "v-btn",
+                  {
+                    attrs: { color: "secondary", flat: "" },
+                    nativeOn: {
+                      click: function($event) {
+                        _vm.showDialog = false
+                      }
+                    }
+                  },
+                  [
+                    _c("v-icon", { staticClass: "mr-1" }, [_vm._v("save")]),
+                    _vm._v("Guardar")
+                  ],
+                  1
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "v-card",
+              [
+                _c(
+                  "v-card-text",
+                  [
+                    _c(
+                      "v-form",
+                      [
+                        _c("v-text-field", {
+                          attrs: {
+                            readonly: "",
+                            label: "Nom",
+                            hint: "El nom de la tag..."
                           },
-                          expression: "search"
-                        }
-                      })
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "v-data-table",
-            {
-              staticClass: "hidden-md-and-down",
+                          model: {
+                            value: _vm.tagBeingShown.name,
+                            callback: function($$v) {
+                              _vm.$set(_vm.tagBeingShown, "name", $$v)
+                            },
+                            expression: "tagBeingShown.name"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.tagBeingEdited.color,
+                              expression: "tagBeingEdited.color"
+                            }
+                          ],
+                          attrs: { type: "color", readonly: "" },
+                          domProps: { value: _vm.tagBeingEdited.color },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.tagBeingEdited,
+                                "color",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("v-textarea", {
+                          attrs: {
+                            readonly: "",
+                            label: "Descripcio",
+                            hint: "Descripció"
+                          },
+                          model: {
+                            value: _vm.tagBeingShown.description,
+                            callback: function($$v) {
+                              _vm.$set(_vm.tagBeingShown, "description", $$v)
+                            },
+                            expression: "tagBeingShown.description"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "text-xs-center" },
+                          [
+                            _c(
+                              "v-btn",
+                              {
+                                attrs: { color: "secondary" },
+                                nativeOn: {
+                                  click: function($event) {
+                                    _vm.showDialog = false
+                                  }
+                                }
+                              },
+                              [
+                                _c("v-icon", { staticClass: "mr-1" }, [
+                                  _vm._v("exit_to_app")
+                                ]),
+                                _vm._v("Sortir")
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "v-dialog",
+          {
+            on: {
+              keydown: function($event) {
+                if (
+                  !("button" in $event) &&
+                  _vm._k($event.keyCode, "esc", 27, $event.key, [
+                    "Esc",
+                    "Escape"
+                  ])
+                ) {
+                  return null
+                }
+                _vm.createDialog = false
+              }
+            },
+            model: {
+              value: _vm.createDialog,
+              callback: function($$v) {
+                _vm.createDialog = $$v
+              },
+              expression: "createDialog"
+            }
+          },
+          [
+            _c(
+              "v-toolbar",
+              { staticClass: "white--text", attrs: { color: "primary" } },
+              [
+                _c(
+                  "v-btn",
+                  {
+                    attrs: { color: "secondary", flat: "", icon: "" },
+                    nativeOn: {
+                      click: function($event) {
+                        _vm.createDialog = false
+                      }
+                    }
+                  },
+                  [_c("v-icon", { staticClass: "mr-1" }, [_vm._v("close")])],
+                  1
+                ),
+                _vm._v(" "),
+                _c("span", { staticClass: "hidden-md-and-down" }, [
+                  _vm._v("Crear tag")
+                ]),
+                _vm._v(" "),
+                _c("v-spacer"),
+                _vm._v(" "),
+                _c(
+                  "v-btn",
+                  {
+                    attrs: { color: "secondary", flat: "" },
+                    nativeOn: {
+                      click: function($event) {
+                        _vm.createDialog = false
+                      }
+                    }
+                  },
+                  [
+                    _c("v-icon", { staticClass: "mr-1" }, [
+                      _vm._v("exit_to_app")
+                    ]),
+                    _vm._v("Sortir")
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "v-btn",
+                  {
+                    attrs: { color: "secondary", flat: "" },
+                    nativeOn: {
+                      click: function($event) {
+                        _vm.createDialog = false
+                      }
+                    }
+                  },
+                  [
+                    _c("v-icon", { staticClass: "mr-1" }, [_vm._v("save")]),
+                    _vm._v("Guardar")
+                  ],
+                  1
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "v-card",
+              [
+                _c(
+                  "v-card-text",
+                  [
+                    _c(
+                      "v-form",
+                      [
+                        _c("v-text-field", {
+                          attrs: { label: "Nom", hint: "El nom de la tag..." },
+                          model: {
+                            value: _vm.tagBeingCreated.name,
+                            callback: function($$v) {
+                              _vm.$set(_vm.tagBeingCreated, "name", $$v)
+                            },
+                            expression: "tagBeingCreated.name"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.tagBeingCreated.color,
+                              expression: "tagBeingCreated.color"
+                            }
+                          ],
+                          attrs: { type: "color" },
+                          domProps: { value: _vm.tagBeingCreated.color },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.tagBeingCreated,
+                                "color",
+                                $event.target.value
+                              )
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c("v-textarea", {
+                          attrs: { label: "Descripcio", hint: "Descripció" },
+                          model: {
+                            value: _vm.tagBeingCreated.description,
+                            callback: function($$v) {
+                              _vm.$set(_vm.tagBeingCreated, "description", $$v)
+                            },
+                            expression: "tagBeingCreated.description"
+                          }
+                        }),
+                        _vm._v(" "),
+                        _c(
+                          "div",
+                          { staticClass: "text-xs-center" },
+                          [
+                            _c(
+                              "v-btn",
+                              {
+                                attrs: { color: "secondary" },
+                                nativeOn: {
+                                  click: function($event) {
+                                    _vm.createDialog = false
+                                  }
+                                }
+                              },
+                              [
+                                _c("v-icon", { staticClass: "mr-1" }, [
+                                  _vm._v("exit_to_app")
+                                ]),
+                                _vm._v("Sortir")
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "v-btn",
+                              {
+                                attrs: { color: "success" },
+                                nativeOn: {
+                                  click: function($event) {
+                                    _vm.create()
+                                  }
+                                }
+                              },
+                              [
+                                _c("v-icon", { staticClass: "mr-1" }, [
+                                  _vm._v("save")
+                                ]),
+                                _vm._v("Guardar")
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "v-toolbar",
+          { attrs: { color: "secondary darken-1" } },
+          [
+            _c(
+              "v-menu",
+              { attrs: { left: "" } },
+              [
+                _c(
+                  "v-btn",
+                  {
+                    attrs: { slot: "activator", icon: "", dark: "" },
+                    slot: "activator"
+                  },
+                  [_c("v-icon", [_vm._v("settings")])],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "v-list",
+                  [
+                    _c(
+                      "v-list-tile",
+                      { on: { click: _vm.opcio1 } },
+                      [_c("v-list-tile-title", [_vm._v("Opció 1")])],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "v-list-tile",
+                      { on: { click: _vm.opcio2 } },
+                      [_c("v-list-tile-title", [_vm._v("Opció 2")])],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "v-list-tile",
+                      { attrs: { href: "google.com" } },
+                      [_c("v-list-tile-title", [_vm._v("Google")])],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c("v-toolbar-title", { staticClass: "white--text" }, [
+              _vm._v("Tags")
+            ]),
+            _vm._v(" "),
+            _c("v-spacer"),
+            _vm._v(" "),
+            _c(
+              "v-btn",
+              { staticClass: "white--text", attrs: { icon: "", dark: "" } },
+              [_c("v-icon", [_vm._v("settings")])],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "v-btn",
+              {
+                staticClass: "white--text",
+                attrs: {
+                  icon: "",
+                  dark: "",
+                  loading: _vm.loading,
+                  disabled: _vm.loading
+                },
+                on: { click: _vm.refresh }
+              },
+              [_c("v-icon", [_vm._v("refresh")])],
+              1
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "v-card",
+          [
+            _c(
+              "v-card-title",
+              [
+                _c(
+                  "v-layout",
+                  { attrs: { row: "", wrap: "" } },
+                  [
+                    _c(
+                      "v-flex",
+                      { attrs: { xs12: "" } },
+                      [
+                        _c("v-text-field", {
+                          attrs: {
+                            "append-icon": "search",
+                            label: "Búsqueda",
+                            "single-line": "",
+                            "hide-details": ""
+                          },
+                          model: {
+                            value: _vm.search,
+                            callback: function($$v) {
+                              _vm.search = $$v
+                            },
+                            expression: "search"
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "v-data-table",
+              {
+                staticClass: "hidden-md-and-down",
+                attrs: {
+                  headers: _vm.headers,
+                  items: _vm.dataTags,
+                  search: _vm.search,
+                  "no-results-text": "No s'ha trobat cap registre coincident",
+                  loading: _vm.loading,
+                  "no-data-text": "",
+                  "rows-per-page-text": "Tags per pàgina",
+                  "rows-per-page-items": [
+                    5,
+                    10,
+                    25,
+                    50,
+                    100,
+                    200,
+                    { text: "Tots", value: -1 }
+                  ],
+                  pagination: _vm.pagination
+                },
+                on: {
+                  "update:pagination": function($event) {
+                    _vm.pagination = $event
+                  }
+                },
+                scopedSlots: _vm._u([
+                  {
+                    key: "items",
+                    fn: function(ref) {
+                      var tag = ref.item
+                      return [
+                        _c("tr", [
+                          _c("td", [_vm._v(_vm._s(tag.id))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(tag.name))]),
+                          _vm._v(" "),
+                          _c("td", [_vm._v(_vm._s(tag.description))]),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            [
+                              _c("v-icon", { attrs: { color: tag.color } }, [
+                                _vm._v("bookmark")
+                              ])
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c(
+                              "span",
+                              { attrs: { title: tag.created_at_formatted } },
+                              [_vm._v(_vm._s(tag.created_at_human))]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c("td", [
+                            _c(
+                              "span",
+                              { attrs: { title: tag.updated_at_formatted } },
+                              [_vm._v(_vm._s(tag.updated_at_human))]
+                            )
+                          ]),
+                          _vm._v(" "),
+                          _c(
+                            "td",
+                            [
+                              _vm.$can("tags.update", tag)
+                                ? _c(
+                                    "v-btn",
+                                    {
+                                      attrs: {
+                                        color: "success",
+                                        icon: "",
+                                        flat: "",
+                                        title: "Modificar la tag"
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.showEdit(tag)
+                                        }
+                                      }
+                                    },
+                                    [_c("v-icon", [_vm._v("border_color")])],
+                                    1
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.$can("tags.show", tag)
+                                ? _c(
+                                    "v-btn",
+                                    {
+                                      attrs: {
+                                        color: "success",
+                                        icon: "",
+                                        flat: "",
+                                        title: "Modificar la tag"
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.showShow(tag)
+                                        }
+                                      }
+                                    },
+                                    [_c("v-icon", [_vm._v("remove_red_eye")])],
+                                    1
+                                  )
+                                : _vm._e(),
+                              _vm._v(" "),
+                              _vm.$can("tags.destroy", tag)
+                                ? _c(
+                                    "v-btn",
+                                    {
+                                      attrs: {
+                                        loading: _vm.removing === tag.id,
+                                        disabled: _vm.removing === tag.id,
+                                        color: "error",
+                                        flat: "",
+                                        icon: "",
+                                        title: "Eliminar la tag"
+                                      },
+                                      on: {
+                                        click: function($event) {
+                                          _vm.destroy(tag)
+                                        }
+                                      }
+                                    },
+                                    [_c("v-icon", [_vm._v("delete")])],
+                                    1
+                                  )
+                                : _vm._e()
+                            ],
+                            1
+                          )
+                        ])
+                      ]
+                    }
+                  }
+                ])
+              },
+              [
+                _c("v-progress-linear", {
+                  attrs: {
+                    slot: "progress",
+                    color: "secondary",
+                    indeterminate: ""
+                  },
+                  slot: "progress"
+                })
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c("v-data-iterator", {
+              staticClass: "hidden-lg-and-up",
               attrs: {
-                headers: _vm.headers,
                 items: _vm.dataTags,
                 search: _vm.search,
-                "no-results-text": "No s'ha trobat cap registre coincident",
-                loading: _vm.loading,
-                "no-data-text": "",
-                "rows-per-page-text": "Tags per pàgina",
+                "no-results-text": "No s'ha trobat cap tag coincident",
+                "no-data-text": "No hi ha dades disponibles",
+                "rows-per-page-text": "Tags per pagina",
                 "rows-per-page-items": [
                   5,
                   10,
                   25,
                   50,
                   100,
-                  200,
-                  { text: "Tots", value: -1 }
+                  { text: "Totes", value: -1 }
                 ],
-                pagination: _vm.pagination
+                loading: _vm.loading,
+                pagination: _vm.pagination,
+                "content-tag": "v-layout",
+                row: "",
+                wrap: ""
               },
               on: {
                 "update:pagination": function($event) {
@@ -82260,156 +82514,298 @@ var render = function() {
               },
               scopedSlots: _vm._u([
                 {
-                  key: "items",
+                  key: "item",
                   fn: function(ref) {
                     var tag = ref.item
-                    return [
-                      _c("tr", [
-                        _c("td", [_vm._v(_vm._s(tag.id))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(tag.name))]),
-                        _vm._v(" "),
-                        _c("td", [_vm._v(_vm._s(tag.description))]),
-                        _vm._v(" "),
+                    return _c(
+                      "v-flex",
+                      {
+                        staticClass: "pa-1 elevation-10",
+                        attrs: { xs12: "", sm6: "", md4: "", lg3: "" }
+                      },
+                      [
                         _c(
-                          "td",
+                          "v-card",
                           [
-                            _c("v-icon", { attrs: { color: tag.color } }, [
-                              _vm._v("bookmark")
-                            ])
-                          ],
-                          1
-                        ),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c(
-                            "span",
-                            { attrs: { title: tag.created_at_formatted } },
-                            [_vm._v(_vm._s(tag.created_at_human))]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("td", [
-                          _c(
-                            "span",
-                            { attrs: { title: tag.updated_at_formatted } },
-                            [_vm._v(_vm._s(tag.updated_at_human))]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c(
-                          "td",
-                          [
-                            _vm.$can("tags.update", tag)
-                              ? _c(
-                                  "v-btn",
-                                  {
-                                    attrs: {
-                                      color: "success",
-                                      icon: "",
-                                      flat: "",
-                                      title: "Modificar la tag"
-                                    },
-                                    on: {
-                                      click: function($event) {
-                                        _vm.showEdit(tag)
-                                      }
-                                    }
-                                  },
-                                  [_c("v-icon", [_vm._v("border_color")])],
-                                  1
-                                )
-                              : _vm._e(),
+                            _c(
+                              "v-toolbar",
+                              {
+                                staticClass: "secondary darken-2",
+                                attrs: { dark: "" }
+                              },
+                              [
+                                _c("span", { staticClass: "title" }, [
+                                  _vm._v(_vm._s(tag.name))
+                                ]),
+                                _vm._v(" "),
+                                _c("v-spacer")
+                              ],
+                              1
+                            ),
                             _vm._v(" "),
-                            _vm.$can("tags.show", tag)
-                              ? _c(
-                                  "v-btn",
+                            _c(
+                              "v-card-text",
+                              [
+                                _c(
+                                  "v-layout",
                                   {
                                     attrs: {
-                                      color: "success",
-                                      icon: "",
-                                      flat: "",
-                                      title: "Modificar la tag"
-                                    },
-                                    on: {
-                                      click: function($event) {
-                                        _vm.showShow(tag)
-                                      }
+                                      "align-center": "",
+                                      "justify-center": "",
+                                      row: "",
+                                      "fill-height": ""
                                     }
                                   },
-                                  [_c("v-icon", [_vm._v("remove_red_eye")])],
+                                  [
+                                    _c(
+                                      "v-flex",
+                                      {
+                                        staticClass: "pt-2 pb-2",
+                                        attrs: { xs5: "" }
+                                      },
+                                      [
+                                        _c(
+                                          "v-flex",
+                                          {
+                                            staticClass: "pt-2",
+                                            attrs: { xs12: "" }
+                                          },
+                                          [
+                                            _c(
+                                              "span",
+                                              [
+                                                _c(
+                                                  "v-icon",
+                                                  {
+                                                    attrs: { color: tag.color }
+                                                  },
+                                                  [_vm._v("bookmark")]
+                                                )
+                                              ],
+                                              1
+                                            )
+                                          ]
+                                        )
+                                      ],
+                                      1
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "v-flex",
+                                      { attrs: { xs7: "" } },
+                                      [
+                                        _c(
+                                          "v-list",
+                                          { staticClass: "pb-3 pb-3" },
+                                          [
+                                            _c(
+                                              "v-list-tile",
+                                              [
+                                                _c("v-list-tile-content", [
+                                                  _c(
+                                                    "span",
+                                                    {
+                                                      staticClass:
+                                                        "font-weight-thin grey--text"
+                                                    },
+                                                    [
+                                                      _vm._v(
+                                                        _vm._s(tag.description)
+                                                      )
+                                                    ]
+                                                  )
+                                                ])
+                                              ],
+                                              1
+                                            )
+                                          ],
+                                          1
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ],
                                   1
                                 )
-                              : _vm._e(),
+                              ],
+                              1
+                            ),
                             _vm._v(" "),
-                            _vm.$can("tags.destroy", tag)
-                              ? _c(
-                                  "v-btn",
-                                  {
-                                    attrs: {
-                                      loading: _vm.removing === tag.id,
-                                      disabled: _vm.removing === tag.id,
-                                      color: "error",
-                                      flat: "",
-                                      icon: "",
-                                      title: "Eliminar la tag"
-                                    },
-                                    on: {
-                                      click: function($event) {
-                                        _vm.destroy(tag)
-                                      }
-                                    }
-                                  },
-                                  [_c("v-icon", [_vm._v("delete")])],
+                            _c(
+                              "v-card-actions",
+                              [
+                                _c(
+                                  "v-spacer",
+                                  [
+                                    _vm.$can("tags.update", tag)
+                                      ? _c(
+                                          "v-btn",
+                                          {
+                                            attrs: {
+                                              color: "success",
+                                              icon: "",
+                                              flat: "",
+                                              title: "Modificar la tag"
+                                            },
+                                            on: {
+                                              click: function($event) {
+                                                _vm.showEdit(tag)
+                                              }
+                                            }
+                                          },
+                                          [
+                                            _c("v-icon", [
+                                              _vm._v("border_color")
+                                            ])
+                                          ],
+                                          1
+                                        )
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _vm.$can("tags.show", tag)
+                                      ? _c(
+                                          "v-btn",
+                                          {
+                                            attrs: {
+                                              color: "success",
+                                              icon: "",
+                                              flat: "",
+                                              title: "Modificar la tag"
+                                            },
+                                            on: {
+                                              click: function($event) {
+                                                _vm.showShow(tag)
+                                              }
+                                            }
+                                          },
+                                          [
+                                            _c("v-icon", [
+                                              _vm._v("remove_red_eye")
+                                            ])
+                                          ],
+                                          1
+                                        )
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _vm.$can("tags.destroy", tag)
+                                      ? _c(
+                                          "v-btn",
+                                          {
+                                            attrs: {
+                                              loading: _vm.removing === tag.id,
+                                              disabled: _vm.removing === tag.id,
+                                              color: "error",
+                                              flat: "",
+                                              icon: "",
+                                              title: "Eliminar la tag"
+                                            },
+                                            on: {
+                                              click: function($event) {
+                                                _vm.destroy(tag)
+                                              }
+                                            }
+                                          },
+                                          [_c("v-icon", [_vm._v("delete")])],
+                                          1
+                                        )
+                                      : _vm._e()
+                                  ],
                                   1
                                 )
-                              : _vm._e()
+                              ],
+                              1
+                            )
                           ],
                           1
                         )
-                      ])
-                    ]
+                      ],
+                      1
+                    )
                   }
                 }
               ])
-            },
-            [
-              _c("v-progress-linear", {
+            })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _vm.$can("user.tags.store")
+          ? _c(
+              "v-btn",
+              {
+                staticClass: "white--text",
                 attrs: {
-                  slot: "progress",
-                  color: "secondary",
-                  indeterminate: ""
+                  fab: "",
+                  bottom: "",
+                  right: "",
+                  color: "accent",
+                  fixed: ""
                 },
-                slot: "progress"
-              })
-            ],
-            1
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _vm.$can("user.tags.store")
-        ? _c(
-            "v-btn",
-            {
-              staticClass: "white--text",
-              attrs: {
-                fab: "",
-                bottom: "",
-                right: "",
-                color: "accent",
-                fixed: ""
+                on: { click: _vm.showCreate }
               },
-              on: { click: _vm.showCreate }
-            },
-            [_c("v-icon", [_vm._v("add")])],
-            1
-          )
-        : _vm._e()
-    ],
-    1
-  )
+              [_c("v-icon", [_vm._v("add")])],
+              1
+            )
+          : _vm._e()
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _c(
+      "span",
+      {
+        directives: [
+          {
+            name: "show",
+            rawName: "v-show",
+            value: _vm.dataTags.length === 0,
+            expression: "dataTags.length === 0"
+          }
+        ]
+      },
+      [
+        _c(
+          "v-card",
+          [
+            _c(
+              "v-card-title",
+              [
+                _c("v-flex", { attrs: { xs12: "" } }, [
+                  _c("img", { attrs: { src: "img/task_not_found.svg" } })
+                ])
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "v-card-text",
+              [
+                _c("v-flex", { attrs: { xs12: "" } }, [
+                  _c("span", { staticClass: "headline text-xs-center" }, [
+                    _vm._v("No hi ha cap tag!")
+                  ])
+                ]),
+                _vm._v(" "),
+                _c(
+                  "v-flex",
+                  { attrs: { xs12: "" } },
+                  [
+                    _c("v-btn", { on: { click: _vm.showCreate } }, [
+                      _vm._v("Crean una!")
+                    ])
+                  ],
+                  1
+                )
+              ],
+              1
+            )
+          ],
+          1
+        )
+      ],
+      1
+    )
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -82664,7 +83060,12 @@ var render = function() {
               },
               expression: "password"
             }
-          })
+          }),
+          _vm._v(" "),
+          _c("span", [
+            _vm._v("No tens usuari? "),
+            _c("a", { attrs: { href: "/register" } }, [_vm._v("Registrat!")])
+          ])
         ],
         1
       ),
@@ -82893,7 +83294,7 @@ var render = function() {
         "v-toolbar",
         { attrs: { dark: "", color: "primary" } },
         [
-          _c("v-toolbar-title", [_vm._v("Register form")]),
+          _c("v-toolbar-title", [_vm._v("Formulari de registre")]),
           _vm._v(" "),
           _c("v-spacer")
         ],
@@ -83008,7 +83409,12 @@ var render = function() {
               },
               expression: "password_confirmation"
             }
-          })
+          }),
+          _vm._v(" "),
+          _c("span", [
+            _vm._v("Ja tens usuari? "),
+            _c("a", { attrs: { href: "/login" } }, [_vm._v("Inicia sessió!")])
+          ])
         ],
         1
       ),
@@ -83019,7 +83425,7 @@ var render = function() {
           _c("v-spacer"),
           _vm._v(" "),
           _c("v-btn", { attrs: { color: "primary", type: "submit" } }, [
-            _vm._v("Register")
+            _vm._v("Registrat!")
           ])
         ],
         1

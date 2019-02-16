@@ -2,11 +2,8 @@
   <span>
   <v-dialog v-model="dialog" @keydown.esc="dialog = false">
     <v-toolbar color="primary" class="white--text">
-      <v-btn color="secondary" flat icon @click.native="dialog = false">
-        <v-icon class="mr-1">close</v-icon>
-      </v-btn>
 
-      Crear tasca
+      <span class="hidden-md-and-down">Crear tasca</span>
       <v-spacer></v-spacer>
       <v-btn color="secondary" flat @click.native="dialog = false">
         <v-icon class="mr-1">exit_to_app</v-icon>

@@ -48,8 +48,8 @@ const DRAWER_RIGHT_STATE_KEY = 'DRAWER_RIGHT_STATE_KEY'
 const drawerToggle = window.localStorage.getItem(DRAWER_STATE_KEY) || false
 const drawerRightToggle = window.localStorage.getItem(DRAWER_RIGHT_STATE_KEY) || false
 const darkToggle = window.localStorage.getItem(DARK_THEME_KEY) || false
-const primaryColor = window.localStorage.getItem(PRIMARY_COLOR_KEY) || '#BA2525'
-const secondaryColor = window.localStorage.getItem(SECONDARY_COLOR_KEY) || '#F0B429'
+const primaryColor = window.localStorage.getItem(PRIMARY_COLOR_KEY) || '#627D98'
+const secondaryColor = window.localStorage.getItem(SECONDARY_COLOR_KEY) || '#2BB0ED'
 
 window.Vue.use(VueTimeago, {
   locale: 'ca', // Default locale
@@ -67,63 +67,63 @@ window.Vue.use(window.Vuetify, {
   theme: {
     primary: {
       base: primaryColor,
-      lighten1: '#D64545',
-      lighten2: '#E66A6A',
-      lighten3: '#F29B9B',
-      lighten4: '#FACDCD',
-      lighten5: '#FFEEEE',
-      darken1: '#A61B1B',
-      darken2: '#911111',
-      darken3: '#780A0A',
-      darken4: '#610404'
+      lighten1: '#829AB1',
+      lighten2: '#9FB3C8',
+      lighten3: '#BCCCDC',
+      lighten4: '#D9E2EC',
+      lighten5: '#F0F4F8',
+      darken1: '#486581',
+      darken2: '#334E68',
+      darken3: '#243B53',
+      darken4: '#102A43'
     },
     secondary: {
       base: secondaryColor,
-      lighten1: '#F7C948',
-      lighten2: '#FADB5F',
-      lighten3: '#FCE588',
-      lighten4: '#FFF3C4',
-      lighten5: '#FFFBEA',
-      darken1: '#DE911D',
-      darken2: '#CB6E17',
-      darken3: '#B44D12',
-      darken4: '#8D2B0B'
+      lighten1: '#40C3F7',
+      lighten2: '#5ED0FA',
+      lighten3: '#81DEFD',
+      lighten4: '#B3ECFF',
+      lighten5: '#E3F8FF',
+      darken1: '#1992D4',
+      darken2: '#127FBF',
+      darken3: '#0B69A3',
+      darken4: '#035388'
     },
     accent: {
-      base: '#2CB1BC',
-      lighten1: '#38BEC9',
-      lighten2: '#54D1DB',
-      lighten3: '#87EAF2',
-      lighten4: '#BEF8FD',
-      lighten5: '#E0FCFF',
-      darken1: '#14919B',
-      darken2: '#0E7C86',
-      darken3: '#0A6C74',
-      darken4: '#044E54'
+      base: '#DA127D',
+      lighten1: '#E8368F',
+      lighten2: '#F364A2',
+      lighten3: '#FF8CBA',
+      lighten4: '#FFB8D2',
+      lighten5: '#FFE3EC',
+      darken1: '#BC0A6F',
+      darken2: '#A30664',
+      darken3: '#870557',
+      darken4: '#620042'
     },
     error: {
-      base: '#C65D21',
-      lighten1: '#E67635',
-      lighten2: '#EF8E58',
-      lighten3: '#FAB38B',
-      lighten4: '#FFD3BA',
-      lighten5: '#FFEFE6',
-      darken1: '#AB4E19',
-      darken2: '#8C3D10',
-      darken3: '#77340D',
-      darken4: '#572508'
+      base: '#E12D39',
+      lighten1: '#EF4E4E',
+      lighten2: '#F86A6A',
+      lighten3: '#FF9B9B',
+      lighten4: '#FFBDBD',
+      lighten5: '#FFE3E3',
+      darken1: '#CF1124',
+      darken2: '#AB091E',
+      darken3: '#8A041A',
+      darken4: '#610316'
     },
     success: {
-      base: '#7BB026',
-      lighten1: '#94C843',
-      lighten2: '#ABDB5E',
-      lighten3: '#C7EA8F',
-      lighten4: '#E2F7C2',
-      lighten5: '#F2FDE0',
-      darken1: '#63921A',
-      darken2: '#507712',
-      darken3: '#42600C',
-      darken4: '#2B4005'
+      base: '#27AB83',
+      lighten1: '#3EBD93',
+      lighten2: '#65D6AD',
+      lighten3: '#8EEDC7',
+      lighten4: '#C6F7E2',
+      lighten5: '#EFFCF6',
+      darken1: '#199473',
+      darken2: '#147D64',
+      darken3: '#0C6B58',
+      darken4: '#014D40'
     },
     grey: {
       base: '#627D98',

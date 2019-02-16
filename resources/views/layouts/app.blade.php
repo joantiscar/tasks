@@ -39,6 +39,7 @@
                 clipped
                 app
         >
+
             <v-card>
                 <v-card-title class="primary darken-3 white--text"><h4>Perfil</h4></v-card-title>
                 <v-layout row wrap>
@@ -69,6 +70,16 @@
             @endImpersonating
 
             <tema></tema>
+            <v-switch v-model="dark" label="Mode nocturn"></v-switch>
+
+            <v-form action="logout" method="POST">
+                @csrf
+                <v-btn type="submit" color="accent">
+                    Logout
+                </v-btn>
+
+
+            </v-form>
 
         </v-navigation-drawer>
         <v-navigation-drawer
@@ -81,28 +92,20 @@
     </v-navigation-drawer>
         <v-toolbar color="primary darken-1" dark fixed app clipped-right clipped-left>
             <v-toolbar-side-icon @click="drawer = !drawer"></v-toolbar-side-icon>
-            <v-toolbar-title>Lo pantano es de La Sénia</v-toolbar-title>
+            <v-toolbar-title class="hidden-md-and-down">Lo pantano es de La Sénia</v-toolbar-title>
             <v-spacer></v-spacer>
             <notifications-widget></notifications-widget>
             <v-spacer></v-spacer>
             <span v-role="'SuperAdmin'">
-                <git-info></git-info>
+                <git-info class="hidden-md-and-down"></git-info>
             </span>
             <v-btn icon @click="" href="/profile">
             <v-avatar>
                 <img src="https://www.gravatar.com/avatar/{{ md5(Auth::user()->email) }}" alt="avatar">
             </v-avatar>
             </v-btn>
-            <v-form action="logout" method="POST">
-                @csrf
-                <v-btn type="submit" color="accent">
-                    Logout
-                </v-btn>
-                <v-btn icon @click.native="dark = !dark"><v-icon>lens</v-icon></v-btn>
 
-                <v-toolbar-side-icon @click="drawerRight = !drawerRight"></v-toolbar-side-icon>
-
-            </v-form>
+            <v-toolbar-side-icon @click="drawerRight = !drawerRight"></v-toolbar-side-icon>
 
         </v-toolbar>
 

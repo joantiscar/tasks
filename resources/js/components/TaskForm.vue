@@ -10,15 +10,15 @@
               :label="editingTask.completed ? 'Completada' : 'Pendent'"></v-switch>
     <!--<v-select label="User" :items="users" v-model="editingTask.user_id" item-text="name" item-value="id"-->
               <!--clearable></v-select>-->
-    <task-tags-chips v-model="editingTask.tags" :selected-tasks="editingTask.tags" :task="editingTask" :tags="tags"></task-tags-chips>
+    <span>Tags: <task-tags-chips v-model="editingTask.tags" :selected-tasks="editingTask.tags" :task="editingTask" :tags="tags"></task-tags-chips></span>
     <user-select :users="users" label="User" v-model="editingTask.user"></user-select>
 
     <v-textarea v-model="editingTask.description" label="Descripcio" hint="Descripció"></v-textarea>
     <div class="text-xs-center">
-      <v-btn color="secondary" @click.native="$emit('close')">
-        <v-icon class="mr-1">exit_to_app</v-icon>
-        Sortir
+      <v-btn flat class="grey--text" @click.native="$emit('close')">
+          Sortir
       </v-btn>
+
       <v-btn color="success" @click.native="create" :disabled="loading || $v.$invalid" :loading="loading">
         <v-icon class="mr-1">save</v-icon>
         Guardar

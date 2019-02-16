@@ -29,9 +29,9 @@ export default {
   },
   methods: {
     async add (tags) {
-
       window.axios.post(('/api/v1/task/' + this.task.id + '/tags/multiple'), tags).then((response) => {
         this.$snackbar.showMessage('Etiquetes afegides correctament')
+        this.$emit('updated', response.data)
       }).catch((error) => {
         this.$snackbar.showError(error.message)
       })

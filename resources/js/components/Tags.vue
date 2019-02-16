@@ -1,10 +1,11 @@
 <template>
     <span>
+        <span v-show="dataTags.length > 0">
   <v-dialog v-model="editDialog" @keydown.esc="editDialog = false">
             <v-toolbar color="primary" class="white--text">
             <v-btn color="secondary" flat icon @click.native="editDialog = false"><v-icon class="mr-1">close</v-icon></v-btn>
 
-                Editar tag
+               <span class="hidden-md-and-down">Editar tag</span>
                <v-spacer></v-spacer> <v-btn color="secondary" flat @click.native="editDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>Sortir</v-btn>
                <v-btn color="secondary" flat @click.native="editDialog = false"><v-icon class="mr-1">save</v-icon>Guardar</v-btn>
             </v-toolbar>
@@ -26,8 +27,7 @@
   <v-dialog v-model="showDialog" @keydown.esc="showDialog = false">
         <v-toolbar color="primary" class="white--text">
             <v-btn color="secondary" flat icon @click.native="showDialog = false"><v-icon class="mr-1">close</v-icon></v-btn>
-
-                Crear tag
+            <span class="hidden-md-and-down">Crear tag</span>
                <v-spacer></v-spacer> <v-btn color="secondary" flat @click.native="showDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>Sortir</v-btn>
                <v-btn color="secondary" flat @click.native="showDialog = false"><v-icon class="mr-1">save</v-icon>Guardar</v-btn>
             </v-toolbar>
@@ -49,7 +49,7 @@
             <v-toolbar color="primary" class="white--text">
             <v-btn color="secondary" flat icon @click.native="createDialog = false"><v-icon class="mr-1">close</v-icon></v-btn>
 
-                Crear tag
+                <span class="hidden-md-and-down">Crear tag</span>
                <v-spacer></v-spacer> <v-btn color="secondary" flat @click.native="createDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>Sortir</v-btn>
                <v-btn color="secondary" flat @click.native="createDialog = false"><v-icon class="mr-1">save</v-icon>Guardar</v-btn>
             </v-toolbar>
@@ -151,6 +151,71 @@
 
                 </template>
             </v-data-table>
+            <v-data-iterator
+                    class="hidden-lg-and-up"
+                    :items="dataTags"
+                    :search="search"
+                    no-results-text="No s'ha trobat cap tag coincident"
+                    no-data-text="No hi ha dades disponibles"
+                    rows-per-page-text="Tags per pagina"
+                    :rows-per-page-items="[5,10,25,50,100,{'text':'Totes','value':-1}]"
+                    :loading="loading"
+                    :pagination.sync="pagination"
+                    content-tag="v-layout"
+                    row
+                    wrap
+            >
+                <v-flex
+                        slot="item"
+                        slot-scope="{item:tag}"
+                        xs12
+                        sm6
+                        md4
+                        lg3
+                        class="pa-1 elevation-10"
+                >
+                      <v-card>
+                        <v-toolbar dark class="secondary darken-2">
+                          <span class="title">{{ tag.name }}</span>
+                            <v-spacer></v-spacer>
+                        </v-toolbar>
+                        <v-card-text>
+                        <v-layout align-center justify-center row fill-height>
+                          <v-flex xs5 class="pt-2 pb-2">
+                            <v-flex xs12 class="pt-2">
+                                <span ><v-icon :color="tag.color">bookmark</v-icon></span>
+                            </v-flex>
+                          </v-flex>
+                          <v-flex xs7>
+                              <v-list class="pb-3 pb-3">
+                                  <v-list-tile>
+                                  <v-list-tile-content>
+                                      <span class="font-weight-thin grey--text">{{ tag.description }}</span>
+                                  </v-list-tile-content>
+                                </v-list-tile>
+                              </v-list>
+                          </v-flex>
+                        </v-layout>
+                          </v-card-text>
+                        <v-card-actions>
+                          <v-spacer>
+                              <v-btn v-if="$can('tags.update', tag)" color="success" icon flat title="Modificar la tag"
+                                     @click="showEdit(tag)">
+                            <v-icon>border_color</v-icon>
+                        </v-btn>
+                            <v-btn v-if="$can('tags.show', tag)" color="success" icon flat title="Modificar la tag"
+                                   @click="showShow(tag)">
+                            <v-icon>remove_red_eye</v-icon>
+                        </v-btn>
+                        <v-btn v-if="$can('tags.destroy', tag)" :loading="removing === tag.id" :disabled="removing === tag.id" color="error" flat icon title="Eliminar la tag"
+                               @click="destroy(tag)">
+                            <v-icon>delete</v-icon>
+                        </v-btn>
+                          </v-spacer>
+                        </v-card-actions>
+                        </v-card>
+                </v-flex>
+            </v-data-iterator>
         </v-card>
         <v-btn
           fab
@@ -165,11 +230,29 @@
             <v-icon>add</v-icon>
 
         </v-btn>
+        </span>
+        <span v-show="dataTags.length === 0">
+            <v-card>
+            <v-card-title>
+                <v-flex xs12>
+                    <img src="img/task_not_found.svg">
+                </v-flex>
+            </v-card-title>
+            <v-card-text>
+                <v-flex xs12>
+                    <span class="headline text-xs-center">No hi ha cap tag!</span>
+                </v-flex>
+                <v-flex xs12>
+                    <v-btn @click="showCreate">Crean una!</v-btn>
+                </v-flex>
+            </v-card-text>
+        </v-card>
+        </span>
     </span>
 </template>
 
 <script>
-export default{
+export default {
   name: 'Tags',
 
   data () {

@@ -33,15 +33,15 @@
   <v-card>
     <v-card-title>
       <v-layout row wrap>
-        <v-flex xs4>
+        <v-flex xs12 md4>
           <user-select @cleared="selectedUser = null" v-model="selectedUser" :users="dataUsers"
                        label="Filtrar per usuari" class="pr-4"></user-select>
         </v-flex>
-        <v-flex xs4>
+        <v-flex xs12 md4>
           <v-autocomplete v-model="selectedStatus" :items="estats" label="Filtarar per estat" class="pr-4"
                           item-value="valor" item-text="nom"></v-autocomplete>
         </v-flex>
-        <v-flex xs4>
+        <v-flex xs12 md4>
           <v-text-field
                   v-model="search"
                   append-icon="search"
@@ -76,7 +76,7 @@
         <td>
           <task-completed-toggle :status="task.completed" :task="task" :tags="tags"></task-completed-toggle>
         </td>
-        <td><task-tags :tags="tags" :task="task"></task-tags></td>
+        <td><task-tags :tags="tags" :task="task" @updated="updateTask"></task-tags></td>
         <td><span :title="task.created_at_formatted">{{task.created_at_human}}</span></td>
         <td><span :title="task.updated_at_formatted">{{task.updated_at_human}}</span></td>
         <td>
@@ -112,7 +112,7 @@
                         sm6
                         md4
                         lg3
-                        class="pb-2"
+                        class="pa-1 elevation-10"
                 >
                       <v-card>
                         <v-toolbar dark class="secondary darken-2">
@@ -139,14 +139,14 @@
                             </v-avatar>
                             </v-flex>
                             <v-flex xs12 class="pt-2">
-                                <span class="font-weight-bold">{{ task.user_name }}</span>
+                                <span class="font-weight-bold grey--text">{{ task.user_name }}</span>
                             </v-flex>
                           </v-flex>
                           <v-flex xs7>
                               <v-list class="pb-3 pb-3">
                                   <v-list-tile>
                                   <v-list-tile-content>
-                                      <span class="font-weight-thin">{{ task.description }}</span>
+                                      <span class="font-weight-thin grey--text">{{ task.description }}</span>
                                   </v-list-tile-content>
                                 </v-list-tile>
                                 <v-list-tile>
@@ -161,7 +161,7 @@
                           </v-card-text>
                         <v-card-actions>
                           <v-spacer></v-spacer>
-                                    <task-tags :tags="tags" :task="task"></task-tags>
+                                    <task-tags :tags="tags" :task="task" @updated="updateTask"></task-tags>
                         </v-card-actions>
                         </v-card>
                 </v-flex>
@@ -283,6 +283,9 @@ export default {
     },
     addTask (task) {
       this.dataTasks.push(task)
+    },
+    updateTask (task) {
+      this.dataTasks.splice(this.dataTasks.indexOf(task), 1, task)
     },
     opcio1 () {
       console.log('Opcio1')
