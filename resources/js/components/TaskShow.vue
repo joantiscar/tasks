@@ -1,10 +1,9 @@
 <template>
-  <v-list-tile class="hidden-lg-and-up" v-if="$can('tasks.show', task)" @click="dialog = true">
-  <v-list-tile-title>Detalls</v-list-tile-title>
-  <v-list-tile-action>
+  <span>
+  <v-btn flat icon v-if="$can('tasks.show', task)" @click="dialog = true">
     <v-icon color="success" title="Mira els detalls de la tasca">remove_red_eye</v-icon>
-    </v-list-tile-action>
-    <v-dialog v-model="dialog" @keydown.esc="dialog = false">
+  </v-btn>
+    <v-dialog v-model="dialog" @keydown.esc="dialog = false" max-width="1000">
       <v-toolbar dark class="secondary darken-2">
         <v-btn color="white" flat icon @click.native="dialog = false">
           <v-icon class="mr-1">close</v-icon>
@@ -15,17 +14,17 @@
       <v-card>
         <v-card-text>
           <v-layout align-center justify-center row fill-height>
-            <v-flex xs5 class="pt-2 pb-2">
-              <v-flex xs12>
+            <v-flex xs5 md2 class="pt-2 pb-2">
+              <v-flex xs12 md4>
                 <v-avatar size="100">
                   <img :alt="task.user_name" :src="task.user_gravatar">
                 </v-avatar>
               </v-flex>
-              <v-flex xs12 class="pt-2">
+              <v-flex xs12  md4class="pt-2">
                 <span class="subheading">{{ task.user_name }}</span>
               </v-flex>
             </v-flex>
-            <v-flex xs7>
+            <v-flex xs7 md4>
               <v-list class="pb-3 pb-3">
                 <v-list-tile>
                   <v-list-tile-content>
@@ -68,14 +67,15 @@
         </v-card-text>
       </v-card>
     </v-dialog>
-  </v-list-tile>
+  </v-btn>
+    </span>
 </template>
 <script>
 import TaskForm from './TaskForm'
 import TaskTagsChips from './TaskTagsChips'
 
 export default {
-  name: 'task-show',
+  name: 'task-show-mobile',
   components: { TaskTagsChips, TaskForm },
   data () {
     return {

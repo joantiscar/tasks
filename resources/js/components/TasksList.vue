@@ -82,6 +82,7 @@
         <td>
           <task-destroy :task="task" @removed="removeTask" :uri="uri"></task-destroy>
             <task-edit :tags="tags" :task="task" :users="dataUsers" @edited="refresh"></task-edit>
+            <task-show :tags="tags" :task="task" :users="dataUsers"></task-show>
             <!--<v-btn v-if="$can('tasks.show', task)" color="success" icon flat title="Modificar la tasca"-->
             <!--@click="showShow">-->
             <!--<v-icon>remove_red_eye</v-icon>-->
@@ -196,10 +197,11 @@ import TaskDestroy from './TaskDestroy'
 import TaskTags from './TaskTags'
 import EmptyTasksCreateButton from './EmptyTasksCreateButton'
 import TaskShowMobile from './TaskShowMobile'
+import TaskShow from './TaskShow'
 
 export default {
   name: 'tasks-list',
-  components: { EmptyTasksCreateButton, TaskCompletedToggle, TaskEdit, TaskCreate, TaskDestroy, TaskTags, TaskShowMobile },
+  components: { EmptyTasksCreateButton, TaskCompletedToggle, TaskEdit, TaskCreate, TaskDestroy, TaskTags, TaskShowMobile , TaskShow},
   data () {
     return {
       dataUsers: this.users,
