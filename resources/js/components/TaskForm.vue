@@ -4,18 +4,21 @@
                   :error-messages="nameErrors"
                   @input="$v.name.$touch()"
                   @blur="$v.name.$touch()"
+                  :disabled="loading"
                   label="Nom"
                   hint="El nom de la tasca..."></v-text-field>
     <v-switch v-model="editingTask.completed"
+              :disabled="loading"
               :label="editingTask.completed ? 'Completada' : 'Pendent'"></v-switch>
     <!--<v-select label="User" :items="users" v-model="editingTask.user_id" item-text="name" item-value="id"-->
               <!--clearable></v-select>-->
     <span>Tags: <task-tags-chips v-model="editingTask.tags" :selected-tasks="editingTask.tags" :task="editingTask" :tags="tags"></task-tags-chips></span>
-    <user-select :users="users" label="User" v-model="editingTask.user"></user-select>
+    <user-select :users="users" label="User" v-model="editingTask.user" @input="$v.editingTask.user.$touch()"
+                 @blur="$v.editingTask.user.$touch()" :error-messages="userErrors"></user-select>
 
-    <v-textarea v-model="editingTask.description" label="Descripcio" hint="Descripció"></v-textarea>
+    <v-textarea v-model="editingTask.description" label="Descripcio" hint="Descripció" :disabled="loading"></v-textarea>
     <div class="text-xs-center">
-      <v-btn flat class="grey--text" @click.native="$emit('close')">
+      <v-btn flat class="grey--text" @click.native="$emit('close')" :disabled="loading" :loading="loading">
           Sortir
       </v-btn>
 
@@ -34,7 +37,8 @@ export default {
   components: { TaskTagsChips },
   mixins: [validationMixin],
   validations: {
-    name: { required }
+    name: { required },
+    'editingTask.user': { required }
   },
   name: 'TaskForm',
   data () {
@@ -82,8 +86,15 @@ export default {
   computed: {
     nameErrors () {
       const errors = []
+      console.log(this.$v)
       if (!this.$v.name.$dirty) return errors
       !this.$v.name.required && errors.push('El nom és obligatori')
+      return errors
+    },
+    userErrors () {
+      const errors = []
+      if (!this.$v.editingTask.user.$dirty) return errors
+      !this.$v.editingTask.user.required && errors.push('El usuari és obligatori')
       return errors
     }
   },
@@ -103,7 +114,7 @@ export default {
       this.editingTask.user = null
     },
     create () {
-      this.creating = true
+      this.loading = true
       const task = {
         'name': this.name,
         'description': this.editingTask.description,
