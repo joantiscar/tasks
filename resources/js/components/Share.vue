@@ -1,6 +1,5 @@
 <template>
     <v-btn
-            v-model="fab"
             v-if="show"
             color="accent"
             @click="share"
@@ -17,7 +16,6 @@ export default {
   name: 'Share',
   data () {
     return {
-      fab: false,
       dataTitle: this.title,
       dataText: this.text,
       dataUrl: this.url
@@ -55,3 +53,4 @@ export default {
     }
   }
 }
+</script>

@@ -80976,8 +80976,10 @@ module.exports = Component.exports
 
 /***/ }),
 /* 146 */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
@@ -80991,7 +80993,51 @@ module.exports = Component.exports
 //
 //
 //
-//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: 'Share',
+  data: function data() {
+    return {
+      dataTitle: this.title,
+      dataText: this.text,
+      dataUrl: this.url
+    };
+  },
+
+
+  props: {
+    title: {
+      type: String,
+      default: 'Tasques Joan Tíscar'
+    },
+    text: {
+      type: String,
+      default: 'pos moltes mes tasques'
+    },
+    url: {
+      type: String,
+      default: 'https://tasks.joantiscar.scool.cat'
+    }
+  },
+  computed: {
+    show: function show() {
+      return 'share' in navigator;
+    }
+  },
+  methods: {
+    share: function share() {
+      navigator.share({
+        title: this.dataTitle,
+        text: this.dataText,
+        url: this.dataUrl
+      }).then(function () {
+        return console.log('Successful share');
+      }).catch(function (error) {
+        return console.log('Error sharing:', error);
+      });
+    }
+  }
+});
 
 /***/ }),
 /* 147 */
@@ -81006,14 +81052,7 @@ var render = function() {
         "v-btn",
         {
           attrs: { color: "accent", dark: "", icon: "", flat: "" },
-          on: { click: _vm.share },
-          model: {
-            value: _vm.fab,
-            callback: function($$v) {
-              _vm.fab = $$v
-            },
-            expression: "fab"
-          }
+          on: { click: _vm.share }
         },
         [_c("v-icon", [_vm._v("share")])],
         1
