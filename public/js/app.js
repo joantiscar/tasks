@@ -28034,7 +28034,7 @@ window.Vue.component('service-worker', __WEBPACK_IMPORTED_MODULE_26__components_
 window.Vue.component('NotificationsWidget', __WEBPACK_IMPORTED_MODULE_27__components_notifications_NotificationsWidget___default.a);
 window.Vue.component('Notifications', __WEBPACK_IMPORTED_MODULE_28__components_notifications_Notifications___default.a);
 window.Vue.component('FooterComponent', __WEBPACK_IMPORTED_MODULE_29__components_FooterComponent_vue___default.a);
-window.Vue.component('ShareFav', __WEBPACK_IMPORTED_MODULE_30__components_ShareFab___default.a);
+window.Vue.component('share-fav', __WEBPACK_IMPORTED_MODULE_30__components_ShareFab___default.a);
 
 var app = new window.Vue(__WEBPACK_IMPORTED_MODULE_0__components_App_vue___default.a);
 

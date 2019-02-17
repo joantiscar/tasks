@@ -168,6 +168,6 @@ window.Vue.component('service-worker', ServiceWorker)
 window.Vue.component('NotificationsWidget', NotificationsWidget)
 window.Vue.component('Notifications', Notifications)
 window.Vue.component('FooterComponent', FooterComponent)
-window.Vue.component('ShareFav', ShareFav)
+window.Vue.component('share-fav', ShareFav)
 
 const app = new window.Vue(AppComponent)
