@@ -200,7 +200,7 @@
                     </v-layout>
                 </v-container>
             </section>
-
+            <share-fab></share-fab>
             <v-footer class="blue darken-2">
                 <v-layout row wrap align-center>
                     <v-flex xs12>

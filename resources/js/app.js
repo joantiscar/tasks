@@ -35,7 +35,7 @@ import ServiceWorker from './components/ServiceWorker'
 import NotificationsWidget from './components/notifications/NotificationsWidget'
 import Notifications from './components/notifications/Notifications'
 import FooterComponent from './components/FooterComponent.vue'
-
+import ShareFav from './components/ShareFab'
 require('./bootstrap')
 
 window.Vue = Vue
@@ -168,5 +168,6 @@ window.Vue.component('service-worker', ServiceWorker)
 window.Vue.component('NotificationsWidget', NotificationsWidget)
 window.Vue.component('Notifications', Notifications)
 window.Vue.component('FooterComponent', FooterComponent)
+window.Vue.component('ShareFav', ShareFav)
 
 const app = new window.Vue(AppComponent)

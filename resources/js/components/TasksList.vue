@@ -83,6 +83,7 @@
           <task-destroy :task="task" @removed="removeTask" :uri="uri"></task-destroy>
             <task-edit :tags="tags" :task="task" :users="dataUsers" @edited="refresh"></task-edit>
             <task-show :tags="tags" :task="task" :users="dataUsers"></task-show>
+            <share></share>
             <!--<v-btn v-if="$can('tasks.show', task)" color="success" icon flat title="Modificar la tasca"-->
             <!--@click="showShow">-->
             <!--<v-icon>remove_red_eye</v-icon>-->
@@ -128,6 +129,7 @@
                                                    @edited="refresh"></task-show-mobile>
                                   <task-edit :tags="tags" :task="task" :users="dataUsers" @edited="refresh"></task-edit>
                                   <task-destroy :task="task" @removed="removeTask" :uri="uri"></task-destroy>
+                                    <share></share>
                             </v-list>
                           </v-menu>
                         </v-toolbar>
@@ -198,10 +200,11 @@ import TaskTags from './TaskTags'
 import EmptyTasksCreateButton from './EmptyTasksCreateButton'
 import TaskShowMobile from './TaskShowMobile'
 import TaskShow from './TaskShow'
+import Share from './Share'
 
 export default {
   name: 'tasks-list',
-  components: { EmptyTasksCreateButton, TaskCompletedToggle, TaskEdit, TaskCreate, TaskDestroy, TaskTags, TaskShowMobile , TaskShow},
+  components: {Share, EmptyTasksCreateButton, TaskCompletedToggle, TaskEdit, TaskCreate, TaskDestroy, TaskTags, TaskShowMobile , TaskShow},
   data () {
     return {
       dataUsers: this.users,
