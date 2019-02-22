@@ -23,6 +23,8 @@
     <meta property="og:description" content="Pos moltes tasques">
     <meta property="og:url" content="https://tasks.joantiscar.scool.cat">
     <meta property="og:title" content="Tasques">
+    <script defer src="{{ mix('js/app.js') }}"></script>
+
 </head>
 <body>
 <div id="app" v-cloak>
@@ -33,6 +35,5 @@
 
     @yield('content')
 </div>
-<script src="{{ mix('js/app.js') }}"></script>
 </body>
 </html>
