@@ -29,7 +29,7 @@
         </v-toolbar>
         <v-content>
             <section>
-                <v-parallax src="img/landing_image.jpg" height="600">
+                <v-parallax src="img/landing_image.web" height="600">
                 </v-parallax>
                 <div class="overlay" style="
                 position:absolute;
