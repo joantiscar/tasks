@@ -29,7 +29,7 @@
         </v-toolbar>
         <v-content>
             <section>
-                <v-parallax src="img/landing_image.web" height="600">
+                <v-parallax src="img/landing_image.webp" height="600">
                 </v-parallax>
                 <div class="overlay" style="
                 position:absolute;
@@ -138,7 +138,7 @@
             </section>
 
             <section>
-                <v-parallax src="img/section.jpg" height="380">
+                <v-parallax src="img/section.webp" height="380">
                     <v-layout column align-center justify-center>
                         <div class="headline white--text mb-3 text-xs-center">Web development has never been easier</div>
                         <em>Kick-start your application today</em>
