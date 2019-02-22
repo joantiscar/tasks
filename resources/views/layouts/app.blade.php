@@ -29,6 +29,9 @@
 
 </head>
 <body>
+<noscript>
+    <strong>We're sorry but frontend doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
+</noscript>
     <v-app id="app" v-cloak :dark="dark">
         <snackbar></snackbar>
         <service-worker></service-worker>
