@@ -5,8 +5,16 @@
         <v-toolbar class="white">
             <v-toolbar-title v-text="title" class="hidden-md-and-down"></v-toolbar-title>
             <v-spacer></v-spacer>
+            @auth
+                <v-btn icon @click="" href="/profile">
+                    <v-avatar>
+                        <img src="https://www.gravatar.com/avatar/{{ md5(Auth::user()->email) }}" alt="avatar">
+                    </v-avatar>
+                </v-btn>
+            @else
             <v-btn @click="loginForm = !loginForm">Login</v-btn>
             <v-btn @click="registerForm = !registerForm">Register</v-btn>
+            @endauth
             <v-dialog v-model="loginForm" max-width="1000">
                 <v-card>
                     <login-form v-if="loginForm" email="{{old('email')}}" csrf-token="{{csrf_token()}}"></login-form>
