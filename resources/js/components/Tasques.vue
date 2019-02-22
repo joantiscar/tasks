@@ -1,32 +1,5 @@
 <template>
-    <span>
-  <!--<v-dialog v-model="showDialog" @keydown.esc="showDialog = false">-->
-        <!--<v-toolbar color="primary" class="white&#45;&#45;text">-->
-            <!--<v-btn color="secondary" flat icon @click.native="showDialog = false"><v-icon class="mr-1">close</v-icon></v-btn>-->
-
-                <!--Crear tasca-->
-               <!--<v-spacer></v-spacer> <v-btn color="secondary" flat @click.native="showDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>Sortir</v-btn>-->
-               <!--<v-btn color="secondary" flat @click.native="showDialog = false"><v-icon class="mr-1">save</v-icon>Guardar</v-btn>-->
-            <!--</v-toolbar>-->
-            <!--<v-card>-->
-                      <!--&lt;!&ndash;                                                                                                                                                                                                                                                                                                                                     Fet per lo de La Sénia&ndash;&gt;-->
-
-                <!--<v-card-text>-->
-        <!--<v-form>-->
-            <!--<v-text-field readonly v-model="taskBeingShown.name" label="Nom" hint="El nom de la tasca..."></v-text-field>-->
-            <!--<v-switch readonly v-model="taskBeingShown.completed" :label="taskBeingShown.completed ? 'Completada' : 'Pendent'"></v-switch>-->
-            <!--<v-text-field readonly label="User" v-model="taskBeingShown.user_name" item-text="name" item-value="id" clearable></v-text-field>-->
-                <!--<v-textarea readonly v-model="taskBeingShown.description" label="Descripcio" hint="Descripció"></v-textarea>-->
-            <!--<div class="text-xs-center">-->
-            <!--<v-btn color="secondary" @click.native="showDialog = false"><v-icon class="mr-1">exit_to_app</v-icon>Sortir</v-btn>-->
-                <!--</div>-->
-        <!--</v-form>-->
-                <!--</v-card-text>-->
-      <!--</v-card>-->
-
-  <!--</v-dialog>-->
-          <tasks-list :tags="tags" :tasks="dataTasks" :users="dataUsers"></tasks-list>
-    </span>
+  <tasks-list :tags="tags" :tasks="dataTasks" :users="dataUsers"></tasks-list>
 </template>
 
 <script>

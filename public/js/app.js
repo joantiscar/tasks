@@ -75800,33 +75800,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -81775,15 +81748,9 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "span",
-    [
-      _c("tasks-list", {
-        attrs: { tags: _vm.tags, tasks: _vm.dataTasks, users: _vm.dataUsers }
-      })
-    ],
-    1
-  )
+  return _c("tasks-list", {
+    attrs: { tags: _vm.tags, tasks: _vm.dataTasks, users: _vm.dataUsers }
+  })
 }
 var staticRenderFns = []
 render._withStripped = true

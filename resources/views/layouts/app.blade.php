@@ -108,11 +108,14 @@
             <v-toolbar-side-icon @click="drawerRight = !drawerRight"></v-toolbar-side-icon>
 
         </v-toolbar>
-
-        <v-layout align-center justify-center row fluid class="grey lighten-5">
+        <v-container fill-height fluid>
+        <v-content>
                 @yield('content')
-        </v-layout>
+        </v-content>
+
+        </v-container>
         <footer-component></footer-component>
+
     </v-app>
 <script src="{{ mix('js/app.js') }}"></script>
 </body>
