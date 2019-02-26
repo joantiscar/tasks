@@ -2469,15 +2469,30 @@ __webpack_require__.r(__webpack_exports__);
   // VULL EXECUTAR EL REGISTRE DEL SERVICE WORKER
   methods: {
     registerServiceWorker: function registerServiceWorker() {
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/service-worker.js').then(function (registration) {
-          console.log('Registration successful, sope is: ' + registration.scope);
-        }).catch(function (error) {
-          console.log('Service worker registration failed, error: ' + error);
+      var _this = this;
+
+      if (!('serviceWorker' in navigator)) {
+        console.log('Service workers aren\'t supported in this browser.');
+        return;
+      }
+
+      if (document.readyState === 'complete') {
+        window.addEventListener('load', function () {
+          _this.register();
         });
       } else {
-        console.log('missatge d\'error');
+        this.register();
       }
+    },
+    register: function register() {
+      navigator.serviceWorker.register('/sw.js').then(function (registration) {
+        console.log('Registration successful, scope is:', registration.scope);
+        navigator.serviceWorker.ready.then(function (serviceWorkerRegistration) {
+          return serviceWorkerRegistration.pushManager.subscribe({
+            userVisibleOnly: true
+          });
+        });
+      });
     }
   },
   created: function created() {
