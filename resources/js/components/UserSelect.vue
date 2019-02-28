@@ -4,8 +4,8 @@
                 v-model="selectedUser"
                 :clearable="true"
                 :label="label"
-                return-object
                 item-value="id"
+                item-text="nom"
         >
             <template slot="selection" slot-scope="{item: user}">
                 <v-chip>
@@ -57,9 +57,9 @@ export default {
       default: 'Usuaris'
     },
     user: {
-      type: Object,
+      type: Number,
       default: function () {
-        return {}
+        return null
       }
     }
     //                                                                                                                                                                                                                                                                                                                                     Fet per lo de La Sénia
