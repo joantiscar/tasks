@@ -13,8 +13,7 @@
     <!--<v-select label="User" :items="users" v-model="editingTask.user_id" item-text="name" item-value="id"-->
               <!--clearable></v-select>-->
     <span>Tags: <task-tags-chips v-model="editingTask.tags" :selected-tasks="editingTask.tags" :task="editingTask" :tags="tags"></task-tags-chips></span>
-    <user-select :users="users" label="User" v-model="editingTask.user" @input="$v.editingTask.user.$touch()"
-                 @blur="$v.editingTask.user.$touch()" :error-messages="userErrors"></user-select>
+    <user-select :users="users" label="User" v-model="editingTask.user_id"></user-select>
 
     <v-textarea v-model="editingTask.description" label="Descripcio" hint="Descripció" :disabled="loading"></v-textarea>
     <div class="text-xs-center">
@@ -37,8 +36,7 @@ export default {
   components: { TaskTagsChips },
   mixins: [validationMixin],
   validations: {
-    name: { required },
-    'editingTask.user': { required }
+    name: { required }
   },
   name: 'TaskForm',
   data () {
@@ -51,7 +49,6 @@ export default {
         completed: this.task.completed,
         description: this.task.description,
         user_id: this.task.user_id,
-        user: this.task.user,
         tags: this.task.tags
       }
     }
@@ -78,11 +75,6 @@ export default {
       }
     }
   },
-  watch: {
-    user (newValue) {
-      this.selectLoggedUser()
-    }
-  },
   computed: {
     nameErrors () {
       const errors = []
@@ -90,28 +82,14 @@ export default {
       if (!this.$v.name.$dirty) return errors
       !this.$v.name.required && errors.push('El nom és obligatori')
       return errors
-    },
-    userErrors () {
-      const errors = []
-      if (!this.$v.editingTask.user.$dirty) return errors
-      !this.$v.editingTask.user.required && errors.push('El usuari és obligatori')
-      return errors
     }
-  },
+      },
   methods: {
-    selectLoggedUser () {
-      if (window.laravel_user) {
-        this.user = this.users.find((user) => {
-          return parseInt(user.id) === window.laravel_user.id
-        })
-      }
-    },
     reset () {
       this.editingTask.name = ''
       this.editingTask.description = ''
       this.editingTask.completed = false
       this.editingTask.user_id = ''
-      this.editingTask.user = null
     },
     create () {
       this.loading = true
@@ -123,22 +101,7 @@ export default {
         'tags': this.editingTask.tags
       }
       this.$emit('saved', task)
-      // window.axios.post(this.uri, task).then((response) => {
-      //   // this.refresh() // Problema -> rendiment
-      //   this.$snackbar.showMessage("S'ha editat correctament la tasca")
-      //   this.$emit('created', response.data)
-      //   this.reset()
-      // }).catch((error) => {
-      //   this.$snackbar.showError(error.message)
-      //   this.creating = false
-      //   this.reset()
-      // }).finally(() => {
-      //   this.creating = false
-      // })
     }
-  },
-  created () {
-    if (!this.task.user) this.editingTask.user = this.selectLoggedUser()
   }
 }
 </script>
