@@ -14,19 +14,20 @@ const publicDir = 'public'
  |
  */
 
-mix.js('resources/js/app.js', 'public/js')
-  .sass('resources/sass/app.scss', 'public/css').then(() => {
-    replace.sync({
+mix.js('resources/js/app.js', 'public/js').then(() => {
+  replace.sync({
     // SEE: https://github.com/JeffreyWay/laravel-mix/issues/1717
     // FIXME:   Workaround for laravel-mix placeing '//*.js' at the begining of JS filesystem
 
-      files: path.normalize(`${publicDir}/service-worker/precache-manifest.*.js`),
-      from: /\/\//gu,
-      to: '/'
-    })
+    files: path.normalize(`${publicDir}/service-worker/precache-manifest.*.js`),
+    from: /\/\//gu,
+    to: '/'
   })
-
-if (mix.inProducction()) {
+})
+  .extract()
+  .sourceMaps(false)
+  .sass('resources/sass/app.scss', 'public/css')// .sourceMaps(false) -> Disable source maps in production
+if (mix.inProduction()) {
   mix.version()
 }
 
