@@ -7,7 +7,7 @@
             icon
             flat
     >
-        <span class="mr-2" v-if="menu">Comparteix</span>
+        <span v-if="menu">Comparteix</span>
         <v-icon>share</v-icon>
     </v-btn>
 </template>
