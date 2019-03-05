@@ -131,7 +131,7 @@
                                                    @edited="refresh"></task-show-mobile>
                                   <task-edit :tags="tags" :task="task" :users="dataUsers" @edited="refresh"></task-edit>
                                   <task-destroy :task="task" @removed="removeTask" :uri="uri"></task-destroy>
-                                <span class="mr-2">Comparteix</span><share-task :task="task"></share-task>
+                                <share-task :task="task" :menu="true"></share-task>
 
                             </v-list>
                           </v-menu>
