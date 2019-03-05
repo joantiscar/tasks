@@ -51,7 +51,7 @@
                         <h1
                                 style="text-shadow: 0 0 50px hsla(0, 0%, 0%, .4);font-family: 'Montserrat', sans-serif !important; z-index: 10;"
                                 class="black--text mb-2 display-1 text-xs-center">Lo pantano és de La Sénia</h1>
-                        <v-btn href="https://github.com/joantiscar/tasks"><img alt="github" height="30" class="pr-2" src="https://cdn.onlinewebfonts.com/svg/img_326384.png">  Github</v-btn>
+                        <v-btn href="https://github.com/joantiscar/tasks"><img alt="github" height="30" class="pr-2" src="img/github-icon.webp">  Github</v-btn>
                         <div class="black--text subheading mb-3 text-xs-center"
                         style="text-shadow: 0 0 50px hsla(0, 0%, 0%, .4);font-family: 'Montserrat', sans-serif !important; z-index: 10;"
                         >Fet per Joan Tíscar</div>
