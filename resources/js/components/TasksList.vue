@@ -131,7 +131,6 @@
                                                    @edited="refresh"></task-show-mobile>
                                   <task-edit :tags="tags" :task="task" :users="dataUsers" @edited="refresh"></task-edit>
                                   <task-destroy :task="task" @removed="removeTask" :uri="uri"></task-destroy>
-                                    <share></share>
                             </v-list>
                           </v-menu>
                         </v-toolbar>

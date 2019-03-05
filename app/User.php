@@ -30,6 +30,9 @@ class User extends Authenticatable
      *
      * @var array
      */
+
+    protected $appends = ['gravatar'];
+
     protected $fillable
       = [
         'name',

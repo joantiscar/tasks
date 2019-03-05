@@ -11,6 +11,8 @@ class Task extends Model
 
     const TASKS_CACHE_KEY = 'tasks.joantiscar.scool.cat';
 
+    protected $appends = ['created_at_formatted', 'updated_at_formatted'];
+
     protected $hidden = [
 //        'created_at'
     ];
@@ -21,7 +23,6 @@ class Task extends Model
     {
         return $this->hasOne(File::class);
     }
-
     public function assignFile(File $file)
     {
         $file->task_id = $this->id;
@@ -31,7 +32,6 @@ class Task extends Model
     public function tasks()
     {
         return $this->belongsToMany(Task::class);
-
     }
 
     public function addTags($tags)
@@ -131,6 +131,10 @@ class Task extends Model
             'tags' => $this->tags
         ];
     }
+    public function getCompletedAttribute($completed)
+    {
+        return (bool) $completed;
+    }
 
     public function mapSimple()
     {
@@ -139,7 +143,7 @@ class Task extends Model
           'name' => $this->name,
           'description' => $this->description,
           'completed' => (boolean)$this->completed,
-          'user_id' => $this->user->id
+          'user_id' => optional($this->user)->id
         ];
     }
     public function scopeCompleted($query)

@@ -128,6 +128,25 @@ class TasquesControllerTest extends TestCase
         $response->assertSee('Comprar pa');
     }
 
+    public function test_can_show_task()
+    {
+        initialize_roles();
+        create_Example_tasks();
+
+        $user = $this->loginAsTaskUser();
+        $task = Task::create([
+          'name'      => 'Tasca Usuari',
+          'completed' => true,
+          'user_id'   => $user->id,
+        ]);
+        $response = $this->get('/tasques/1');
+        $response->assertStatus(200);
+        $response->assertViewIs('tasks.user.show');
+        $response->assertViewHas('task', function ($task_view) {
+            return (Task::find(1) == $task_view);
+        });
+    }
+
     public function cannot_show_edit_form()
     {
         $user = factory(User::class)->create();

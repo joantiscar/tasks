@@ -233,11 +233,11 @@ class TasksControllerTest extends TestCase
           'completed' => false,
         ]);
         //2
-        $response = $this->json('PUT', '/api/v1/tasks/' . $task->id, [
+        $response = $this->json('PUT', '/api/v1/tasks/' . $task['id'], [
           'name'      => 'Comprar pa',
           'completed' => true,
         ]);
-
+        //dd($response);
         // 2 opcions
         //        $this->assertDatabaseHas('tasks',$newTask);
         //        $this->assertDatabaseMissing('tasks',$task);

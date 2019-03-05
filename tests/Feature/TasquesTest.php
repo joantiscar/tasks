@@ -86,4 +86,7 @@ class TasquesTest extends TestCase
         $response->assertStatus(302);
         $response->assertRedirect('/login');
     }
+
+
+
 }

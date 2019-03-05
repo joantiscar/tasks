@@ -18,6 +18,7 @@ import './bootstrap'
 import ExampleComponent from './components/ExampleComponent.vue'
 import Tasks from './components/Tasks.vue'
 import Tasques from './components/Tasques.vue'
+import ShowTask from './components/ShowTask.vue'
 import Tags from './components/Tags.vue'
 import LoginForm from './components/LoginForm.vue'
 import RegisterForm from './components/RegisterForm.vue'
@@ -157,6 +158,7 @@ window.Vue.component('example-component', ExampleComponent)
 window.Vue.component('tasks', Tasks)
 window.Vue.component('tags', Tags)
 window.Vue.component('tasques', Tasques)
+window.Vue.component('show-task', ShowTask)
 window.Vue.component('login-form', LoginForm)
 window.Vue.component('register-form', RegisterForm)
 window.Vue.component('user-list', UserList)

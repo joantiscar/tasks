@@ -31,7 +31,7 @@ class LoginControllerTest extends TestCase
           'password' => 'secret',
         ]);
 
-        $response->assertRedirect('/home');
+        $response->assertRedirect('/tasques');
         $this->assertNotNull(Auth::user());
         $this->assertEquals('astio@gmail.com', Auth::user()->email);
     }

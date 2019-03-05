@@ -37,7 +37,7 @@ class TasksController extends Controller
         $task->update($request->all());
         $task->save();
         $data = (array)$request->only('tags');
-        $task->syncTags($data['tags']);
+        $task->syncTags($data);
         $task->save();
         event(new TaskUpdated($oldTask, $task));
         return $task->map();

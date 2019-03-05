@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserTaskShow;
 use App\Http\Requests\UserTasksIndex;
 use App\Tag;
 use App\Task;
@@ -31,5 +32,14 @@ class TasquesController extends Controller
         $users = map_simple_collection(User::with('roles', 'permissions')->get());
         $tags = map_collection(Tag::all());
         return view('tasques', compact('tasks', 'users', 'uri', 'tags'));
+    }
+
+    public function show(UserTaskShow $request)
+    {
+        // MVC
+            $task = Task::where('id', '=', $request->id )->with('user')->first()->toJson();
+        $tags = map_collection(Tag::all());
+
+        return view('tasks.user.show', compact('task', 'tags'));
     }
 }
