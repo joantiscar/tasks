@@ -7,6 +7,7 @@
             icon
             flat
     >
+        <span class="mr-2" v-if="menu">Comparteix</span>
         <v-icon>share</v-icon>
     </v-btn>
 </template>
@@ -26,6 +27,10 @@ export default {
     task: {
       type: Object,
       required: true
+    },
+    menu: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
