@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 importScripts("/service-worker/precache-manifest.850928ca30c7077a0abde103884ae4a2.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
+=======
+importScripts("/service-worker/precache-manifest.d31f857087504126e8662e9a0ad9b7f6.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
+>>>>>>> 5e76cf3b8bc41aaeb649d4521e9c36498a610d12
 
 /* eslint-disable no-undef */
 workbox.setConfig({
