@@ -1,5 +1,4 @@
 <template>
-    <span>
     <v-btn
             v-if="show"
             color="accent"
@@ -12,7 +11,6 @@
 
         <v-icon>share</v-icon>
     </v-btn>
-        </span>
 </template>
 
 <script>
