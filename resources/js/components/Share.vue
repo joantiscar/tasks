@@ -1,4 +1,5 @@
 <template>
+    <span>
     <v-btn
             v-if="show"
             color="accent"
@@ -7,8 +8,11 @@
             icon
             flat
     >
+        <span class="mr-2" v-if="menu">Comparteix</span>
+
         <v-icon>share</v-icon>
     </v-btn>
+        </span>
 </template>
 
 <script>
@@ -34,6 +38,10 @@ export default {
     url: {
       type: String,
       default: 'https://tasks.joantiscar.scool.cat'
+    },
+    menu: {
+      type: Boolean,
+      default: false
     }
   },
   computed: {
