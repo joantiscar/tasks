@@ -84,7 +84,7 @@
           <task-destroy :task="task" @removed="removeTask" :uri="uri"></task-destroy>
             <task-edit :tags="tags" :task="task" :users="dataUsers" @edited="refresh"></task-edit>
             <task-show :tags="tags" :task="task" :users="dataUsers"></task-show>
-            <share></share>
+            <share-task :task="task"></share-task>
             <!--<v-btn v-if="$can('tasks.show', task)" color="success" icon flat title="Modificar la tasca"-->
             <!--@click="showShow">-->
             <!--<v-icon>remove_red_eye</v-icon>-->
@@ -131,6 +131,8 @@
                                                    @edited="refresh"></task-show-mobile>
                                   <task-edit :tags="tags" :task="task" :users="dataUsers" @edited="refresh"></task-edit>
                                   <task-destroy :task="task" @removed="removeTask" :uri="uri"></task-destroy>
+                                <span class="mr-2">Comparteix</span><share-task :task="task"></share-task>
+
                             </v-list>
                           </v-menu>
                         </v-toolbar>
@@ -202,10 +204,11 @@ import EmptyTasksCreateButton from './EmptyTasksCreateButton'
 import TaskShowMobile from './TaskShowMobile'
 import TaskShow from './TaskShow'
 import Share from './Share'
+import ShareTask from './ShareTask'
 
 export default {
   name: 'tasks-list',
-  components: { Share, EmptyTasksCreateButton, TaskCompletedToggle, TaskEdit, TaskCreate, TaskDestroy, TaskTags, TaskShowMobile, TaskShow },
+  components: { ShareTask, Share, EmptyTasksCreateButton, TaskCompletedToggle, TaskEdit, TaskCreate, TaskDestroy, TaskTags, TaskShowMobile, TaskShow },
   data () {
     return {
       dataUsers: this.users,
