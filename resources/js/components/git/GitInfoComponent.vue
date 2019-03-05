@@ -22,8 +22,8 @@
                     <li>Missatge: {{ dataGit.message }}</li>
                     <li>Data: {{ dataGit.date_human }} | {{ dataGit.date_formatted }}</li>
                     <li>Origin: {{ dataGit.origin }}</li>
-                    <li>Projecte Github: <a :href="githubURL()" target="_blank">{{ githubUri() }}</a></li>
-                    <li>Commits Github: <a :href="githubURLIssues()" target="_blank">{{ githubUri() }}</a></li>
+                    <li>Projecte Github: <a rel="noreferrer" :href="githubURL()" target="_blank">{{ githubUri() }}</a></li>
+                    <li>Commits Github: <a rel="noreferrer" :href="githubURLIssues()" target="_blank">{{ githubUri() }}</a></li>
                 </ul>
             </v-card-text>
 

@@ -28,7 +28,6 @@
     <script defer src="{{ url (mix('/js/manifest.js')) }}" type="text/javascript"></script>
     <script defer src="{{ url (mix('/js/vendor.js')) }}" type="text/javascript"></script>
     <script defer src="{{ url (mix('/js/app.js')) }}" type="text/javascript"></script>
-    <script async defer src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
     @stack('afterScripts')
 
 </head>

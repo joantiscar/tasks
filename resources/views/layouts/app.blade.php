@@ -24,8 +24,11 @@
     <meta property="og:description" content="Pos moltes tasques">
     <meta property="og:url" content="https://tasks.joantiscar.scool.cat">
     <meta property="og:title" content="Tasques">
-    <script defer src="{{ mix('js/app.js') }}"></script>
-
+    @stack('beforeScripts')
+    <script defer src="{{ (mix('/js/manifest.js')) }}" type="text/javascript"></script>
+    <script defer src="{{ (mix('/js/vendor.js')) }}" type="text/javascript"></script>
+    <script defer src="{{ (mix('/js/app.js')) }}" type="text/javascript"></script>
+    @stack('afterScripts')
 
     <title>@yield('title','Put your title here')</title>
 

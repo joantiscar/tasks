@@ -1,4 +1,4 @@
-importScripts("/service-worker/precache-manifest.00235d287446f184ad8032ffdb5b5ce9.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
+importScripts("/service-worker/precache-manifest.850928ca30c7077a0abde103884ae4a2.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 /* eslint-disable no-undef */
 workbox.setConfig({
@@ -32,24 +32,15 @@ workbox.routing.registerRoute(
   })
 )
 
-// images
-workbox.routing.registerRoute(
-  new RegExp('.(?:jpg|jpeg|png|gif|svg|webp)$'),
-  workbox.strategies.cacheFirst({
-    cacheName: 'images',
-    plugins: [
-      new workbox.expiration.Plugin({
-        maxEntries: 20,
-        purgeOnQuotaError: true
-      })
-    ]
-  })
-)
-
 workbox.routing.registerRoute(
   '/',
   workbox.strategies.staleWhileRevalidate({ cacheName: 'landing' })
 )
+
+workbox.routing.registerRoute(
+  new RegExp('/tasques'),
+  new workbox.strategies.NetworkFirst()
+);
 
 // NO ENS CAL PQ LES TENIM INTEGRADES EN LOCAL VIA WEBPACK i NMP IMPORTS
 // // fonts

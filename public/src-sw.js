@@ -30,24 +30,15 @@ workbox.routing.registerRoute(
   })
 )
 
-// images
-workbox.routing.registerRoute(
-  new RegExp('.(?:jpg|jpeg|png|gif|svg|webp)$'),
-  workbox.strategies.cacheFirst({
-    cacheName: 'images',
-    plugins: [
-      new workbox.expiration.Plugin({
-        maxEntries: 20,
-        purgeOnQuotaError: true
-      })
-    ]
-  })
-)
-
 workbox.routing.registerRoute(
   '/',
   workbox.strategies.staleWhileRevalidate({ cacheName: 'landing' })
 )
+
+workbox.routing.registerRoute(
+  new RegExp('/tasques'),
+  new workbox.strategies.NetworkFirst()
+);
 
 // NO ENS CAL PQ LES TENIM INTEGRADES EN LOCAL VIA WEBPACK i NMP IMPORTS
 // // fonts
