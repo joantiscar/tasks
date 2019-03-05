@@ -1,35 +1,22 @@
-importScripts("/service-worker/precache-manifest.bd90f5d1e04c68774333a4ba76dd39d0.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.0/workbox-sw.js");
+importScripts("/service-worker/precache-manifest.e614a526621b6c603ddd89eafcdb2d37.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
-workbox.setConfig({ debug: true })
-workbox.core.skipWaiting()
-workbox.core.clientsClaim()
+/* eslint-disable no-undef */
+workbox.setConfig({
+  debug: true
+});
+workbox.skipWaiting()
+workbox.clientsClaim()
 
-workbox.precaching.cleanupOutdatedCaches()
+// workbox.routing.registerRoute(
+//   new RegExp('https://hacker-news.firebaseio.com'),
+//   workbox.strategies.staleWhileRevalidate()
+// );
 
-// self.addEventListener('push', (event) => {
-//   const title = 'Tasks App - Joan Tíscar'
-//   const options = {
-//     body: event.data.text()
-//   }
-//   event.waitUntil(self.registration.showNotification(title, options))
-// })
-
-self.addEventListener('sync', function (event) {
-
-})
-
-const showNotification = () => {
-  self.registration.showNotification('Post Sent', {
-    body: 'You are back onlinee and your post was successfully sent!'
-    // icon: 'assets/icon/256.png',
-    // badge: 'assets/icon/32png.png'
-  })
-}
-
-const bgSyncPlugin = new workbox.backgroundSync.Plugin('newsletter', {
-  maxRetentionTime: 24 * 60, // Retry for max of 24 Hours
-  callbacks: {
-    queueDidReplay: showNotification
+// TODO cal utilitzar PushManager al registrar el service worker
+self.addEventListener('push', (event) => {
+  const title = 'TODO CANVIAR TITOL'
+  const options = {
+    body: event.data.text()
   }
 })
 
