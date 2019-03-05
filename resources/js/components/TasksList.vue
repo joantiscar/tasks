@@ -62,7 +62,8 @@
           rows-per-page-text="Tasques per pàgina"
           :rows-per-page-items="[5,10,25,50,100,200,{'text':'Tots','value':-1}]"
           :pagination.sync="pagination"
-          class="hidden-md-and-down"
+          v-if="$vuetify.breakpoint.lgAndUp"
+
   >
 
     <v-progress-linear slot="progress" color="secondary" indeterminate></v-progress-linear>
@@ -94,6 +95,7 @@
     </template>
   </v-data-table>
       <v-data-iterator
+        v-if="$vuetify.breakpoint.mdAndDown"
               class="hidden-lg-and-up"
               :items="filteredTasks"
               :search="search"

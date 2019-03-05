@@ -21,7 +21,7 @@
           Guardar
         </v-btn>
       </v-toolbar>
-      <v-card>
+      <v-card v-if="dialog === true">
         <v-card-text>
           <task-form :task="task" :users="users" :user="task.user" :tags="tags" @saved="edit" @close="dialog = false"></task-form>
         </v-card-text>

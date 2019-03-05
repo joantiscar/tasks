@@ -11,7 +11,7 @@
         <span class="title">{{ task.name }}</span>
         <v-spacer></v-spacer>
       </v-toolbar>
-      <v-card>
+      <v-card v-if="dialog === true">
         <v-card-text>
           <v-layout align-center justify-center row fill-height>
             <v-flex xs5 md2 class="pt-2 pb-2">
