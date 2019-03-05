@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 workbox.setConfig({
   debug: true
 });
@@ -89,4 +90,4 @@ workbox.routing.registerRoute(
         purgeOnQuotaError: true,
       })
     ]
-  })
+  }))

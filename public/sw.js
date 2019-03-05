@@ -1,5 +1,6 @@
-importScripts("/service-worker/precache-manifest.de28706849ff9f4982299b7d8d8af1ba.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
+importScripts("/service-worker/precache-manifest.00235d287446f184ad8032ffdb5b5ce9.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
+/* eslint-disable no-undef */
 workbox.setConfig({
   debug: true
 });
@@ -91,5 +92,5 @@ workbox.routing.registerRoute(
         purgeOnQuotaError: true,
       })
     ]
-  })
+  }))
 

@@ -204,7 +204,7 @@ import Share from './Share'
 
 export default {
   name: 'tasks-list',
-  components: {Share, EmptyTasksCreateButton, TaskCompletedToggle, TaskEdit, TaskCreate, TaskDestroy, TaskTags, TaskShowMobile , TaskShow},
+  components: { Share, EmptyTasksCreateButton, TaskCompletedToggle, TaskEdit, TaskCreate, TaskDestroy, TaskTags, TaskShowMobile, TaskShow },
   data () {
     return {
       dataUsers: this.users,
