@@ -153,6 +153,11 @@
                     </v-layout>
                 </v-parallax>
             </section>
+            <section>
+                <v-parallax src="img/section.webp" height="380">
+                    <newsletter-subscription-card></newsletter-subscription-card>
+                </v-parallax>
+            </section>
 
             <section>
                 <v-container grid-list-xl>

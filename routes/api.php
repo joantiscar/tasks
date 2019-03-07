@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\Changelog\ChangelogController;
 use App\Http\Controllers\Api\GitController;
+use App\Http\Controllers\Api\Newsletter\NewsletterController;
 use App\Task;
 use Illuminate\Http\Request;
 
@@ -33,6 +34,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('/v1/completed_task/{task}','Api\CompletedTasksApiController@store');      //EDIT
     Route::delete('/v1/completed_task/{task}','Api\CompletedTasksApiController@destroy');      //EDIT
 
+    Route::post('/newsletter', '\\' . NewsletterController::class . '@store');
 
     Route::get('/v1/tags','Api\TagsController@index');            //BROWSE
     Route::get('/v1/tags/{tag}','Api\TagsController@show');      //READ
