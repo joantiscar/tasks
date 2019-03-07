@@ -43,32 +43,30 @@
         </v-flex>
         <v-flex xs12 md4>
           <v-text-field
-                  v-model="search"
-                  append-icon="search"
-                  label="Búsqueda"
-                  single-line
-                  hide-details
+            v-model="search"
+            append-icon="search"
+            label="Búsqueda"
+            single-line
+            hide-details
           ></v-text-field>
         </v-flex>
       </v-layout>
     </v-card-title>
   <v-data-table
-          :headers="headers"
-          :items="filteredTasks"
-          :search="search"
-          no-results-text="No s'ha trobat cap registre coincident"
-          :loading="loading"
-          no-data-text=""
-          rows-per-page-text="Tasques per pàgina"
-          :rows-per-page-items="[5,10,25,50,100,200,{'text':'Tots','value':-1}]"
-          :pagination.sync="pagination"
-          v-if="$vuetify.breakpoint.lgAndUp"
-
+    :headers="headers"
+    :items="filteredTasks"
+    :search="search"
+    no-results-text="No s'ha trobat cap registre coincident"
+    :loading="loading"
+    no-data-text=""
+    rows-per-page-text="Tasques per pàgina"
+    :rows-per-page-items="[5,10,25,50,100,200,{'text':'Tots','value':-1}]"
+    :pagination.sync="pagination"
+    v-if="$vuetify.breakpoint.lgAndUp"
   >
 
     <v-progress-linear slot="progress" color="secondary" indeterminate></v-progress-linear>
     <template slot="items" slot-scope="{item: task}">
-      <tr>
         <td>{{ task.id}}</td>
         <td>{{ task.name}}</td>
         <v-avatar :title="task.user_name">
@@ -78,45 +76,44 @@
           <task-completed-toggle :status="task.completed" :task="task" :tags="tags"></task-completed-toggle>
         </td>
         <td><task-tags :tags="tags" :task="task" @updated="updateTask"></task-tags></td>
-        <td><span :title="task.created_at_formatted">{{task.created_at_human}}</span></td>
-        <td><span :title="task.updated_at_formatted">{{task.updated_at_human}}</span></td>
+        <td><span :title="task.created_at_formatted" class="ellipsis">{{task.created_at_human}}</span></td>
+        <td><span :title="task.updated_at_formatted" class="ellipsis">{{task.updated_at_human}}</span></td>
         <td>
           <task-destroy :task="task" @removed="removeTask" :uri="uri"></task-destroy>
             <task-edit :tags="tags" :task="task" :users="dataUsers" @edited="refresh"></task-edit>
             <task-show :tags="tags" :task="task" :users="dataUsers"></task-show>
             <share-task :task="task"></share-task>
-            <!--<v-btn v-if="$can('tasks.show', task)" color="success" icon flat title="Modificar la tasca"-->
-            <!--@click="showShow">-->
-            <!--<v-icon>remove_red_eye</v-icon>-->
-            <!--</v-btn>-->
+          <!--<v-btn v-if="$can('tasks.show', task)" color="success" icon flat title="Modificar la tasca"-->
+          <!--@click="showShow">-->
+          <!--<v-icon>remove_red_eye</v-icon>-->
+          <!--</v-btn>-->
         </td>
-      </tr>
 
     </template>
   </v-data-table>
       <v-data-iterator
         v-if="$vuetify.breakpoint.mdAndDown"
-              class="hidden-lg-and-up"
-              :items="filteredTasks"
-              :search="search"
-              no-results-text="No s'ha trobat cap tasca coincident"
-              no-data-text="No hi ha dades disponibles"
-              rows-per-page-text="Tasks per pagina"
-              :rows-per-page-items="[5,10,25,50,100,{'text':'Totes','value':-1}]"
-              :loading="loading"
-              :pagination.sync="pagination"
-              content-tag="v-layout"
-              row
-              wrap
+        class="hidden-lg-and-up"
+        :items="filteredTasks"
+        :search="search"
+        no-results-text="No s'ha trobat cap tasca coincident"
+        no-data-text="No hi ha dades disponibles"
+        rows-per-page-text="Tasks per pagina"
+        :rows-per-page-items="[5,10,25,50,100,{'text':'Totes','value':-1}]"
+        :loading="loading"
+        :pagination.sync="pagination"
+        content-tag="v-layout"
+        row
+        wrap
       >
                 <v-flex
-                        slot="item"
-                        slot-scope="{item:task}"
-                        xs12
-                        sm6
-                        md4
-                        lg3
-                        class="pa-1 elevation-10"
+                  slot="item"
+                  slot-scope="{item:task}"
+                  xs12
+                  sm6
+                  md4
+                  lg3
+                  class="pa-1 elevation-10"
                 >
                       <v-card>
                         <v-toolbar dark class="secondary darken-2">
@@ -187,7 +184,8 @@
                     <span class="headline text-xs-center">No hi ha cap tasca!</span>
                 </v-flex>
                 <v-flex xs12>
-                    <empty-tasks-create-button :tags="tags" :users="users" @created="addTask"></empty-tasks-create-button>
+                    <empty-tasks-create-button :tags="tags" :users="users"
+                                               @created="addTask"></empty-tasks-create-button>
                 </v-flex>
             </v-card-text>
         </v-card>
@@ -208,7 +206,18 @@ import ShareTask from './ShareTask'
 
 export default {
   name: 'tasks-list',
-  components: { ShareTask, Share, EmptyTasksCreateButton, TaskCompletedToggle, TaskEdit, TaskCreate, TaskDestroy, TaskTags, TaskShowMobile, TaskShow },
+  components: {
+    ShareTask,
+    Share,
+    EmptyTasksCreateButton,
+    TaskCompletedToggle,
+    TaskEdit,
+    TaskCreate,
+    TaskDestroy,
+    TaskTags,
+    TaskShowMobile,
+    TaskShow
+  },
   data () {
     return {
       dataUsers: this.users,

@@ -15,7 +15,6 @@
            :readonly="readonly"
          >
            <template slot="selection" slot-scope="data">
-             <v-chip>
                <v-chip
                  :selected="data.selected"
                  :disabled="data.disabled"
@@ -25,7 +24,6 @@
                >
               {{ data.item.name }}
             </v-chip>
-             </v-chip>
            </template>
          </v-combobox>
          </v-card-text>

@@ -12,7 +12,7 @@
               :label="editingTask.completed ? 'Completada' : 'Pendent'"></v-switch>
     <!--<v-select label="User" :items="users" v-model="editingTask.user_id" item-text="name" item-value="id"-->
               <!--clearable></v-select>-->
-    <span>Tags: <task-tags-chips v-model="editingTask.tags" :selected-tasks="editingTask.tags" :task="editingTask" :tags="tags"></task-tags-chips></span>
+    <span>Tags: <task-tags-chips @updated="verifyTags" v-model="editingTask.tags" :selected-tasks="editingTask.tags" :task="editingTask" :tags="tags"></task-tags-chips></span>
     <user-select :users="users" label="User" v-model="editingTask.user_id"></user-select>
 
     <v-textarea v-model="editingTask.description" label="Descripcio" hint="Descripció" :disabled="loading"></v-textarea>
@@ -78,12 +78,11 @@ export default {
   computed: {
     nameErrors () {
       const errors = []
-      console.log(this.$v)
       if (!this.$v.name.$dirty) return errors
       !this.$v.name.required && errors.push('El nom és obligatori')
       return errors
     }
-      },
+  },
   methods: {
     reset () {
       this.editingTask.name = ''
@@ -91,16 +90,33 @@ export default {
       this.editingTask.completed = false
       this.editingTask.user_id = ''
     },
-    create () {
+    async create () {
       this.loading = true
       const task = {
         'name': this.name,
         'description': this.editingTask.description,
         'completed': this.editingTask.completed,
-        'user_id': this.editingTask.user.id,
+        'user_id': this.editingTask.user_id,
         'tags': this.editingTask.tags
       }
+      await this.verifyTags()
       this.$emit('saved', task)
+    },
+    verifyTags () {
+      this.editingTask.tags.forEach((tag) => {
+        if (!tag.name) {
+          window.axios.post('/api/v1/tags', {
+            name: tag
+          }).then((response) => {
+            this.editingTask.tags[this.editingTask.tags.indexOf(tag)] = response.data.id
+          }).catch((error) => {
+            this.$snackbar.showError(error.message)
+          })
+        } else {
+          this.editingTask.tags[this.editingTask.tags.indexOf(tag)] = tag.id
+        }
+      }
+      )
     }
   }
 }
