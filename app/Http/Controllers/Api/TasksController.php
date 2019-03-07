@@ -35,9 +35,7 @@ class TasksController extends Controller
     {
         $oldTask = $task->mapSimple();
         $task->update($request->all());
-        $task->save();
-        $data = (array)$request->only('tags');
-        $task->syncTags($data);
+        $task->tags()->sync($request->only('tags')['tags']);
         $task->save();
         event(new TaskUpdated($oldTask, $task));
         return $task->map();
@@ -46,16 +44,16 @@ class TasksController extends Controller
     public function store(StoreTask $request) // Route Model Binding
     {
         //        return $request->all();
-        $task = new Task($request->all());
-        $task->save();
+        $task = Task::create($request->all());
+        $task->tags()->sync($request->only('tags')['tags']);
         //        $data = (array) $request->only('tags');
         //        $task->syncTags($data['tags']);
 
-        $tags = $request->only('tags');
-        if (sizeof($tags) > 0) {
-            $task->syncTags($tags['tags']);
-        }
-        $task->save();
+//        $tags = $request->only('tags');
+//        if (sizeof($tags) > 0) {
+//            $task->syncTags($tags['tags']);
+//        }
+//        $task->save();
 
         event(new TaskCreated($task));
 
