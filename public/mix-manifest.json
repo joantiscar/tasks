@@ -1,6 +1,13 @@
 {
+<<<<<<< HEAD
     "/js/app.js": "/js/app.js?id=8ab3b03afa79fe9c3d4e",
     "/css/app.css": "/css/app.css?id=c03621214db1b49d89c3",
     "/js/manifest.js": "/js/manifest.js?id=227795a4cf81cedbd601",
     "/js/vendor.js": "/js/vendor.js?id=baa2d4658974135ec225"
+=======
+    "/js/app.js": "/js/app.js?id=44bbc04335067e03b0d2",
+    "/css/app.css": "/css/app.css?id=418bcc9d39618eab7643",
+    "/js/manifest.js": "/js/manifest.js?id=227795a4cf81cedbd601",
+    "/js/vendor.js": "/js/vendor.js?id=8b4d25488dd68fef1c55"
+>>>>>>> master
 }
