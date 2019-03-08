@@ -17,16 +17,16 @@ import 'typeface-roboto/index.css'
 import './bootstrap'
 import ExampleComponent from './components/ExampleComponent.vue'
 import Tasks from './components/Tasks.vue'
-import Tasques from './components/Tasques.vue'
-import ShowTask from './components/ShowTask.vue'
-import Tags from './components/Tags.vue'
+import Tasques from './components/tasks/Tasques.vue'
+import ShowTask from './components/tasks/ShowTask.vue'
+import Tags from './components/tags/Tags.vue'
 import LoginForm from './components/LoginForm.vue'
 import RegisterForm from './components/RegisterForm.vue'
 import UserList from './components/UserList.vue'
 import UserSelect from './components/UserSelect.vue'
 import Impersonate from './components/Impersonate.vue'
 import Tema from './components/Tema.vue'
-import TaskCompletedToggle from './components/TaskCompletedToggle.vue'
+import TaskCompletedToggle from './components/tasks/TaskCompletedToggle.vue'
 import GitInfoComponent from './components/git/GitInfoComponent.vue'
 import Profile from './components/Profile.vue'
 import SidebarMenu from './components/SidebarMenu.vue'
@@ -42,6 +42,7 @@ import Notifications from './components/notifications/Notifications'
 import FooterComponent from './components/FooterComponent.vue'
 import NewsLetterSubscriptionCard from './components/newsletter/NewsLetterSubscriptionCard.vue'
 import ShareFav from './components/ShareFab'
+import Mobile from './components/mobile/Mobile'
 require('./bootstrap')
 
 window.Vue = Vue
@@ -175,6 +176,7 @@ window.Vue.component('service-worker', ServiceWorker)
 window.Vue.component('NotificationsWidget', NotificationsWidget)
 window.Vue.component('Notifications', Notifications)
 window.Vue.component('FooterComponent', FooterComponent)
+window.Vue.component('Mobile', Mobile)
 window.Vue.component('NewsLetterSubscriptionCard', NewsLetterSubscriptionCard)
 window.Vue.component('share-fav', ShareFav)
 
