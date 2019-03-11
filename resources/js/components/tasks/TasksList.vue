@@ -201,7 +201,7 @@ import TaskTags from './TaskTags'
 import EmptyTasksCreateButton from './EmptyTasksCreateButton'
 import TaskShowMobile from './TaskShowMobile'
 import TaskShow from './TaskShow'
-import Share from './Share'
+import Share from '../Share'
 import ShareTask from './ShareTask'
 
 export default {

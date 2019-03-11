@@ -27,6 +27,7 @@ export default {
       },
       { icon: 'history', text: 'Tags', url: '/tags' },
       { icon: 'track_changes', text: 'Changelog', url: '/changelog' },
+      { icon: 'phone', text: 'Mobile', url: '/mobile' },
       { icon: 'notifications', text: 'Notifications', url: '/notifications' }
 
     ],
