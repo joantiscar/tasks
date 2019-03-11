@@ -23,9 +23,30 @@ export default {
       this.show = true
     },
     showError (error) {
-      this.message = error
-      this.color = 'error'
-      this.show = true
+      console.log(error)
+      if (error) {
+        this.color = 'error'
+        if (error.response) {
+          this.message = error(error.response.data)
+        } else if (error.request) {
+          console.log('Status:')
+          if (navigator.onLine) {
+            console.log('online')
+          } else {
+            console.log('offline')
+          }
+          if (navigator.onLine) {
+            this.message = error('Error de xarxa')
+          } else {
+            this.message = ('Error de xarxa. Estat de la xarxa: sense connexió')
+          }
+        } else {
+          // Something happened in setting up the request that triggered an Error
+          console.log('Error', error.message)
+          this.message = error
+        }
+        this.show = true
+      }
     }
   },
   mounted () {

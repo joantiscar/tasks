@@ -58,6 +58,8 @@ const darkToggle = window.localStorage.getItem(DARK_THEME_KEY) || false
 const primaryColor = window.localStorage.getItem(PRIMARY_COLOR_KEY) || '#627D98'
 const secondaryColor = window.localStorage.getItem(SECONDARY_COLOR_KEY) || '#2BB0ED'
 
+
+
 window.Vue.use(VueTimeago, {
   locale: 'ca', // Default locale
   locales: {
@@ -146,6 +148,24 @@ window.Vue.use(window.Vuetify, {
     }
   }
 })
+window.axios.interceptors.response.use((response) => {
+  return response
+}, function (error) {
+  if (error) {
+    if (error.response) {
+      if (error.response.status === 401) {
+        console.log('HEY! unauthorized, logging out ...')
+        // TODO -> Pass current page as query string '/login?back=CURRENT_URL'
+        // this.showSnackBar(error.response.data, 'error', error.response.status)
+        window.Vue.prototype.$snackbar.showError("No heu entrat al sistema. Renviant-vos a l'entrada del sistema")
+        setTimeout(function () { window.location = '/login' }, 3000)
+      }
+      // return Promise.reject(error.response)
+    }
+  }
+  return Promise.reject(error)
+})
+
 window.Vue.use(confirm)
 window.Vue.use(permissions)
 window.Vue.use(snackbar)

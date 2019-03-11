@@ -25,6 +25,7 @@ class TasksController extends Controller
 
     public function destroy(DestroyTask $request, Task $task) // Route Model Binding
     {
+        abort(500);
         $oldTask = $task->mapSimple();
         $task->delete();
         event(new TaskDeleted($oldTask));
