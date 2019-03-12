@@ -1,5 +1,5 @@
 <template>
-    $END$
+    <canvas></canvas>
 </template>
 
 <script>

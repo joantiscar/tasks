@@ -41,7 +41,8 @@ import NotificationsWidget from './components/notifications/NotificationsWidget'
 import Notifications from './components/notifications/Notifications'
 import FooterComponent from './components/FooterComponent.vue'
 import NewsLetterSubscriptionCard from './components/newsletter/NewsLetterSubscriptionCard.vue'
-import ShareFav from './components/ShareFab'
+import ShareFab from './components/ShareFab'
+import Clock from './components/Clock'
 import Mobile from './components/mobile/Mobile'
 require('./bootstrap')
 
@@ -198,6 +199,7 @@ window.Vue.component('Notifications', Notifications)
 window.Vue.component('FooterComponent', FooterComponent)
 window.Vue.component('Mobile', Mobile)
 window.Vue.component('NewsLetterSubscriptionCard', NewsLetterSubscriptionCard)
-window.Vue.component('share-fav', ShareFav)
+window.Vue.component('share-fab', ShareFab)
+window.Vue.component('clock', Clock)
 
 const app = new window.Vue(AppComponent)
