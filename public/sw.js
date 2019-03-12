@@ -1,12 +1,13 @@
-importScripts("/service-worker/precache-manifest.217e80dc99e41fb88a8a20f30947ebec.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
+importScripts("/service-worker/precache-manifest.57119b4119e637af841c0fa8a78bebac.js", "https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 /* eslint-disable no-undef */
 workbox.setConfig({
   debug: true
 });
-workbox.skipWaiting()
-workbox.clientsClaim()
+workbox.core.skipWaiting()
+workbox.core.clientsClaim()
 
+workbox.precaching.cleanupOutdatedCaches()
 // workbox.routing.registerRoute(
 //   new RegExp('https://hacker-news.firebaseio.com'),
 //   workbox.strategies.staleWhileRevalidate()
@@ -34,7 +35,7 @@ workbox.routing.registerRoute(
 
 workbox.routing.registerRoute(
   '/',
-  workbox.strategies.staleWhileRevalidate({ cacheName: 'landing' })
+  new workbox.strategies.StaleWhileRevalidate({ cacheName: 'landing' })
 )
 
 workbox.routing.registerRoute(
@@ -42,6 +43,29 @@ workbox.routing.registerRoute(
   new workbox.strategies.NetworkFirst()
 );
 
+
+const bgSyncPlugin = new workbox.backgroundSync.Plugin('newsletter', {
+  maxRetentionTime: 24 * 60, // Retry for max of 24 Hours
+  callbacks: {
+    queueDidReplay: showNotification
+  }
+})
+
+workbox.routing.registerRoute(
+  '/api/v1/newsletter',
+  new workbox.strategies.NetworkOnly({
+    plugins: [bgSyncPlugin]
+  }),
+  'POST'
+)
+
+workbox.routing.registerRoute(
+  '/api/v1/newsletter',
+  new workbox.strategies.NetworkOnly({
+    plugins: [bgSyncPlugin]
+  }),
+  'POST'
+)
 // NO ENS CAL PQ LES TENIM INTEGRADES EN LOCAL VIA WEBPACK i NMP IMPORTS
 // // fonts
 // workbox.routing.registerRoute(

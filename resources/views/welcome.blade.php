@@ -1,7 +1,6 @@
 @extends('layouts.landing')
 @section('content')
 
-    <v-app light>
         <v-toolbar class="white">
             <v-toolbar-title v-text="title" class="hidden-md-and-down"></v-toolbar-title>
             <v-spacer></v-spacer>
@@ -227,5 +226,4 @@
                 </v-layout>
             </v-footer>
         </v-content>
-    </v-app>
     @endsection
