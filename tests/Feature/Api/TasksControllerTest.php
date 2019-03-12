@@ -96,17 +96,17 @@ class TasksControllerTest extends TestCase
 
     public function test_manager_can_delete_task()
     {
+        $this->withoutExceptionHandling();
         initialize_roles();
         $user = $this->login('api');
-        $task = factory(Task::class)->create();
-
         $user->assignRole('TaskManager');
         $task = factory(Task::class)->create();
 
-        $response = $this->DELETE('/api/v1/tasks/' . $task->id);
-
+        $response = $this->delete('/api/v1/tasks/' . $task->id);
+        $response->assertSuccessful();
         //        $this->assertNotContains('')
         $result = json_decode($response->getContent());
+
         $this->assertEquals('', $result);
         //        $this->assertDatabaseMissing('tasks', $task);
         $this->assertNull(Task::find($task->id));
@@ -171,7 +171,6 @@ class TasksControllerTest extends TestCase
 
         //        $this->assertNotContains('')
         $result = json_decode($response->getContent());
-
         $this->assertNotNull($task = Task::find($result->id));
 
         $this->assertEquals('Comprar pa', $result->name);

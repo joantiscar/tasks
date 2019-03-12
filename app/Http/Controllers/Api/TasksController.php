@@ -25,7 +25,6 @@ class TasksController extends Controller
 
     public function destroy(DestroyTask $request, Task $task) // Route Model Binding
     {
-        abort(500);
         $oldTask = $task->mapSimple();
         $task->delete();
         event(new TaskDeleted($oldTask));
@@ -46,7 +45,7 @@ class TasksController extends Controller
     {
         //        return $request->all();
         $task = Task::create($request->all());
-        $task->tags()->sync($request->only('tags')['tags']);
+        if ($request->only('tags')) $task->tags()->sync($request->only('tags')['tags']);
         //        $data = (array) $request->only('tags');
         //        $task->syncTags($data['tags']);
 

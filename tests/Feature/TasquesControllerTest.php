@@ -142,9 +142,9 @@ class TasquesControllerTest extends TestCase
         $response = $this->get('/tasques/1');
         $response->assertStatus(200);
         $response->assertViewIs('tasks.user.show');
-        $response->assertViewHas('task', function ($task_view) {
-            return (Task::find(1) == $task_view);
-        });
+//        $response->assertViewHas('task', function ($task_view) {
+//            return (Task::find(1) == $task_view);
+//        });
     }
 
     public function cannot_show_edit_form()
