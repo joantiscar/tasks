@@ -78,9 +78,15 @@ Route::delete('/v1/user/tasks/{task}','Api\LoggedUserTasksController@destroy');
     // Simple notifications
     Route::post('/v1/simple_notifications/', 'Api\Notifications\SimpleNotificationsController@store');
 
+
+
+
+
 });
 
+// Newsletter
 
+Route::post('/v1/newsletter', 'Api\Newsletter\NewsletterController@store');
 //
 //Route::get('/v1/completed_task','Api\CompletedTasksController@index');            //BROWSE
 //Route::get('/v1/completed_task/{task}','Api\CompletedTasksController@show');      //READ
