@@ -11,6 +11,7 @@ namespace Tests\Feature\Api;
 use App\Tag;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Spatie\Permission\Models\Role;
 use Tests\Feature\Traits\CanLogin;
 use Tests\TestCase;
 
@@ -129,7 +130,7 @@ class TagsControllerTest extends TestCase
     {
 
         initialize_roles();
-        $user = $this->login('api');
+        $user = $this->loginAsTagManager('api');
         $tag = factory(Tag::class)->create();
 
         $response = $this->post('/api/v1/tags/', [
@@ -149,18 +150,13 @@ class TagsControllerTest extends TestCase
 
         $user = factory(User::class)->create();
         $this->actingAs($user, "api");
-        $tag = factory(Tag::class)->create();
 
         $response = $this->post('/api/v1/tags/', [
           'name' => 'Comprar pa',
         ]);
 
         //        $this->assertNotContains('')
-        $result = json_decode($response->getContent());
-
-        $this->assertNotNull($tag = Tag::find($result->id));
-
-        $this->assertEquals('Comprar pa', $result->name);
+        $response->assertStatus(403);
     }
 
     public function test_superUser_can_edit_a_tag()
@@ -281,15 +277,12 @@ class TagsControllerTest extends TestCase
 
     public function test_regular_user_cannot_browse_tags()
     {
+        $this->withoutExceptionHandling();
         $user = $this->loginAsTagManager('api');
 
         $tag1 = factory(Tag::class)->create();
         $tag2 = factory(Tag::class)->create();
         $tag3 = factory(Tag::class)->create();
-
-        $this->post('/api/v1/tags/' . $tag1);
-        $this->post('/api/v1/tags/' . $tag2);
-        $this->post('/api/v1/tags/' . $tag3);
 
         $response = $this->get('/api/v1/tags');
         $response->assertSuccessful();

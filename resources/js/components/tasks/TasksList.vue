@@ -67,6 +67,7 @@
 
     <v-progress-linear slot="progress" color="secondary" indeterminate></v-progress-linear>
     <template slot="items" slot-scope="{item: task}">
+      <tr v-touch="{right: () => destroy(task)}">
         <td>{{ task.id}}</td>
         <td>{{ task.name}}</td>
         <v-avatar :title="task.user_name">
@@ -88,7 +89,7 @@
           <!--<v-icon>remove_red_eye</v-icon>-->
           <!--</v-btn>-->
         </td>
-
+        </tr>
     </template>
   </v-data-table>
       <v-data-iterator
@@ -115,7 +116,7 @@
                   lg3
                   class="pa-1 elevation-10"
                 >
-                      <v-card>
+                      <v-card v-touch="{right: () => destroy(task)}">
                         <v-toolbar dark class="secondary darken-2">
                           <span class="title">{{ task.name }}</span>
                             <v-spacer></v-spacer>
@@ -310,6 +311,26 @@ export default {
     },
     opcio2 () {
       console.log('Opcio2')
+    },
+    async destroy () {
+      // ES6 async await
+
+      let result = await this.$confirm('Les tasques esborrades no es poden recuperar',
+        { title: 'Esteu segurs?', buttonTrueText: 'Eliminar', buttonFalseText: 'Cancel·lar', color: 'blue', buttonFalseColor: 'grey' })
+      if (result) {
+        this.loading = true
+        window.axios.delete(this.uri + '/' + this.task.id).then(() => {
+          // this.refresh() // Problema -> rendiment
+          this.$emit('removed', this.task)
+          this.$snackbar.showMessage("S'ha esborrat correctament la tasca")
+        }).catch(error => {
+          this.$snackbar.showError(error.message)
+          this.loading = false
+        }).finally(() => {
+          this.loading = false
+          // })
+        })
+      }
     }
   }
 }

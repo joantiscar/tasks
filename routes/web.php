@@ -48,6 +48,7 @@ Route::middleware((['auth']))->group(function () {
     Route::patch('/tasks/{id}','TasksController@completar');
     Route::get('/home','TasquesController@index');
     Route::get('/tasks_vue', 'TasksVueController@index');
+    Route::get('/clock', 'ClockController@index');
     Route::get('/tasques', 'TasquesController@index');
     Route::get('/tasques/{id}', 'TasquesController@show');
     Route::get('/tags', 'TagsController@index');
