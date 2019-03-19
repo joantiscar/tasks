@@ -29,7 +29,8 @@ export default {
       { icon: 'track_changes', text: 'Changelog', url: '/changelog' },
       { icon: 'phone', text: 'Mobile', url: '/mobile' },
       { icon: 'notifications', text: 'Notifications', url: '/notifications' },
-      { icon: 'clock', text: 'Clock', url: '/clock' }
+      { icon: 'clock', text: 'Clock', url: '/clock' },
+      { icon: 'chat', text: 'Chat', url: '/chat' }
 
     ],
     loginForm: false,

@@ -60,6 +60,7 @@ Route::middleware((['auth']))->group(function () {
     Route::get('/user/avatar', 'LoggedUserAvatarController@show');
     Route::get('/notifications', 'NotificationController@index');
     Route::get('/mobile', 'MobileController@index');
+    Route::get('/chat', 'ChatController@index');
     Route::get('/changelog','\\'. ChangelogController::class . '@index');
 
     Route::impersonate();

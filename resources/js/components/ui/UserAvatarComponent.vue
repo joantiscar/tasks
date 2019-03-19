@@ -56,14 +56,12 @@ export default {
       default: () => { return {} }
     },
     hashId: {
-      required: true
     },
     size: {
       type: String,
       default: '40'
     },
     alt: {
-      required: true
     },
     tile: {
       type: Boolean,

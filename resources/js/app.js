@@ -44,6 +44,7 @@ import NewsLetterSubscriptionCard from './components/newsletter/NewsLetterSubscr
 import ShareFab from './components/ShareFab'
 import Clock from './components/Clock'
 import Mobile from './components/mobile/Mobile'
+import Chat from './components/chat/Chat'
 require('./bootstrap')
 
 window.Vue = Vue
@@ -201,5 +202,6 @@ window.Vue.component('Mobile', Mobile)
 window.Vue.component('NewsLetterSubscriptionCard', NewsLetterSubscriptionCard)
 window.Vue.component('share-fab', ShareFab)
 window.Vue.component('clock', Clock)
+window.Vue.component('chat', Chat)
 
 const app = new window.Vue(AppComponent)
