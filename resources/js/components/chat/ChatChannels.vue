@@ -1,6 +1,8 @@
 <template>
     <span>
-      <v-navigation-drawer v-model="drawer" left absolute></v-navigation-drawer>
+      <v-navigation-drawer v-model="drawer" left absolute>
+          <v-btn  @click="drawer = false">Amagar drawer</v-btn>
+      </v-navigation-drawer>
         <v-toolbar color="primary">
             <user-avatar :user="user" size="52px" @click="$emit('toggleright')"></user-avatar>
             <v-toolbar-title>Channels</v-toolbar-title>
