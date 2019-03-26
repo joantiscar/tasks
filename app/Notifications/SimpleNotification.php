@@ -50,4 +50,11 @@ class SimpleNotification extends Notification
             'title' => $this->title
         ];
     }
+
+    public function toDatabase($notifiable)
+    {
+        return [
+          'title' => $this->title
+        ];
+    }
 }
