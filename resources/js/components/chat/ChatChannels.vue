@@ -1,82 +1,14 @@
 <template>
     <span>
-        <v-navigation-drawer
-                v-model="prova"
-                absolute
-                temporary
-                clipped
-                width="900"
-        >
-          <v-list class="pa-1">
-            <v-list-tile avatar>
-              <v-list-tile-avatar>
-                <img src="https://randomuser.me/api/portraits/men/85.jpg">
-              </v-list-tile-avatar>
-
-              <v-list-tile-content>
-                <v-list-tile-title>John Leider</v-list-tile-title>
-              </v-list-tile-content>
-            </v-list-tile>
-          </v-list>
-
-          <v-list class="pt-0" dense>
-            <v-divider></v-divider>
-
-            <v-list-tile @click="">
-              <v-list-tile-action>
-                <v-icon>clse</v-icon>
-              </v-list-tile-action>
-
-              <v-list-tile-content>
-                <v-list-tile-title>Prova asd asdsa asd asd asd asd as dasd asd as dasd asd as <d></d></v-list-tile-title>
-              </v-list-tile-content>
-            </v-list-tile>
-
-              <v-list-tile @click="">
-              <v-list-tile-action>
-                <v-icon>clse</v-icon>
-              </v-list-tile-action>
-
-              <v-list-tile-content>
-                <v-list-tile-title>Prova</v-list-tile-title>
-              </v-list-tile-content>
-            </v-list-tile>
-
-              <v-list-tile @click="">
-              <v-list-tile-action>
-                <v-icon>clse</v-icon>
-              </v-list-tile-action>
-
-              <v-list-tile-content>
-                <v-list-tile-title>Prova</v-list-tile-title>
-              </v-list-tile-content>
-            </v-list-tile>
-
-              <v-list-tile @click="">
-              <v-list-tile-action>
-                <v-icon>clse</v-icon>
-              </v-list-tile-action>
-
-              <v-list-tile-content>
-                <v-list-tile-title>Prova</v-list-tile-title>
-              </v-list-tile-content>
-            </v-list-tile>
-          </v-list>
-        </v-navigation-drawer>
-
-
-
-
-
-
+        <new-chat-drawer @close="drawer = !drawer" :value="drawer"/>
 
         <v-toolbar color="primary">
             <user-avatar :user="user" size="52px" @click="$emit('toggleright')"></user-avatar>
             <v-toolbar-title>Channels</v-toolbar-title>
             <v-spacer></v-spacer>
             <v-tooltip bottom>
-                <v-btn icon slot="activator" @click="prova=!prova">
-                    <v-icon>turned_in_not</v-icon>
+                <v-btn icon slot="activator" @click="drawer=!drawer">
+                    <v-icon>chat</v-icon>
                 </v-btn>
                 <span>Nova conversació</span>
             </v-tooltip>
@@ -128,16 +60,18 @@
 </template>
 
 <script>
-import UserAvatar from '../users/UserAvatar'
+  import UserAvatar from '../ui/UserAvatarComponent'
+  import NewChatDrawer from './NewChatDrawer'
 
-export default {
+  export default {
   name: 'ChatChannels',
   components: {
+    NewChatDrawer,
     'user-avatar': UserAvatar
   },
   data () {
     return {
-      prova: false,
+      drawer: false,
       dataChannels: this.channels
     }
   },

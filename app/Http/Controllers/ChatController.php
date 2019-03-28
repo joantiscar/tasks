@@ -1,11 +1,14 @@
 <?php
+
 namespace App\Http\Controllers;
+
+use App\Http\Controllers\Controller;
 use App\Http\Requests\Chat\ChatIndex;
 
 /**
  * Class ChatController.
  *
- * @package App\Http\Controllers\Tenant\Web
+ * @package App\Http\Controllers\Web
  */
 class ChatController extends Controller
 {
@@ -17,7 +20,7 @@ class ChatController extends Controller
      */
     public function index(ChatIndex $request)
     {
-//        $channels = $request->user()->channels;
-        return view('chat');
+        $channels = $request->user()->channels;
+        return view('chat.index', compact('channels'));
     }
 }
