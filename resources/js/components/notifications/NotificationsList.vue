@@ -105,10 +105,10 @@
                     </td>
                     <td class="text-xs-left cell">
                         <span v-if="props.item.notifiable_type === 'App\\Models\\User'">
-                            <user-avatar :hash-id="props.item.user_hashid"
+                            <user-photo :hash-id="props.item.user_hashid"
                                          :alt="props.item.user_name"
                                          :user="props.item.notifiable"
-                            ></user-avatar>
+                            ></user-photo>
                         </span>
                         <json-dialog-component btn-class="ma-0" icon="visibility" name="data" title="Veure les dades completes" :json="props.item.notifiable"></json-dialog-component>
                     </td>
@@ -152,7 +152,7 @@
 
 <script>
 import NotificationsDeleteMultiple from './NotificationsDeleteMultiple'
-import UserAvatar from '../ui/UserAvatarComponent'
+import UserPhoto from '../ui/UserAvatarComponent'
 import JsonDialogComponent from '../ui/JsonDialogComponent'
 import NotificationsFilterByType from './NotificationsFilterByType'
 import NotificationsFilterByNotifiableType from './NotificationsFilterByNotifiableType'
@@ -207,7 +207,7 @@ export default {
   name: 'NotificationsList',
   components: {
     'notifications-delete-multiple': NotificationsDeleteMultiple,
-    'user-avatar': UserAvatar,
+    'user-photo': UserPhoto,
     'json-dialog-component': JsonDialogComponent,
     'notifications-filter-by-type': NotificationsFilterByType,
     'notifications-filter-by-notifiable-type': NotificationsFilterByNotifiableType,

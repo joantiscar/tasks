@@ -57,6 +57,12 @@ class TaskCreated extends Notification implements ShouldQueue
      */
     public function toDatabase($notifiable)
     {
-        return $this->task->map();
+        return [
+          'title' => 'S\'ha creat una nova tasca: ' . $this->task->name,
+            'url' => '/tasks/' . $this->task->id,
+            'icon' => 'build',
+            'iconColor' => 'accent',
+
+        ];
     }
 }
