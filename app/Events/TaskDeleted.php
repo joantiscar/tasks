@@ -16,15 +16,17 @@ class TaskDeleted implements shouldBroadcast
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $task;
+    public $user;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(array $task)
+    public function __construct(array $task, $user)
     {
         $this->task = $task;
+        $this->user = $user;
     }
 
     /**

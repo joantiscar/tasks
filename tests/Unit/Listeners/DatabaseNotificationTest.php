@@ -96,7 +96,7 @@ class DatabaseNotificationTest extends TestCase
         $this->assertNotNull($mappedNotification['created_at_human']);
         $this->assertNotNull($mappedNotification['updated_at_human']);
 
-        $this->assertEquals('r0', $mappedNotification['user_hashid']);
+        $this->assertEquals('jR', $mappedNotification['user_hashid']);
         $this->assertEquals('Pepe Pardo Jeans',
           $mappedNotification['user_name']);
 

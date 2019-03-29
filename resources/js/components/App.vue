@@ -30,7 +30,8 @@ export default {
       { icon: 'phone', text: 'Mobile', url: '/mobile' },
       { icon: 'notifications', text: 'Notifications', url: '/notifications' },
       { icon: 'clock', text: 'Clock', url: '/clock' },
-      { icon: 'chat', text: 'Chat', url: '/chat' }
+      { icon: 'chat', text: 'Chat', url: '/chat' },
+      { icon: 'users', text: 'Users', url: '/users' }
 
     ],
     loginForm: false,

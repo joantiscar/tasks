@@ -17,6 +17,7 @@ class TaskUpdated
 
     public $newTask;
     public $oldTask;
+    public $user;
 
 
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                // Creat per lo de La Sénia
@@ -25,10 +26,11 @@ class TaskUpdated
      *
      * @return void
      */
-    public function __construct(array $oldTask, Task $newTask)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   // Creat per lo de La Sénia
+    public function __construct(array $oldTask, Task $newTask, $user)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   // Creat per lo de La Sénia
     {
         $this->oldTask = $oldTask;
         $this->newTask = $newTask;
+        $this->user = $user;
     }
 
     /**

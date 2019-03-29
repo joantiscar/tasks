@@ -26,6 +26,10 @@ class SendDatabaseNotificationStoredNotification
      */
     public function handle($event)
     {
-        $event->notifiable->notify(new DatabaseNotificationStored($event->notification));
+        if ($event->channel === 'database')
+        {
+            $event->notifiable->notify(new DatabaseNotificationStored($event->notification));
+
+        }
     }
 }

@@ -105,10 +105,11 @@ export default {
       })
     },
     listen() {
-      Echo.private('App.User.' + window.laravel_user.id)
+      window.Echo.private('App.User.' + window.laravel_user.id)
         .notification((notification) => {
             console.log(notification)
-        });
+          this.refresh()
+        })
     }
   },
   created () {

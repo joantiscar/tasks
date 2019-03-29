@@ -11,20 +11,22 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class TaskCreated
+class TaskCreated implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
 
     public $task;
+    public $user;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(Task $task)
+    public function __construct(Task $task, $user)
     {
         $this->task = $task;
+        $this->user = $user;
     }
 
     /**
@@ -34,6 +36,9 @@ class TaskCreated
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('channel-name');
+        return [
+          new PrivateChannel('App.User.'.$this->user->id),
+          new PrivateChannel('tasks')
+        ];
     }
 }

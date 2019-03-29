@@ -15,6 +15,7 @@ use App\Listeners\LogTaskCreated;
 use App\Listeners\LogTaskDeleted;
 use App\Listeners\LogTaskUncompleted;
 use App\Listeners\LogTaskUpdated;
+use App\Listeners\SendDatabaseNotificationStoredNotification;
 use App\Listeners\SendMailTaskCompleted;
 use App\Listeners\SendMailTaskCreated;
 use App\Listeners\SendMailTaskDeleted;
@@ -53,9 +54,10 @@ class EventServiceProvider extends ServiceProvider
         ],
         TaskCreated::class => [
           SendMailTaskCreated::class,
-          LogTaskCreated::class,
           ForgetTasksCache::class,
           SendTaskCreatedNotification::class,
+          LogTaskCreated::class,
+
         ],
         TaskUpdated::class => [
           SendMailTaskUpdated::class,

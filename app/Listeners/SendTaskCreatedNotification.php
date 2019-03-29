@@ -28,6 +28,6 @@ class SendTaskCreatedNotification
      */
     public function handle($event)
     {
-        $event->task->user->notify(new TaskCreated($event->task));
+        $event->user->notify(new TaskCreated($event->task));
     }
 }
