@@ -62,6 +62,7 @@ Route::middleware((['auth']))->group(function () {
     Route::get('/mobile', 'MobileController@index');
     Route::get('/chat', 'ChatController@index');
     Route::get('/users', 'UsersController@index');
+    Route::get('/gamepad', 'GamepadController@index');
     Route::get('/changelog','\\'. ChangelogController::class . '@index');
 
     Route::impersonate();

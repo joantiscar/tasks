@@ -31,7 +31,8 @@ export default {
       { icon: 'notifications', text: 'Notifications', url: '/notifications' },
       { icon: 'clock', text: 'Clock', url: '/clock' },
       { icon: 'chat', text: 'Chat', url: '/chat' },
-      { icon: 'users', text: 'Users', url: '/users' }
+      { icon: 'users', text: 'Users', url: '/users' },
+      { icon: 'gamepad', text: 'Gamepad', url: '/gamepad' }
 
     ],
     loginForm: false,

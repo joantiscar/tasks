@@ -46,6 +46,7 @@ import Clock from './components/Clock'
 import Mobile from './components/mobile/Mobile'
 import Chat from './components/chat/Chat'
 import Users from './components/users/Users'
+import Gamepad from './components/gamepad/Gamepad'
 require('./bootstrap')
 
 window.Vue = Vue
@@ -205,5 +206,6 @@ window.Vue.component('share-fab', ShareFab)
 window.Vue.component('clock', Clock)
 window.Vue.component('chat', Chat)
 window.Vue.component('users', Users)
+window.Vue.component('gamepad', Gamepad)
 
 const app = new window.Vue(AppComponent)
