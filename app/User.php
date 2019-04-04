@@ -12,7 +12,7 @@ use Lab404\Impersonate\Models\Impersonate;
 use Laravel\Passport\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
 
     use Notifiable, HasApiTokens, HasRoles, Impersonate;
@@ -195,5 +195,10 @@ class User extends Authenticatable
     public function channels()
     {
         return $this->belongsToMany(Channel::class);
+    }
+
+    public function routeNotificationForNexmo()
+    {
+        return $this->mobile;
     }
 }

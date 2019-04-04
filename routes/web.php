@@ -13,7 +13,7 @@
 
 use App\Http\Controllers\ChangelogController;
 
-Auth::routes();
+Auth::routes( ['verify' => true]);
 Route::post('/login_alt','Auth\LoginAltController@login');
 Route::post('/register_alt','Auth\RegisterAltController@register');
 

@@ -76,6 +76,7 @@ if (!function_exists('create_primary_user')){
         $user = User::create([
             'name' => 'Joan Tíscar Verdiell',
             'email' => 'joantiscar@iesebre.com',
+            'mobile' => env('ADMIN_PHONE','123456789'),
             'password' => bcrypt(env('PRIMARY_USER_PASSWORD', '123456'))
         ]);
         $user-> admin = true;
