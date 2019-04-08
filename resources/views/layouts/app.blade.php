@@ -8,6 +8,7 @@
     <link rel="manifest" href="/manifest.json">
     <meta name="theme-color" content="#2F3BA2"/>
     <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="vapidPublicKey" content="{{ config('webpush.vapid.public_key') }}">
     <meta name="user" content="{{ logged_user() }}">
     <meta name="impersonating" content="{{ app('impersonate')->getImpersonatorId() }}">
     <style>[v-cloak]{display: none}</style>
@@ -103,6 +104,7 @@
             <v-toolbar-title class="hidden-md-and-down">Lo pantano es de La Sénia</v-toolbar-title>
             <v-spacer></v-spacer>
             <notifications-widget></notifications-widget>
+            <users-online-widget></users-online-widget>
             <v-spacer></v-spacer>
             <span v-role="'SuperAdmin'">
                 <git-info class="hidden-md-and-down"></git-info>
