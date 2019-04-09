@@ -12,6 +12,7 @@ use App\Http\Requests\TaskShow;
 use App\Http\Requests\UpdateTask;
 use App\Task;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 
 class TasksController extends Controller
@@ -27,7 +28,7 @@ class TasksController extends Controller
     {
         $oldTask = $task->mapSimple();
         $task->delete();
-        event(new TaskDeleted($oldTask));
+        event(new TaskDeleted($oldTask, Auth::user()));
 
     }
 
@@ -37,7 +38,7 @@ class TasksController extends Controller
         $task->update($request->all());
         $task->tags()->sync($request->only('tags')['tags']);
         $task->save();
-        event(new TaskUpdated($oldTask, $task));
+        event(new TaskUpdated($oldTask, $task, Auth::user()));
         return $task->map();
     }
 
@@ -55,7 +56,7 @@ class TasksController extends Controller
 //        }
 //        $task->save();
 
-        event(new TaskCreated($task));
+        event(new TaskCreated($task, Auth::user()));
 
         return $task->map();
     }

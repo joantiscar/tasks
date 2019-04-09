@@ -154,7 +154,7 @@ class TasksControllerTest extends TestCase
         $this->assertFalse($result->completed);
     }
 
-    public function test_manager_can_create_task()
+        public function test_manager_can_create_task()
     {
         initialize_roles();
         Mail::fake();

@@ -10,12 +10,13 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Session;
 use Lab404\Impersonate\Models\Impersonate;
 use Laravel\Passport\HasApiTokens;
+use NotificationChannels\WebPush\HasPushSubscriptions;
 use Spatie\Permission\Traits\HasRoles;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
 
-    use Notifiable, HasApiTokens, HasRoles, Impersonate;
+    use Notifiable, HasApiTokens, HasRoles, Impersonate, HasPushSubscriptions;
 
     const DEFAULT_PHOTO = 'default.png';
 
@@ -116,6 +117,7 @@ class User extends Authenticatable
           'id'          => $this->id,
           'name'        => $this->name,
           'email'       => $this->email,
+          'mobile'       => $this->mobile,
           'gravatar'    => $this->gravatar,
           'admin'       => (boolean)$this->admin,
           'roles'       => $this->roles()->pluck('name')->unique()->toArray(),
@@ -134,6 +136,7 @@ class User extends Authenticatable
           'id'       => $this->id,
           'name'     => $this->name,
           'email'    => $this->email,
+          'mobile'       => $this->mobile,
           'gravatar' => $this->gravatar,
           'admin'    => (boolean)$this->admin,
           'hash_id'  => $this->hash_id,
@@ -190,5 +193,15 @@ class User extends Authenticatable
     public function getIsOnlineAttribute()
     {
         return $this->isOnline();
+    }
+
+    public function channels()
+    {
+        return $this->belongsToMany(Channel::class);
+    }
+
+    public function routeNotificationForNexmo()
+    {
+        return $this->mobile;
     }
 }

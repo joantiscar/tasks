@@ -13,7 +13,7 @@
 
 use App\Http\Controllers\ChangelogController;
 
-Auth::routes();
+Auth::routes( ['verify' => true]);
 Route::post('/login_alt','Auth\LoginAltController@login');
 Route::post('/register_alt','Auth\RegisterAltController@register');
 
@@ -60,6 +60,9 @@ Route::middleware((['auth']))->group(function () {
     Route::get('/user/avatar', 'LoggedUserAvatarController@show');
     Route::get('/notifications', 'NotificationController@index');
     Route::get('/mobile', 'MobileController@index');
+    Route::get('/chat', 'ChatController@index');
+    Route::get('/users', 'UsersController@index');
+    Route::get('/gamepad', 'GamepadController@index');
     Route::get('/changelog','\\'. ChangelogController::class . '@index');
 
     Route::impersonate();

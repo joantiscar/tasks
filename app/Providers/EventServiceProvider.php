@@ -9,16 +9,20 @@ use App\Events\TaskUncompleted;
 use App\Events\TaskUpdated;
 use App\Listeners\AddRolesToRegisterUser;
 use App\Listeners\ForgetTasksCache;
+use App\Listeners\LogNotification;
 use App\Listeners\LogTaskCompleted;
 use App\Listeners\LogTaskCreated;
 use App\Listeners\LogTaskDeleted;
 use App\Listeners\LogTaskUncompleted;
 use App\Listeners\LogTaskUpdated;
+use App\Listeners\SendDatabaseNotificationStoredNotification;
 use App\Listeners\SendMailTaskCompleted;
 use App\Listeners\SendMailTaskCreated;
 use App\Listeners\SendMailTaskDeleted;
 use App\Listeners\SendMailTaskUncompleted;
 use App\Listeners\SendMailTaskUpdated;
+use App\Listeners\SendTaskCreatedNotification;
+use Illuminate\Notifications\Events\NotificationSent;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
@@ -50,8 +54,10 @@ class EventServiceProvider extends ServiceProvider
         ],
         TaskCreated::class => [
           SendMailTaskCreated::class,
-          LogTaskCreated::class,
           ForgetTasksCache::class,
+          SendTaskCreatedNotification::class,
+          LogTaskCreated::class,
+
         ],
         TaskUpdated::class => [
           SendMailTaskUpdated::class,
@@ -63,8 +69,12 @@ class EventServiceProvider extends ServiceProvider
           LogTaskDeleted::class,
           ForgetTasksCache::class,
         ],
+          NotificationSent::class => [
+            LogNotification::class,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   // Creat per lo de La Sénia
+            SendDatabaseNotificationStoredNotification::class,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   // Creat per lo de La Sénia
+        ]
       ];
-
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   // Creat per lo de La Sénia
     /**
      * Register any events for your application.
      *

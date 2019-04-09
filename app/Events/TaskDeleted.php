@@ -11,20 +11,22 @@ use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Broadcasting\InteractsWithSockets;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 
-class TaskDeleted
+class TaskDeleted implements shouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
 
     public $task;
+    public $user;
 
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(array $task)
+    public function __construct(array $task, $user)
     {
         $this->task = $task;
+        $this->user = $user;
     }
 
     /**
@@ -34,6 +36,6 @@ class TaskDeleted
      */
     public function broadcastOn()
     {
-        return new PrivateChannel('channel-name');
+        return new PrivateChannel('tasks');
     }
 }

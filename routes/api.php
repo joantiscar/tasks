@@ -79,7 +79,11 @@ Route::delete('/v1/user/tasks/{task}','Api\LoggedUserTasksController@destroy');
     Route::post('/v1/simple_notifications/', 'Api\Notifications\SimpleNotificationsController@store');
 
 
+    Route::get('/v1/channel/{channel}/messages', 'Api\Chat\ChatMessagesController@index');
+    Route::post('/v1/channel/{channel}/messages', 'Api\Chat\ChatMessagesController@store');
+    Route::delete('/v1/channel/{channel}/messages/{message}', 'Api\Chat\ChatMessagesController@destroy');
 
+    Route::post('v1/notifications/hello', 'Api\Notifications\HelloNotificationsController@store');
 
 
 });
