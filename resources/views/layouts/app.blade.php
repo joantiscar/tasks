@@ -63,6 +63,7 @@
                     </v-flex>
                 </v-layout>
             </v-card>
+
             @canImpersonate
             Administrador:
 
@@ -80,7 +81,7 @@
 
             <tema></tema>
             <v-switch v-model="dark" label="Mode nocturn"></v-switch>
-
+            <push-notification-button></push-notification-button>
             <v-form action="logout" method="POST">
                 @csrf
                 <v-btn type="submit" color="accent">
