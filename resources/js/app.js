@@ -49,6 +49,7 @@ import Users from './components/users/Users'
 import Gamepad from './components/gamepad/Gamepad'
 import UsersOnlineWidget from './components/ui/UsersOnlineWidget'
 import PushNotificationButton from './components/ui/PushNotificationButton'
+import Multimedia from './components/multimedia/Multimedia'
 require('./bootstrap')
 
 window.Vue = Vue
@@ -200,6 +201,7 @@ window.Vue.component('changelog', Changelog)
 window.Vue.component('sidebar-menu', SidebarMenu)
 window.Vue.component('service-worker', ServiceWorker)
 window.Vue.component('NotificationsWidget', NotificationsWidget)
+window.Vue.component('Multimedia', Multimedia)
 window.Vue.component('Notifications', Notifications)
 window.Vue.component('FooterComponent', FooterComponent)
 window.Vue.component('Mobile', Mobile)
