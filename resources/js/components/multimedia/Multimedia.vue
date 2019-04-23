@@ -1,15 +1,17 @@
 <template>
-<volume-slider></volume-slider>
+  <div>
+    <video-component />
+    <audio-component />
+  </div>
 </template>
 
 <script>
-  import VolumeSlider from './VolumeSlider'
-  export default {
-    name: "Multimedia",
-    components: {VolumeSlider}
-  }
+import VideoComponent from './VideoComponent'
+import AudioComponent from './AudioComponent'
+
+export default {
+  name: 'Multimedia',
+  components: { AudioComponent, VideoComponent }
+
+}
 </script>
-
-<style scoped>
-
-</style>

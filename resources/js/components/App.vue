@@ -32,7 +32,8 @@ export default {
       { icon: 'clock', text: 'Clock', url: '/clock' },
       { icon: 'chat', text: 'Chat', url: '/chat' },
       { icon: 'users', text: 'Users', url: '/users' },
-      { icon: 'gamepad', text: 'Gamepad', url: '/gamepad' }
+      { icon: 'gamepad', text: 'Gamepad', url: '/gamepad' },
+      { icon: 'video_library', text: 'Multimedia', url: '/multimedia' }
 
     ],
     loginForm: false,
