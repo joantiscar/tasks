@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\Events\LogCreated;
 use App\Log;
 use App\Task;
 use Carbon\Carbon;
@@ -28,7 +29,7 @@ class LogTaskUpdated implements shouldQueue
      */
     public function handle($event)
     {
-        Log::create([
+        $log = Log::create([
             'text' => "S'ha editat la tasca '" . $event->oldTask['name'] ."'",
             'time' =>  Carbon::now(),
             'action_type' => 'editar',
@@ -41,5 +42,7 @@ class LogTaskUpdated implements shouldQueue
             'new_value' => json_encode($event->newTask->mapSimple()),
             'old_value' => json_encode($event->oldTask)
         ]);
+        event(new LogCreated($log));
+
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\Events\LogCreated;
 use App\Log;
 use App\Task;
 use Carbon\Carbon;
@@ -28,17 +29,19 @@ class LogTaskCreated implements shouldQueue
      */
     public function handle($event)
     {
-        Log::create([
+        $log = Log::create([
             'text' => "S'ha creat la tasca '" . $event->task->name ."'",
             'time' =>  Carbon::now(),
             'action_type' => 'crear',
             'module_type' => 'Tasques',
             'icon' => 'lock_open',
             'color' => 'primary',
-            'user_id' => $event->task->id,
+            'user_id' => $event->task['user_id'],
             'loggable_id' => $event->task->id,
             'loggable_type' => Task::class,
             'new_value' => json_encode($event->task->mapSimple())
         ]);
+        event(new LogCreated($log));
+
     }
 }
