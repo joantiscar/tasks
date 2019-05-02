@@ -174,6 +174,9 @@ export default {
   watch: {
     realTime (newValue) {
       newValue ? this.activeRealTime() : this.disableRealTime()
+    },
+    logs (newValue) {
+      if (this.realTime) this.dataLogs = newValue
     }
   },
   methods: {

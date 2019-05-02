@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\Notifications\LogCreatedPushNotification;
 use App\Notifications\TaskCompleted;
 use App\Task;
 use Illuminate\Queue\InteractsWithQueue;

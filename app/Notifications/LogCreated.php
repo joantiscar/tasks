@@ -2,27 +2,25 @@
 
 namespace App\Notifications;
 
-use App\Log;
 use Illuminate\Bus\Queueable;
-use Illuminate\Notifications\Messages\BroadcastMessage;
+use Illuminate\Support\Carbon;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\MailMessage;
+use NotificationChannels\WebPush\WebPushMessage;
+use NotificationChannels\WebPush\WebPushChannel;
 
 class LogCreated extends Notification
 {
     use Queueable;
 
-
-    public $log;
     /**
      * Create a new notification instance.
      *
      * @return void
      */
-    public function __construct(Log $log)
+    public function __construct()
     {
-        $this->log = $log;
+        //
     }
 
     /**
@@ -33,15 +31,30 @@ class LogCreated extends Notification
      */
     public function via($notifiable)
     {
-        return ['broadcast'];
+        return ['database', 'broadcast', WebPushChannel::class];
     }
 
-    public function toBroadcast($notifiable)
+    /**
+     * Get the array representation of the notification.
+     *
+     * @param  mixed  $notifiable
+     * @return array
+     */
+    public function toArray($notifiable)
     {
-        return new BroadcastMessage([
-            'key1' => 'value1',
-            'key2' => 'value2'
-        ]);
+        return [
+          'title' => 'Hi ha un log nou!',
+      'icon' => '/notification-icon.png',
+      'body' => 'Ves al apartat de changelog.'
+        ];
     }
 
+
+    public function toWebPush($notifiable, $notification)
+    {
+        return (new WebPushMessage)
+          ->title('Hi ha un log nou!')
+          ->icon('/notification-icon.png')
+          ->body('Ves al apartat de changelog.');
+    }
 }

@@ -55,7 +55,7 @@ export default {
       listen() {
         console.log('astio')
         window.Echo.channel('changelog')
-          .listen('App\\Events\\LogCreated', (notification) => {
+          .listen('LogCreated', (notification) => {
             console.log(notification)
             this.refresh()
           })

@@ -7,6 +7,8 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use NotificationChannels\WebPush\WebPushChannel;
+use NotificationChannels\WebPush\WebPushMessage;
 
 class TaskCompleted extends Notification implements ShouldQueue
 {
@@ -34,7 +36,7 @@ class TaskCompleted extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return ['database', 'broadcast', WebPushChannel::class];
     }
 
     /**
@@ -57,14 +59,20 @@ class TaskCompleted extends Notification implements ShouldQueue
      * @param  mixed  $notifiable
      * @return array
      */
-    public function toDatabase($notifiable)
+    public function toArray($notifiable)
     {
         return [
-          'title' => 'S\'ha completat una tasca: ' . $this->task->name,
-            'url' => '/tasks/' . $this->task->id,
-            'icon' => 'build',
-            'iconColor' => 'accent',
-
+          'title' => "La tasca" . $this->task->name . "ha estat completada!",
+          'body' => 'Fes click per a anar a la tasca.',
+          'action_url' => env('APP_URL') . '/tasks/' . $this->task->id,
         ];
+    }
+
+    public function toWebPush($notifiable, $notification)
+    {
+        return (new WebPushMessage)
+          ->title("La tasca " . $this->task->name . "ha estat completada!")
+          ->body('Fes click per a anar a la tasca.')
+          ->action('View app', env('APP_URL') . '/tasks/' . $this->task->id);
     }
 }

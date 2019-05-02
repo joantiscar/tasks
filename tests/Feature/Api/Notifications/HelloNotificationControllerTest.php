@@ -3,7 +3,7 @@
 namespace Tests\Feature\Tenants\Api\Notifications;
 
 use App\User;
-use App\Notifications\HelloNotification;
+use App\Notifications\LogCreatedPushNotification;
 use Illuminate\Contracts\Console\Kernel;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Notification;
@@ -33,7 +33,7 @@ class HelloNotificationControllerTest extends TestCase
         $response = $this->json('POST','/api/v1/notifications/hello');
         $response->assertSuccessful();
 
-        Notification::assertSentTo($user,HelloNotification::class);
+        Notification::assertSentTo($user,LogCreatedPushNotification::class);
     }
 
     /**
