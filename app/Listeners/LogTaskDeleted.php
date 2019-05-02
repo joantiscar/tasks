@@ -2,6 +2,7 @@
 
 namespace App\Listeners;
 
+use App\Events\LogCreated;
 use App\Log;
 use App\Task;
 use Carbon\Carbon;
@@ -28,7 +29,7 @@ class LogTaskDeleted
      */
     public function handle($event)
     {
-        Log::create([
+        $log = Log::create([
             'text' => "S'ha borrat la tasca '" . $event->task['name'] ."'",
             'time' =>  Carbon::now(),
             'action_type' => 'borrar',
@@ -40,5 +41,7 @@ class LogTaskDeleted
             'loggable_type' => Task::class,
             'old_value' => json_encode($event->task)
         ]);
+        event(new LogCreated($log));
+
     }
 }

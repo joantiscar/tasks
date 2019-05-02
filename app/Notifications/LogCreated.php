@@ -9,7 +9,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use NotificationChannels\WebPush\WebPushMessage;
 use NotificationChannels\WebPush\WebPushChannel;
 
-class HelloNotification extends Notification
+class LogCreated extends Notification
 {
     use Queueable;
 
@@ -43,27 +43,18 @@ class HelloNotification extends Notification
     public function toArray($notifiable)
     {
         return [
-          'title' => 'Hello from Laravel!',
-          'body' => 'Thank you for using our application.',
-          'action_url' => 'https://laravel.com',
-          'created' => Carbon::now()->toIso8601String()
+          'title' => 'Hi ha un log nou!',
+      'icon' => '/notification-icon.png',
+      'body' => 'Ves al apartat de changelog.'
         ];
     }
 
-    /**
-     * Get the web push representation of the notification.
-     *
-     * @param  mixed  $notifiable
-     * @param  mixed  $notification
-     * @return \Illuminate\Notifications\Messages\DatabaseMessage
-     */
+
     public function toWebPush($notifiable, $notification)
     {
         return (new WebPushMessage)
-          ->title('Hello from Laravel!')
+          ->title('Hi ha un log nou!')
           ->icon('/notification-icon.png')
-          ->body('Thank you for using our application.')
-          ->action('View app', 'view_app')
-          ->data(['id' => $notification->id]);
+          ->body('Ves al apartat de changelog.');
     }
 }

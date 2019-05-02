@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\CompleteUserTask;
 use App\Events\TaskUncompleted;
 use App\Task;
-
+use Illuminate\Support\Facades\Auth;
 
 class CompletedTasksApiController extends Controller
 {
@@ -17,7 +17,7 @@ class CompletedTasksApiController extends Controller
     {
         $task->completed = true;
         $task->save();
-        event(new TaskCompleted($task));
+        event(new TaskCompleted($task, Auth::user()));
         //                                                                                                                                                                                                                                                                                                                                     Fet per lo de La Sénia
 
         return $task;

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Events\LogCreated;
 use App\Events\TaskCompleted;
 use App\Events\TaskCreated;
 use App\Events\TaskDeleted;
@@ -16,11 +17,13 @@ use App\Listeners\LogTaskDeleted;
 use App\Listeners\LogTaskUncompleted;
 use App\Listeners\LogTaskUpdated;
 use App\Listeners\SendDatabaseNotificationStoredNotification;
+use App\Listeners\SendLogCreatedNotification;
 use App\Listeners\SendMailTaskCompleted;
 use App\Listeners\SendMailTaskCreated;
 use App\Listeners\SendMailTaskDeleted;
 use App\Listeners\SendMailTaskUncompleted;
 use App\Listeners\SendMailTaskUpdated;
+use App\Listeners\SendTaskCompletedNotification;
 use App\Listeners\SendTaskCreatedNotification;
 use Illuminate\Notifications\Events\NotificationSent;
 use Illuminate\Support\Facades\Event;
@@ -50,6 +53,7 @@ class EventServiceProvider extends ServiceProvider
         TaskCompleted::class => [
           SendMailTaskCompleted::class,
           LogTaskCompleted::class,
+          SendTaskCompletedNotification::class,
           ForgetTasksCache::class,
         ],
         TaskCreated::class => [
@@ -72,7 +76,10 @@ class EventServiceProvider extends ServiceProvider
           NotificationSent::class => [
             LogNotification::class,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   // Creat per lo de La Sénia
             SendDatabaseNotificationStoredNotification::class,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   // Creat per lo de La Sénia
-        ]
+        ],
+          LogCreated::class => [
+            SendLogCreatedNotification::class,
+          ]
       ];
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    // Creat per lo de La Sénia
     /**

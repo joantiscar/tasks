@@ -49,6 +49,7 @@ Route::middleware((['auth']))->group(function () {
     Route::get('/home','TasquesController@index');
     Route::get('/tasks_vue', 'TasksVueController@index');
     Route::get('/clock', 'ClockController@index');
+    Route::get('/multimedia', 'MultimediaController@index');
     Route::get('/tasques', 'TasquesController@index');
     Route::get('/tasques/{id}', 'TasquesController@show');
     Route::get('/tags', 'TagsController@index');
