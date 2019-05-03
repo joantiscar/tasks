@@ -86,6 +86,11 @@ Route::delete('/v1/user/tasks/{task}','Api\LoggedUserTasksController@destroy');
     Route::post('v1/notifications/hello', 'Api\Notifications\HelloNotificationsController@store');
 
 
+    // Push Subscriptions
+    Route::put('/v1/subscriptions', 'PushSubscriptionController@update');
+    Route::post('/v1/subscriptions/delete', 'PushSubscriptionController@destroy');
+
+
 });
 
 // Newsletter

@@ -53,6 +53,7 @@ import Multimedia from './components/multimedia/Multimedia'
 require('./bootstrap')
 
 window.Vue = Vue
+window.eventBus = new Vue()
 window.Vuetify = Vuetify
 const PRIMARY_COLOR_KEY = 'PRIMARY_COLOR_KEY'
 const SECONDARY_COLOR_KEY = 'SECONDARY_COLOR_KEY'

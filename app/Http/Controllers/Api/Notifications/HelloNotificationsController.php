@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Api\Notifications;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Notifications\HelloNotificationStore;
-use App\Notifications\LogCreatedPushNotification;
+use App\Notifications\HelloNotification;
 
 /**
  * Class HelloNotificationsController.
@@ -21,7 +21,7 @@ class HelloNotificationsController extends Controller
      */
     public function store(HelloNotificationStore $request)
     {
-        $request->user()->notify(new LogCreatedPushNotification);
+        $request->user()->notify(new HelloNotification);
 
         return response()->json('Notification sent.', 201);
     }
