@@ -7,6 +7,8 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use NotificationChannels\WebPush\WebPushChannel;
+use NotificationChannels\WebPush\WebPushMessage;
 
 class TaskCreated extends Notification implements ShouldQueue
 {
@@ -32,7 +34,7 @@ class TaskCreated extends Notification implements ShouldQueue
      */
     public function via($notifiable)
     {
-        return ['database'];
+        return ['database', WebPushChannel::class];
     }
 
     /**
@@ -64,5 +66,13 @@ class TaskCreated extends Notification implements ShouldQueue
             'iconColor' => 'accent',
 
         ];
+    }
+
+    public function toWebPush($notifiable, $notification)
+    {
+        return (new WebPushMessage)
+          ->title("La tasca " . $this->task->name . "ha estat creada!")
+          ->body('Fes click per a anar a la tasca.')
+          ->action('View app', env('APP_URL') . '/tasks/' . $this->task->id);
     }
 }

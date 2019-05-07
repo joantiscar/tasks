@@ -35,7 +35,7 @@ class CompletedTasksApiController extends Controller
 
         // HOOK -> EVENT
 
-        event(new TaskUncompleted($task));
+        event(new TaskUncompleted($task, Auth::user()));
 
 //        // EXEMPLE DE COM NO FER
 //

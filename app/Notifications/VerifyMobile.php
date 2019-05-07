@@ -13,6 +13,12 @@ class VerifyMobile extends Notification
 {
     use Queueable;
 
+    public $codi;
+
+    public function __construct($codi)
+    {
+        $this->codi = $codi;
+    }
 
     /**
      * Get the notification's delivery channels.
@@ -27,11 +33,8 @@ class VerifyMobile extends Notification
 
     public function toNexmo($notifiable)
     {
-
-        $code = MobileCodesGenerator::generate();
-
         return (new NexmoMessage)
-                    ->content('Ets lo puto amo. El teu codi es: ' . $code);
+                    ->content('Ets lo puto amo. El teu codi es: ' . $this->codi . '. Verificat aqui: ' . env('APP_URL') . '/verificar_mobil ');
     }
 
 }

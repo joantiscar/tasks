@@ -117,7 +117,7 @@ class User extends Authenticatable implements MustVerifyEmail
           'id'          => $this->id,
           'name'        => $this->name,
           'email'       => $this->email,
-          'mobile'       => $this->mobile,
+          'mobile'      => $this->mobile,
           'gravatar'    => $this->gravatar,
           'admin'       => (boolean)$this->admin,
           'roles'       => $this->roles()->pluck('name')->unique()->toArray(),
@@ -125,7 +125,7 @@ class User extends Authenticatable implements MustVerifyEmail
             ->pluck('name')
             ->unique()
             ->toArray(),
-          'isOnline' => $this->isOnline
+          'isOnline'    => $this->isOnline,
 
         ];
     }
@@ -133,14 +133,15 @@ class User extends Authenticatable implements MustVerifyEmail
     public function mapSimple()
     {
         return [
-          'id'       => $this->id,
-          'name'     => $this->name,
-          'email'    => $this->email,
-          'mobile'       => $this->mobile,
-          'gravatar' => $this->gravatar,
-          'admin'    => (boolean)$this->admin,
-          'hash_id'  => $this->hash_id,
-          'isOnline' => $this->isOnline
+          'id'                 => $this->id,
+          'name'               => $this->name,
+          'email'              => $this->email,
+          'mobile'             => $this->mobile,
+          'gravatar'           => $this->gravatar,
+          'admin'              => (boolean)$this->admin,
+          'hash_id'            => $this->hash_id,
+          'isOnline'           => $this->isOnline,
+          'mobile_verified_at' => $this->mobile_verified_at,
         ];
     }
 

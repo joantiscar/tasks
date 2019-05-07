@@ -7,6 +7,8 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
+use NotificationChannels\WebPush\WebPushChannel;
+use NotificationChannels\WebPush\WebPushMessage;
 
 class TaskUncompleted extends Notification
 {
@@ -14,14 +16,17 @@ class TaskUncompleted extends Notification
 
     public $task;
 
+    public $user;
+
     /**
      * Create a new notification instance.
      *
      * @param \App\Task $task
      */
-    public function __construct(Task $task)
+    public function __construct(Task $task, $user)
     {
-        //
+        $this->task = $task;
+        $this->user = $user;
     }
 
     /**
@@ -32,7 +37,7 @@ class TaskUncompleted extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'database', WebPushChannel::class];
     }
 
     /**
@@ -60,5 +65,13 @@ class TaskUncompleted extends Notification
         return [
             //
         ];
+    }
+
+    public function toWebPush($notifiable, $notification)
+    {
+        return (new WebPushMessage)
+          ->title("La tasca " . $this->task->name . "ha estat descompletada!")
+          ->body('Fes click per a anar a la tasca.')
+          ->action('View app', env('APP_URL') . '/tasks/' . $this->task->id);
     }
 }

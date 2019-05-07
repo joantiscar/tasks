@@ -8,7 +8,6 @@ class MobileCodesGenerator
 
     public static function generate()
     {
-        // TODO
-        return 1234;
+        return random_int(100000, 999999);
     }
 }
