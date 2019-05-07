@@ -65,6 +65,7 @@ Route::middleware((['auth']))->group(function () {
     Route::get('/users', 'UsersController@index');
     Route::get('/gamepad', 'GamepadController@index');
     Route::get('/changelog','\\'. ChangelogController::class . '@index');
+    Route::get('/verificar_mobil','\\' . \App\Http\Controllers\PhoneVerificationController::class . '@index');
 
     Route::impersonate();
 

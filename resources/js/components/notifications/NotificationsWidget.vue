@@ -7,6 +7,11 @@
             </v-btn>
         </v-badge>
         <v-list>
+            <v-list-tile>
+                <v-list-tile-title class="caption">
+                    <a href="/notifications">Veure totes</a> | <span v-if="dataNotifications.length > 0"> <a href="#" @click="markAllAsReaded">Marcar totes com a llegides</a> | </span><a href="#" @click="refresh(true)">Actualitzar</a>
+                </v-list-tile-title>
+            </v-list-tile>
             <v-list-tile v-if="dataNotifications.length > 0">
                 <v-list-tile-title>
                     <span v-if="dataNotifications.length === 1">
@@ -35,12 +40,7 @@
             <v-list-tile v-if="dataNotifications.length === 0">
                 <v-list-tile-title>No hi ha cap notificació pendent de llegir</v-list-tile-title>
             </v-list-tile>
-            <v-divider></v-divider>
-            <v-list-tile>
-                <v-list-tile-title class="caption">
-                    <a href="/notifications">Veure totes</a> | <span v-if="dataNotifications.length > 0"> <a href="#" @click="markAllAsReaded">Marcar totes com a llegides</a> | </span><a href="#" @click="refresh(true)">Actualitzar</a>
-                </v-list-tile-title>
-            </v-list-tile>
+
         </v-list>
     </v-menu>
 

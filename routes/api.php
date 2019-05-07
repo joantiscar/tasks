@@ -90,7 +90,8 @@ Route::delete('/v1/user/tasks/{task}','Api\LoggedUserTasksController@destroy');
     Route::put('/v1/subscriptions', 'PushSubscriptionController@update');
     Route::post('/v1/subscriptions/delete', 'PushSubscriptionController@destroy');
 
-
+    Route::post('/v1/mobile/{user}/requestCode', 'Auth\VerifyPhoneController@requestCode');
+    Route::post('/v1/mobile/{user}/verify', 'Auth\VerifyPhoneController@verify');
 });
 
 // Newsletter

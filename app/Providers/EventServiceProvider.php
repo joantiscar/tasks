@@ -25,6 +25,7 @@ use App\Listeners\SendMailTaskUncompleted;
 use App\Listeners\SendMailTaskUpdated;
 use App\Listeners\SendTaskCompletedNotification;
 use App\Listeners\SendTaskCreatedNotification;
+use App\Listeners\SendTaskUncompletedNotification;
 use Illuminate\Notifications\Events\NotificationSent;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Auth\Events\Registered;
@@ -41,47 +42,52 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen
       = [
-        Registered::class => [
+        Registered::class       => [
           SendEmailVerificationNotification::class,
           AddRolesToRegisterUser::class,
         ],
-        TaskUncompleted::class => [
+        TaskUncompleted::class  => [
           SendMailTaskUncompleted::class,
           LogTaskUncompleted::class,
           ForgetTasksCache::class,
-        ],
-        TaskCompleted::class => [
+          SendTaskUncompletedNotification::class
+          ],
+        TaskCompleted::class    => [
           SendMailTaskCompleted::class,
           LogTaskCompleted::class,
           SendTaskCompletedNotification::class,
           ForgetTasksCache::class,
         ],
-        TaskCreated::class => [
+        TaskCreated::class      => [
           SendMailTaskCreated::class,
           ForgetTasksCache::class,
           SendTaskCreatedNotification::class,
           LogTaskCreated::class,
 
         ],
-        TaskUpdated::class => [
+        TaskUpdated::class      => [
           SendMailTaskUpdated::class,
           LogTaskUpdated::class,
           ForgetTasksCache::class,
         ],
-        TaskDeleted::class => [
+        TaskDeleted::class      => [
           SendMailTaskDeleted::class,
           LogTaskDeleted::class,
           ForgetTasksCache::class,
         ],
-          NotificationSent::class => [
-            LogNotification::class,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   // Creat per lo de La Sénia
-            SendDatabaseNotificationStoredNotification::class,                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   // Creat per lo de La Sénia
+        NotificationSent::class => [
+          LogNotification::class,
+            // Creat per lo de La Sénia
+          SendDatabaseNotificationStoredNotification::class,
+            // Creat per lo de La Sénia
         ],
-          LogCreated::class => [
-            SendLogCreatedNotification::class,
-          ]
+        LogCreated::class       => [
+          SendLogCreatedNotification::class,
+        ],
       ];
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   // Creat per lo de La Sénia
+
+    // Creat per lo de La Sénia
+
     /**
      * Register any events for your application.
      *

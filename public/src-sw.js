@@ -4,13 +4,13 @@ workbox.core.clientsClaim()
 
 workbox.precaching.cleanupOutdatedCaches()
 
-self.addEventListener('push', (event) => {
-  const title = 'Tasks App - Joan Tíscar'
-  const options = {
-    body: event.data.text()
-  }
-  event.waitUntil(self.registration.showNotification(title, options))
-})
+// self.addEventListener('push', (event) => {
+//   const title = 'Tasks App - Joan Tíscar'
+//   const options = {
+//     body: event.data.text()
+//   }
+//   event.waitUntil(self.registration.showNotification(title, options))
+// })
 
 self.addEventListener('sync', function (event) {
 
@@ -18,7 +18,7 @@ self.addEventListener('sync', function (event) {
 
 const showNotification = () => {
   self.registration.showNotification('Post Sent', {
-    body: 'You are back online and your post was successfully sent!'
+    body: 'You are back onlinee and your post was successfully sent!'
     // icon: 'assets/icon/256.png',
     // badge: 'assets/icon/32png.png'
   })

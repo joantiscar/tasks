@@ -50,6 +50,7 @@ import Gamepad from './components/gamepad/Gamepad'
 import UsersOnlineWidget from './components/ui/UsersOnlineWidget'
 import PushNotificationButton from './components/ui/PushNotificationButton'
 import Multimedia from './components/multimedia/Multimedia'
+import VerifyMobileForm from './components/users/VerifyMobileForm'
 require('./bootstrap')
 
 window.Vue = Vue
@@ -214,5 +215,6 @@ window.Vue.component('users', Users)
 window.Vue.component('gamepad', Gamepad)
 window.Vue.component('push-notification-button', PushNotificationButton)
 window.Vue.component('users-online-widget', UsersOnlineWidget)
+window.Vue.component('verify-mobile-form', VerifyMobileForm)
 
 const app = new window.Vue(AppComponent)

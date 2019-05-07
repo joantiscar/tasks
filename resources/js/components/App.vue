@@ -33,7 +33,8 @@ export default {
       { icon: 'chat', text: 'Chat', url: '/chat' },
       { icon: 'users', text: 'Users', url: '/users' },
       { icon: 'gamepad', text: 'Gamepad', url: '/gamepad' },
-      { icon: 'video_library', text: 'Multimedia', url: '/multimedia' }
+      { icon: 'video_library', text: 'Multimedia', url: '/multimedia' },
+      { icon: 'phone', text: 'Verificar Mobil', url: '/verificar_mobil' }
 
     ],
     loginForm: false,

@@ -31,7 +31,7 @@ class LogCreated extends Notification
      */
     public function via($notifiable)
     {
-        return ['database', 'broadcast', WebPushChannel::class];
+        return ['database', 'broadcast'];
     }
 
     /**
@@ -49,12 +49,4 @@ class LogCreated extends Notification
         ];
     }
 
-
-    public function toWebPush($notifiable, $notification)
-    {
-        return (new WebPushMessage)
-          ->title('Hi ha un log nou!')
-          ->icon('/notification-icon.png')
-          ->body('Ves al apartat de changelog.');
-    }
 }
