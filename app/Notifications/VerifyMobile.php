@@ -34,7 +34,7 @@ class VerifyMobile extends Notification
     public function toNexmo($notifiable)
     {
         return (new NexmoMessage)
-                    ->content('Ets lo puto amo. El teu codi es: ' . $this->codi . '. Verificat aqui: ' . env('APP_URL') . '/verificar_mobil ');
+                    ->content('Ets lo puto amo. El teu codi es: ' . $this->codi . '. Verificat aqui: ' . env('APP_URL') . '/verificar_mobil   .');
     }
 
 }
