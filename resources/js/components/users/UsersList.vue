@@ -17,12 +17,6 @@
                             </v-icon>
                         </v-btn>
                         <v-list>
-                            <v-list-tile>
-                                Restaurar contrasenya
-                            </v-list-tile>
-                            <v-list-tile>
-                                Confirmar email
-                            </v-list-tile>
 
                             <v-list-tile @click="verifyPhone(user)">
                                 Confirmar telefon
