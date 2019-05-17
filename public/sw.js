@@ -1,4 +1,4 @@
-importScripts("/service-worker/precache-manifest.9191ae6cd8f54ab0bb74e55f436c563f.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.0/workbox-sw.js");
+importScripts("/service-worker/precache-manifest.b429144c3cbf47d16c5dd89b939c52af.js", "https://storage.googleapis.com/workbox-cdn/releases/4.3.0/workbox-sw.js");
 
 workbox.setConfig({ debug: true })
 workbox.core.skipWaiting()
@@ -6,13 +6,13 @@ workbox.core.clientsClaim()
 
 workbox.precaching.cleanupOutdatedCaches()
 
-self.addEventListener('push', (event) => {
-  const title = 'Tasks App - Joan Tíscar'
-  const options = {
-    body: event.data.text()
-  }
-  event.waitUntil(self.registration.showNotification(title, options))
-})
+// self.addEventListener('push', (event) => {
+//   const title = 'Tasks App - Joan Tíscar'
+//   const options = {
+//     body: event.data.text()
+//   }
+//   event.waitUntil(self.registration.showNotification(title, options))
+// })
 
 self.addEventListener('sync', function (event) {
 
@@ -20,7 +20,7 @@ self.addEventListener('sync', function (event) {
 
 const showNotification = () => {
   self.registration.showNotification('Post Sent', {
-    body: 'You are back online and your post was successfully sent!'
+    body: 'You are back onlinee and your post was successfully sent!'
     // icon: 'assets/icon/256.png',
     // badge: 'assets/icon/32png.png'
   })
@@ -113,12 +113,34 @@ const WebPush = {
    * @param {NotificationEvent} event
    */
   notificationClick (event) {
-    // console.log(event.notification)
-    if (event.action === 'some_action') {
-      // Do something...
-      // TODO
-    } else {
-      self.clients.openWindow('/')
+    if (!event.action) {
+      if (event.notification.data) {
+        if (event.notification.data.url) {
+          promiseChain = self.clients.openWindow(event.notification.data.url)
+          event.waitUntil(promiseChain)
+          return
+        }
+      }
+      promiseChain = self.clients.openWindow('/')
+      event.waitUntil(promiseChain)
+      return
+    }
+
+    switch (event.action) {
+      case 'open_url':
+        if (event.notification.data) {
+          if (event.notification.data.url) {
+            promiseChain = self.clients.openWindow(event.notification.data.url)
+            event.waitUntil(promiseChain)
+            break
+          }
+        }
+        break
+      case 'other_action':
+        break
+      default:
+        console.log(`Unknown action clicked: '${event.action}'`)
+        break
     }
   },
 

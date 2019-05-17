@@ -72,6 +72,9 @@ class TaskUncompleted extends Notification
         return (new WebPushMessage)
           ->title("La tasca " . $this->task->name . "ha estat descompletada!")
           ->body('Fes click per a anar a la tasca.')
-          ->action('View app', env('APP_URL') . '/tasks/' . $this->task->id);
+          ->action('Obrir tasca', 'open_url')
+          ->data([
+            'url' => env('APP_URL') . '/tasques/' . $this->task->id
+          ]);
     }
 }
