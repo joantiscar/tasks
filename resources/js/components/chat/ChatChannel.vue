@@ -25,26 +25,19 @@
           <v-layout row wrap>
             <v-flex xs12 style="height: calc(100vh - 64px - 64px - 64px);" class="bg-pattern">
                 <v-list subheader style="background-color: transparent;">
-                    <v-subheader>Recent messages</v-subheader>
-                    <v-list-tile
-                            v-for="message in dataMessages"
+                    <text-message
+                            v-for="message in this.dataMessages"
                             :key="message.id"
-                            avatar
-                            @click=""
-                    >
-                      <v-list-tile-avatar>
-                        <img :src="message.avatar">
-                      </v-list-tile-avatar>
-
-                      <v-list-tile-content>
-                        <v-list-tile-title v-html="message.text"></v-list-tile-title>
-                      </v-list-tile-content>
-
-                      <v-list-tile-action>
-                        <v-icon color="primary">chat_bubble</v-icon>
-                      </v-list-tile-action>
-                    </v-list-tile>
-                  </v-list>
+                            :message="message.message"
+                            :author="message.author"
+                            :owner="message.owner"
+                            :time="message.time"
+                    ></text-message>
+                    <contact-message :owner="false"></contact-message>
+                    <image-message :owner="true" src="https://pbs.twimg.com/profile_images/1008272534243078144/PySRvtbQ_400x400.jpg"></image-message>
+                    <audio-message :owner="false" file="https://sample-videos.com/audio/mp3/wave.mp3"></audio-message>
+                    <video-message :owner="true" src="http://techslides.com/demos/sample-videos/small.mp4"></video-message>
+                </v-list>
             </v-flex>
               <v-flex xs12>
                   <chat-message-add :channel="channel" @added="add"></chat-message-add>
@@ -56,10 +49,20 @@
 
 <script>
 import ChatMessageAdd from './ChatMessageAdd'
+import TextMessage from './TextMessage'
+import ContactMessage from './ContactMessage'
+import ImageMessage from './ImageMessage'
+import AudioMessage from './AudioMessage'
+import VideoMessage from './VideoMessage'
 export default {
   name: 'ChatChannel',
   components: {
-    'chat-message-add': ChatMessageAdd
+    'chat-message-add': ChatMessageAdd,
+    'text-message': TextMessage,
+    'contact-message': ContactMessage,
+    'image-message': ImageMessage,
+    'audio-message': AudioMessage,
+    'video-message': VideoMessage
   },
   data () {
     return {

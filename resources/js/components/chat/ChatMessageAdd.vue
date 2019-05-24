@@ -22,7 +22,7 @@ export default {
   props: {
     channel: {
       type: Object,
-      required: true
+      required: false
     }
   },
   methods: {
