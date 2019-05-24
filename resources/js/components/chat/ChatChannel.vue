@@ -25,6 +25,10 @@
             <v-layout row wrap class="mx-0">
                 <v-flex xs12 style="overflow-y:auto;max-height: calc(100vh - 64px - 64px - 64px);" class="p-4 bg-pattern">
                     <v-list subheader style="background-color: transparent;">
+                        <contact-message :owner="false"></contact-message>
+                        <image-message :owner="true" src="https://pbs.twimg.com/profile_images/1008272534243078144/PySRvtbQ_400x400.jpg"></image-message>
+                        <audio-message :owner="false" file="https://sample-videos.com/audio/mp3/wave.mp3"></audio-message>
+                        <video-message :owner="true" src="http://techslides.com/demos/sample-videos/small.mp4"></video-message>
                         <text-message
                                 v-for="message in this.dataMessages"
                                 :key="message.id"
@@ -33,18 +37,11 @@
                                 :owner="message.owner"
                                 :time="message.time"
                         ></text-message>
-                        <contact-message :owner="false"></contact-message>
-                        <image-message :owner="true" src="https://pbs.twimg.com/profile_images/1008272534243078144/PySRvtbQ_400x400.jpg"></image-message>
-                        <audio-message :owner="false" file="https://sample-videos.com/audio/mp3/wave.mp3"></audio-message>
-                        <video-message :owner="true" src="http://techslides.com/demos/sample-videos/small.mp4"></video-message>
+
                     </v-list>
                 </v-flex>
                 <v-flex xs12>
-                    <v-text-field
-                            label="Solo"
-                            placeholder="Nou missatge"
-                            solo
-                    ></v-text-field>
+                    <chat-message-add :channel="channel" @added="add"></chat-message-add>
                 </v-flex>
             </v-layout>
         </v-container>
@@ -57,6 +54,7 @@
   import ImageMessage from './ImageMessage'
   import AudioMessage from './AudioMessage'
   import VideoMessage from './VideoMessage'
+  import ChatMessageAdd from './ChatMessageAdd'
 
   export default {
     name: 'ChatChannel',
@@ -65,7 +63,8 @@
       'contact-message': ContactMessage,
       'image-message': ImageMessage,
       'audio-message': AudioMessage,
-      'video-message': VideoMessage
+      'video-message': VideoMessage,
+      'chat-message-add': ChatMessageAdd
     },
     data () {
       return {
@@ -120,8 +119,17 @@
         //     this.loading = false
         //   })
         // }
+      },
+      add (message) {
+        this.dataMessages.push({
+          id: this.dataMessages.length + 1,
+          message: message,
+          owner: true,
+          time: '12:23'
+        })
       }
     },
+
     created () {
       this.fetchMessages()
     }

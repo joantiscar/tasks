@@ -73,7 +73,7 @@
   components: {
     NewChatDrawer,
     UserAvatar,
-    ProfileDrawer
+    ProfileDrawer,
   },
   data () {
     return {
