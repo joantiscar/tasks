@@ -7,7 +7,7 @@
         <v-flex xs10>
             <div>
                 <label class="m-2">
-                    <input @keyup.enter="save" v-model="message" type="text" class="search"
+                    <input @keyup.enter="save" v-model="message" type="text" class="search" width="100%"
                            placeholder="Escribe un mensaje aquí">
                 </label>
                 <v-btn icon class="mic">
@@ -63,7 +63,8 @@
         left: 12px;
         margin-left: 65px;
         padding-left: 10px;
-        padding-right: 70%;
+        padding-right: 0%;
+        width: 92%;
         right: 14px;
         background-color: #fff;
         border-radius: 18px;
