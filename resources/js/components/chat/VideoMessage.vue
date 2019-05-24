@@ -132,7 +132,7 @@ export default {
     }
     .video-overlay{
         position: absolute;
-        z-index: 10;
+        z-index: 6;
         background: #717171b8;
         height: 94.3%;
         top: 15.4px;
