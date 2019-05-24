@@ -3,7 +3,7 @@
         <new-chat-drawer @close="drawer = !drawer" :value="drawer"/>
 
         <v-toolbar color="primary">
-            <v-avatar :user="user" size="52px" @click.stop="profileDrawer =! profileDrawer">
+            <v-avatar :user="user" size="52px" @click.stop.prevent="profileDrawer =! profileDrawer">
                                 <img :src=userAvatar alt="avatar">
             </v-avatar>
             <v-toolbar-title>Channels</v-toolbar-title>

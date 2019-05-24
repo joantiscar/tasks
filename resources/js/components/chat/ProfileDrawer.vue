@@ -8,7 +8,7 @@
             <v-flex xs12>
                 <v-card>
                     <v-card-title class="teal lighten-2 white--text">
-                        <v-btn flat icon color="white" @click.stop="dataDrawer =! dataDrawer">
+                        <v-btn flat icon color="white" @click.stop.prevent="dataDrawer =! dataDrawer">
                             <v-icon>arrow_back</v-icon>
                         </v-btn>
                         <h4>Perfil</h4>

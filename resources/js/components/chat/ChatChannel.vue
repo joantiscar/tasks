@@ -1,27 +1,77 @@
 <template>
-    <div id="dsadsasadasdasddsadsa">
-        <v-toolbar color="primary">
+    <div>
+        <v-toolbar color="primary" flat>
+            <v-layout @click.stop.prevent="drawerNavigationGroup = !drawerNavigationGroup">
+
             <v-avatar
                     color="grey lighten-4"
             >
                 <img src="https://vuetifyjs.com/apple-touch-icon-180x180.png" alt="avatar">
             </v-avatar>
             <v-toolbar-title>Channel 1</v-toolbar-title>
+            </v-layout>
             <v-spacer></v-spacer>
-            <v-tooltip bottom>
-                <v-btn icon slot="activator">
-                    <v-icon>channel</v-icon>
-                </v-btn>
-                <span>Nova conversació</span>
-            </v-tooltip>
-            <v-tooltip bottom>
-                <v-btn icon slot="activator">
-                    <v-icon>more_vert</v-icon>
-                </v-btn>
-                <span>Menú</span>
-            </v-tooltip>
+
+                <v-tooltip bottom>
+
+                    <v-btn slot="activator" icon @click.stop.prevent="drawerSearchMessage = !drawerSearchMessage">
+                        <v-icon>search</v-icon>
+                    </v-btn>
+                    <span>Buscar</span>
+                </v-tooltip>
+
+                <v-speed-dial
+                        :direction="direction"
+                        :transition="transition">
+                    <template v-slot:activator>
+                        <v-tooltip bottom>
+                            <v-btn icon slot="activator" >
+                                <v-icon class="icon_clip">attach_file</v-icon>
+                            </v-btn>
+                            <span>Adjuntar</span>
+                        </v-tooltip>
+                    </template>
+                    <v-btn
+                            fab
+                            dark
+                            small
+                            color="green"
+                    >
+                        <v-icon>image</v-icon>
+                    </v-btn>
+                    <v-btn
+                            fab
+                            dark
+                            small
+                            color="indigo"
+                    >
+                        <v-icon>camera_alt</v-icon>
+                    </v-btn>
+                    <v-btn
+                            fab
+                            dark
+                            small
+                            color="red"
+                    >
+                        <v-icon>insert_drive_file</v-icon>
+                    </v-btn>
+                    <v-btn
+                            fab
+                            dark
+                            small
+                            color="red"
+                    >
+                        <v-icon>person</v-icon>
+                    </v-btn>
+                </v-speed-dial>
+
+                <menu-contacte-grup></menu-contacte-grup>
         </v-toolbar>
-        <v-container fluid text-xs-center class="ma-0 pa-0" >
+
+                <search-message v-model="drawerSearchMessage"></search-message>
+
+                <navigation-group v-model="drawerNavigationGroup"></navigation-group>
+            <v-container fluid text-xs-center class="ma-0 pa-0" >
             <v-layout row wrap class="mx-0">
                 <v-flex xs12 style="overflow-y:auto;max-height: calc(100vh - 64px - 64px - 64px);" class="p-4 bg-pattern">
                     <v-list subheader style="background-color: transparent;">
@@ -55,6 +105,10 @@
   import AudioMessage from './AudioMessage'
   import VideoMessage from './VideoMessage'
   import ChatMessageAdd from './ChatMessageAdd'
+  import ChatMenuContacteGrup from './ChatMenuContacteGrup'
+  import ChatNavigationChannel from './ChatNavigationChannel'
+  import ChatNavigationGroup from './ChatNavigationGroup'
+  import ChatNavigationSearchMessage from './ChatNavigationSearchMessage'
 
   export default {
     name: 'ChatChannel',
@@ -64,10 +118,18 @@
       'image-message': ImageMessage,
       'audio-message': AudioMessage,
       'video-message': VideoMessage,
-      'chat-message-add': ChatMessageAdd
+      'chat-message-add': ChatMessageAdd,
+      'menu-contacte-grup': ChatMenuContacteGrup,
+      'search-message': ChatNavigationSearchMessage,
+      'navigation-group': ChatNavigationGroup
     },
     data () {
       return {
+        drawerSearchMessage: false,
+        drawerNavigationChannel: false,
+        drawerNavigationGroup: false,
+        direction: 'bottom',
+        transition: 'slide-y-transition',
         dataMessages: [],
         loading: false
       }

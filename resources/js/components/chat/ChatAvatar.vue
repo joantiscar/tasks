@@ -30,7 +30,7 @@
         </template>
 
         <v-list>
-            <v-list-tile @click.stop="dialogVeureFoto = true">
+            <v-list-tile @click.stop.prevent="dialogVeureFoto = true">
                 <v-list-tile-title>Veure foto</v-list-tile-title>
             </v-list-tile>
             <v-list-tile   @click="selectFiles">
@@ -51,7 +51,7 @@
                                 Pujar foto
                             </v-list-tile-title>
             </v-list-tile>
-            <v-list-tile @click.stop="dialogEliminarFoto = true">
+            <v-list-tile @click.stop.prevent="dialogEliminarFoto = true">
                 <v-list-tile-title>Eliminar foto</v-list-tile-title>
             </v-list-tile>
         </v-list>
