@@ -11,6 +11,8 @@
             <v-text-field id="password" prepend-icon="lock" name="password" label="Password" type="password" v-model="password" :error-messages="passwordErrors" @input="$v.password.$touch()" @blur="$v.password.$touch()"></v-text-field>
             <v-text-field id="password_confirmation" prepend-icon="lock" name="password_confirmation" label="Password Confirmation" type="password" v-model="password_confirmation" :error-messages="password_confirmationErrors" @input="$v.password_confirmation.$touch()" @blur="$v.password_confirmation.$touch()"></v-text-field>
             <span>Ja tens usuari? <a href="/login">Inicia sessió!</a></span>
+            <span>No recordes la contrassenya? <a href="/password/reset">Recuperala!</a></span>
+
         </v-card-text>
         <v-card-actions>
             <v-spacer></v-spacer>

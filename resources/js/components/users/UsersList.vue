@@ -21,6 +21,9 @@
                             <v-list-tile @click="verifyPhone(user)">
                                 Confirmar telefon
                             </v-list-tile>
+                            <v-list-tile @click="verifyMail(user)">
+                                Confirmar telefon
+                            </v-list-tile>
 
 
                         </v-list>
@@ -55,9 +58,15 @@
     },
     methods: {
       verifyPhone(user) {
-        window.axios.post('api/v1/mobile/' + user.id + '/requestCode').then(() => console.log('tot be')).catch((error) => {
-          console.log('tot mal')
-          console.log(error)
+        window.axios.post('api/v1/mobile/' + user.id + '/requestCode').then((response) => {
+          this.$snackbar.showMessage("S'ha creat correctament la tasca")
+        }).catch((error) => {
+        })
+      },
+      verifyMail(user) {
+        window.axios.post('api/v1/mobile/' + user.id + '/verifyMail').then((response) => {
+          this.$snackbar.showMessage("S'ha creat correctament la tasca")
+        }).catch((error) => {
         })
       }
     }

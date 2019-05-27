@@ -18,3 +18,11 @@ Broadcast::channel('App.User.{id}', function ($user, $id) {
 Broadcast::channel('changelog', function () {
     return true;
 });
+
+Broadcast::channel('App.Counter', function ($user) {
+    return [
+      'id' => $user->id,
+      'name' => $user->name,
+      'gravatar' => $user->gravatar
+    ];
+});

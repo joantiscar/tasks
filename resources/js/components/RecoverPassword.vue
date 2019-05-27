@@ -1,15 +1,12 @@
 <template>
-    <v-form action="/login" method="post">
+    <v-form action="/password.update" method="post">
         <v-toolbar dark color="primary">
-            <v-toolbar-title>Login form</v-toolbar-title>
+            <v-toolbar-title>Recuperar contrassenya</v-toolbar-title>
             <v-spacer></v-spacer>
         </v-toolbar>
         <v-card-text>
             <input type="hidden" name="_token" :value="csrfToken">
             <v-text-field prepend-icon="person" name="email" label="email" type="text" v-model="dataEmail" :error-messages="emailErrors" @input="$v.dataEmail.$touch()" @blur="$v.dataEmail.$touch()"></v-text-field>
-            <v-text-field id="password" prepend-icon="lock" name="password" label="Password" type="password" v-model="password" :error-messages="passwordErrors" @input="$v.password.$touch()" @blur="$v.password.$touch()"></v-text-field>
-<span>No tens usuari? <a href="/register">Registrat!</a></span>
-<span>No recordes la contrassenya? <a href="/password/reset">Recuperala!</a></span>
         </v-card-text>
         <v-card-actions>
             <v-spacer></v-spacer>
@@ -27,9 +24,8 @@ export default {
   mixins: [validationMixin],
   validations: {
     dataEmail: { required, minLength: minLength(6), email },
-    password: { required, minLength: minLength(6) }
   },
-  name: 'LoginForm',
+  name: 'RecoverPassword',
   data () {
     return {
       dataEmail: this.email,
