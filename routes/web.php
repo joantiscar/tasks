@@ -85,5 +85,3 @@ Route::view('about','about');
 // edit -> PUT
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');

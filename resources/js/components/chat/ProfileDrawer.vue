@@ -2,7 +2,7 @@
     <v-navigation-drawer
             v-model="dataDrawer"
             absolute
-            width="344"
+            width="350"
     >
         <v-layout row wrap>
             <v-flex xs12>
@@ -62,7 +62,7 @@
     props: {
       profileDrawer: {
         Type: Boolean,
-        default: false
+        required: true
       }
     },
     watch: {

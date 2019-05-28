@@ -42,7 +42,7 @@
     }
   }
 </script>
-<style>
+<style scoped>
     .mic {
         position: relative;
         left: -10px;

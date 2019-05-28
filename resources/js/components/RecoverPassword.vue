@@ -1,7 +1,7 @@
 <template>
     <v-form action="/password.update" method="post">
         <v-toolbar dark color="primary">
-            <v-toolbar-title>Recuperar contrassenya</v-toolbar-title>
+            <v-toolbar-title>Recuperar contrassenya </v-toolbar-title>
             <v-spacer></v-spacer>
         </v-toolbar>
         <v-card-text>
