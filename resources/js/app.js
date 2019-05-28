@@ -47,7 +47,8 @@ import Mobile from './components/mobile/Mobile'
 import Chat from './components/chat/Chat'
 import Users from './components/users/Users'
 import Gamepad from './components/gamepad/Gamepad'
-import UsersOnlineWidget from './components/ui/UsersOnlineWidget'
+import RecoverPassword from './components/RecoverPassword'
+import UsersOnlineWidget from './components/users/UsersOnlineWidget'
 import PushNotificationButton from './components/ui/PushNotificationButton'
 import Multimedia from './components/multimedia/Multimedia'
 import VerifyMobileForm from './components/users/VerifyMobileForm'
@@ -215,6 +216,7 @@ window.Vue.component('users', Users)
 window.Vue.component('gamepad', Gamepad)
 window.Vue.component('push-notification-button', PushNotificationButton)
 window.Vue.component('users-online-widget', UsersOnlineWidget)
+window.Vue.component('recover-password', RecoverPassword)
 window.Vue.component('verify-mobile-form', VerifyMobileForm)
 
 const app = new window.Vue(AppComponent)

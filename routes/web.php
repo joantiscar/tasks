@@ -36,7 +36,7 @@ Route::get('/prova_cua', function () {
 
 //GRUP DE URLS PER USUARIS AUTENTICATS
 
-Route::middleware((['auth']))->group(function () {
+Route::middleware((['auth', 'verified']))->group(function () {
 
     Route::post('/photo', 'PhotoController@store');
     Route::post('/avatar', 'AvatarController@store');
@@ -83,3 +83,5 @@ Route::view('about','about');
 // store -> create
 // delete -> destroy
 // edit -> PUT
+
+Auth::routes();
