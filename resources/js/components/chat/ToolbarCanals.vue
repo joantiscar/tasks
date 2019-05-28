@@ -14,7 +14,7 @@
         </v-tooltip>
         <menu-canals></menu-canals>
     </v-toolbar>
-        <new-chat-drawer :value="chatDrawer"></new-chat-drawer>
+        <new-chat-drawer :value="chatDrawer" @close="chatDrawer = false"></new-chat-drawer>
     </span>
 </template>
 
