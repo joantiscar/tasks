@@ -79,9 +79,3 @@ Route::view('about','about');
 
 
 
-// Index -> LIST
-// store -> create
-// delete -> destroy
-// edit -> PUT
-
-Auth::routes();

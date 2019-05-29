@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Tenant\Api\Changelog;
+namespace App\Http\Controllers\Api\Changelog;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Changelog\ListUserChangelog;

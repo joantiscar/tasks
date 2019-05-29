@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UsersIndex;
@@ -15,10 +15,11 @@ use Illuminate\Support\Facades\Cache;
 class UsersController extends Controller
 {
 
-    public function index(UsersIndex $request)
+    public function verifyMail(UsersIndex $request, User $user)
     {
-        $users = map_simple_collection(User::with('roles', 'permissions')->get());
-        return view('users', compact('users'));
+
+        $user->sendEmailVerificationNotification();
+
     }
 
 }
