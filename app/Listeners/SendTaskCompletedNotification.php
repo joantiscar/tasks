@@ -8,7 +8,7 @@ use App\Task;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 
-class SendTaskCompletedNotification
+class SendTaskCompletedNotification implements ShouldQueue
 {
 
     /**
