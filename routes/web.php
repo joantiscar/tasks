@@ -71,7 +71,7 @@ Route::middleware((['auth', 'verified']))->group(function () {
 
 });
 
-
+    
 Route::view('about','about');
 Route::view('contact','contact');
 
@@ -79,17 +79,3 @@ Route::view('about','about');
 
 
 
-// Index -> LIST
-// store -> create
-// delete -> destroy
-// edit -> PUT
-
-Auth::routes();
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
-
-Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
