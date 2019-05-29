@@ -71,7 +71,7 @@ Route::middleware((['auth', 'verified']))->group(function () {
 
 });
 
-    
+
 Route::view('about','about');
 Route::view('contact','contact');
 
