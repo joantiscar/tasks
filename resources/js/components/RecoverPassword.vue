@@ -1,5 +1,5 @@
 <template>
-    <v-form action="/password/reset" method="post">
+    <v-form action="/password/email" method="post">
         <v-toolbar dark color="primary">
             <v-toolbar-title>Recuperar contrassenya </v-toolbar-title>
             <v-spacer></v-spacer>
