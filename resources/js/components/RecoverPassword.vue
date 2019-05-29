@@ -1,5 +1,5 @@
 <template>
-    <v-form action="/password.update" method="post">
+    <v-form action="/password/reset" method="post">
         <v-toolbar dark color="primary">
             <v-toolbar-title>Recuperar contrassenya </v-toolbar-title>
             <v-spacer></v-spacer>
@@ -10,7 +10,7 @@
         </v-card-text>
         <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="primary" type="submit">Login</v-btn>
+            <v-btn color="primary" type="submit">Enviar mail</v-btn>
         </v-card-actions>
     </v-form>
 </template>

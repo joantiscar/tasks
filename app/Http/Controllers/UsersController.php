@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\UsersIndex;
 use App\Http\Requests\UserTaskShow;
 use App\Http\Requests\UserTasksIndex;
