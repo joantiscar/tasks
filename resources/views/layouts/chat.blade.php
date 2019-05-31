@@ -12,7 +12,7 @@
     <meta name="impersonating" content="{{ app('impersonate')->getImpersonatorId() }}">
     <style>[v-cloak]{display: none}</style>
     <link rel="stylesheet" href="/css/app.css">
-
+    <link rel="stylesheet" href="{{ mix('/css/app.css') }}">
     <meta name="git" content="{{ git() }}">
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
